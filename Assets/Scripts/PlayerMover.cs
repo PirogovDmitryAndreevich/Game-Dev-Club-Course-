@@ -8,10 +8,12 @@ public class PlayerMover : MonoBehaviour
 {
     private const float SPEED_COIFICIENT = 50f;
     private const string HORIZONTAL_AXIS = "Horizontal";
+    private const string VERTICAL_AXIS = "Vertical";
 
-    [SerializeField] private float _speedX = 1;
+    [SerializeField] private float _speed = 1;
 
-    private float _directly;
+    private float _movementX;
+    private float _movementY;
 
     private Rigidbody2D _rigidbody;
 
@@ -22,11 +24,12 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        _directly = Input.GetAxis(HORIZONTAL_AXIS);
+        _movementX = Input.GetAxis(HORIZONTAL_AXIS);
+        _movementY = Input.GetAxis(VERTICAL_AXIS);
     }
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_speedX * _directly * SPEED_COIFICIENT * Time.fixedDeltaTime, _rigidbody.velocity.y);
+        _rigidbody.velocity = new Vector2(_speed * _movementX* SPEED_COIFICIENT * Time.fixedDeltaTime, _speed * _movementY * SPEED_COIFICIENT * Time.fixedDeltaTime);
     }
 }
