@@ -1,48 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
-    private const float SPEED_COIFICIENT = 50f;
-    private const string HORIZONTAL_AXIS = "Horizontal";
-    private const string VERTICAL_AXIS = "Vertical";
+    private const float DASH = 5000f;
+    private const float SPEED = 5f;
 
-    private float _speed = 3f;
-    private float _movementX;
-    private float _movementY;
-    private bool _isDash;
-    private float _dash = 9.5f;
+    private bool _isTernRight = true;
 
     private Rigidbody2D _rigidbody;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+    }    
+
+    public void Dash(Vector2 direction)
+    {
+        Vector2 dashForce = new Vector2(DASH * direction.x, DASH * direction.y);
+        _rigidbody.AddForce(dashForce, ForceMode2D.Force);        
     }
 
-    private void Update()
+    public void Move(Vector2 direction)
     {
-        _movementX = Input.GetAxis(HORIZONTAL_AXIS);
-        _movementY = Input.GetAxis(VERTICAL_AXIS);
+        _rigidbody.velocity = new Vector2(SPEED * direction.x, SPEED * direction.y);
 
-        if (!_isDash && Input.GetKeyDown(KeyCode.Space))
-        {
-            _speed *= _dash;
-            _isDash = true;
-        }
-        if (_isDash && Input.GetKeyUp(KeyCode.Space))
-        {
-            _speed /= _dash;
-            _isDash = false;
-        }
+        if ((direction.x > 0 && _isTernRight == false) || (direction.x < 0 && _isTernRight == true))
+            Flip();
     }
-
-    private void FixedUpdate()
+    private void Flip()
     {
-        _rigidbody.velocity = new Vector2(_speed * _movementX * SPEED_COIFICIENT * Time.fixedDeltaTime, _speed * _movementY * SPEED_COIFICIENT * Time.fixedDeltaTime);
+        _isTernRight = !_isTernRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }
