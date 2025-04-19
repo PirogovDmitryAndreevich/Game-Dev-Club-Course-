@@ -8,7 +8,6 @@ public class PlayerMover : MonoBehaviour
     private const int TernShapePlayer = -1;
 
     private bool _isTernRight = true;
-
     private Rigidbody2D _rigidbody;
 
     private void Start()

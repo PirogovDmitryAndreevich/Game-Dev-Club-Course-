@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    private const string HORIZONTAL_AXIS = "Horizontal";
-    private const string VERTICAL_AXIS = "Vertical";
 
     private float _movementX;
     private float _movementY;
@@ -13,8 +11,8 @@ public class InputReader : MonoBehaviour
 
     private void Update()
     {
-        _movementX = Input.GetAxis(HORIZONTAL_AXIS);
-        _movementY = Input.GetAxis(VERTICAL_AXIS);
+        _movementX = Input.GetAxis(ConstantsData.InputAxis.HorizontalAxis);
+        _movementY = Input.GetAxis(ConstantsData.InputAxis.VerticalAxis);
         Direction = new Vector2(_movementX, _movementY);
 
         if (Input.GetKeyDown(KeyCode.Space))        
