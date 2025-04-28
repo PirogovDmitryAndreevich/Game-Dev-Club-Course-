@@ -6,6 +6,7 @@ public class InputReader : MonoBehaviour
     private float _movementX;
     private float _movementY;
     private bool _isDash;
+    private bool _isInteract;
 
     public Vector2 Direction { get; private set;}
 
@@ -17,12 +18,19 @@ public class InputReader : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))        
             _isDash = true;        
+
+        if (Input.GetKeyDown(KeyCode.F))
+            _isInteract = true;
     }
 
-    public bool GetIsDash()
+    public bool GetIsDash() => GetBoolIsTrigger(ref _isDash);
+
+    public bool GetIsInteract() => GetBoolIsTrigger(ref _isInteract);
+
+    private bool GetBoolIsTrigger(ref bool value)
     {
-        bool isDash = _isDash;
-        _isDash = false;
-        return isDash;
+        bool localValue = value;
+        value = false;
+        return localValue;
     }
 }
