@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-
+    private bool _isAttack;
     private float _movementX;
     private float _movementY;
     private bool _isDash;
@@ -21,11 +21,16 @@ public class InputReader : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
             _isInteract = true;
+
+        if (Input.GetMouseButtonDown(0))
+            _isAttack = true;
     }
 
     public bool GetIsDash() => GetBoolIsTrigger(ref _isDash);
 
     public bool GetIsInteract() => GetBoolIsTrigger(ref _isInteract);
+
+    public bool GetIsAttack() => GetBoolIsTrigger(ref _isAttack);
 
     private bool GetBoolIsTrigger(ref bool value)
     {

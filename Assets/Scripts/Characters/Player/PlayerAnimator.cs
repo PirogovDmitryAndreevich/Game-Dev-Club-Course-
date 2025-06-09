@@ -7,4 +7,9 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator.SetBool(ConstantsData.AnimatorParameters.IsWalk, isWalk);
     }
+
+    public void SetAttackTrigger()
+    {
+        _animator.SetTrigger(ConstantsData.AnimatorParameters.IsAttack);
+    }
 }
