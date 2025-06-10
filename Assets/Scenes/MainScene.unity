@@ -13596,6 +13596,7 @@ GameObject:
   - component: {fileID: 1782716991}
   - component: {fileID: 1782716992}
   - component: {fileID: 1782716993}
+  - component: {fileID: 1782716994}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -13705,6 +13706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea37601c99ada0447bacdac401d0d065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 20
 --- !u!114 &1782716990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13756,6 +13758,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _runSpeed: 6
+--- !u!114 &1782716994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782716983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d567c3e115913c643aa5211b2b138aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sword: {fileID: 2008307941}
 --- !u!1 &1784617624
 GameObject:
   m_ObjectHideFlags: 0
@@ -13870,6 +13885,7 @@ MonoBehaviour:
   - {fileID: 381886448}
   _waitTime: 2
   _tryFindTime: 0
+  _maxHealth: 100
 --- !u!114 &1853766115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14334,6 +14350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c801efe4ae74c5e4aacf2ad87edc402d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 20
 --- !u!70 &2008307942
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

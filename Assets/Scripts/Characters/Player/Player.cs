@@ -1,20 +1,24 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(InputReader), typeof(PlayerAnimator))]
-[RequireComponent (typeof(CollisionHandler), typeof(Fliper), typeof(PlayerAttacker))]
+[RequireComponent(typeof(CollisionHandler), typeof(Fliper), typeof(PlayerAttacker))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private int _maxHealth = 20;
+
     private Mover _mover;
     private InputReader _inputReader;
     private PlayerAnimator _animator;
     private CollisionHandler _collisionHandler;
     private Fliper _fliper;
     private PlayerAttacker _attacker;
+    private Health _health;
 
     private IInteractable _interactable;
 
     private void Awake()
     {
+        _health = new Health(_maxHealth);
         _attacker = GetComponent<PlayerAttacker>();
         _mover = GetComponent<Mover>();
         _inputReader = GetComponent<InputReader>();
@@ -48,17 +52,27 @@ public class Player : MonoBehaviour
             _mover.Dash(_inputReader.Direction);
 
         if (_inputReader.GetIsAttack() && _attacker.CanAttack)
-        { 
+        {
             _attacker.Attack();
             _animator.SetAttackTrigger();
         }
 
         if (_inputReader.GetIsInteract() && _interactable != null)
-            _interactable.Interact();        
+            _interactable.Interact();
     }
 
     private void OnInteractStarted(IInteractable interactableObject)
     {
         _interactable = interactableObject;
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        _health.ApplyDamage(damage);
+    }
+
+    public void Heal(int value)
+    {
+        _health.Heal(value);
     }
 }

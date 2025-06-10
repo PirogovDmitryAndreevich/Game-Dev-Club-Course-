@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
+    [SerializeField] private int _damage;
     public bool IsAttack { get; private set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (IsAttack && collision.TryGetComponent(out Enemy enemy))
-        Debug.Log("Sword: hit");
+            enemy.ApplyDamage(_damage);
     }
 
     public void Attack()

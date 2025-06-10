@@ -7,10 +7,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private WayPoint[] _wayPoints;
     [SerializeField] private float _waitTime = 2.0f;
     [SerializeField] private float _tryFindTime = 1f;
-    
+    [SerializeField] private int _maxHealth = 100;
+
+    private Health _health;
     private EnemyAnimator _animator;
     private float _maxSqrDistance = 14.7f;
     private EnemyStateMachine _stateMachine;
+
+    private void Awake()
+    {
+        _health = new Health(_maxHealth);
+    }
 
     private void Start()
     {
@@ -25,6 +32,15 @@ public class Enemy : MonoBehaviour
     {
         _stateMachine.Update();
     }
+
+    public void ApplyDamage(int damage)
+    {
+        _health.ApplyDamage(damage);
+
+        if (_health.HealthCurrent <= 0)
+            Destroy(gameObject);
+    }
+    
 }
 
 
