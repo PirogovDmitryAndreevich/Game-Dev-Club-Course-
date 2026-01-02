@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
     public void ApplyDamage(int damage)
     {
         _health.ApplyDamage(damage);
+        Debug.Log(_health.HealthCurrent);
     }
 
     public void Heal(int value)

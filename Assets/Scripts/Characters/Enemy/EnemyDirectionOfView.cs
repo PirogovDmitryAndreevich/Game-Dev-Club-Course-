@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent (typeof(Fliper))]
+[RequireComponent(typeof(Fliper))]
 public class EnemyDirectionOfView : MonoBehaviour
 {
     [SerializeField] private Vector2 _seeAreaSize;

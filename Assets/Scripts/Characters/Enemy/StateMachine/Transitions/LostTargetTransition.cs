@@ -14,7 +14,7 @@ class LostTargetTransition : Transition
 
     public override bool IsNeedTransit()
     {
-        if (_view.TrySeeTarget(out Transform _) == false)
+        if (_view.TrySeeTarget(out Transform _))
         {
             _endFindTime = Time.time + _tryFindTime;
         }
@@ -29,11 +29,7 @@ class LostTargetTransition : Transition
     public override void Transit()
     {
         base.Transit();
+
         StateMachine.ChangeState<IdleState>();
     }
 }
-
-
-
-
-

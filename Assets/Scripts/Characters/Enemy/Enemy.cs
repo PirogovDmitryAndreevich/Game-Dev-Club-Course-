@@ -1,7 +1,8 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(EnemyAnimator), typeof(Fliper))]
-[RequireComponent(typeof(EnemyDirectionOfView))]
+[RequireComponent(typeof(EnemyDirectionOfView), typeof(EnemyAttacker))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private WayPoint[] _wayPoints;
@@ -25,7 +26,9 @@ public class Enemy : MonoBehaviour
         var mover = GetComponent<Mover>();
         var fliper = GetComponent<Fliper>();
         var view = GetComponent<EnemyDirectionOfView>();
-        _stateMachine = new EnemyStateMachine(fliper, mover, view, _wayPoints, _animator, _maxSqrDistance, transform, _waitTime, _tryFindTime);
+        var attacker = GetComponent<EnemyAttacker>();
+        _stateMachine = new EnemyStateMachine(fliper, mover, view, _wayPoints, _animator, _maxSqrDistance,
+            transform, _waitTime, _tryFindTime, attacker);
     }
 
     private void FixedUpdate()

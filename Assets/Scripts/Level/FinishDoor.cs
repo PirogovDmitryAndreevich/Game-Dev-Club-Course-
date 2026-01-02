@@ -16,7 +16,7 @@ public class FinishDoor : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (runesForActivate.All(i => i._isActivated == true) && _isOpen == false)
+        if (runesForActivate.All(i => i.IsActivated == true) && _isOpen == false)
         {
             _animator.SetTrigger(ConstantsData.AnimatorParameters.IsOpen);
             _isOpen = true;

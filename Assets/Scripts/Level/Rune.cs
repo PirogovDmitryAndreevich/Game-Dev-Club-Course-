@@ -5,7 +5,7 @@ public class Rune : MonoBehaviour, IInteractable
 {
     private Animator _animator;
 
-    public bool _isActivated { get; private set; }
+    public bool IsActivated { get; private set; }
 
     private void Awake()
     {
@@ -15,6 +15,6 @@ public class Rune : MonoBehaviour, IInteractable
     public void Interact()
     {
         _animator.SetTrigger(ConstantsData.AnimatorParameters.IsActivated);
-        _isActivated = true;
+        IsActivated = true;
     }
 }
