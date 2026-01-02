@@ -15,7 +15,7 @@ class EnemyStateMachine : StateMachine
             {typeof(IdleState), new IdleState(this, view, animator, waitTime, attacker.SqrAttackDistance) },
             {typeof(FollowState), new FollowState(this,animator, fliper, mover, view, tryFindTime,
                                                     attacker.SqrAttackDistance) },
-            {typeof(AttackState), new AttackState(this, animator, attacker,fliper ,view, tryFindTime) }
+            {typeof(AttackState), new AttackState(this, animator, attacker,fliper ,view, attacker.Delay) }
         };
 
         ChangeState<PatrolState>();

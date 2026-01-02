@@ -25,8 +25,12 @@ class AttackState : State
 
     public override void Enter()
     {
+        Debug.Log("AttackState Enter");
+
         base.Enter();
         _vision.TrySeeTarget(out _target);
+
+        Debug.Log($"AttackState _target = {_target}");
     }
 
     public override void Update()

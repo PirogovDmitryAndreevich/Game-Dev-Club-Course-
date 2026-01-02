@@ -14,6 +14,8 @@ public class EnemyAttacker : MonoBehaviour
     private float _endWaitTime;
     private float _endAttackTime;
 
+    public float Delay => _delay;
+
     public float SqrAttackDistance => _offset * _offset;
 
     public bool CanAttack => _endWaitTime <= Time.time;

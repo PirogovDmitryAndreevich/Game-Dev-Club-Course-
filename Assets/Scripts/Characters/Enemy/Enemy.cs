@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(EnemyAnimator), typeof(Fliper))]
@@ -11,7 +10,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _maxHealth = 100;
 
     private Health _health;
-    private EnemyAnimator _animator;
     private float _maxSqrDistance = 14.7f;
     private EnemyStateMachine _stateMachine;
 
@@ -22,12 +20,12 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<EnemyAnimator>();
+        var animator = GetComponent<EnemyAnimator>();
         var mover = GetComponent<Mover>();
         var fliper = GetComponent<Fliper>();
         var view = GetComponent<EnemyDirectionOfView>();
         var attacker = GetComponent<EnemyAttacker>();
-        _stateMachine = new EnemyStateMachine(fliper, mover, view, _wayPoints, _animator, _maxSqrDistance,
+        _stateMachine = new EnemyStateMachine(fliper, mover, view, _wayPoints, animator, _maxSqrDistance,
             transform, _waitTime, _tryFindTime, attacker);
     }
 
