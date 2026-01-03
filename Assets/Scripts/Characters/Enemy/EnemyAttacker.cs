@@ -12,7 +12,6 @@ public class EnemyAttacker : MonoBehaviour
 
     private Fliper _fliper;
     private float _endWaitTime;
-    private float _endAttackTime;
 
     public float Delay => _delay;
 
@@ -20,7 +19,7 @@ public class EnemyAttacker : MonoBehaviour
 
     public bool CanAttack => _endWaitTime <= Time.time;
 
-    public bool IsAttack => _endAttackTime > Time.time;
+    public bool IsAttack { get; private set; }
 
     private void Start()
     {
@@ -37,14 +36,18 @@ public class EnemyAttacker : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(GetAttackOrigin(), _radius, _targetLayer);
 
-        _endWaitTime = Time.time + _delay;
-        _endAttackTime = Time.time + 1;
-
         if (hit != null && hit.TryGetComponent(out Player player))
         {
             player.ApplyDamage(_damage);
         }
     }
+
+    public void StartAttack()
+    {
+        _endWaitTime = Time.time + _delay;
+        IsAttack = true;
+    }
+    public void OnEndAttackEvent() => IsAttack = false;
 
     private Vector2 GetAttackOrigin()
     {

@@ -29,8 +29,6 @@ public class EnemyDirectionOfView : MonoBehaviour
 
         if (hit != null)
         {
-            Debug.Log($"{hit.name}");
-
             Vector2 direction = (hit.transform.position - transform.position).normalized;
             RaycastHit2D hit2D = Physics2D.Raycast(transform.position, direction, _seeAreaSize.x, ~_ignoreLayers);
 
