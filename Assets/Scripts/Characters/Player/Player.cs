@@ -49,10 +49,14 @@ public class Player : MonoBehaviour
         }
 
         if (_inputReader.GetIsDash() && _inputReader.Direction != null)
+        {
             _mover.Dash(_inputReader.Direction);
+            _animator.SetDashTrigger();
+        }
 
         if (_inputReader.GetIsAttack() && _attacker.CanAttack)
         {
+            _attacker.StartAttack();
             _attacker.Attack();
             _animator.SetAttackTrigger();
         }
@@ -69,7 +73,8 @@ public class Player : MonoBehaviour
     public void ApplyDamage(int damage)
     {
         _health.ApplyDamage(damage);
-        Debug.Log(_health.HealthCurrent);
+        _animator.SetHitTrigger();
+        Debug.Log($"Player: {_health.HealthCurrent}");
     }
 
     public void Heal(int value)

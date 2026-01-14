@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(EnemyAnimator), typeof(Fliper))]
-[RequireComponent(typeof(EnemyDirectionOfView), typeof(EnemyAttacker))]
+[RequireComponent(typeof(EnemyDirectionOfView))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private WayPoint[] _wayPoints;
@@ -9,18 +9,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _waitTime = 2.0f;
     [SerializeField] private float _tryFindTime = 1f;
     [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private float _maxSqrDistance = 13.7f;
+
+    protected EnemyAttacker _attacker;
 
     private Health _health;
-    private float _maxSqrDistance = 14.7f;
-    private EnemyAttacker _attacker;
     private EnemyStateMachine _stateMachine;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        _attacker = GetComponent<EnemyAttacker>();
         _health = new Health(_maxHealth);
-        _animationEvent.Attack += _attacker.Attack;
-        _animationEvent.EndAttack += _attacker.OnEndAttackEvent;
+        _animationEvent.DealDamage += _attacker.Attack;
+        _animationEvent.AttackEnded += _attacker.OnAttackEndedEvent;
     }
 
     private void Start()
@@ -28,7 +28,8 @@ public class Enemy : MonoBehaviour
         var animator = GetComponent<EnemyAnimator>();
         var mover = GetComponent<Mover>();
         var fliper = GetComponent<Fliper>();
-        var view = GetComponent<EnemyDirectionOfView>();        
+        var view = GetComponent<EnemyDirectionOfView>();
+
         _stateMachine = new EnemyStateMachine(fliper, mover, view, _wayPoints, animator, _maxSqrDistance,
             transform, _waitTime, _tryFindTime, _attacker);
     }
@@ -40,13 +41,15 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        _animationEvent.Attack -= _attacker.Attack;
-        _animationEvent.EndAttack -= _attacker.OnEndAttackEvent;
+        _animationEvent.DealDamage -= _attacker.Attack;
+        _animationEvent.AttackEnded -= _attacker.OnAttackEndedEvent;
     }
 
     public void ApplyDamage(int damage)
     {
         _health.ApplyDamage(damage);
+
+        Debug.Log($"Enemy: {_health.HealthCurrent}");
 
         if (_health.HealthCurrent <= 0)
             Destroy(gameObject);

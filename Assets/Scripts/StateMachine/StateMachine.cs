@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-abstract class StateMachine
+abstract class StateMachine 
 {
     protected State CurrentState;
     protected Dictionary<Type, State> States;

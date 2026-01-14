@@ -8,6 +8,8 @@ public class ConstantsData
         public static readonly int IsOpen = Animator.StringToHash(nameof(IsOpen));
         public static readonly int IsActivated = Animator.StringToHash(nameof(IsActivated));
         public static readonly int IsAttack = Animator.StringToHash(nameof(IsAttack));
+        public static readonly int Hit = Animator.StringToHash(nameof(Hit));
+        public static readonly int IsDash = Animator.StringToHash(nameof(IsDash));
 
     }
 

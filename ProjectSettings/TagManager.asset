@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Sword
   - 
   - 
   - 
@@ -49,4 +49,10 @@ TagManager:
     locked: 0
   - name: Layer 3
     uniqueID: 4189426099
+    locked: 0
+  - name: Enemy
+    uniqueID: 2491034869
+    locked: 0
+  - name: Player
+    uniqueID: 2315634871
     locked: 0

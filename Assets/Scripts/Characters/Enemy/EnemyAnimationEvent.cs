@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class EnemyAnimationEvent : MonoBehaviour
 {
-    public Action Attack;
-    public Action EndAttack;
+    public Action DealDamage;
+    public Action AttackEnded;
 
     /// Called in the animator
-    public void InvokeAttackEvent() => Attack?.Invoke();
+    public void InvokeAttackEvent() => DealDamage?.Invoke();
 
-    public void InvokeEndAttackEvent() => EndAttack?.Invoke();
+    public void InvokeAttackEndedEvent()
+    {
+        AttackEnded?.Invoke();
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyDirectionOfView : MonoBehaviour
 {
     [SerializeField] private Vector2 _seeAreaSize;
+    [SerializeField] private float _ariaSizeRadius;
     [SerializeField] private LayerMask _targetLayer;
     [SerializeField] private LayerMask _ignoreLayers;
 
@@ -18,19 +19,19 @@ public class EnemyDirectionOfView : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(GetLookAreaOrigin(), _seeAreaSize);
+        Gizmos.DrawWireSphere(transform.position, _ariaSizeRadius);
     }
 
     public bool TrySeeTarget(out Transform target)
     {
         target = null;
 
-        Collider2D hit = Physics2D.OverlapBox(GetLookAreaOrigin(), _seeAreaSize, 0f, _targetLayer);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, _ariaSizeRadius, _targetLayer);
 
         if (hit != null)
         {
             Vector2 direction = (hit.transform.position - transform.position).normalized;
-            RaycastHit2D hit2D = Physics2D.Raycast(transform.position, direction, _seeAreaSize.x, ~_ignoreLayers);
+            RaycastHit2D hit2D = Physics2D.Raycast(transform.position, direction, _ariaSizeRadius, ~_ignoreLayers);
 
             if (hit2D.collider != null)
             {
@@ -48,14 +49,6 @@ public class EnemyDirectionOfView : MonoBehaviour
         }
 
         return false;
-    }
-
-    private Vector2 GetLookAreaOrigin()
-    {
-        float halfCoefficient = 2.0f;
-        float directionCoefficient = _fliper?.IsTernRight ?? true ? 1 : -1;
-        float originX = transform.position.x + _seeAreaSize.x / halfCoefficient * directionCoefficient;
-        return new Vector2(originX, transform.position.y);
     }
 
     internal bool TrySeeTarget(out object target)
