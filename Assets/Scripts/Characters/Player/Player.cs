@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 20;
+    [SerializeField] private PlayerAttackAnimationEvent _attackEvents;
+    [SerializeField] private HitFlash _hitFlash;
 
     private Mover _mover;
     private InputReader _inputReader;
@@ -13,6 +15,7 @@ public class Player : MonoBehaviour
     private Fliper _fliper;
     private PlayerAttacker _attacker;
     private Health _health;
+    private SpriteRenderer _playerSprite;
 
     private IInteractable _interactable;
 
@@ -27,14 +30,23 @@ public class Player : MonoBehaviour
         _fliper = GetComponent<Fliper>();
     }
 
+    private void Start()
+    {
+        _playerSprite = _attackEvents.GetComponent<SpriteRenderer>();
+    }
+
     private void OnEnable()
     {
         _collisionHandler.InteractStarted += OnInteractStarted;
+        _attackEvents.AttackEnded += _attacker.OnAttackEndedEvent;
+        _attackEvents.DealDamage += _attacker.Attack;
     }
 
     private void OnDisable()
     {
         _collisionHandler.InteractStarted -= OnInteractStarted;
+        _attackEvents.AttackEnded -= _attacker.OnAttackEndedEvent;
+        _attackEvents.DealDamage -= _attacker.Attack;
     }
 
     private void FixedUpdate()
@@ -42,14 +54,16 @@ public class Player : MonoBehaviour
         _animator.SetIsWalk(_inputReader.Direction.x != 0
                            || _inputReader.Direction.y != 0);
 
-        if (_inputReader.Direction != null)
+        if (_inputReader.Direction != null && !_attacker.IsAttack)
         {
             _mover.Move(_inputReader.Direction);
             _fliper.LookAtTarget((Vector2)transform.position + Vector2.right * _inputReader.Direction);
         }
 
-        if (_inputReader.GetIsDash() && _inputReader.Direction != null)
+        if (_inputReader.GetIsDash()
+            && _inputReader.Direction != null)
         {
+            _mover.Stop();
             _mover.Dash(_inputReader.Direction);
             _animator.SetDashTrigger();
         }
@@ -57,8 +71,9 @@ public class Player : MonoBehaviour
         if (_inputReader.GetIsAttack() && _attacker.CanAttack)
         {
             _attacker.StartAttack();
-            _attacker.Attack();
             _animator.SetAttackTrigger();
+            _mover.Stop();
+            _mover.AttackStep();
         }
 
         if (_inputReader.GetIsInteract() && _interactable != null)
@@ -73,7 +88,7 @@ public class Player : MonoBehaviour
     public void ApplyDamage(int damage)
     {
         _health.ApplyDamage(damage);
-        _animator.SetHitTrigger();
+        //_hitFlash.Play();
         Debug.Log($"Player: {_health.HealthCurrent}");
     }
 

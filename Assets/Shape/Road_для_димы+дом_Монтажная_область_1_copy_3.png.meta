@@ -1,0 +1,831 @@
+fileFormatVersion: 2
+guid: 53bd7fc1f93d83f45b4d20b3dda31623
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_0"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b45a8cd1210a5a408a506b8be99de2d
+      internalID: -1407229935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_1"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c7354761a1798d49b04e844f7511267
+      internalID: -1694113232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_2"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cedc996eb06525143abda3d9d65de9d4
+      internalID: -457273883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_3"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06009de92fe1ad8409454a5ba1484b39
+      internalID: -1381075416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_4"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11fbee7fa19372e4da83bfbeca974157
+      internalID: 1848313234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_5"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 846c77ba60c63174888f74ebe9e1ded2
+      internalID: 2042946904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_6"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20bab8a85e8a97d428c8cba777e0b423
+      internalID: -738616118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_7"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3532491531d6d9d4cbb7078eeef1f9f7
+      internalID: 2108889382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_8"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16108d445a62cae4ab05305ed6e198f9
+      internalID: -1909603577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_9"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ad299945125bd845b902bb2d22f7996
+      internalID: 1046573476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_10"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3512a37016c6b814486ee70d8efc9c4e
+      internalID: -322552198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_11"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa093e5eb8ba80e4a8109e03dc3573e1
+      internalID: -2055996521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_12"
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d36a1579994a9242b616eec277e33a2
+      internalID: -742315373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_13"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5ae1cb3f69904745a17126ab89db410
+      internalID: 787787601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_14"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b731274f73aacf4bb26e32727215132
+      internalID: 1397594847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_15"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 735f9c0218129c740ac46216af2b7243
+      internalID: -377289600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_16"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d314bce475511f4db158427c2f2d994
+      internalID: 432045587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_17"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b507986a92b2334cbe260da89c0caf9
+      internalID: 642474166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_18"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 924ab1b4005d2374fb3361ddeef5d928
+      internalID: -14236616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_19"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc65b5f0533b63d45a794ce4e5ec6254
+      internalID: -1243020306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_20"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 387be24029e81594bbf16739b2a9942f
+      internalID: 2081425577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_21"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4745b68c2c1920a4cae403f4d3548af6
+      internalID: -1458302617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_22"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fc2808226a12d84e9cdc79034f1bbd9
+      internalID: 1685746700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_23"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fda56ada51738b40921f49f122fffa8
+      internalID: -1596276705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_24"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb396a69fe85634884ee71a5ffe3780
+      internalID: -1545405548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_25"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5722186072b21e468774e0c8bed5c7b
+      internalID: 2082736729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_26"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74d0cd709ea57c44ba53bf3df614d1e9
+      internalID: -1443926910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_27"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e9325a74c4023342b318c340a8c65d4
+      internalID: 1348033265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_28"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6ac80abccac07c468f7cf2e3f0b0a71
+      internalID: -26866163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_29"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdecac1f48a3da24d965b2888fad51a4
+      internalID: 1117884777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_30"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e9cb4ddf29ae94a838cf016563e6f5
+      internalID: 1539742818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_31"
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a176c3095c0c7334880ab0de4a0a2b2a
+      internalID: -44336797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_0": -1407229935
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_1": -1694113232
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_10": -322552198
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_11": -2055996521
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_12": -742315373
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_13": 787787601
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_14": 1397594847
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_15": -377289600
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_16": 432045587
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_17": 642474166
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_18": -14236616
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_19": -1243020306
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_2": -457273883
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_20": 2081425577
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_21": -1458302617
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_22": 1685746700
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_23": -1596276705
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_24": -1545405548
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_25": 2082736729
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_26": -1443926910
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_27": 1348033265
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_28": -26866163
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_29": 1117884777
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_3": -1381075416
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_30": 1539742818
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_31": -44336797
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_4": 1848313234
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_5": 2042946904
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_6": -738616118
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_7": 2108889382
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_8": -1909603577
+      "Road_\u0434\u043B\u044F_\u0434\u0438\u043C\u044B+\u0434\u043E\u043C_\u041C\u043E\u043D\u0442\u0430\u0436\u043D\u0430\u044F_\u043E\u0431\u043B\u0430\u0441\u0442\u044C_1_copy_3_9": 1046573476
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

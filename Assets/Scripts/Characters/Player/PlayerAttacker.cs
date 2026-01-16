@@ -32,10 +32,8 @@ public class PlayerAttacker : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(GetAttackOrigin(), _radius, _targetLayer);
 
-        if (hit != null && hit.TryGetComponent(out Enemy enemy))
-        {
-            enemy.ApplyDamage(_damage);
-        }
+        if (hit != null && hit.TryGetComponent(out Enemy enemy))        
+            enemy.ApplyDamage(_damage, transform.position);                
     }
 
     public void StartAttack()

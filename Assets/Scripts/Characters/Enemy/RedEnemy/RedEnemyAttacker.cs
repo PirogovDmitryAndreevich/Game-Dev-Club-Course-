@@ -15,15 +15,6 @@ public class RedEnemyAttacker : EnemyAttacker
         _mover = GetComponent<Mover>();
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (_isAttacking)
-        {
-            if (collision.TryGetComponent(out Player player))
-                player.ApplyDamage(_damage);
-        }
-    }*/
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (_isAttacking)
@@ -46,6 +37,7 @@ public class RedEnemyAttacker : EnemyAttacker
 
     public override void OnAttackEndedEvent()
     {
+        Debug.Log("RedEnemy: OnAttackEndedEvent");
         _isAttacking = false;
         base.OnAttackEndedEvent();
     }
