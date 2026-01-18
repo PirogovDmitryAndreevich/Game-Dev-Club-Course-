@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyDirectionOfView))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private PunchAnimation _punch;
     [SerializeField] private WayPoint[] _wayPoints;
     [SerializeField] private EnemyAnimationEvent _animationEvent;
     [SerializeField] private HitFlash _hitFlash;
@@ -47,10 +48,11 @@ public class Enemy : MonoBehaviour
         _animationEvent.AttackEnded -= _attacker.OnAttackEndedEvent;
     }
 
-    public void ApplyDamage(int damage, Vector2 sourcePosition)
+    public void ApplyDamage(int damage, Vector2 damageSource, Vector2 pushDirection)
     {
+        _punch.Punch(damageSource);
         _health.ApplyDamage(damage);
-        _mover.TakeDamage(sourcePosition);
+        _mover.TakeDamage(pushDirection);
         _hitFlash.Play();
 
         Debug.Log($"Enemy: {_health.HealthCurrent}");

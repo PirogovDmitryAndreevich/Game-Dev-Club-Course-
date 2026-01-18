@@ -79,18 +79,15 @@ public class Mover : MonoBehaviour
 
     }
 
-    public void TakeDamage(Vector2 sourcePosition)
+    public void TakeDamage(Vector2 pushDirection)
     {
         Stop();
 
-        float directionX = transform.position.x - sourcePosition.x;
-        directionX = Mathf.Sign(directionX);
+        pushDirection = new Vector2(Mathf.Sign(pushDirection.x), 0f);
 
         Vector2 startPos = _rigidbody.position;
 
-        Vector2 target = new Vector2(
-        startPos.x + directionX * _knockbackForce,
-        startPos.y);
+        Vector2 target = startPos + pushDirection * _knockbackForce;
 
         _currentTween = _rigidbody.DOMove(target, _knockbackDuration)
             .SetEase(Ease.OutQuad)

@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &358735953934921824
 Transform:
   m_ObjectHideFlags: 0
@@ -49,7 +49,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2833903280721920454}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -66,7 +66,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &5561337522192031351
 CapsuleCollider2D:
@@ -115,12 +115,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ba99ab1c882b647930b292356b6171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _punch: {fileID: 0}
   _wayPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   _animationEvent: {fileID: 8158308296136176821}
+  _hitFlash: {fileID: 2908411576186180299}
   _waitTime: 2
   _tryFindTime: 1
   _maxHealth: 100
@@ -184,6 +186,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _runSpeed: 1.5
+  _attackStepDistance: 0.5
+  _attackStepDuration: 0.1
+  _dashDistance: 5
+  _dashDuration: 0.15
+  _dashCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _knockbackForce: 1
+  _knockbackDuration: 0.5
 --- !u!114 &5341855650610571285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +270,7 @@ GameObject:
   - component: {fileID: 1366158775253439473}
   - component: {fileID: 8158308296136176821}
   - component: {fileID: 651619756934320764}
+  - component: {fileID: 2908411576186180299}
   m_Layer: 7
   m_Name: View
   m_TagString: Untagged
@@ -298,7 +313,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 41078a91f037db342b6fb58d6b00ea64, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -375,3 +390,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2908411576186180299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200043273907690815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e47763fcd19784584f486ec1391a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _whiteColor: {r: 1, g: 1, b: 1, a: 1}
+  _yellowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _whiteDuration: 0.05
+  _yellowDuration: 0.07

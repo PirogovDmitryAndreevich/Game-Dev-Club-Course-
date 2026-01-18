@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputReader : MonoBehaviour
 {
@@ -12,8 +13,12 @@ public class InputReader : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         _movementX = Input.GetAxis(ConstantsData.InputAxis.HorizontalAxis);
         _movementY = Input.GetAxis(ConstantsData.InputAxis.VerticalAxis);
+
         Direction = new Vector2(_movementX, _movementY);
 
         if (Input.GetKeyDown(KeyCode.Space))        

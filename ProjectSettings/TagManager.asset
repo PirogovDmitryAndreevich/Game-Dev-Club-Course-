@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Enemy
   - Sword
-  - 
+  - Effects
   - 
   - 
   - 
@@ -55,4 +55,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2315634871
+    locked: 0
+  - name: Effects
+    uniqueID: 395636711
     locked: 0

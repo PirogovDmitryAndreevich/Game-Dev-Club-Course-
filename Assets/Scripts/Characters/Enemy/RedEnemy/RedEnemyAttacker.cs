@@ -19,9 +19,15 @@ public class RedEnemyAttacker : EnemyAttacker
     {
         if (_isAttacking)
         {
+            Debug.Log("IsAttacking true");
+
             if (collision.TryGetComponent(out Player player))
             {
-                player.ApplyDamage(_damage);
+                Debug.Log(collision.name);
+
+                Vector2 direction = (player.transform.position - transform.position).normalized;
+
+                player.ApplyDamageWithKnockback(_damage, direction);
                 _isAttacking = false;
             }
         }

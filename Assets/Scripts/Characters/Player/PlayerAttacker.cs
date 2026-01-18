@@ -30,10 +30,18 @@ public class PlayerAttacker : MonoBehaviour
 
     public void Attack()
     {
-        Collider2D hit = Physics2D.OverlapCircle(GetAttackOrigin(), _radius, _targetLayer);
+        Vector2 origin = GetAttackOrigin();
 
-        if (hit != null && hit.TryGetComponent(out Enemy enemy))        
-            enemy.ApplyDamage(_damage, transform.position);                
+        Collider2D hit = Physics2D.OverlapCircle(origin, _radius, _targetLayer);
+
+        if (hit != null && hit.TryGetComponent(out Enemy enemy))
+        {
+            Vector2 pushDirection = _fliper.IsTernRight
+                                        ? Vector2.right
+                                            : Vector2.left;
+
+            enemy.ApplyDamage(_damage, hit.ClosestPoint(origin), pushDirection);
+        }
     }
 
     public void StartAttack()

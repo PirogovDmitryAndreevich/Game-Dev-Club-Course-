@@ -10,9 +10,11 @@ public class GreyEnemyAttacker : EnemyAttacker
 
     public override void Attack()
     {
-        Collider2D hit = Physics2D.OverlapCircle(GetAttackOrigin(), _radius, _targetLayer);
+        Vector2 origin = GetAttackOrigin();
+
+        Collider2D hit = Physics2D.OverlapCircle(origin, _radius, _targetLayer);
 
         if (hit != null && hit.TryGetComponent(out Player player))        
-            player.ApplyDamage(_damage);        
+            player.ApplyDamage(_damage, hit.ClosestPoint(origin));        
     }
 }
