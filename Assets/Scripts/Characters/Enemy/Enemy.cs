@@ -1,67 +1,44 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(EnemyAnimator), typeof(Fliper))]
-[RequireComponent(typeof(EnemyDirectionOfView))]
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(EnemyDirectionOfView), typeof(Attacker), typeof(EnemyAI))]
+public class Enemy : Character
 {
-    [SerializeField] private PunchAnimation _punch;
     [SerializeField] private WayPoint[] _wayPoints;
-    [SerializeField] private EnemyAnimationEvent _animationEvent;
-    [SerializeField] private HitFlash _hitFlash;
     [SerializeField] private float _waitTime = 2.0f;
     [SerializeField] private float _tryFindTime = 1f;
-    [SerializeField] private int _maxHealth = 100;
     [SerializeField] private float _maxSqrDistance = 13.7f;
 
-    protected EnemyAttacker _attacker;
-
-    private Mover _mover;
-    private Health _health;
     private EnemyStateMachine _stateMachine;
-
-    protected virtual void Awake()
-    {
-        _health = new Health(_maxHealth);        
-        _animationEvent.DealDamage += _attacker.Attack;
-        _animationEvent.AttackEnded += _attacker.OnAttackEndedEvent;
-    }
+    protected EnemySounds _sound;
 
     private void Start()
     {
-        var animator = GetComponent<EnemyAnimator>();
-        _mover = GetComponent<Mover>();
-        var fliper = GetComponent<Fliper>();
         var view = GetComponent<EnemyDirectionOfView>();
+        var enemyAI = GetComponent<EnemyAI>();
+        _sound = GetComponent<EnemySounds>();
 
-        _stateMachine = new EnemyStateMachine(fliper, _mover, view, _wayPoints, animator, _maxSqrDistance,
-            transform, _waitTime, _tryFindTime, _attacker);
+        _stateMachine = new EnemyStateMachine(_fliper, _mover, view, _wayPoints, _animator, _maxSqrDistance,
+            transform, _waitTime, _tryFindTime, _attacker, enemyAI, _sound);
     }
 
-    private void FixedUpdate()
-    {
-        _stateMachine.Update();
-    }
+    protected override void FixedUpdate() => _stateMachine.Update(); 
 
-    private void OnDestroy()
+    public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
     {
-        _animationEvent.DealDamage -= _attacker.Attack;
-        _animationEvent.AttackEnded -= _attacker.OnAttackEndedEvent;
-    }
+        _sound.PlayHitSound();
 
-    public void ApplyDamage(int damage, Vector2 damageSource, Vector2 pushDirection)
-    {
-        _punch.Punch(damageSource);
-        _health.ApplyDamage(damage);
-        _mover.TakeDamage(pushDirection);
-        _hitFlash.Play();
+        base.ApplyDamage(damageInfo, damageSource, pushDirection);
 
-        Debug.Log($"Enemy: {_health.HealthCurrent}");
+        var damageNumber = FXPool.Instance.Get(FXType.DamageNumber) as DamageValueAnimation;
+        damageNumber.Play(damageSource, damageInfo.Damage, damageInfo.IsCrit);
 
         if (_health.HealthCurrent <= 0)
         {
             _mover.Stop();
+            _sound.PlayDeathSound();
+            var deathParticles = FXPool.Instance.Get(FXType.EnemyDeath);
+            deathParticles.Play(transform.position);
             Destroy(gameObject);
         }
     }
-    
 }

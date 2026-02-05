@@ -1,20 +1,32 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PinkAttackRealization))]
-public class PinkEnemyAttacker : EnemyAttacker
+[RequireComponent(typeof(EnemySounds))]
+public class PinkEnemyAttacker : Attacker
 {
-    private PinkAttackRealization _realization;
+    [SerializeField] private float _offsetDamage = 1f;
 
-    protected override void Start()
+    public override AttacksType type => _attack.Type;
+    private EnemySounds _sound;
+
+    protected override void Awake()
     {
-        _realization = GetComponent<PinkAttackRealization>();
+        _sound = GetComponent<EnemySounds>();
+        base.Awake();
     }
 
     public override void Attack()
     {
+        _sound.PlayAttackSound();
+
         Collider2D hit = Physics2D.OverlapCircle(transform.position, SqrAttackDistance, _targetLayer);
 
-        if (hit != null && hit.TryGetComponent(out Player player))        
-            _realization.StartAttack(player.transform.position, _damage, _targetLayer);        
+        if (hit != null && hit.TryGetComponent(out Player player))
+        {
+            var bullet = FXPool.Instance.Get(FXType.Bullet) as Bullet;
+
+            Vector2 point = player.transform.position;
+            point.y -= _offsetDamage;
+            bullet.Play(transform.position, point, _attack, _targetLayer);
+        }       
     }
 }

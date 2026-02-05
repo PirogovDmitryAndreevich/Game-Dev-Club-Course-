@@ -1,0 +1,25 @@
+{
+    "intExample": 5,
+    "strExample": "Hello!",
+    "boolExample": [
+        false,
+        false,
+        false,
+        false
+    ],
+    "idSave": 413,
+    "GameSaveData": {
+        "_soundValue": 1.0,
+        "_musicValue": 0.9932829737663269,
+        "_isSoundMute": false,
+        "_isMusicMute": false
+    },
+    "PlayerSaveData": {
+        "_coins": 0,
+        "_gems": 0,
+        "_score": 0,
+        "_damage": 5,
+        "_defense": 0,
+        "_health": 100
+    }
+}

@@ -11,7 +11,7 @@ public class Health
 
     public event Action OnDied;
 
-    public event Action<float, float> OnHealthChanged;
+    public event Action<float, float, bool> OnHealthChanged;
 
     public int MaxHealth { get; private set; }
 
@@ -23,12 +23,13 @@ public class Health
             if (_currentValue != value)
             { 
                 _currentValue = value;
-                OnHealthChanged?.Invoke(_currentValue, MaxHealth);
+                OnHealthChanged?.Invoke(_currentValue, MaxHealth, _isShield);
             }
         }
     }
 
     private int _currentValue;
+    private bool _isShield = false;
 
     public void ApplyDamage(int damage)
     {

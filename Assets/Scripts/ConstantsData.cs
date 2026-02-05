@@ -10,6 +10,7 @@ public class ConstantsData
         public static readonly int IsAttack = Animator.StringToHash(nameof(IsAttack));
         public static readonly int Hit = Animator.StringToHash(nameof(Hit));
         public static readonly int IsDash = Animator.StringToHash(nameof(IsDash));
+        public static readonly int IsAttackBool = Animator.StringToHash(nameof(IsAttackBool));
 
     }
 

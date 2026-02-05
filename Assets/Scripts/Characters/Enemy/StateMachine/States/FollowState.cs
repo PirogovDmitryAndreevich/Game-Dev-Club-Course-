@@ -6,15 +6,23 @@ class FollowState : State, IMoveState
     private Transform _target;
     private Mover _mover;
     private Fliper _fliper;
-    private EnemyAnimator _animator;
+    private CharacterAnimator _animator;
+    private EnemyAI _enemyAI;
+    private EnemySounds _sounds;
+    private float _repathCooldown = 0.5f;
+    private float _repathTimer;
+    private float _closeDistance = 1f;
 
-    public FollowState(StateMachine stateMachine, EnemyAnimator animator, Fliper fliper, Mover mover,
-        EnemyDirectionOfView view, float tryFindTime, float sqrAttackDistance) : base(stateMachine)
+    public FollowState(StateMachine stateMachine, EnemyAI enemyAI, CharacterAnimator animator,
+        Fliper fliper, Mover mover, EnemyDirectionOfView view, float tryFindTime,
+        float sqrAttackDistance, EnemySounds sounds) : base(stateMachine)
     {
         _animator = animator;
         _view = view;
         _mover = mover;
         _fliper = fliper;
+        _enemyAI = enemyAI;
+        _sounds = sounds;
 
         Transitions = new Transition[]
         {
@@ -38,15 +46,36 @@ class FollowState : State, IMoveState
 
     public override void Update()
     {
-        if (_target != null)
+        if (_target == null)
+            return;
+
+        _repathTimer -= Time.deltaTime;
+
+        float sqrDistanceToTarget =
+            (_target.position - _mover.transform.position).sqrMagnitude;
+
+        if (sqrDistanceToTarget > _closeDistance * _closeDistance &&
+            _repathTimer <= 0f)
         {
-            _mover.Run(_target);
-            _fliper.LookAtTarget(_target.position);
+            _enemyAI.BuildPath(_target);
+            _repathTimer = _repathCooldown;
         }
+
+        Vector3 moveTarget;
+
+        if (sqrDistanceToTarget > _closeDistance * _closeDistance &&
+            _enemyAI.HasPath)
+        {
+            moveTarget = _enemyAI.CurrentPoint;
+            _enemyAI.AdvanceIfReached();
+        }
+        else
+        {
+            moveTarget = _target.position;
+        }
+
+        _mover.Run(moveTarget);
+        _sounds.PlayStepsSound();
+        _fliper.LookAtTarget(_target.position);
     }
 }
-
-
-
-
-

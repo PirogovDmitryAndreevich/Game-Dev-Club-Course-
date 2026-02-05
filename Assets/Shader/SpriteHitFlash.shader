@@ -1,9 +1,8 @@
-Shader "Custom/SpriteHitFlash"
+Shader "Custom/SpriteHitFlash_Optimized"
 {
     Properties
     {
         _MainTex ("Sprite Texture", 2D) = "white" {}
-        _Color ("Tint", Color) = (1,1,1,1)
         _FlashColor ("Flash Color", Color) = (1,1,1,1)
         _FlashAmount ("Flash Amount", Range(0,1)) = 0
     }
@@ -15,6 +14,7 @@ Shader "Custom/SpriteHitFlash"
             "Queue"="Transparent"
             "RenderType"="Transparent"
             "IgnoreProjector"="True"
+            "CanUseSpriteAtlas"="True"
         }
 
         Blend SrcAlpha OneMinusSrcAlpha
@@ -37,13 +37,12 @@ Shader "Custom/SpriteHitFlash"
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float2 uv : TEXCOORD0;
+                half2 uv : TEXCOORD0;
             };
 
             sampler2D _MainTex;
-            float4 _Color;
-            float4 _FlashColor;
-            float _FlashAmount;
+            half4 _FlashColor;
+            half _FlashAmount;
 
             v2f vert (appdata v)
             {
@@ -55,9 +54,13 @@ Shader "Custom/SpriteHitFlash"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 tex = tex2D(_MainTex, i.uv) * _Color;
-                fixed3 flashRgb = lerp(tex.rgb, _FlashColor.rgb, _FlashAmount);
-                return fixed4(flashRgb, tex.a);
+                fixed4 tex = tex2D(_MainTex, i.uv);
+
+                if (_FlashAmount <= 0)
+                    return tex;
+
+                tex.rgb = lerp(tex.rgb, _FlashColor.rgb, _FlashAmount);
+                return tex;
             }
             ENDCG
         }

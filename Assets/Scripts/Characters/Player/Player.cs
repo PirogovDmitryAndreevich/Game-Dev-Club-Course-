@@ -1,81 +1,68 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(InputReader), typeof(PlayerAnimator))]
-[RequireComponent(typeof(CollisionHandler), typeof(Fliper), typeof(PlayerAttacker))]
-public class Player : MonoBehaviour
+[RequireComponent(typeof(CollisionHandler), typeof(InputReader), typeof(PlayerAttacker))]
+[RequireComponent(typeof(CameraShake), typeof(PlayerSounds))]
+public class Player : Character
 {
-    [SerializeField] private int _maxHealth = 20;
-    [SerializeField] private PlayerAttackAnimationEvent _attackEvents;
-    [SerializeField] private HitFlash _hitFlash;
-    [SerializeField] private PunchAnimation _punch;
     [SerializeField] private HealthBar _healthBar;
 
-    private Mover _mover;
     private InputReader _inputReader;
-    private PlayerAnimator _animator;
     private CollisionHandler _collisionHandler;
-    private Fliper _fliper;
-    private PlayerAttacker _attacker;
-    private Health _health;
+    private CameraShake _camera;
+    private PlayerSounds _sound;
 
     private IInteractable _interactable;
 
-    public event Action OnPlayerDied;
-
-    private void Awake()
+    protected override void Awake()
     {
-        _health = new Health(_maxHealth);
-        _healthBar.Initialize(_health);
+        _maxHealth = SaveData.PlayerData.Health;
         _attacker = GetComponent<PlayerAttacker>();
-        _mover = GetComponent<Mover>();
         _inputReader = GetComponent<InputReader>();
-        _animator = GetComponent<PlayerAnimator>();
         _collisionHandler = GetComponent<CollisionHandler>();
-        _fliper = GetComponent<Fliper>();
-    }
+        _camera = GetComponent<CameraShake>();
+        _sound = GetComponent<PlayerSounds>();
 
-    private void OnEnable()
-    {
-        _health.OnDied += OnDied;
         _collisionHandler.InteractStarted += OnInteractStarted;
-        _attackEvents.AttackEnded += _attacker.OnAttackEndedEvent;
-        _attackEvents.DealDamage += _attacker.Attack;
+        base.Awake();
+        _healthBar.Initialize(_health);
     }
 
-    private void OnDisable()
+    protected override void OnDestroy()
     {
-        _health.OnDied -= OnDied;
+        base.OnDestroy();
         _collisionHandler.InteractStarted -= OnInteractStarted;
-        _attackEvents.AttackEnded -= _attacker.OnAttackEndedEvent;
-        _attackEvents.DealDamage -= _attacker.Attack;
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        _animator.SetIsWalk(_inputReader.Direction.x != 0
-                           || _inputReader.Direction.y != 0);
+        _animator.SetIsWalk(_inputReader.Direction.x != 0 
+                            || _inputReader.Direction.y != 0);
 
         if (_inputReader.Direction != null && !_attacker.IsAttack)
         {
             _mover.Move(_inputReader.Direction);
             _fliper.LookAtTarget((Vector2)transform.position + Vector2.right * _inputReader.Direction);
+
+            if (_inputReader.Direction != Vector2.zero)
+                _sound.PlayStepsSound();
         }
 
         if (_inputReader.GetIsDash()
-            && _inputReader.Direction != null)
+        && _inputReader.Direction != null)
         {
             _mover.Stop();
             _mover.Dash(_inputReader.Direction);
-            _animator.SetDashTrigger();
+            _animator.SetPlayerDashTrigger();
         }
 
         if (_inputReader.GetIsAttack() && _attacker.CanAttack)
         {
-            _attacker.StartAttack();
-            _animator.SetAttackTrigger();
+            _attacker.StartAttack(_camera);
+            _animator.SetDefaultPlayerAttackTrigger();
             _mover.Stop();
             _mover.AttackStep();
+            _sound.PlayAttackSound();
         }
 
         if (_inputReader.GetIsInteract() && _interactable != null)
@@ -87,30 +74,14 @@ public class Player : MonoBehaviour
         _interactable = interactableObject;
     }
 
-    public void ApplyDamage(int damage, Vector2 damageSource)
+    public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
     {
-        _health.ApplyDamage(damage);
-        _punch.Punch(damageSource);
-        Debug.Log($"Player: {_health.HealthCurrent}");
-    }
-
-    public void ApplyDamage(int damage)
-    {
-        _health.ApplyDamage(damage);
-    }
-
-    public void ApplyDamageWithKnockback(int damage, Vector2 pushDirection)
-    {
-        _health.ApplyDamage(damage);
-        _mover.TakeDamage(pushDirection);
+        base.ApplyDamage(damageInfo, damageSource, pushDirection);
+        _sound.PlayHitSound();
     }
 
     public void Heal(int value)
     {
         _health.Heal(value);
-    }
-    private void OnDied()
-    {
-        OnPlayerDied?.Invoke();
     }
 }

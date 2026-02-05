@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
@@ -16,23 +15,33 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _dashDuration = 0.15f;
     [SerializeField] private AnimationCurve _dashCurve;
     [Header("Take Damage")]
-    [SerializeField] private float _knockbackForce = 1f;
     [SerializeField] private float _knockbackDuration = 0.5f;
+    [Header("Enemy")]
+    [SerializeField] float separationRadius = 1.2f;
+    [SerializeField] float separationStrength = 1.5f;
+    [SerializeField] LayerMask enemyLayer;
 
     private Rigidbody2D _rigidbody;
     private Vector2 _lastMoveDirection = Vector2.zero;
     private Tween _currentTween;
+    private Collider2D[] _neighbors = new Collider2D[16];
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.position = transform.position;
+    }
+
+    private void OnDestroy()
+    {
+        Stop();
     }
 
     public void Dash(Vector2 direction)
     {
         if (direction.sqrMagnitude < 0.01f) return;
 
-        Stop(); // убиваем текущие tween и velocity
+        Stop();
 
         Vector2 target = _rigidbody.position + direction.normalized * _dashDistance;
 
@@ -51,15 +60,22 @@ public class Mover : MonoBehaviour
         _rigidbody.velocity = direction * _speed;
     }
 
-    public void Run(Transform target) => Move(target, _runSpeed);
-
+    public void Run(Vector2 targetPoint) => Move(targetPoint, _runSpeed);
     public void RunAttack(Vector2 target, float attackSpeed) => Move(target, attackSpeed);
+    public void Walk(Vector2 targetPoint) => Move(targetPoint, _speed);
 
-    public void Walk(Transform target) => Move(target, _speed);
-
-    private void Move(Transform target, float speed)
+    private void Move(Vector2 targetPoint, float speed)
     {
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+        Vector2 moveDir = targetPoint - _rigidbody.position;
+        Vector2 desired = moveDir.normalized;
+
+        Vector2 separation = CalculateSeparation();
+
+        Vector2 finalDir = (desired + separation).normalized;
+
+        Vector2 newPosition = _rigidbody.position +
+            finalDir * speed * Time.fixedDeltaTime;
+
         _rigidbody.MovePosition(newPosition);
     }
 
@@ -69,7 +85,6 @@ public class Mover : MonoBehaviour
 
         Stop();
 
-        Debug.Log(_lastMoveDirection);
         Vector2 target = _rigidbody.position + _lastMoveDirection * _attackStepDistance;
 
         _currentTween = _rigidbody.DOMove(target, _attackStepDuration)
@@ -79,7 +94,7 @@ public class Mover : MonoBehaviour
 
     }
 
-    public void TakeDamage(Vector2 pushDirection)
+    public void Knockback(Vector2 pushDirection, float knockbackForce)
     {
         Stop();
 
@@ -87,7 +102,7 @@ public class Mover : MonoBehaviour
 
         Vector2 startPos = _rigidbody.position;
 
-        Vector2 target = startPos + pushDirection * _knockbackForce;
+        Vector2 target = startPos + pushDirection * knockbackForce;
 
         _currentTween = _rigidbody.DOMove(target, _knockbackDuration)
             .SetEase(Ease.OutQuad)
@@ -99,13 +114,45 @@ public class Mover : MonoBehaviour
     public void Stop()
     {
         _rigidbody.velocity = Vector2.zero;
-        _currentTween?.Kill();
+        _currentTween?.Kill(false);
         _currentTween = null;
     }
 
-    private void Move(Vector2 target, float speed)
+    public Vector2 CalculateSeparation()
     {
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
-        _rigidbody.MovePosition(newPosition);
+        int countHits = Physics2D.OverlapCircleNonAlloc(
+        _rigidbody.position,
+        separationRadius,
+        _neighbors,
+        enemyLayer
+    );
+
+        Vector2 separation = Vector2.zero;
+        int count = 0;
+
+        for (int i = 0; i < countHits; i++)
+        {
+            var col = _neighbors[i];
+
+            if (col.attachedRigidbody == _rigidbody)
+                continue;
+
+            Vector2 diff = _rigidbody.position - col.attachedRigidbody.position;
+
+            float sqrDistance = diff.sqrMagnitude;
+            if (sqrDistance <= 0.000001f)
+                continue;
+
+            float distance = Mathf.Sqrt(sqrDistance);
+            float weight = 1f - (sqrDistance / (separationRadius * separationRadius));
+
+            separation += diff.normalized * weight;
+            count++;
+        }
+
+        if (count > 0)
+            separation /= count;
+
+        return separation * separationStrength;
     }
 }

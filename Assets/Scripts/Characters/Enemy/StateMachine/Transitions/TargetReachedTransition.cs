@@ -10,7 +10,6 @@ class TargetReachedTransition : ReachedTransition
         base.Transit();
 
         StateMachine.ChangeState<AttackState>();
-        //
     }
 }
 

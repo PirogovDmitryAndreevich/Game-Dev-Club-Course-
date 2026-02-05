@@ -7,7 +7,7 @@ public class FinishDoor : MonoBehaviour, IInteractable
     private Animator _animator;
     private bool _isOpen;
 
-    [SerializeField] private Rune[] runesForActivate;
+    [SerializeField] private BusStop[] runesForActivate;
 
     private void Awake()
     {
@@ -25,5 +25,15 @@ public class FinishDoor : MonoBehaviour, IInteractable
         {
             Debug.Log("Not all runes are activated");
         }
+    }
+
+    public void HighlightOn()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void HighlightOff()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -2,12 +2,12 @@ using UnityEngine;
 
 class IdleState : State
 {
-    EnemyAnimator _animator;
+    CharacterAnimator _animator;
 
     private float _endWaitTime;
     private float _waitTime;
 
-    public IdleState(StateMachine stateMachine, EnemyDirectionOfView vision,EnemyAnimator animator,
+    public IdleState(StateMachine stateMachine, EnemyDirectionOfView vision, CharacterAnimator animator,
         float waitTime, float sqrAttackDistance) : base(stateMachine)
     {
         _waitTime = waitTime;

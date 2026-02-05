@@ -8,13 +8,23 @@ public class CollisionHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out IInteractable interactable))
-            InteractStarted?.Invoke(interactable);
+        {
+            if (interactable is BusStop)
+                InteractStarted?.Invoke(interactable);
+
+            interactable.HighlightOn();
+        }
 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IInteractable _))
-            InteractStarted?.Invoke(null);        
+        if (collision.TryGetComponent(out IInteractable interactable))
+        {
+            InteractStarted?.Invoke(null);
+
+            if (interactable is BusStop)
+                interactable.HighlightOff();
+        }
     }
 }

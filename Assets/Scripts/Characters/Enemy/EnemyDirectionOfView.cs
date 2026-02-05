@@ -1,20 +1,12 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Fliper))]
 public class EnemyDirectionOfView : MonoBehaviour
 {
     [SerializeField] private Vector2 _seeAreaSize;
     [SerializeField] private float _ariaSizeRadius;
     [SerializeField] private LayerMask _targetLayer;
     [SerializeField] private LayerMask _ignoreLayers;
-
-    private Fliper _fliper;
-
-    private void Start()
-    {
-        _fliper = GetComponent<Fliper>();
-    }
 
     private void OnDrawGizmos()
     {

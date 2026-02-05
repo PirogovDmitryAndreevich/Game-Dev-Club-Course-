@@ -1,0 +1,3 @@
+﻿Build path: D:/IT/Unity Project/CourseGD/Build/Build
+Build number: 6
+PluginYG version: 2.007

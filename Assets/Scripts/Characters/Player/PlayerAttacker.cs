@@ -1,62 +1,100 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Fliper))]
-public class PlayerAttacker : MonoBehaviour
+public class PlayerAttacker : Attacker
 {
-    [SerializeField] private int _damage;
-    [SerializeField] private float _radius;
-    [SerializeField] private float _delay = 2f;
-    [SerializeField] private float _offset;
-    [SerializeField] private LayerMask _targetLayer;
+    [Header("Player attacker")]
+    [SerializeField] private int _superHitCount = 3;
+    [SerializeField] private float _comboCooldown = 1.2f;
 
-    private Fliper _fliper;
-    private float _endWaitTime;
+    public override bool CanAttack => !_isAttacking;
 
-    public bool CanAttack => _endWaitTime <= Time.time;
+    public override AttacksType type => _attack.Type;
 
-    public bool IsAttack { get; private set; }
+    private AttackBase _defaultAttack;
+    private List<AttackBase> _superAttacks = new();
+    private Collider2D[] _hits = new Collider2D[16];
 
-    private void Start()
+    private bool _isAttacking = false;
+    private int _hitCounter;
+    private float _lastHitTime;
+
+    protected override void Awake()
     {
-        _fliper = GetComponent<Fliper>();
+        base.Awake();
+        _defaultAttack = AttacksData.Attacks[AttacksType.PlayerDefaultAttack];
+        _superAttacks.Add(AttacksData.Attacks[AttacksType.PlayerSuperAttack]);
+        _attack = _defaultAttack;
     }
 
-    private void OnDrawGizmos()
+    public override void StartAttack(CameraShake camera)
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(GetAttackOrigin(), _radius);
+        base.StartAttack(camera);
+        _isAttacking = true;
     }
 
-    public void Attack()
+    public override void Attack()
     {
         Vector2 origin = GetAttackOrigin();
 
-        Collider2D hit = Physics2D.OverlapCircle(origin, _radius, _targetLayer);
+        bool isSuperHit = RegisterHit();
 
-        if (hit != null && hit.TryGetComponent(out Enemy enemy))
+        int countHits = Physics2D.OverlapCircleNonAlloc(origin, _radius, _hits, _targetLayer);
+
+        AttackBase attack = isSuperHit
+            ? _superAttacks[UnityEngine.Random.Range(0, _superAttacks.Count)]
+            : _attack;
+
+        if (isSuperHit)
         {
-            Vector2 pushDirection = _fliper.IsTernRight
+            _camera.ShakeSuperPunch();
+        }
+        else
+        {
+            _camera.ShakePunch();
+        }
+
+        for (int i =0; i < countHits; i++)
+        {
+            var hit = _hits[i];
+
+            if (hit != null && hit.TryGetComponent(out Enemy enemy))
+            {
+                Vector2 pushDirection = _fliper.IsTernRight
                                         ? Vector2.right
                                             : Vector2.left;
 
-            enemy.ApplyDamage(_damage, hit.ClosestPoint(origin), pushDirection);
+                enemy.ApplyDamage(attack, hit.ClosestPoint(origin), pushDirection);
+            }
+        }        
+    }
+
+    public override void OnAttackEndedEvent()
+    {
+        base.OnAttackEndedEvent();
+        _isAttacking = false;
+    }
+
+    private bool RegisterHit()
+    {
+        float time = Time.time;
+
+        if (time - _lastHitTime > _comboCooldown)
+        {
+            _hitCounter = 0;
         }
-    }
 
-    public void StartAttack()
-    {
-        _endWaitTime = Time.time + _delay;
-        IsAttack = true;
-    }
+        _lastHitTime = time;
+        _hitCounter++;
 
-    public void OnAttackEndedEvent() => IsAttack = false;
+        if (_hitCounter >= _superHitCount)
+        {
+            _hitCounter = 0;
+            return true; 
+        }
 
-    private Vector2 GetAttackOrigin()
-    {
-        float directionCoefficient = _fliper?.IsTernRight ?? true ? 1 : -1;
-        float originX = transform.position.x + _offset * directionCoefficient;
-        return new Vector2(originX, transform.position.y);
+        return false;
     }
 
     internal bool TrySeeTarget(out object target)
@@ -64,3 +102,13 @@ public class PlayerAttacker : MonoBehaviour
         throw new NotImplementedException();
     }
 }
+
+/*if (countHits != null && countHits.TryGetComponent(out Enemy enemy))
+{
+    Vector2 pushDirection = _fliper.IsTernRight
+                                ? Vector2.right
+                                    : Vector2.left;
+
+    enemy.ApplyDamage(attack, countHits.ClosestPoint(origin), pushDirection);
+}
+*/

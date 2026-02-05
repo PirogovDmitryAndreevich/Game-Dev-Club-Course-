@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,11 @@ public class PauseWindow : PauseBase
     [Header("Animation setting")]
     [SerializeField] private float _ACDuration;
     [SerializeField] private float _panelScaleDuration;
+    [SerializeField] private AudioClip _showSound;
+    [SerializeField] private AudioClip _hideSound;
 
     [Header("Buttons")]
+    [SerializeField] private TMP_Text _textTitle;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _exitButton;
@@ -30,7 +34,7 @@ public class PauseWindow : PauseBase
     {
         base.OnEnable();
         _restartButton.onClick.AddListener(Restart);
-        _continueButton.onClick.AddListener(Continue);
+        _continueButton.onClick.AddListener(Continue); 
         _exitButton.onClick.AddListener(Exit);
     }
 
@@ -44,21 +48,40 @@ public class PauseWindow : PauseBase
 
     public override void Show()
     {
-        DOTween.Sequence()
-            .SetUpdate(true)
-            .Append(_anticlicker.DOFade(1f, _ACDuration)).SetEase(Ease.Flash).Play()
-            .Append(_panelView.DOFade(1f, _panelScaleDuration)).Play()
-            .Join(_panelRectTransform.DOScale(1f, _panelScaleDuration).From(0).SetEase(Ease.OutBounce)).Play();
+        KillCurrentAnimationIfActive();
 
+        _animation = DOTween.Sequence();
+
+        _animation
+            .SetUpdate(true)
+            .Append(_anticlicker.DOFade(1f, _ACDuration)).SetEase(Ease.Flash)
+            .Append(_panelView.DOFade(1f, _panelScaleDuration))
+            .Join(_panelRectTransform.DOScale(1f, _panelScaleDuration).From(0).SetEase(Ease.OutBounce))
+            .Append(_restartButton.transform.DOScale(1.1f, 0.35f).From(0).SetEase(Ease.OutBack))
+            .Join(_exitButton.transform.DOScale(1.1f, 0.35f).From(0).SetEase(Ease.OutBack))
+            .Append(_restartButton.transform.DOScale(1f, 0.15f).SetEase(Ease.OutQuad))
+            .Join(_exitButton.transform.DOScale(1f, 0.15f).SetEase(Ease.OutQuad))
+            .Play();
+
+        if(_showSound != null)
+            AudioManager.Instance.PlaySound(_showSound);
     }
 
     public override void Hide(Action callback)
     {
-        DOTween.Sequence()
+        KillCurrentAnimationIfActive();
+
+        _animation = DOTween.Sequence();
+
+        _animation
             .SetUpdate(true)
-            .Append(_panelRectTransform.DOScale(0f, _panelScaleDuration).From(1)).Play()
-            .Join(_panelView.DOFade(0f, _panelScaleDuration)).Play()
-            .Append(_anticlicker.DOFade(0f, _ACDuration)).Play()
+            .Append(_panelRectTransform.DOScale(0f, _panelScaleDuration).From(1))
+            .Join(_panelView.DOFade(0f, _panelScaleDuration))
+            .Append(_anticlicker.DOFade(0f, _ACDuration)).SetEase(Ease.Flash)
+            .Play()
             .OnComplete(() => callback?.Invoke());
+
+        if (_hideSound != null)
+            AudioManager.Instance.PlaySound(_hideSound);
     }
 }

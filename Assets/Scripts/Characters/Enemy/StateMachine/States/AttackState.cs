@@ -1,15 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 class AttackState : State
 {
-    private EnemyAttacker _attacker;
-    private EnemyAnimator _animator;
+    private Attacker _attacker;
+    private CharacterAnimator _animator;
     private EnemyDirectionOfView _vision;
     private LostTargetTransition _lostTargetTransition;
     private Transform _target;
     private Fliper _fliper;
 
-    public AttackState(StateMachine stateMachine, EnemyAnimator animator, EnemyAttacker attacker,
+    public AttackState(StateMachine stateMachine, CharacterAnimator animator, Attacker attacker,
         Fliper flipper, EnemyDirectionOfView vision, float tryFindTime) : base(stateMachine)
     {
         _attacker = attacker;
@@ -28,15 +29,23 @@ class AttackState : State
 
     public override void Enter()
     {
+        _vision.TrySeeTarget(out _target);
         _lostTargetTransition.IsNeedTransit();
     }
 
     public override void Update()
     {
+        if (_attacker.IsAttack == false)
+            _fliper.LookAtTarget(_target.position);
+
         if (_attacker.CanAttack)
         {
             _attacker.StartAttack();
-            _animator.SetAttackTrigger();
+
+            if (_attacker.type != AttacksType.RedEnemyAttack)
+            {
+                _animator.SetEnemyAttackTrigger();
+            }
         }
     }
 

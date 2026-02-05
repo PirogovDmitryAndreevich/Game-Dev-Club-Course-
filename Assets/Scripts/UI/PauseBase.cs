@@ -1,10 +1,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public abstract class PauseBase : MonoBehaviour
 {
     private const int MainMenuSceneIndex = 0;
+
+    protected Sequence _animation;
+
+    protected bool IsAnimating => _animation != null && _animation.active;
 
     protected virtual void OnEnable()
     {
@@ -40,5 +45,9 @@ public abstract class PauseBase : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
-
+    protected void KillCurrentAnimationIfActive()
+    {
+        if (IsAnimating)
+            _animation.Kill();
+    }
 }
