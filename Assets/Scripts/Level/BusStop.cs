@@ -30,7 +30,6 @@ public class BusStop : MonoBehaviour, IInteractable
         _spriteRenderer.SetPropertyBlock(mpb);
     }
 
-    // Выключить подсветку
     public void HighlightOff()
     {
         _spriteRenderer.GetPropertyBlock(mpb);

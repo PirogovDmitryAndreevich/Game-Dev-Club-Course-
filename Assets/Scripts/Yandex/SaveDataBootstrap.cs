@@ -25,11 +25,17 @@ public class SaveDataBootstrap : MonoBehaviour
 
         _exists = true;
         DontDestroyOnLoad(gameObject);
-        YG2.onGetSDKData += OnYGLoaded;
 
-        if (YG2.saves != null)
-            OnYGLoaded();
+        YG2.onGetSDKData += OnYGLoaded;
     }
+
+#if UNITY_EDITOR
+    private void Start()
+    {
+        OnYGLoaded();
+    }
+
+#endif
 
     private void OnDestroy()
     {

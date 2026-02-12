@@ -1,10 +1,11 @@
 using System;
 using YG;
 
+[Serializable]
 public static class SaveData
 {
-    public static GameSaveData GameData { get; private set; }
-    public static PlayerSaveData PlayerData { get; private set; }
+    public static GameSaveData GameData { get; private set; } 
+    public static PlayerSaveData PlayerData { get; private set; } 
     public static bool IsLoaded { get; private set; }
 
     public static event Action OnLoaded;

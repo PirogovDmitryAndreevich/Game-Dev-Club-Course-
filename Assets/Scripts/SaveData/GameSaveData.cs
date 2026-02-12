@@ -1,6 +1,6 @@
 using System;
 
-[System.Serializable]
+[Serializable]
 public class GameSaveData
 {
     public float _soundValue = 1f;
@@ -8,9 +8,9 @@ public class GameSaveData
     public bool _isSoundMute = false;
     public bool _isMusicMute = false;
 
-    public Action OnAudioChanged;
+    [NonSerialized] public Action OnAudioChanged;
 
-    public float SoundVolume
+    public float SoundValue
     {
         get => _soundValue;
         set
@@ -22,7 +22,7 @@ public class GameSaveData
             }
         }
     }
-    public float MusicVolume
+    public float MusicValue
     {
         get => _musicValue;
         set

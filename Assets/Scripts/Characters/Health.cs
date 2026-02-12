@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class Health
 {
-    public Health(int maxHealth)
+    private const int ArmorReductionInOneHit = 1;
+
+    public Health(int maxHealth, int defense, bool isShield)
     {
         MaxHealth = maxHealth;
         HealthCurrent = maxHealth;
+        _defense = defense;
+        IsShield = isShield;
     }
 
     public event Action OnDied;
@@ -14,29 +18,44 @@ public class Health
     public event Action<float, float, bool> OnHealthChanged;
 
     public int MaxHealth { get; private set; }
-
     public int HealthCurrent
     {
-        get => _currentValue;
+        get => _currentHealth;
         private set
         {
-            if (_currentValue != value)
-            { 
-                _currentValue = value;
-                OnHealthChanged?.Invoke(_currentValue, MaxHealth, _isShield);
+            if (_currentHealth != value)
+            {
+                _currentHealth = value;                
             }
         }
     }
 
-    private int _currentValue;
-    private bool _isShield = false;
+    public bool IsShield = false;
+    public int Defense
+    {
+        get => _defense;
+        set
+        {
+            if (_defense != value)
+            {
+                _defense = value;
+            }
+
+        }
+    }
+
+    private int _currentHealth;
+    private int _defense = 0;
 
     public void ApplyDamage(int damage)
     {
         if (damage < 0)
             return;
 
-        ChangeHealth(-damage);
+        if (IsShield)
+            ChangeDefense(-ArmorReductionInOneHit);
+        else
+            ChangeHealth(-damage);
 
         if (HealthCurrent == 0)
             OnDied?.Invoke();
@@ -50,8 +69,25 @@ public class Health
         ChangeHealth(value);
     }
 
+    public void AddDefense(int value)
+    {
+        if (value < 0)
+            return;
+
+        ChangeDefense(value);
+    }
+
     private void ChangeHealth(int value)
     {
         HealthCurrent = Mathf.Clamp(HealthCurrent + value, 0, MaxHealth);
+        OnHealthChanged?.Invoke(_currentHealth, MaxHealth, IsShield);
+    }
+
+    private void ChangeDefense(int value)
+    {
+        Defense = Mathf.Max(0, Defense + value);
+        IsShield = Defense > 0;
+
+        OnHealthChanged?.Invoke(_currentHealth, MaxHealth, IsShield);
     }
 }

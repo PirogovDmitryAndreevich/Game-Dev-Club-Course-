@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionHandler), typeof(InputReader), typeof(PlayerAttacker))]
@@ -6,6 +5,9 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private InteractableCanvas _interactableCanvas;
+    [SerializeField] private ParticleSystem _healEffect; 
+    [SerializeField] private ParticleSystem _defenseEffect;
 
     private InputReader _inputReader;
     private CollisionHandler _collisionHandler;
@@ -15,28 +17,43 @@ public class Player : Character
     private IInteractable _interactable;
 
     protected override void Awake()
-    {
-        _maxHealth = SaveData.PlayerData.Health;
+    { 
         _attacker = GetComponent<PlayerAttacker>();
         _inputReader = GetComponent<InputReader>();
         _collisionHandler = GetComponent<CollisionHandler>();
         _camera = GetComponent<CameraShake>();
         _sound = GetComponent<PlayerSounds>();
+        _mover = GetComponent<Mover>();
+        _animator = GetComponent<CharacterAnimator>();
+        _fliper = GetComponent<Fliper>();
 
         _collisionHandler.InteractStarted += OnInteractStarted;
-        base.Awake();
-        _healthBar.Initialize(_health);
+        _collisionHandler.OnShowKeyF += _interactableCanvas.ShowKeyF;
+        _collisionHandler.OnHideKeyF += _interactableCanvas.HideKeyF;
+        _animationEvent.DealDamage += _attacker.Attack;
+        _animationEvent.AttackEnded += _attacker.OnAttackEndedEvent;
+        
+    }
+
+    private void Start()
+    {
+        if (SaveData.IsLoaded)
+            InitializeHealth();
+        else
+            SaveData.OnLoaded += InitializeHealth;
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
         _collisionHandler.InteractStarted -= OnInteractStarted;
+        _collisionHandler.OnShowKeyF -= _interactableCanvas.ShowKeyF;
+        _collisionHandler.OnHideKeyF -= _interactableCanvas.HideKeyF;
     }
 
     protected override void FixedUpdate()
     {
-        _animator.SetIsWalk(_inputReader.Direction.x != 0 
+        _animator.SetIsWalk(_inputReader.Direction.x != 0
                             || _inputReader.Direction.y != 0);
 
         if (_inputReader.Direction != null && !_attacker.IsAttack)
@@ -80,8 +97,29 @@ public class Player : Character
         _sound.PlayHitSound();
     }
 
-    public void Heal(int value)
+    public void Heal(MedKit medKit)
     {
-        _health.Heal(value);
+            _healEffect.Play();
+            _health.Heal(medKit.Value); 
+    }
+
+    public void AddArmor(Defense defense)
+    {
+        _defenseEffect.Play();
+        _health.AddDefense(defense.Value);
+    }
+
+    private void InitializeHealth()
+    {
+        SaveData.OnLoaded -= InitializeHealth;
+
+        _maxHealth = SaveData.PlayerData.Health;
+        var defense = SaveData.PlayerData.Defense;
+        var isShield = defense > 0;
+
+        _health = new Health(_maxHealth, defense, isShield);
+        _health.OnDied += OnDied;
+
+        _healthBar.Initialize(_health);
     }
 }

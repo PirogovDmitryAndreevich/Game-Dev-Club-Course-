@@ -19,17 +19,17 @@ public class SettingsWidow : PauseBase
     {
         _panelView.alpha = 0f;
         _anticlicker.alpha = 0f;
-        _panelRectTransform = _panelView.GetComponent<RectTransform>();        
+        _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 
     protected override void OnEnable()
     {
-        _closeButton.onClick.AddListener(() => Hide(Continue));
+        _closeButton.onClick.AddListener(Continue);
     }
 
     protected override void OnDisable()
     {
-        _closeButton.onClick.RemoveListener(() => Hide(Continue));
+        _closeButton.onClick.RemoveListener(Continue);
     }
 
     public override void Hide(Action callback)
@@ -49,6 +49,7 @@ public class SettingsWidow : PauseBase
 
     public override void Show()
     {
+        _panelView.gameObject.SetActive(true);
         KillCurrentAnimationIfActive();
 
         _animation = DOTween.Sequence();

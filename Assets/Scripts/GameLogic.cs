@@ -3,8 +3,10 @@ using UnityEngine;
 public class GameLogic : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private FailWindow _failWindow;
     [SerializeField] private AudioClip _gameMusic;
+    [SerializeField] private FailWindow _failWindow;
+    [SerializeField] private WinWindow _winWindow;
+    //[SerializeField] private FinishLevel _finisher;
 
     private void Awake()
     {
@@ -14,6 +16,13 @@ public class GameLogic : MonoBehaviour
             InitMusic();
         else
             AudioManager.OnLoaded += InitMusic;
+
+        //_finisher.OnLevelFinished += ShowWinWindow;
+    }
+
+    private void OnDestroy()
+    {
+       // _finisher.OnLevelFinished -= ShowWinWindow;
     }
 
     private void InitMusic()
@@ -21,5 +30,11 @@ public class GameLogic : MonoBehaviour
         AudioManager.OnLoaded -= InitMusic;
 
         AudioManager.Instance.PlayMusic(_gameMusic);
+    }
+
+    private void ShowWinWindow()
+    {
+        _winWindow.gameObject.SetActive(true);
+        _winWindow.Show();
     }
 }

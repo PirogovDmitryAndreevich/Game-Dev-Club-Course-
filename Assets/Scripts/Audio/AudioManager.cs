@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,7 +17,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float _topPith = 2f;
     [SerializeField] private AudioClip _defaultBGMusic;
 
+    [SerializeField] private float _sqrMaxDistanceToSource = 400f;
+
+    private AudioListener _listener;
     private GameSaveData _playerSave;
+    private Transform _listenerTransform;
 
     private void Awake()
     {
@@ -42,6 +47,12 @@ public class AudioManager : MonoBehaviour
             Init();        
         else        
             SaveData.OnLoaded += Init;
+
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Init()
@@ -55,11 +66,20 @@ public class AudioManager : MonoBehaviour
         IsLoaded = true;
     }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void OnDestroy()
     {
         if (_playerSave != null)
             _playerSave.OnAudioChanged -= ResetVolume;
     }
+
+    public bool CanBeHeard(Vector3 source) =>           
+         (source - _listenerTransform.position).sqrMagnitude < _sqrMaxDistanceToSource;
+    
 
     public void PlayMusic(AudioClip clip)
     {
@@ -85,8 +105,15 @@ public class AudioManager : MonoBehaviour
         _randomPitchSoundSource.mute = _playerSave.IsSoundMute;
         _musicSource.mute = _playerSave.IsMusicMute;
 
-        _soundsSource.volume = _playerSave.SoundVolume;
-        _randomPitchSoundSource.volume = _playerSave.SoundVolume;
-        _musicSource.volume = _playerSave.MusicVolume;
+        _soundsSource.volume = _playerSave.SoundValue;
+        _randomPitchSoundSource.volume = _playerSave.SoundValue;
+        _musicSource.volume = _playerSave.MusicValue;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _listener = FindAnyObjectByType<AudioListener>();
+
+        if (_listener != null)
+            _listenerTransform = _listener.transform;
     }
 }

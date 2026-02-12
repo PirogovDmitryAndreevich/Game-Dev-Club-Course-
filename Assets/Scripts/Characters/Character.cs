@@ -18,7 +18,7 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _health = new Health(_maxHealth);
+        _health = new Health(_maxHealth, 0, false);
         _mover = GetComponent<Mover>();
         _animator = GetComponent<CharacterAnimator>();
         _fliper = GetComponent<Fliper>();
@@ -29,8 +29,12 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        _animationEvent.DealDamage -= _attacker.Attack;
-        _animationEvent.AttackEnded -= _attacker.OnAttackEndedEvent;
+        if (_animationEvent != null)
+        {
+            _animationEvent.DealDamage -= _attacker.Attack;
+            _animationEvent.AttackEnded -= _attacker.OnAttackEndedEvent;
+        }
+
         _health.OnDied -= OnDied;
     }
 

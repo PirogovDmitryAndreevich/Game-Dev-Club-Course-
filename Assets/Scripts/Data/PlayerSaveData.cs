@@ -1,6 +1,6 @@
 using System;
 
-[System.Serializable]
+[Serializable]
 public class PlayerSaveData
 {
     public int _coins = 0;
@@ -10,7 +10,7 @@ public class PlayerSaveData
     public int _defense = 0;
     public int _health = 100;
 
-    public Action<StatsType> StatsChanged;
+    [NonSerialized] public Action<StatsType> StatsChanged;
 
     public int Coins
     { 

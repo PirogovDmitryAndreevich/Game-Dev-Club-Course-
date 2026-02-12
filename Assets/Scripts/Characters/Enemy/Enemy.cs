@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyDirectionOfView), typeof(Attacker), typeof(EnemyAI))]
@@ -7,6 +8,8 @@ public class Enemy : Character
     [SerializeField] private float _waitTime = 2.0f;
     [SerializeField] private float _tryFindTime = 1f;
     [SerializeField] private float _maxSqrDistance = 13.7f;
+
+    public event Action OnEnemyDied;
 
     private EnemyStateMachine _stateMachine;
     protected EnemySounds _sound;
@@ -40,5 +43,10 @@ public class Enemy : Character
             deathParticles.Play(transform.position);
             Destroy(gameObject);
         }
+    }
+
+    protected override void OnDied()
+    {
+        OnEnemyDied?.Invoke();
     }
 }

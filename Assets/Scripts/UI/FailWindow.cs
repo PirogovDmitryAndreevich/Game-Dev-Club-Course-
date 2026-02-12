@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using System.Runtime.CompilerServices;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class FailWindow : PauseBase

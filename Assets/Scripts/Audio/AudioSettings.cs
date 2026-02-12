@@ -36,7 +36,8 @@ public class AudioSettings : MonoBehaviour
         _musicButton.onClick.AddListener(SwitchMuteMusic);
 
         _playerData = SaveData.GameData;
-        _playerData.OnAudioChanged += ResetSettings;
+        Debug.Log($"[SaveData] SoundVolume: {SaveData.GameData.SoundValue}; MusicVolume: {SaveData.GameData.MusicValue}");
+        Debug.Log($"[_playerData] SoundVolume: {_playerData.SoundValue}; MusicVolume: {_playerData.MusicValue}");
         ResetSettings();
     }
 
@@ -48,14 +49,12 @@ public class AudioSettings : MonoBehaviour
         _soundButton.onClick.RemoveListener(SwitchMuteSound);
         _musicButton.onClick.RemoveListener(SwitchMuteMusic);
 
-        _playerData.OnAudioChanged -= ResetSettings;
-
         SaveData.Save();
     }
 
     private void ChangedSoundVolume(float value)
     {
-        _playerData.SoundVolume = value;
+        _playerData.SoundValue = value;
 
         if (value <= 0f)
         {
@@ -73,7 +72,7 @@ public class AudioSettings : MonoBehaviour
 
     private void ChangedMusicVolume(float value)
     {
-        _playerData.MusicVolume = value;
+        _playerData.MusicValue = value;
 
         if (value <= 0f)
         {
@@ -92,12 +91,14 @@ public class AudioSettings : MonoBehaviour
     private void SwitchMuteSound()
     {
         _playerData.IsSoundMute = !_playerData.IsSoundMute;
+        SetSoundSprite();
         SaveData.Save();
     }
 
     private void SwitchMuteMusic()
     {
         _playerData.IsMusicMute = !_playerData.IsMusicMute;
+        SetMusicSprite();
         SaveData.Save();
     }
 
@@ -113,8 +114,9 @@ public class AudioSettings : MonoBehaviour
 
     private void ResetSettings()
     {
-        _soundSlider.value = _playerData.SoundVolume;
-        _musicSlider.value = _playerData.MusicVolume;
+        Debug.Log($"Reset Sliders - SoundVolume: {_playerData.SoundValue} MusicVolume: {_playerData.MusicValue}");
+        _soundSlider.SetValueWithoutNotify(_playerData.SoundValue);
+        _musicSlider.SetValueWithoutNotify(_playerData.MusicValue);
         SetSoundSprite();
         SetMusicSprite();
     }
