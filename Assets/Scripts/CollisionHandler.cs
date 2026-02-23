@@ -1,49 +1,41 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
 public class CollisionHandler : MonoBehaviour
 {
     public event Action<IInteractable> InteractStarted;
-    public event Action OnShowKeyF;
-    public event Action OnHideKeyF;
-
-    private Player _player;
-
-    private void Awake()
-    {
-        _player = GetComponent<Player>();
-    }
+    public event Action<IItem> InteractWithItem;
+    public event Action ShowingHindePressF;
+    public event Action HideHindPressF;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IInteractable interactable))
-        {
-            if (interactable is BusStop)
-            {
-                interactable.HighlightOn();
-            }
-        }
+        var go = collision.gameObject;
 
-        if (collision.TryGetComponent(out IItem item))
-        {
-            item.CollisionEnter(_player);
-        }
+        if (go.TryGetComponent(out IInteractable interactable))
+            InteractStarted?.Invoke(interactable);        
 
-        InteractStarted?.Invoke(interactable);
-        OnShowKeyF?.Invoke();
+        if (go.TryGetComponent(out IHighlight highlight))
+            highlight.HighlightOn();
+
+        if (go.TryGetComponent(out IItem item))
+            InteractWithItem?.Invoke(item);
+
+        if (go.TryGetComponent<IShowKey>(out _))
+            ShowingHindePressF?.Invoke();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IInteractable interactable))
-        {
+        var go = collision.gameObject;
+
+        if (go.TryGetComponent(out IInteractable interactable))
             InteractStarted?.Invoke(null);
 
-            if (interactable is BusStop)
-                interactable.HighlightOff();
+        if (go.TryGetComponent(out IHighlight highlight))
+            highlight.HighlightOff();
 
-            OnHideKeyF?.Invoke();
-        }
+        if (go.TryGetComponent<IShowKey>(out _))
+            HideHindPressF?.Invoke();
     }
 }

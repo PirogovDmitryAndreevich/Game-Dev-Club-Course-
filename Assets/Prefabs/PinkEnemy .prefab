@@ -117,9 +117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ba99ab1c882b647930b292356b6171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitFlash: {fileID: 2908411576186180299}
-  _animationEvent: {fileID: 9181060760069531859}
-  _maxHealth: 100
+  HitFlash: {fileID: 2908411576186180299}
+  AnimationEvent: {fileID: 9181060760069531859}
+  MaxHealth: 100
   _wayPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -168,7 +168,25 @@ MonoBehaviour:
   _dashDuration: 0.15
   _dashCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -190,11 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3135036fa0f8c954388809c6bd59e6e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 2
-  _attack: {fileID: 11400000, guid: 5c34e944339ff7e4687f6aad7702b3e0, type: 2}
-  _targetLayer:
+  Delay: 2
+  AttackType: {fileID: 11400000, guid: 5c34e944339ff7e4687f6aad7702b3e0, type: 2}
+  TargetLayer:
     serializedVersion: 2
     m_Bits: 64
+  _offsetDamage: 1
 --- !u!114 &1954702344401898561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f88f396f1875b941ac4c69f2ef2a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManager: {fileID: 0}
   _stepsSounds: {fileID: 8300000, guid: fa95ebee958fb0e41a42a832aab767eb, type: 3}
   _attackSounds:
   - {fileID: 8300000, guid: c266e86e5ec11e344bf66dede26cbc46, type: 3}

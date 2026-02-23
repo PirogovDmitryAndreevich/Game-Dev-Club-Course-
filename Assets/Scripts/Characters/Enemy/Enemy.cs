@@ -12,37 +12,40 @@ public class Enemy : Character
     public event Action OnEnemyDied;
 
     private EnemyStateMachine _stateMachine;
-    protected EnemySounds _sound;
+    protected EnemySounds Sound;
 
     private void Start()
     {
         var view = GetComponent<EnemyDirectionOfView>();
         var enemyAI = GetComponent<EnemyAI>();
-        _sound = GetComponent<EnemySounds>();
+        Sound = GetComponent<EnemySounds>();
 
-        _stateMachine = new EnemyStateMachine(_fliper, _mover, view, _wayPoints, _animator, _maxSqrDistance,
-            transform, _waitTime, _tryFindTime, _attacker, enemyAI, _sound);
+        _stateMachine = new EnemyStateMachine(Fliper, Mover, view, _wayPoints, Animator, _maxSqrDistance,
+            transform, _waitTime, _tryFindTime, Attacker, enemyAI, Sound);
     }
-
-    protected override void FixedUpdate() => _stateMachine.Update(); 
 
     public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
     {
-        _sound.PlayHitSound();
+        Sound.PlayHitSound();
 
         base.ApplyDamage(damageInfo, damageSource, pushDirection);
 
-        var damageNumber = FXPool.Instance.Get(FXType.DamageNumber) as DamageValueAnimation;
+        var damageNumber = FXPool.Get(FXType.DamageNumber) as DamageValueAnimation;
         damageNumber.Play(damageSource, damageInfo.Damage, damageInfo.IsCrit);
 
-        if (_health.HealthCurrent <= 0)
+        if (Health.HealthCurrent <= 0)
         {
-            _mover.Stop();
-            _sound.PlayDeathSound();
-            var deathParticles = FXPool.Instance.Get(FXType.EnemyDeath);
+            Mover.Stop();
+            Sound.PlayDeathSound();
+            var deathParticles = FXPool.Get(FXType.EnemyDeath);
             deathParticles.Play(transform.position);
             Destroy(gameObject);
         }
+    }
+
+    protected override void CharacterFixUpdate()
+    {
+        _stateMachine.Update();
     }
 
     protected override void OnDied()

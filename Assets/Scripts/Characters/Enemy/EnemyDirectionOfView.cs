@@ -20,31 +20,26 @@ public class EnemyDirectionOfView : MonoBehaviour
 
         Collider2D hit = Physics2D.OverlapCircle(transform.position, _ariaSizeRadius, _targetLayer);
 
-        if (hit != null)
-        {
-            Vector2 direction = (hit.transform.position - transform.position).normalized;
-            RaycastHit2D hit2D = Physics2D.Raycast(transform.position, direction, _ariaSizeRadius, ~_ignoreLayers);
+        if (hit == null)
+            return false;
 
-            if (hit2D.collider != null)
+        Vector2 direction = (hit.transform.position - transform.position).normalized;
+        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, direction, _ariaSizeRadius, ~_ignoreLayers);
+
+        if (hit2D.collider != null)
+        {
+            if (hit2D.collider == hit)
             {
-                if (hit2D.collider == hit)
-                {
-                    Debug.DrawLine(transform.position, hit2D.point, Color.red);
-                    target = hit2D.transform;
-                    return true;
-                }
-                else
-                {
-                    Debug.DrawLine(transform.position, hit2D.point, Color.white);
-                }
+                Debug.DrawLine(transform.position, hit2D.point, Color.red);
+                target = hit2D.transform;
+                return true;
+            }
+            else
+            {
+                Debug.DrawLine(transform.position, hit2D.point, Color.white);
             }
         }
 
         return false;
-    }
-
-    internal bool TrySeeTarget(out object target)
-    {
-        throw new NotImplementedException();
     }
 }

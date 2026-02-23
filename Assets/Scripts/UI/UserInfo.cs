@@ -11,22 +11,22 @@ public class UserInfo : MonoBehaviour
         if (AttacksData.Instance != null && AttacksData.Attacks.Count != 0)
             Init();
         else
-            AttacksData.OnInitialized += Init;
+            AttacksData.Initialized += Init;
     }
 
     private void OnDisable()
     {
-        _defaultPlayerAttack.OnDamageChanged -= SetDamage;
+        _defaultPlayerAttack.DamageChanged -= SetDamage;
     }
 
     private void Init()
     {
-        AttacksData.OnInitialized -= Init;
+        AttacksData.Initialized -= Init;
 
         _defaultPlayerAttack =
             AttacksData.Attacks[AttacksType.PlayerDefaultAttack];
 
-        _defaultPlayerAttack.OnDamageChanged += SetDamage;
+        _defaultPlayerAttack.DamageChanged += SetDamage;
         SetDamage(_defaultPlayerAttack.Damage);
     }
 

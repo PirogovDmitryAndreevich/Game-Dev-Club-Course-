@@ -1,4 +1,4 @@
 public class HealthView : StatsViewBase
 {
-    protected override StatsType _type => StatsType.Health;
+    protected override StatsType Type => StatsType.Health;
 }

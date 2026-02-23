@@ -3,6 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class HitFlash : MonoBehaviour
 {
+    private static readonly int FlashAmountId =
+        Shader.PropertyToID("_FlashAmount");
+    private static readonly int FlashColorId =
+        Shader.PropertyToID("_FlashColor");
+
     [Header("Colors")]
     [SerializeField] private Color _whiteColor = Color.white;
     [SerializeField] private Color _yellowColor = Color.yellow;
@@ -12,15 +17,10 @@ public class HitFlash : MonoBehaviour
     [SerializeField] private float _yellowDuration = 0.07f;
 
     private SpriteRenderer _renderer;
-    private MaterialPropertyBlock _mpb;
+    private MaterialPropertyBlock _materialPropertyBlock;
 
     private float _timer;
-    private FlashPhase _phase = FlashPhase.None;
-
-    private static readonly int FlashAmountId =
-        Shader.PropertyToID("_FlashAmount");
-    private static readonly int FlashColorId =
-        Shader.PropertyToID("_FlashColor");
+    private FlashPhase _phase = FlashPhase.None;    
 
     private enum FlashPhase
     {
@@ -32,7 +32,7 @@ public class HitFlash : MonoBehaviour
     private void Awake()
     {
         _renderer = GetComponent<SpriteRenderer>();
-        _mpb = new MaterialPropertyBlock();
+        _materialPropertyBlock = new MaterialPropertyBlock();
         ResetFlash();
     }
 
@@ -46,15 +46,7 @@ public class HitFlash : MonoBehaviour
     {
         ResetFlash();
         _phase = FlashPhase.None;
-    }
-
-    public void Play()
-    {
-        // перезапуск всегда безопасен
-        _phase = FlashPhase.White;
-        _timer = _whiteDuration;
-        SetFlash(_whiteColor, 1f);
-    }
+    }    
 
     private void Update()
     {
@@ -80,6 +72,13 @@ public class HitFlash : MonoBehaviour
         }
     }
 
+    public void Play()
+    {
+        _phase = FlashPhase.White;
+        _timer = _whiteDuration;
+        SetFlash(_whiteColor, 1f);
+    }
+
     private void ResetFlash()
     {
         SetFlash(Color.white, 0f);
@@ -87,9 +86,9 @@ public class HitFlash : MonoBehaviour
 
     private void SetFlash(Color color, float amount)
     {
-        _renderer.GetPropertyBlock(_mpb);
-        _mpb.SetColor(FlashColorId, color);
-        _mpb.SetFloat(FlashAmountId, amount);
-        _renderer.SetPropertyBlock(_mpb);
+        _renderer.GetPropertyBlock(_materialPropertyBlock);
+        _materialPropertyBlock.SetColor(FlashColorId, color);
+        _materialPropertyBlock.SetFloat(FlashAmountId, amount);
+        _renderer.SetPropertyBlock(_materialPropertyBlock);
     }
 }

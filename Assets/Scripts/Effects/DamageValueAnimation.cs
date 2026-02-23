@@ -14,9 +14,7 @@ public class DamageValueAnimation : FXBase
     [SerializeField] private float randomX = 0.5f;
     [SerializeField] private float scaleMultiplier = 1.3f;
 
-    public override FXType Type => FXType.DamageNumber;
-
-    private Transform _tr;
+    private Transform _transform;
 
     private bool _isPlaying;
     private float _time;
@@ -24,34 +22,13 @@ public class DamageValueAnimation : FXBase
     private Vector2 _startPos;
     private Vector2 _endPos;
 
-    private float TotalTime => moveDuration + stayDuration + fadeDuration;
+    public override FXType Type => FXType.DamageNumber;
 
     private void Awake()
     {
-        _tr = transform;
-        enabled = false; // Update выключен по умолчанию
-    }
-
-    public void Play(Vector2 position, int damage, bool isCrit = false)
-    {
-        _isPlaying = true;
-        _time = 0f;
-
-        _startPos = position;
-        _endPos = position + new Vector2(
-            Random.Range(-randomX, randomX),
-            moveY
-        );
-
-        _tr.position = position;
-        _tr.localScale = Vector3.one;
-
-        _value.text = damage.ToString();
-        _value.color = isCrit ? CritColor : NormalColor;
-        _value.alpha = 1f;
-
-        enabled = true; // включаем Update
-    }
+        _transform = transform;
+        enabled = false;
+    }    
 
     private void Update()
     {
@@ -65,8 +42,8 @@ public class DamageValueAnimation : FXBase
         {
             float t = _time / moveDuration;
 
-            _tr.position = Vector2.Lerp(_startPos, _endPos, EaseOutCubic(t));
-            _tr.localScale = Vector3.one *
+            _transform.position = Vector2.Lerp(_startPos, _endPos, EaseOutCubic(t));
+            _transform.localScale = Vector3.one *
                 Mathf.Lerp(1f, scaleMultiplier, EaseOutBack(t));
             return;
         }
@@ -88,15 +65,36 @@ public class DamageValueAnimation : FXBase
         Finish();
     }
 
+    public void Play(Vector2 position, int damage, bool isCrit = false)
+    {
+        _isPlaying = true;
+        _time = 0f;
+
+        _startPos = position;
+        _endPos = position + new Vector2(
+            Random.Range(-randomX, randomX),
+            moveY
+        );
+
+        _transform.position = position;
+        _transform.localScale = Vector3.one;
+
+        _value.text = damage.ToString();
+        _value.color = isCrit ? CritColor : NormalColor;
+        _value.alpha = 1f;
+
+        enabled = true;
+    }
+
     private void Finish()
     {
         _isPlaying = false;
         enabled = false;
 
         _value.alpha = 1f;
-        _tr.localScale = Vector3.one;
+        _transform.localScale = Vector3.one;
 
-        ReturnToPool();
+        ReturnToPool?.Invoke(this);
     }
 
     // ===== EASING =====

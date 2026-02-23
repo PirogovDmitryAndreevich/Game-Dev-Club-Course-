@@ -1,9 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FXPool : MonoBehaviour
 {
-    public static FXPool Instance;
+    [SerializeField] private FXEntry[] fxList;
 
     [System.Serializable]
     public class FXEntry
@@ -13,33 +14,11 @@ public class FXPool : MonoBehaviour
         public int preloadCount;
     }
 
-    [SerializeField] private FXEntry[] fxList;
-
     private Dictionary<FXType, Queue<FXBase>> pools = new();
 
-    private void Awake()
+    private void Start()
     {
-        Instance = this;
-
-        foreach (var entry in fxList)
-        {
-            pools[entry.type] = new Queue<FXBase>();
-
-            for (int i = 0; i < entry.preloadCount; i++)
-            {
-                Create(entry);
-            }
-        }
-    }
-
-    private FXBase Create(FXEntry entry)
-    {
-        FXBase fx = Instantiate((MonoBehaviour)entry.prefab, transform)
-            as FXBase;
-        
-        ((MonoBehaviour)fx).gameObject.SetActive(false);
-        pools[entry.type].Enqueue(fx);
-        return fx;
+        StartCoroutine(Preload());
     }
 
     public FXBase Get(FXType type)
@@ -73,5 +52,29 @@ public class FXPool : MonoBehaviour
         ((MonoBehaviour)fx).gameObject.SetActive(false);
         pools[fx.Type].Enqueue(fx);
         fx.IsActive = false;
+    }
+
+    private FXBase Create(FXEntry entry)
+    {
+        FXBase fx = Instantiate((MonoBehaviour)entry.prefab, transform)
+            as FXBase;
+
+        ((MonoBehaviour)fx).gameObject.SetActive(false);
+        pools[entry.type].Enqueue(fx);
+        return fx;
+    }
+
+    private IEnumerator Preload()
+    {
+        foreach (var entry in fxList)
+        {
+            pools[entry.type] = new Queue<FXBase>();
+
+            for (int i = 0; i < entry.preloadCount; i++)
+            {
+                Create(entry);
+                yield return null;
+            }
+        }
     }
 }

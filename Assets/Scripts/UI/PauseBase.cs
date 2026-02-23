@@ -7,19 +7,18 @@ public abstract class PauseBase : MonoBehaviour
 {
     private const int MainMenuSceneIndex = 0;
 
-    protected Sequence _animation;
+    [Header("Scene Settings")]
+    [SerializeField] protected AudioManager CurrentAudioManager;
 
-    protected bool IsAnimating => _animation != null && _animation.active;
+    protected Sequence Animation;
 
-    protected virtual void OnEnable()
-    {
-        TimeManager.Pause();
-    }
+    protected bool IsAnimating => Animation != null && Animation.active;
 
-    protected virtual void OnDisable()
-    {
-        TimeManager.Run();
-    }
+    private void OnEnable() =>
+        Enable();
+
+    private void OnDisable() =>
+        Disable();    
 
     public abstract void Show();
 
@@ -40,6 +39,16 @@ public abstract class PauseBase : MonoBehaviour
         LoadScene(MainMenuSceneIndex);
     }
 
+    protected virtual void Enable()
+    {
+        TimeManager.Pause();
+    }
+
+    protected virtual void Disable()
+    {
+        TimeManager.Run();
+    }
+
     protected void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
@@ -48,6 +57,6 @@ public abstract class PauseBase : MonoBehaviour
     protected void KillCurrentAnimationIfActive()
     {
         if (IsAnimating)
-            _animation.Kill();
+            Animation.Kill();
     }
 }

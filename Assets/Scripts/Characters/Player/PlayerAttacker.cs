@@ -8,25 +8,16 @@ public class PlayerAttacker : Attacker
     [SerializeField] private int _superHitCount = 3;
     [SerializeField] private float _comboCooldown = 1.2f;
 
-    public override bool CanAttack => !_isAttacking;
-
-    public override AttacksType type => _attack.Type;
-
     private AttackBase _defaultAttack;
-    private List<AttackBase> _superAttacks = new();
-    private Collider2D[] _hits = new Collider2D[16];
-
     private bool _isAttacking = false;
     private int _hitCounter;
     private float _lastHitTime;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        _defaultAttack = AttacksData.Attacks[AttacksType.PlayerDefaultAttack];
-        _superAttacks.Add(AttacksData.Attacks[AttacksType.PlayerSuperAttack]);
-        _attack = _defaultAttack;
-    }
+    public override bool CanAttack => !_isAttacking;
+    public override AttacksType type => AttackType.Type;
+
+    private List<AttackBase> _superAttacks = new();
+    private Collider2D[] _hits = new Collider2D[16];
 
     public override void StartAttack(CameraShake camera)
     {
@@ -40,19 +31,19 @@ public class PlayerAttacker : Attacker
 
         bool isSuperHit = RegisterHit();
 
-        int countHits = Physics2D.OverlapCircleNonAlloc(origin, _radius, _hits, _targetLayer);
+        int countHits = Physics2D.OverlapCircleNonAlloc(origin, Radius, _hits, TargetLayer);
 
         AttackBase attack = isSuperHit
             ? _superAttacks[UnityEngine.Random.Range(0, _superAttacks.Count)]
-            : _attack;
+            : AttackType;
 
         if (isSuperHit)
         {
-            _camera.ShakeSuperPunch();
+            Camera.ShakeSuperPunch();
         }
         else
         {
-            _camera.ShakePunch();
+            Camera.ShakePunch();
         }
 
         for (int i =0; i < countHits; i++)
@@ -61,9 +52,9 @@ public class PlayerAttacker : Attacker
 
             if (hit != null && hit.TryGetComponent(out Enemy enemy))
             {
-                Vector2 pushDirection = _fliper.IsTernRight
+                Vector2 pushDirection = Fliper.IsTernRight
                                         ? Vector2.right
-                                            : Vector2.left;
+                                        : Vector2.left;
 
                 enemy.ApplyDamage(attack, hit.ClosestPoint(origin), pushDirection);
             }
@@ -74,6 +65,14 @@ public class PlayerAttacker : Attacker
     {
         base.OnAttackEndedEvent();
         _isAttacking = false;
+    }
+
+    protected override void AttackAwake()
+    {
+        base.AttackAwake();
+        _defaultAttack = AttacksData.Attacks[AttacksType.PlayerDefaultAttack];
+        _superAttacks.Add(AttacksData.Attacks[AttacksType.PlayerSuperAttack]);
+        AttackType = _defaultAttack;
     }
 
     private bool RegisterHit()
@@ -96,19 +95,4 @@ public class PlayerAttacker : Attacker
 
         return false;
     }
-
-    internal bool TrySeeTarget(out object target)
-    {
-        throw new NotImplementedException();
-    }
 }
-
-/*if (countHits != null && countHits.TryGetComponent(out Enemy enemy))
-{
-    Vector2 pushDirection = _fliper.IsTernRight
-                                ? Vector2.right
-                                    : Vector2.left;
-
-    enemy.ApplyDamage(attack, countHits.ClosestPoint(origin), pushDirection);
-}
-*/

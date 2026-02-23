@@ -5,6 +5,10 @@ public class Health
 {
     private const int ArmorReductionInOneHit = 1;
 
+    public bool IsShield = false;
+    private int _currentHealth;
+    private int _defense = 0;
+
     public Health(int maxHealth, int defense, bool isShield)
     {
         MaxHealth = maxHealth;
@@ -13,11 +17,11 @@ public class Health
         IsShield = isShield;
     }
 
-    public event Action OnDied;
-
-    public event Action<float, float, bool> OnHealthChanged;
+    public event Action Died;
+    public event Action<float, float, bool> HealthChanged;
 
     public int MaxHealth { get; private set; }
+
     public int HealthCurrent
     {
         get => _currentHealth;
@@ -30,7 +34,6 @@ public class Health
         }
     }
 
-    public bool IsShield = false;
     public int Defense
     {
         get => _defense;
@@ -42,10 +45,7 @@ public class Health
             }
 
         }
-    }
-
-    private int _currentHealth;
-    private int _defense = 0;
+    }    
 
     public void ApplyDamage(int damage)
     {
@@ -58,7 +58,7 @@ public class Health
             ChangeHealth(-damage);
 
         if (HealthCurrent == 0)
-            OnDied?.Invoke();
+            Died?.Invoke();
     }
 
     public void Heal(int value)
@@ -80,7 +80,7 @@ public class Health
     private void ChangeHealth(int value)
     {
         HealthCurrent = Mathf.Clamp(HealthCurrent + value, 0, MaxHealth);
-        OnHealthChanged?.Invoke(_currentHealth, MaxHealth, IsShield);
+        HealthChanged?.Invoke(_currentHealth, MaxHealth, IsShield);
     }
 
     private void ChangeDefense(int value)
@@ -88,6 +88,6 @@ public class Health
         Defense = Mathf.Max(0, Defense + value);
         IsShield = Defense > 0;
 
-        OnHealthChanged?.Invoke(_currentHealth, MaxHealth, IsShield);
+        HealthChanged?.Invoke(_currentHealth, MaxHealth, IsShield);
     }
 }

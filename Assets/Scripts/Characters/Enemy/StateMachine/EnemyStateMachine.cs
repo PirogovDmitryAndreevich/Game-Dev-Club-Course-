@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 class EnemyStateMachine : StateMachine
@@ -16,7 +15,7 @@ class EnemyStateMachine : StateMachine
             {typeof(IdleState), new IdleState(this, view, animator, waitTime, attacker.SqrAttackDistance) },
             {typeof(FollowState), new FollowState(this,enemyAI,animator, fliper, mover, view, tryFindTime,
                                                     attacker.SqrAttackDistance, sounds) },
-            {typeof(AttackState), new AttackState(this, animator, attacker,fliper ,view, attacker.Delay) }
+            {typeof(AttackState), new AttackState(this, animator, attacker,fliper ,view, attacker.CurrentDelay) }
         };
 
         ChangeState<PatrolState>();

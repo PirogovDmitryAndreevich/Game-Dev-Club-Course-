@@ -3,20 +3,38 @@ using UnityEngine;
 
 public class Bullet : FXBase
 {
-    [SerializeField] GameObject _bullet;
-    [SerializeField] GameObject _damageArea;
+    [SerializeField] private Transform _bullet;
+    [SerializeField] private Transform _damageArea;
+    [SerializeField] private BombYellow _explosion;
 
     [Header("Animation settings")]
     [SerializeField] private float _animationDuration;
     [SerializeField] private AnimationCurve _scaleCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-    public override FXType Type => FXType.Bullet;
+    private CircleCollider2D _damageCollider;
+    private Coroutine _flyRoutine;
+    private Collider2D[] _overlapResults = new Collider2D[8];
 
-    CircleCollider2D _damageCollider;
+    public override FXType Type => FXType.Bullet;
 
     private void Awake()
     {
         _damageCollider = _damageArea.GetComponent<CircleCollider2D>();
+
+        _explosion.ExplosionStopped += OnExplosionStopped;
+    }
+
+    private void OnDisable()
+    {
+        if (_flyRoutine != null)
+            StopCoroutine(_flyRoutine);
+
+        _flyRoutine = null;
+    }
+
+    private void OnDestroy()
+    {
+        _explosion.ExplosionStopped -= OnExplosionStopped;
     }
 
     public override void Play(Vector2 point)
@@ -26,18 +44,21 @@ public class Bullet : FXBase
 
     public void Play(Vector2 point, Vector2 target, AttackBase attack, LayerMask targetLayer)
     {
+        if (_flyRoutine != null)
+            StopCoroutine(_flyRoutine);
+
         _bullet.transform.position = point;
         _damageArea.transform.position = target;
 
-        StartCoroutine(FlyBullet(_bullet, _damageArea, attack, targetLayer));
+        _flyRoutine = StartCoroutine(FlyBullet(_bullet, _damageArea, attack, targetLayer));
     }
 
-    private IEnumerator FlyBullet(GameObject bullet, GameObject damageArea, AttackBase attack ,LayerMask targetLayer)
+    private IEnumerator FlyBullet(Transform bullet, Transform damageArea, AttackBase attack ,LayerMask targetLayer)
     {
-        Vector2 endScale = damageArea.transform.localScale;
-        damageArea.transform.localScale = Vector2.zero;
+        Vector2 endScale = _damageArea.localScale;
+        damageArea.localScale = Vector2.zero;
 
-        Vector2 startPosition = bullet.transform.position;        
+        Vector2 startPosition = bullet.position;        
 
         _damageCollider.radius = endScale.x;
 
@@ -52,28 +73,36 @@ public class Bullet : FXBase
             float scaleValue = _scaleCurve.Evaluate(t);
             damageArea.transform.localScale = Vector2.one * scaleValue;
 
-            bullet.transform.position = Vector2.Lerp(startPosition, damageArea.transform.position, t);
+            bullet.position = Vector2.Lerp(startPosition, damageArea.position, t);
 
             yield return null;
         }
 
-        Collider2D hit = Physics2D.OverlapCircle(
-            damageArea.transform.position,
+        int hitCount = Physics2D.OverlapCircleNonAlloc(
+            damageArea.position,
             _damageCollider.radius,
+            _overlapResults,
             targetLayer
         );
 
-        if (hit != null && hit.TryGetComponent(out Player player))
+        for (int i = 0; i < hitCount; i++)
         {
-            Vector2 knockbackDir =
-                ((Vector2)player.transform.position - (Vector2)damageArea.transform.position)
-                .normalized;
-            player.ApplyDamage(attack, damageArea.transform.position, knockbackDir);
+            if (_overlapResults[i].TryGetComponent(out Player player))
+            {
+                Vector2 knockbackDir =
+                    ((Vector2)player.transform.position - (Vector2)damageArea.position)
+                    .normalized;
+
+                player.ApplyDamage(attack, damageArea.position, knockbackDir);
+                break; 
+            }
         }
 
-        var bombEffect = FXPool.Instance.Get(FXType.BombYellow);
-        bombEffect.Play(bullet.transform.position);
+        _explosion.Play(bullet.position);
+    }
 
-        ReturnToPool();
+    private void OnExplosionStopped()
+    {
+        ReturnToPool?.Invoke(this);
     }
 }

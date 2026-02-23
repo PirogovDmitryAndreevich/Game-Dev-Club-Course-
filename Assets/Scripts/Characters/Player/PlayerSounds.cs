@@ -12,5 +12,4 @@ public class PlayerSounds : CharacterSounds
     public void PlayStepsSound() => PlayTimedRandomIndexSound(_stepsSounds, ref _nextPlayStepTime);
     public void PlayAttackSound() => PlayRandomIndexSound(_attackSounds);
     public void PlayHitSound() => PlayRandomIndexSound(_hitSound);
-
 }

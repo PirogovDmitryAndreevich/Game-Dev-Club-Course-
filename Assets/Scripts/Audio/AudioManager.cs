@@ -1,13 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
-    public static bool IsLoaded { get; private set; }
-
-    public static event Action OnLoaded;
+    [SerializeField] private AudioListener _listener;
 
     [SerializeField] private AudioSource _soundsSource;
     [SerializeField] private AudioSource _randomPitchSoundSource;
@@ -16,25 +12,17 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float _lowPith = 0f;
     [SerializeField] private float _topPith = 2f;
     [SerializeField] private AudioClip _defaultBGMusic;
-
     [SerializeField] private float _sqrMaxDistanceToSource = 400f;
 
-    private AudioListener _listener;
     private GameSaveData _playerSave;
     private Transform _listenerTransform;
 
+    public event Action Loaded;
+
+    public bool IsLoaded { get; private set; }
+
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        transform.parent = null;
-        DontDestroyOnLoad(gameObject);
-
         _musicSource.playOnAwake = true;
         _musicSource.loop = true;
 
@@ -46,40 +34,19 @@ public class AudioManager : MonoBehaviour
         if (SaveData.IsLoaded)
             Init();        
         else        
-            SaveData.OnLoaded += Init;
+            SaveData.Loaded += Init;
 
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void Init()
-    {
-        SaveData.OnLoaded -= Init;
-
-        _playerSave = SaveData.GameData;
-        _playerSave.OnAudioChanged += ResetVolume;
-        ResetVolume();
-        OnLoaded?.Invoke();
-        IsLoaded = true;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        _listenerTransform = _listener.transform;
     }
 
     private void OnDestroy()
     {
         if (_playerSave != null)
             _playerSave.OnAudioChanged -= ResetVolume;
-    }
+    }      
 
     public bool CanBeHeard(Vector3 source) =>           
-         (source - _listenerTransform.position).sqrMagnitude < _sqrMaxDistanceToSource;
-    
+         (source - _listenerTransform.position).sqrMagnitude < _sqrMaxDistanceToSource;    
 
     public void PlayMusic(AudioClip clip)
     {
@@ -99,6 +66,17 @@ public class AudioManager : MonoBehaviour
         _randomPitchSoundSource.PlayOneShot(clip);
     }
 
+    private void Init()
+    {
+        SaveData.Loaded -= Init;
+
+        _playerSave = SaveData.GameData;
+        _playerSave.OnAudioChanged += ResetVolume;
+        ResetVolume();
+        Loaded?.Invoke();
+        IsLoaded = true;
+    }
+
     private void ResetVolume()
     {
         _soundsSource.mute = _playerSave.IsSoundMute;
@@ -108,12 +86,5 @@ public class AudioManager : MonoBehaviour
         _soundsSource.volume = _playerSave.SoundValue;
         _randomPitchSoundSource.volume = _playerSave.SoundValue;
         _musicSource.volume = _playerSave.MusicValue;
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        _listener = FindAnyObjectByType<AudioListener>();
-
-        if (_listener != null)
-            _listenerTransform = _listener.transform;
     }
 }

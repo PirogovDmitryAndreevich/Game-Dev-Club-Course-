@@ -22,23 +22,13 @@ public class SettingsWidow : PauseBase
         _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 
-    protected override void OnEnable()
-    {
-        _closeButton.onClick.AddListener(Continue);
-    }
-
-    protected override void OnDisable()
-    {
-        _closeButton.onClick.RemoveListener(Continue);
-    }
-
     public override void Hide(Action callback)
     {
         KillCurrentAnimationIfActive();
 
-        _animation = DOTween.Sequence();
+        Animation = DOTween.Sequence();
 
-        _animation
+        Animation
             .SetUpdate(true)
             .Append(_panelRectTransform.DOScale(0f, _panelScaleDuration).From(1))
             .Join(_panelView.DOFade(0f, _panelScaleDuration))
@@ -52,13 +42,23 @@ public class SettingsWidow : PauseBase
         _panelView.gameObject.SetActive(true);
         KillCurrentAnimationIfActive();
 
-        _animation = DOTween.Sequence();
+        Animation = DOTween.Sequence();
 
-        _animation
+        Animation
             .SetUpdate(true)
             .Append(_anticlicker.DOFade(1f, _ACDuration)).SetEase(Ease.Flash)
             .Append(_panelView.DOFade(1f, _panelScaleDuration))
             .Join(_panelRectTransform.DOScale(1f, _panelScaleDuration).From(0).SetEase(Ease.OutBounce))
             .Play();
+    }
+
+    protected override void Enable()
+    {
+        _closeButton.onClick.AddListener(Continue);
+    }
+
+    protected override void Disable()
+    {
+        _closeButton.onClick.RemoveListener(Continue);
     }
 }

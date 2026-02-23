@@ -6,16 +6,16 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class FinishLevel : MonoBehaviour, IInteractable
 {
-    private Animator _animator;
-    private bool _isOpen;
-
     [SerializeField] private BusStop[] _interactObjects;
     [SerializeField] private Enemy[] _enemies;
     [SerializeField] private TMP_Text _diedEnemyCounterText;
 
-    public event Action OnLevelFinished;
+    private Animator _animator;
+    private bool _isOpen;
     private int _allEnemy = 0;
     private int _diedEnemy = 0;
+
+    public event Action OnLevelFinished;
 
     private void Awake()
     {
@@ -23,13 +23,13 @@ public class FinishLevel : MonoBehaviour, IInteractable
         _allEnemy = _enemies.Length;
 
         foreach (Enemy enemy in _enemies)
-            enemy.OnCharacterDied += EnemyDied;
+            enemy.CharacterDied += EnemyDied;
     }
 
     private void OnDestroy()
     {
         foreach (Enemy enemy in _enemies)
-            enemy.OnCharacterDied -= EnemyDied;
+            enemy.CharacterDied -= EnemyDied;
     }
 
     public void Interact()

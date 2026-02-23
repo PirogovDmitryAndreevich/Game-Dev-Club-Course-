@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AttacksData : MonoBehaviour
 {
-    public static AttacksData Instance { get; private set; }
-
     [SerializeField] private AttackBase[] _attacksArray;
 
     public static Dictionary<AttacksType, AttackBase> Attacks = new();
 
-    public static event Action OnInitialized;
+    public static event Action Initialized;
+
+    public static AttacksData Instance { get; private set; }
 
     private void Awake()
     {
@@ -39,6 +39,6 @@ public class AttacksData : MonoBehaviour
                 Attacks.Add(attack.Type, attack);
         }
 
-        OnInitialized?.Invoke();
+        Initialized?.Invoke();
     }
 }

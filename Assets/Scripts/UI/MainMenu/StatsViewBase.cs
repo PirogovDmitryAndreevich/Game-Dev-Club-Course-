@@ -4,29 +4,29 @@ using UnityEngine.UI;
 
 public abstract class StatsViewBase : MonoBehaviour
 {
-    protected abstract StatsType _type { get; }
-
-    [SerializeField] protected TMP_Text _valueText;
-    [SerializeField] protected Button _addButton;
+    [SerializeField] protected TMP_Text ValueText;
+    [SerializeField] protected Button AddButton;
 
     private PlayerSaveData _playerData;
+
+    protected abstract StatsType Type { get; }
 
     private void OnEnable()
     {
         if (SaveData.IsLoaded)
             OnEnableUpdate();
         else
-            SaveData.OnLoaded += OnEnableUpdate;
+            SaveData.Loaded += OnEnableUpdate;
     }
 
     private void OnDisable()
     {
-        SaveData.OnLoaded -= OnEnableUpdate;
+        SaveData.Loaded -= OnEnableUpdate;
 
         _playerData.StatsChanged -= UpdateCoins;
 
-        if (_addButton != null)
-            _addButton.onClick.RemoveListener(OnClickButton);
+        if (AddButton != null)
+            AddButton.onClick.RemoveListener(OnClickButton);
     }
 
     protected virtual void OnEnableUpdate()
@@ -34,22 +34,20 @@ public abstract class StatsViewBase : MonoBehaviour
         _playerData = SaveData.PlayerData;
         _playerData.StatsChanged += UpdateCoins;
 
-        if (_addButton != null)
-            _addButton.onClick.AddListener(OnClickButton);
+        if (AddButton != null)
+            AddButton.onClick.AddListener(OnClickButton);
 
-        UpdateCoins(_type);
+        UpdateCoins(Type);
     }
 
     protected virtual void UpdateCoins(StatsType type)
     {
-        if (_type == type)
-            _valueText.text = _playerData.GetStat(_type).ToString();
+        if (Type == type)
+            ValueText.text = _playerData.GetStat(Type).ToString();
     }
 
     protected virtual void OnClickButton()
     {
         Debug.Log($"Pressed add {GetType()} button");
     }
-
-
 }

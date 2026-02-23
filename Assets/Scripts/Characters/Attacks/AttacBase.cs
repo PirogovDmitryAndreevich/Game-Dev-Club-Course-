@@ -12,9 +12,9 @@ public class AttackBase : ScriptableObject
     [SerializeField] private float _knockbackForce;
     [SerializeField] private bool _isCrit;
 
-    public AttacksType Type => _type;
+    public Action<int> DamageChanged;
 
-    public Action<int> OnDamageChanged;
+    public AttacksType Type => _type;
 
     public int Damage
     {
@@ -24,7 +24,7 @@ public class AttackBase : ScriptableObject
             if (_damage != value)
                 _damage = value;
 
-            OnDamageChanged?.Invoke(_damage);
+            DamageChanged?.Invoke(_damage);
         }
     }
     public float Radius => _radius;

@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(GreyEnemyAttacker), typeof(EnemySounds))]
 public class GreyEnemy : Enemy
 {
-    protected override void Awake()
+    protected override void CharacterAwake()
     {
-        _sound = GetComponent<EnemySounds>();
-        _attacker = GetComponent<GreyEnemyAttacker>();
-        base.Awake();
+        Sound = GetComponent<EnemySounds>();
+        Attacker = GetComponent<GreyEnemyAttacker>();
+        base.CharacterAwake();
     }
 }

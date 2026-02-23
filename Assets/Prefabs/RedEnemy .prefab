@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 7720843146958431157}
   - component: {fileID: 2211223796288761710}
   - component: {fileID: 1964168756779212509}
+  - component: {fileID: 6487633532471399325}
   m_Layer: 7
   m_Name: 'RedEnemy '
   m_TagString: Untagged
@@ -280,11 +281,34 @@ MonoBehaviour:
   _dashDuration: 0.15
   _dashCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _knockbackDuration: 0.5
+  separationRadius: 1.2
+  separationStrength: 1.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &1736273452880003178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5627ceb50bb0adf48ad3f636e2e919a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 4
-  _attack: {fileID: 11400000, guid: 821e9059582134e43bff00859180b712, type: 2}
-  _targetLayer:
+  Delay: 2
+  AttackType: {fileID: 11400000, guid: 821e9059582134e43bff00859180b712, type: 2}
+  TargetLayer:
     serializedVersion: 2
     m_Bits: 64
   _runSpeed: 3
@@ -316,9 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2553a62d9853e48a173db670ee09a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitFlash: {fileID: 323536573171845181}
-  _animationEvent: {fileID: 4743377199341321678}
-  _maxHealth: 100
+  HitFlash: {fileID: 323536573171845181}
+  AnimationEvent: {fileID: 4743377199341321678}
+  MaxHealth: 100
   _wayPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -392,3 +416,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6681d8ede2e23704199ba47e3ecb71dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6487633532471399325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2169428594642948106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928acfa6cb4edcb49a2c5395f03b1a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stepsSounds: {fileID: 8300000, guid: fa95ebee958fb0e41a42a832aab767eb, type: 3}
+  _attackSounds: []
+  _hitSounds:
+  - {fileID: 8300000, guid: 1cd9fbc4bb2c19749aa2e61afd72aaaa, type: 3}
+  - {fileID: 8300000, guid: faf53b5b59d41a14e97c8858f4664122, type: 3}
+  - {fileID: 8300000, guid: a715ddf00ff7f24469c72404e8df85e9, type: 3}
+  _deathSounds:
+  - {fileID: 8300000, guid: 5174415e9879415498f7b0dd794d19c5, type: 3}
+  - {fileID: 8300000, guid: 05d0536a3eefc80438f95f9662331f52, type: 3}
+  - {fileID: 8300000, guid: df7b0527bedef454c888055c076048ed, type: 3}
+  _runAttackSound: {fileID: 8300000, guid: fba95cafa5bba8649a7d269656e7317b, type: 3}

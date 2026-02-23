@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(RedEnemySound))]
@@ -18,17 +17,9 @@ public class RedEnemyAttacker : Attacker
     private bool _hasHitPlayer;
     private bool _attackInProgress;
 
+    public override AttacksType type => AttackType.Type;
+
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[4];
-
-    public override AttacksType type => _attack.Type;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        _animator = GetComponent<CharacterAnimator>();
-        _mover = GetComponent<Mover>();
-        _enemySounds = GetComponent<RedEnemySound>();
-    }
 
     protected override void OnDrawGizmos()
     {
@@ -36,7 +27,7 @@ public class RedEnemyAttacker : Attacker
         Gizmos.DrawWireCube(transform.position, _attackBoxSize);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(GetAttackOrigin(), _radius);
+        Gizmos.DrawWireSphere(GetAttackOrigin(), Radius);
     }
 
     private void FixedUpdate()
@@ -55,7 +46,7 @@ public class RedEnemyAttacker : Attacker
 
         if ((currentPos - _attackTargetPosition).sqrMagnitude <= 0.0025f)
         {
-            _endWaitTime = Time.time + _delay;
+            EndWaitTime = Time.time + Delay;
             OnAttackEndedEvent();
         }
     }
@@ -65,10 +56,9 @@ public class RedEnemyAttacker : Attacker
         if (_attackInProgress || !CanAttack)
             return;
 
-        Debug.Log("RedEnemy: attack");
         _attackInProgress = true;
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, SqrAttackDistance, _targetLayer);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, SqrAttackDistance, TargetLayer);
 
         if (hit == null || !hit.TryGetComponent(out Player player))
             return;
@@ -81,8 +71,6 @@ public class RedEnemyAttacker : Attacker
 
     public override void OnAttackEndedEvent()
     {
-        Debug.Log("RedEnemy: OnAttackEndedEvent");
-
         _hasHitPlayer = false;
         _attackInProgress = false;
         IsAttack = false;
@@ -96,6 +84,14 @@ public class RedEnemyAttacker : Attacker
 
         IsAttack = true;
         _animator.SetEnemyAttackBool(IsAttack);
+    }
+
+    protected override void AttackAwake()
+    {
+        base.AttackAwake();
+        _animator = GetComponent<CharacterAnimator>();
+        _mover = GetComponent<Mover>();
+        _enemySounds = GetComponent<RedEnemySound>();
     }
 
     private void TryHit(Vector2 direction)
@@ -112,7 +108,7 @@ public class RedEnemyAttacker : Attacker
             direction,
             _hits,
             castDistance,
-            _targetLayer
+            TargetLayer
         );
 
         for (int i = 0; i < hitCount; i++)
@@ -125,7 +121,7 @@ public class RedEnemyAttacker : Attacker
                     (player.transform.position - transform.position).normalized;
 
                 player.ApplyDamage(
-                    _attack,
+                    AttackType,
                     _hits[i].collider.ClosestPoint(origin),
                     knockbackDir
                 );

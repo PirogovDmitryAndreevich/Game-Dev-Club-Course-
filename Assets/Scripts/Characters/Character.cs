@@ -4,57 +4,74 @@ using UnityEngine;
 [RequireComponent(typeof(Mover), typeof(CharacterAnimator), typeof(Fliper))]
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] protected HitFlash _hitFlash;
-    [SerializeField] protected AnimationEvent _animationEvent;
-    [SerializeField] protected int _maxHealth = 100;
+    [SerializeField] protected FXPool FXPool;
+    [SerializeField] protected HitFlash HitFlash;
+    [SerializeField] protected AnimationEvent AnimationEvent;
+    [SerializeField] protected int MaxHealth = 100;
 
-    protected CharacterAnimator _animator;
-    protected Mover _mover;
-    protected Fliper _fliper;
-    protected Health _health;
-    protected Attacker _attacker;
+    protected CharacterAnimator Animator;
+    protected Mover Mover;
+    protected Fliper Fliper;
+    protected Health Health;
+    protected Attacker Attacker;
 
-    public event Action OnCharacterDied;
+    public event Action CharacterDied;
 
-    protected virtual void Awake()
-    {
-        _health = new Health(_maxHealth, 0, false);
-        _mover = GetComponent<Mover>();
-        _animator = GetComponent<CharacterAnimator>();
-        _fliper = GetComponent<Fliper>();
-        _animationEvent.DealDamage += _attacker.Attack;
-        _animationEvent.AttackEnded += _attacker.OnAttackEndedEvent;
-        _health.OnDied += OnDied;
-    }
+    private void Awake() =>    
+        CharacterAwake();    
 
-    protected virtual void OnDestroy()
-    {
-        if (_animationEvent != null)
-        {
-            _animationEvent.DealDamage -= _attacker.Attack;
-            _animationEvent.AttackEnded -= _attacker.OnAttackEndedEvent;
-        }
+    private void OnDestroy() =>    
+        CharacterDestroy();
 
-        _health.OnDied -= OnDied;
-    }
-
-    protected abstract void FixedUpdate();
+    private void FixedUpdate() =>
+        CharacterFixUpdate();
 
     public virtual void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
     {
-        _health.ApplyDamage(damageInfo.Damage);
+        Health.ApplyDamage(damageInfo.Damage);
 
         if (damageInfo.IsKnockback)
-            _mover.Knockback(pushDirection, damageInfo.KnockbackForce);
+            Mover.Knockback(pushDirection, damageInfo.KnockbackForce);
 
-        _hitFlash.Play();
+        HitFlash.Play();
 
-        var punch = FXPool.Instance.Get(FXType.Punch);
+        var punch = FXPool.Get(FXType.Punch);
+        punch.ReturnToPool += ReturnFXToPool;
         punch.Play(damageSource);
+    }
+
+    protected virtual void CharacterAwake()
+    {
+        Health = new Health(MaxHealth, 0, false);
+        Mover = GetComponent<Mover>();
+        Animator = GetComponent<CharacterAnimator>();
+        Fliper = GetComponent<Fliper>();
+        AnimationEvent.DealDamage += Attacker.Attack;
+        AnimationEvent.AttackEnded += Attacker.OnAttackEndedEvent;
+        Health.Died += OnDied;
+    }
+
+    protected virtual void CharacterDestroy()
+    {
+        if (AnimationEvent != null)
+        {
+            AnimationEvent.DealDamage -= Attacker.Attack;
+            AnimationEvent.AttackEnded -= Attacker.OnAttackEndedEvent;
+        }
+
+        Health.Died -= OnDied;
+    }
+
+    protected abstract void CharacterFixUpdate();
+
+    protected void ReturnFXToPool(FXBase fx)
+    {
+        fx.ReturnToPool -= ReturnFXToPool;
+        FXPool.Return(fx);
     }
 
     protected virtual void OnDied()
     {
-        OnCharacterDied?.Invoke();
+        CharacterDied?.Invoke();
     }
 }

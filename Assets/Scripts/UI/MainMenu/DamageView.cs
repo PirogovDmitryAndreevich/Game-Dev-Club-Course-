@@ -1,4 +1,4 @@
 public class DamageView : StatsViewBase
 {
-    protected override StatsType _type => StatsType.Defense;
+    protected override StatsType Type => StatsType.Defense;
 }

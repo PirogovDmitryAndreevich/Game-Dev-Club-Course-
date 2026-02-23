@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyDeathParticles : FXBase
 {
     private ParticleSystem _particles;
+
     public override FXType Type => FXType.EnemyDeath;
 
     private void Awake()
@@ -19,7 +20,7 @@ public class EnemyDeathParticles : FXBase
 
     private void OnParticleSystemStopped()
     {
-        ReturnToPool();
+        ReturnToPool?.Invoke(this);
     }
 
     public override void Play(Vector2 point)

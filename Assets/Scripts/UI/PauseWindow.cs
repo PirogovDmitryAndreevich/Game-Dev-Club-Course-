@@ -30,29 +30,13 @@ public class PauseWindow : PauseBase
         _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        _restartButton.onClick.AddListener(Restart);
-        _continueButton.onClick.AddListener(Continue); 
-        _exitButton.onClick.AddListener(Exit);
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        _restartButton.onClick.RemoveListener(Restart);
-        _continueButton.onClick.RemoveListener(Continue);
-        _exitButton.onClick.RemoveListener(Exit);
-    }
-
     public override void Show()
     {
         KillCurrentAnimationIfActive();
 
-        _animation = DOTween.Sequence();
+        Animation = DOTween.Sequence();
 
-        _animation
+        Animation
             .SetUpdate(true)
             .Append(_anticlicker.DOFade(1f, _ACDuration)).SetEase(Ease.Flash)
             .Append(_panelView.DOFade(1f, _panelScaleDuration))
@@ -64,16 +48,16 @@ public class PauseWindow : PauseBase
             .Play();
 
         if(_showSound != null)
-            AudioManager.Instance.PlaySound(_showSound);
+            CurrentAudioManager.PlaySound(_showSound);
     }
 
     public override void Hide(Action callback)
     {
         KillCurrentAnimationIfActive();
 
-        _animation = DOTween.Sequence();
+        Animation = DOTween.Sequence();
 
-        _animation
+        Animation
             .SetUpdate(true)
             .Append(_panelRectTransform.DOScale(0f, _panelScaleDuration).From(1))
             .Join(_panelView.DOFade(0f, _panelScaleDuration))
@@ -82,6 +66,22 @@ public class PauseWindow : PauseBase
             .OnComplete(() => callback?.Invoke());
 
         if (_hideSound != null)
-            AudioManager.Instance.PlaySound(_hideSound);
+            CurrentAudioManager.PlaySound(_hideSound);
+    }
+
+    protected override void Enable()
+    {
+        base.Enable();
+        _restartButton.onClick.AddListener(Restart);
+        _continueButton.onClick.AddListener(Continue);
+        _exitButton.onClick.AddListener(Exit);
+    }
+
+    protected override void Disable()
+    {
+        base.Disable();
+        _restartButton.onClick.RemoveListener(Restart);
+        _continueButton.onClick.RemoveListener(Continue);
+        _exitButton.onClick.RemoveListener(Exit);
     }
 }

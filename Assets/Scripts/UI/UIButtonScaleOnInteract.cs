@@ -29,16 +29,7 @@ public class UIButtonScaleOnInteract : MonoBehaviour,
     private void OnDisable()
     {
         scaleTween?.Kill();
-    }
-
-    private void ScaleTo(float scale)
-    {
-        scaleTween?.Kill();
-        scaleTween = rectTransform
-            .DOScale(initialScale * scale, duration)
-            .SetEase(ease)
-            .Play();
-    }
+    }    
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -58,5 +49,14 @@ public class UIButtonScaleOnInteract : MonoBehaviour,
     public void OnPointerUp(PointerEventData eventData)
     {
         ScaleTo(hoverScale);
+    }
+
+    private void ScaleTo(float scale)
+    {
+        scaleTween?.Kill();
+        scaleTween = rectTransform
+            .DOScale(initialScale * scale, duration)
+            .SetEase(ease)
+            .Play();
     }
 }

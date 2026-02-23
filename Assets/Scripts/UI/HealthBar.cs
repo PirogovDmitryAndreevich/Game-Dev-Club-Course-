@@ -21,13 +21,13 @@ public class HealthBar : MonoBehaviour
 
     private void OnDestroy()
     {
-        _health.OnHealthChanged -= OnHealthChanged;
+        _health.HealthChanged -= OnHealthChanged;
     }
 
     public void Initialize(Health health)
     {
         _health = health;
-        _health.OnHealthChanged += OnHealthChanged;
+        _health.HealthChanged += OnHealthChanged;
         OnHealthChanged(_health.HealthCurrent, _health.MaxHealth, _health.IsShield);
     }
 

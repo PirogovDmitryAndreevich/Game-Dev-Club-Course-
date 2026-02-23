@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
+    [Header("Scene Settings")]
+    [SerializeField] private AudioManager _currentAudioManager;
     [SerializeField] private Player _player;
     [SerializeField] private AudioClip _gameMusic;
     [SerializeField] private FailWindow _failWindow;
@@ -12,10 +14,10 @@ public class GameLogic : MonoBehaviour
     {
         _failWindow.Initialize(_player);
 
-        if (AudioManager.IsLoaded)
+        if (_currentAudioManager.IsLoaded)
             InitMusic();
         else
-            AudioManager.OnLoaded += InitMusic;
+            _currentAudioManager.Loaded += InitMusic;
 
         //_finisher.OnLevelFinished += ShowWinWindow;
     }
@@ -27,9 +29,9 @@ public class GameLogic : MonoBehaviour
 
     private void InitMusic()
     {
-        AudioManager.OnLoaded -= InitMusic;
+        _currentAudioManager.Loaded -= InitMusic;
 
-        AudioManager.Instance.PlayMusic(_gameMusic);
+        _currentAudioManager.PlayMusic(_gameMusic);
     }
 
     private void ShowWinWindow()

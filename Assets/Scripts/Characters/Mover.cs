@@ -4,22 +4,25 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Mover : MonoBehaviour
 {
+    private const float MinEnemySeparationDistance = 0.000001f;
+    private const float MinLengthMoveDirection = 0.01f;
+
     [Header("Move")]
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _runSpeed = 6f;
-    [Header("Attack")]
+    [Header("AttackStep")]
     [SerializeField] private float _attackStepDistance = 0.5f;
-    [SerializeField] private float _attackStepDuration = 0.1f;
+    [SerializeField] private float _speedAttackStep = 0.1f;
     [Header("Dash")]
     [SerializeField] private float _dashDistance = 5f;
     [SerializeField] private float _dashDuration = 0.15f;
     [SerializeField] private AnimationCurve _dashCurve;
     [Header("Take Damage")]
     [SerializeField] private float _knockbackDuration = 0.5f;
-    [Header("Enemy")]
-    [SerializeField] float separationRadius = 1.2f;
-    [SerializeField] float separationStrength = 1.5f;
-    [SerializeField] LayerMask enemyLayer;
+    [Header("EnemySeparationSetting")]
+    [SerializeField] private float separationRadius = 1.2f;
+    [SerializeField] private float separationStrength = 1.5f;
+    [SerializeField] private LayerMask enemyLayer;
 
     private Rigidbody2D _rigidbody;
     private Vector2 _lastMoveDirection = Vector2.zero;
@@ -54,7 +57,7 @@ public class Mover : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        if (direction.sqrMagnitude > 0.01f)
+        if (direction.sqrMagnitude > MinLengthMoveDirection)
             _lastMoveDirection = direction.normalized;
 
         _rigidbody.velocity = direction * _speed;
@@ -64,30 +67,16 @@ public class Mover : MonoBehaviour
     public void RunAttack(Vector2 target, float attackSpeed) => Move(target, attackSpeed);
     public void Walk(Vector2 targetPoint) => Move(targetPoint, _speed);
 
-    private void Move(Vector2 targetPoint, float speed)
-    {
-        Vector2 moveDir = targetPoint - _rigidbody.position;
-        Vector2 desired = moveDir.normalized;
-
-        Vector2 separation = CalculateSeparation();
-
-        Vector2 finalDir = (desired + separation).normalized;
-
-        Vector2 newPosition = _rigidbody.position +
-            finalDir * speed * Time.fixedDeltaTime;
-
-        _rigidbody.MovePosition(newPosition);
-    }
-
     public void AttackStep()
     {
-        if (_lastMoveDirection == Vector2.zero) return;
+        if (_lastMoveDirection == Vector2.zero)
+            return;
 
         Stop();
 
         Vector2 target = _rigidbody.position + _lastMoveDirection * _attackStepDistance;
 
-        _currentTween = _rigidbody.DOMove(target, _attackStepDuration)
+        _currentTween = _rigidbody.DOMove(target, _speedAttackStep)
             .SetEase(Ease.OutQuad)
             .Play()
             .OnComplete(() => _currentTween = null);
@@ -140,7 +129,7 @@ public class Mover : MonoBehaviour
             Vector2 diff = _rigidbody.position - col.attachedRigidbody.position;
 
             float sqrDistance = diff.sqrMagnitude;
-            if (sqrDistance <= 0.000001f)
+            if (sqrDistance <= MinEnemySeparationDistance)
                 continue;
 
             float distance = Mathf.Sqrt(sqrDistance);
@@ -154,5 +143,20 @@ public class Mover : MonoBehaviour
             separation /= count;
 
         return separation * separationStrength;
+    }
+
+    private void Move(Vector2 targetPoint, float speed)
+    {
+        Vector2 moveDir = targetPoint - _rigidbody.position;
+        Vector2 desired = moveDir.normalized;
+
+        Vector2 separation = CalculateSeparation();
+
+        Vector2 finalDir = (desired + separation).normalized;
+
+        Vector2 newPosition = _rigidbody.position +
+            finalDir * speed * Time.fixedDeltaTime;
+
+        _rigidbody.MovePosition(newPosition);
     }
 }

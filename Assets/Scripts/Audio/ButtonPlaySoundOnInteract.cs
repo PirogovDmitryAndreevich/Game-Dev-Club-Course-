@@ -7,6 +7,10 @@ public class ButtonPlaySoundOnInteract : MonoBehaviour,
     IPointerDownHandler,
     IPointerUpHandler
 {
+    [Header("Scene Settings")]
+    [SerializeField] private AudioManager _audioManger;
+
+    [Header("Clips")]
     [SerializeField] private AudioClip _pointerDown;
     [SerializeField] private AudioClip _pointerEnter;
     [SerializeField] private AudioClip _pointerExit;
@@ -35,6 +39,6 @@ public class ButtonPlaySoundOnInteract : MonoBehaviour,
     private void PlaySound(AudioClip clip)
     {
         if (clip != null)
-            AudioManager.Instance.PlaySound(clip);
+            _audioManger.PlaySound(clip);
     }
 }

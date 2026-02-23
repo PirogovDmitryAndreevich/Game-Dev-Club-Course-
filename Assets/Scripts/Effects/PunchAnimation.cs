@@ -13,6 +13,6 @@ public class PunchAnimation : FXBase
     // Called in animator
     private void AnimationEnded()
     {
-        ReturnToPool();
+        ReturnToPool?.Invoke(this);
     }
 }
