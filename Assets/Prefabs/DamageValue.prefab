@@ -147,13 +147,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075aab3a9de115e44b35c63853d63ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsActive: 0
   _value: {fileID: 6612199084625980445}
-  moveDuration: 0.25
-  stayDuration: 0.2
+  moveDuration: 0.7
+  fadeDelay: 0.2
   fadeDuration: 0.2
   moveY: 1
-  randomX: 0.45
-  scaleMultiplier: 1.7
+  randomX: 1
+  startScale: 0.6
+  punchScale: 0.4
 --- !u!1 &6356608671274399038
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,10 +15,20 @@ public class FXPool : MonoBehaviour
     }
 
     private Dictionary<FXType, Queue<FXBase>> pools = new();
+    private List<FXBase> allFx = new();
 
     private void Start()
     {
         StartCoroutine(Preload());
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var fx in allFx)
+        {
+            if (fx != null)
+                fx.ReturnToPool -= Return;
+        }
     }
 
     public FXBase Get(FXType type)
@@ -58,6 +68,9 @@ public class FXPool : MonoBehaviour
     {
         FXBase fx = Instantiate((MonoBehaviour)entry.prefab, transform)
             as FXBase;
+
+        fx.ReturnToPool += Return;
+        allFx.Add(fx);
 
         ((MonoBehaviour)fx).gameObject.SetActive(false);
         pools[entry.type].Enqueue(fx);

@@ -30,7 +30,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Highlight: 0
-    - _OutlineThickness: 1.95
+    - _OutlineThickness: 3
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}

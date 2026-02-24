@@ -23,8 +23,6 @@ public class PinkEnemyAttacker : Attacker
 
             Vector2 point = player.transform.position;
             point.y -= _offsetDamage;
-
-            bullet.ReturnToPool += ReturnFXToPool;
             bullet.Play(transform.position, point, AttackType, TargetLayer);
         }       
     }
@@ -33,11 +31,5 @@ public class PinkEnemyAttacker : Attacker
     {
         _sound = GetComponent<EnemySounds>();
         base.AttackAwake();
-    }
-
-    private void ReturnFXToPool(FXBase fx)
-    {
-        fx.ReturnToPool -= ReturnFXToPool;
-        _fxPool.Return(fx);
     }
 }
