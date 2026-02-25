@@ -2,17 +2,20 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyDirectionOfView), typeof(Attacker), typeof(EnemyAI))]
-public class Enemy : Character
-{
+public class Enemy : Character, ITask
+{    
     [SerializeField] private WayPoint[] _wayPoints;
     [SerializeField] private float _waitTime = 2.0f;
     [SerializeField] private float _tryFindTime = 1f;
     [SerializeField] private float _maxSqrDistance = 13.7f;
 
-    public event Action OnEnemyDied;
+    public event Action<Enemy> EnemyDied;
+    public event Action<ITask> TaskCompleted;
 
     private EnemyStateMachine _stateMachine;
     protected EnemySounds Sound;
+
+    public TaskType Type => TaskType.Enemies;
 
     private void Start()
     {
@@ -50,6 +53,7 @@ public class Enemy : Character
 
     protected override void OnDied()
     {
-        OnEnemyDied?.Invoke();
+        TaskCompleted?.Invoke(this);
+        EnemyDied?.Invoke(this);
     }
 }

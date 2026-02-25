@@ -11,14 +11,11 @@ public class DamageValueAnimation : FXBase
 
     [Header("Timing")]
     [SerializeField] private float moveDuration = 0.5f;
-    [SerializeField] private float fadeDelay = 0.2f;
     [SerializeField] private float fadeDuration = 0.25f;
 
     [Header("Motion")]
     [SerializeField] private float moveY = 1.5f;
     [SerializeField] private float randomX = 0.6f;
-    [SerializeField] private float startScale = 0.6f;
-    [SerializeField] private float punchScale = 0.4f;
 
     private Transform _transform;
     private Sequence _sequence;

@@ -1,5 +1,10 @@
-public class Trophy : Interactable, IItem
+using System;
+
+public class Trophy : Interactable, IItem, ITask
 {
+    public TaskType Type => TaskType.Trophy;
+
+    public event Action<ITask> TaskCompleted;
 
     private void OnEnable()
     {
@@ -8,6 +13,7 @@ public class Trophy : Interactable, IItem
 
     public void Collect()
     {
+        TaskCompleted?.Invoke(this);
         Destroy(gameObject);
     }
 

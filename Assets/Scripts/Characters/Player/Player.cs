@@ -181,7 +181,7 @@ public class Player : Character
 
     private void AddTrophy(Trophy trophy)
     {
-
+       
     }
 
     private void AddKey(Key key)

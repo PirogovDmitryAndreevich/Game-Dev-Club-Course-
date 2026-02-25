@@ -10,8 +10,6 @@ public class Lock : MonoBehaviour, IInteractable, IShowKey
 
     [Header("Animation settings")]
     [SerializeField] private float jumpUpDistance = 150f;
-    [SerializeField] private float durationUp = 0.25f;
-    [SerializeField] private float durationDown = 0.4f;
     [SerializeField] private float moveRightDistance = 60f;
     [SerializeField] private float rotateAmount = 25f;
     [SerializeField] private float downDistance = 0.5f;

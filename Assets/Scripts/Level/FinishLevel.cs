@@ -1,76 +1,109 @@
 using System;
-using System.Linq;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class FinishLevel : MonoBehaviour, IInteractable
+public class FinishLevel : MonoBehaviour
 {
+    private const int DefaultStartValueCondition = 0;
+
+    [SerializeField] private TasksView _taskView;
     [SerializeField] private BusStop[] _interactObjects;
     [SerializeField] private Enemy[] _enemies;
-    [SerializeField] private TMP_Text _diedEnemyCounterText;
+    [SerializeField] private Trophy[] _trophies;
 
-    private Animator _animator;
-    private bool _isOpen;
-    private int _allEnemy = 0;
-    private int _diedEnemy = 0;
+    private int _completedConditions;
+    private bool _finished;
 
-    public event Action OnLevelFinished;
+    private Dictionary<TaskType, ConditionsBase> _conditionsData = new();
+    private List<ITask> _tasks = new List<ITask>();
+
+    public event Action LevelFinished;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
-        _allEnemy = _enemies.Length;
+        if (_enemies != null)
+        {
+            foreach (Enemy enemy in _enemies)
+            {
+                _tasks.Add(enemy);
+                enemy.TaskCompleted += UpdateCondition;
+            }
 
-        foreach (Enemy enemy in _enemies)
-            enemy.CharacterDied += EnemyDied;
+            AddNewCondition(_enemies.Length, TaskType.Enemies);
+        }
+
+        if (_trophies != null)
+        {
+            foreach (Trophy trophy in _trophies)
+            {
+                _tasks.Add(trophy);
+                trophy.TaskCompleted += UpdateCondition;
+            }
+
+            AddNewCondition(_trophies.Length, TaskType.Trophy);
+        }
+    }
+
+    private void Start()
+    {
+        foreach (var condition in _conditionsData)
+        {
+            _taskView.AddCondition(condition.Value.Type,
+                DefaultStartValueCondition, condition.Value.Task);
+        }
     }
 
     private void OnDestroy()
     {
-        foreach (Enemy enemy in _enemies)
-            enemy.CharacterDied -= EnemyDied;
+        foreach (ITask task in _tasks)
+            task.TaskCompleted -= UpdateCondition;
     }
 
-    public void Interact()
+    private void AddNewCondition(int value, TaskType type)
     {
-        if (_interactObjects.All(i => i.IsActivated == true) && _isOpen == false)
+        ConditionsBase newCondition;
+
+        newCondition = new ConditionsBase(value, type);
+
+        if (!_conditionsData.ContainsKey(type))
+            _conditionsData[type] = newCondition;
+    }
+
+    private void UpdateCondition(ITask task)
+    {
+        Debug.Log($"Task completed from {task} type {task.Type}");
+
+        if (_finished)
+            return;
+
+        if (!_conditionsData.ContainsKey(task.Type))
+            return;
+
+        bool reached = _conditionsData[task.Type].AddProgress();
+
+        int currentValue = _conditionsData[task.Type].Current;
+
+        _taskView.ChangeValueTask(currentValue, task.Type);
+
+        if (reached)
         {
-            _animator.SetTrigger(ConstantsData.AnimatorParameters.IsOpen);
-            _isOpen = true;
-            OnLevelFinished?.Invoke();
+            _completedConditions++;
+            _taskView.TaskReached(task.Type);
+            CheckFinished();
         }
-        else
-        {
-            Debug.Log("Not all runes are activated");
-        }
-    }
 
-    public void HighlightOn()
-    {
-        Debug.Log("[Finish] highlight on");
-    }
-
-    public void HighlightOff()
-    {
-        Debug.Log("[Finish] highlight off");
-    }
-
-    private void EnemyDied()
-    {
-        _diedEnemy++;
-        UpdateEnemyCounterView();
-        CheckFinished();
-    }
-
-    private void UpdateEnemyCounterView()
-    {
-        _diedEnemyCounterText.text = $"{_diedEnemy} / {_allEnemy}";
     }
 
     private void CheckFinished()
     {
-        if (_diedEnemy == _allEnemy)
-            OnLevelFinished?.Invoke();
+        if (_finished)
+            return;
+
+        if (_completedConditions == _conditionsData.Count)
+        {
+            _finished = true;
+            LevelFinished?.Invoke();
+            Debug.Log("LEVEL FINISHED");
+        }
     }
 }
