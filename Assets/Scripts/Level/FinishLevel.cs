@@ -17,7 +17,7 @@ public class FinishLevel : MonoBehaviour
     private Dictionary<TaskType, ConditionsBase> _conditionsData = new();
     private List<ITask> _tasks = new List<ITask>();
 
-    public event Action LevelFinished;
+    public event Action FinishLevelConditionsCompleted;
 
     private void Awake()
     {
@@ -71,8 +71,6 @@ public class FinishLevel : MonoBehaviour
 
     private void UpdateCondition(ITask task)
     {
-        Debug.Log($"Task completed from {task} type {task.Type}");
-
         if (_finished)
             return;
 
@@ -102,8 +100,7 @@ public class FinishLevel : MonoBehaviour
         if (_completedConditions == _conditionsData.Count)
         {
             _finished = true;
-            LevelFinished?.Invoke();
-            Debug.Log("LEVEL FINISHED");
+            FinishLevelConditionsCompleted?.Invoke();
         }
     }
 }

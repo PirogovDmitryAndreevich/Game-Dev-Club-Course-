@@ -8,6 +8,7 @@ public class Player : Character
     [SerializeField] private InteractableCanvas _interactableCanvas;
     [SerializeField] private InventoryView _inventoryView;
     [SerializeField] private PlayerFX _playerFX;
+    [SerializeField] private ArrowTracking _arrowTracking;
 
     private InputReader _inputReader;
     private CollisionHandler _collisionHandler;
@@ -38,8 +39,15 @@ public class Player : Character
         _sound.PlayHitSound();
     }
 
+    public void FinishLevelConditionsCompleted()
+    {
+        _arrowTracking.gameObject.SetActive(true);
+    }
+
     protected override void CharacterAwake()
     {
+        _arrowTracking.gameObject.SetActive(false);
+
         Attacker = GetComponent<PlayerAttacker>();
         _inputReader = GetComponent<InputReader>();
         _collisionHandler = GetComponent<CollisionHandler>();
@@ -107,8 +115,8 @@ public class Player : Character
     }
 
     private void OnInteractStarted(IInteractable interactableObject)
-    {        
-            _interactable = interactableObject;
+    {
+        _interactable = interactableObject;
     }
 
     private void Interact()
@@ -133,9 +141,6 @@ public class Player : Character
     {
         if (item is Key)
             AddKey((Key)item);
-
-        if (item is Trophy)
-            AddTrophy((Trophy)item);
 
         item.Collect();
     }
@@ -177,11 +182,6 @@ public class Player : Character
         _sound.PlaySound(defense.DefenseSound);
         _playerFX.PlayAddingArmor();
         Health.AddDefense(defense.Value);
-    }
-
-    private void AddTrophy(Trophy trophy)
-    {
-       
     }
 
     private void AddKey(Key key)

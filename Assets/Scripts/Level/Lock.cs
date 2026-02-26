@@ -26,6 +26,7 @@ public class Lock : MonoBehaviour, IInteractable, IShowKey
     {
         _padlockTransform = _padlock.GetComponent<Transform>();
         _barrierPieces = _barriers.GetComponentsInChildren<Transform>();
+        _key.ColorKey = _padlock.color;
     }
 
     private void OnDrawGizmos()

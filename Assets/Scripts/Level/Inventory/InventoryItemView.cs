@@ -12,5 +12,6 @@ public class InventoryItemView : MonoBehaviour
     {
         Item = item;
         _image.sprite = item.Icon;
+        _image.color = item.SpriteColor;
     }
 }

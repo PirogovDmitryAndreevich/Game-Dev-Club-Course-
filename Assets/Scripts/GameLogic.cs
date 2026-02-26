@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private AudioClip _gameMusic;
     [SerializeField] private FailWindow _failWindow;
     [SerializeField] private WinWindow _winWindow;
-    //[SerializeField] private FinishLevel _finisher;
+    [SerializeField] private FinishLevel _finisher;
 
     private void Awake()
     {
@@ -19,12 +19,12 @@ public class GameLogic : MonoBehaviour
         else
             _currentAudioManager.Loaded += InitMusic;
 
-        //_finisher.OnLevelFinished += ShowWinWindow;
+        _finisher.FinishLevelConditionsCompleted += FinishLevelConditionsCompleted;
     }
 
     private void OnDestroy()
     {
-       // _finisher.OnLevelFinished -= ShowWinWindow;
+       _finisher.FinishLevelConditionsCompleted -= FinishLevelConditionsCompleted;
     }
 
     private void InitMusic()
@@ -34,9 +34,8 @@ public class GameLogic : MonoBehaviour
         _currentAudioManager.PlayMusic(_gameMusic);
     }
 
-    private void ShowWinWindow()
+    private void FinishLevelConditionsCompleted()
     {
-        _winWindow.gameObject.SetActive(true);
-        _winWindow.Show();
+        _player.FinishLevelConditionsCompleted();
     }
 }
