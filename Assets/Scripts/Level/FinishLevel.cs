@@ -10,7 +10,7 @@ public class FinishLevel : MonoBehaviour
     [SerializeField] private BusStop[] _interactObjects;
     [SerializeField] private Enemy[] _enemies;
     [SerializeField] private Trophy[] _trophies;
-
+    
     private int _completedConditions;
     private bool _finished;
 

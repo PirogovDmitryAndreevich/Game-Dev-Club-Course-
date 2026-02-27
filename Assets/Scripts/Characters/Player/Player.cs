@@ -14,6 +14,7 @@ public class Player : Character
     private CollisionHandler _collisionHandler;
     private CameraShake _camera;
     private PlayerSounds _sound;
+    private bool _isCutscene;
 
     private Inventory _inventory;
 
@@ -21,6 +22,7 @@ public class Player : Character
 
     private void OnEnable()
     {
+        _isCutscene = false;
         _inventory.ItemAdded += _inventoryView.Add;
         _inventory.ItemRemoved += _inventoryView.Remove;
     }
@@ -37,6 +39,12 @@ public class Player : Character
     {
         base.ApplyDamage(damageInfo, damageSource, pushDirection);
         _sound.PlayHitSound();
+    }
+
+    public void StartMovingInCutscene()
+    {
+        _isCutscene = true;
+        Animator.SetIsWalk(true);
     }
 
     public void FinishLevelConditionsCompleted()
@@ -81,6 +89,9 @@ public class Player : Character
 
     protected override void CharacterFixUpdate()
     {
+        if (_isCutscene)
+            return;
+
         Animator.SetIsWalk(_inputReader.Direction.x != 0
                             || _inputReader.Direction.y != 0);
 

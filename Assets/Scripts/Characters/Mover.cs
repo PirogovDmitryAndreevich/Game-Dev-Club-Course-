@@ -66,6 +66,7 @@ public class Mover : MonoBehaviour
     public void Run(Vector2 targetPoint) => Move(targetPoint, _runSpeed);
     public void RunAttack(Vector2 target, float attackSpeed) => Move(target, attackSpeed);
     public void Walk(Vector2 targetPoint) => Move(targetPoint, _speed);
+    public void MoveToPoint(Vector2 point) => Move(point, _speed);
 
     public void AttackStep()
     {
