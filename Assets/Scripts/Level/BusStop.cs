@@ -21,6 +21,7 @@ public class BusStop : MonoBehaviour, IInteractable, IHighlight, IShowKey
 
     private void Awake()
     {
+        IsActivated = false;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultSprite = _spriteRenderer.sprite;
         _materialPropertyBlock = new MaterialPropertyBlock();
@@ -28,9 +29,9 @@ public class BusStop : MonoBehaviour, IInteractable, IHighlight, IShowKey
 
     public void Interact()
     {
+        IsActivated = true;
         _spriteRenderer.sprite = _activatedSprite;
         Interacted?.Invoke();
-        IsActivated = true;
     }
 
     public void HighlightOn()

@@ -8,13 +8,17 @@ public class MedKit : Interactable, IInteractable, IShowKey
     public AudioClip MedKitSound => _sound;
     public int Value => _value;
 
+    public bool IsActivated { get; private set; }
+
     private void OnEnable()
     {
+        IsActivated = false;
         Moving();
     }
 
     public void Interact()
-    {        
+    {
+        IsActivated = true;
         Destroy(gameObject);
     }
 }

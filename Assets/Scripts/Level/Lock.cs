@@ -16,17 +16,20 @@ public class Lock : MonoBehaviour, IInteractable, IShowKey
 
     private Transform _padlockTransform;
     private Transform[] _barrierPieces;
-    Sequence _animation;
+    private Sequence _animation;
 
     public bool IsLock => _isLock;
     public Key Key => _key;
     private bool IsAnimating => _animation != null && _animation.active;
 
+    public bool IsActivated { get; private set; }
+
     private void Awake()
     {
+        IsActivated = false;
         _padlockTransform = _padlock.GetComponent<Transform>();
         _barrierPieces = _barriers.GetComponentsInChildren<Transform>();
-        _key.ColorKey = _padlock.color;
+        _key.SpriteColor = _padlock.color;
     }
 
     private void OnDrawGizmos()
@@ -138,6 +141,7 @@ public class Lock : MonoBehaviour, IInteractable, IShowKey
 
         _animation.OnComplete(() =>
         {
+            IsActivated = true;
             Destroy(gameObject);
         });
     }

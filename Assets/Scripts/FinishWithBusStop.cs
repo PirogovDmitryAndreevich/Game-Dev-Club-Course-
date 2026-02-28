@@ -16,6 +16,12 @@ public class FinishWithBusStop : MonoBehaviour
     private void OnDestroy()
     {
         _moveTween?.Kill();
+
+        if (_bus != null)
+        {
+            _bus.MovementCompleted -= PutPlayerOnBus;
+            _bus.MovementCompleted -= EndingCutscene;
+        }
     }
 
     public void SetCutscene(BusStop busStop, Bus bus, Player player, Vector2 endBusPosition ,float playerSpeed)
@@ -30,26 +36,23 @@ public class FinishWithBusStop : MonoBehaviour
     public void Play()
     {
         _bus.StartToBusStop(_busStop.transform.position);
-        _bus.BusStopped += PutPlayerOnBus;
+        _bus.MovementCompleted += PutPlayerOnBus;
     }
 
     private void PutPlayerOnBus()
     {
-        _bus.BusStopped -= PutPlayerOnBus;
+        _bus.MovementCompleted -= PutPlayerOnBus;
         _player.StartMovingInCutscene();
 
-        Vector2 finalTarget = _bus.transform.position;
-
-        float distance = Mathf.Abs(transform.position.x - finalTarget.x);
+        float distance = (_bus.transform.position - _player.transform.position).magnitude;
         float duration = distance / _playerSpeed;
-
 
         _moveTween = _player.transform.DOMove(_bus.transform.position, duration)
             .SetEase(Ease.Linear)
             .Play()
             .OnComplete(() =>
             {
-                _moveTween.Kill();
+                _moveTween = null;
                 _player.gameObject.SetActive(false);
                 BusGoOut();
             }
@@ -58,15 +61,14 @@ public class FinishWithBusStop : MonoBehaviour
 
     private void BusGoOut()
     {
-        _bus.BusStopped += EndingCutscene;
+        _bus.MovementCompleted += EndingCutscene;
         _bus.StartGoOut(_endBusPosition);
 
     }
 
     private void EndingCutscene()
     {
-        _bus.BusStopped -= EndingCutscene;
+        _bus.MovementCompleted -= EndingCutscene;
         CutsceneEnded?.Invoke();
-        Debug.Log("Finish cutscene is ended");
     }
 }

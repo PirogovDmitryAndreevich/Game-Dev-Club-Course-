@@ -89,7 +89,6 @@ public class FinishLevel : MonoBehaviour
             _taskView.TaskReached(task.Type);
             CheckFinished();
         }
-
     }
 
     private void CheckFinished()

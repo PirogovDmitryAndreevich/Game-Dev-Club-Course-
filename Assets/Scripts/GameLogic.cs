@@ -14,6 +14,8 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private FinishWithBusStop _busStopFinisher;
     [SerializeField] private float _playerSpeed;
 
+    private bool _finishStarted;
+
     private void Awake()
     {
         _failWindow.Initialize(_player);
@@ -26,11 +28,15 @@ public class GameLogic : MonoBehaviour
             _currentAudioManager.Loaded += InitMusic;
 
         _finisher.FinishLevelConditionsCompleted += FinishLevelConditionsCompleted;
+
+        _busStopFinisher.CutsceneEnded += ShowWinWindow;
     }
 
     private void OnDestroy()
     {
-       _finisher.FinishLevelConditionsCompleted -= FinishLevelConditionsCompleted;
+        _finisher.FinishLevelConditionsCompleted -= FinishLevelConditionsCompleted;
+        _finalBusStop.Interacted -= StartFinishProcess;
+        _busStopFinisher.CutsceneEnded -= ShowWinWindow;
     }
 
     private void InitMusic()
@@ -46,10 +52,20 @@ public class GameLogic : MonoBehaviour
     }
 
     private void StartFinishProcess()
-    {        
-        var bus = Instantiate(_bus, _finalBusStop.BusSpawnPoint.position, Quaternion.identity);
-        _busStopFinisher.SetCutscene(_finalBusStop, bus, _player, _finalBusStop.BusEndedPoint.position, _playerSpeed);
+    {
+        if (_finishStarted)
+            return;
+
+        _finishStarted = true;
+
+        var spawnedBus = Instantiate(_bus, _finalBusStop.BusSpawnPoint.position, Quaternion.identity);
+        _busStopFinisher.SetCutscene(_finalBusStop, spawnedBus, _player, _finalBusStop.BusEndedPoint.position, _playerSpeed);
         _busStopFinisher.Play();
     }
 
+    private void ShowWinWindow()
+    {
+        _winWindow.gameObject.SetActive(true);
+        _winWindow.Show();
+    }
 }

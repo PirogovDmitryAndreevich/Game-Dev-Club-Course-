@@ -12,7 +12,7 @@ public class Bus : MonoBehaviour
 
     private Tween _moveTween;
 
-    public event Action BusStopped; 
+    public event Action MovementCompleted; 
 
     private void OnEnable()
     {
@@ -39,11 +39,7 @@ public class Bus : MonoBehaviour
     {
         StopMove();
 
-        Vector2 finalTarget = new Vector2(
-        target.x,
-        transform.position.y);
-
-        float distance = Mathf.Abs(transform.position.x - finalTarget.x);
+        float distance = Mathf.Abs(transform.position.x - target.x);
         float duration = distance / _moveSpeed;
 
         _animator.SetBool(StartMovingAnimation, true);
@@ -54,7 +50,7 @@ public class Bus : MonoBehaviour
             .OnComplete(() =>
             {
                 StopMove();
-                BusStopped?.Invoke();
+                MovementCompleted?.Invoke();
             }
                 );
     }

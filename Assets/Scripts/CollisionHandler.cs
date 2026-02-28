@@ -13,16 +13,24 @@ public class CollisionHandler : MonoBehaviour
         var go = collision.gameObject;
 
         if (go.TryGetComponent(out IInteractable interactable))
-            InteractStarted?.Invoke(interactable);        
+            InteractStarted?.Invoke(interactable);
 
         if (go.TryGetComponent(out IHighlight highlight))
             highlight.HighlightOn();
 
         if (go.TryGetComponent(out IItem item))
             InteractWithItem?.Invoke(item);
+    }
 
-        if (go.TryGetComponent<IShowKey>(out _))
-            ShowingHindePressF?.Invoke();
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out IShowKey showKey))
+        {
+            if (!showKey.IsActivated)
+                ShowingHindePressF?.Invoke();
+            else if (showKey.IsActivated)
+                HideHindPressF?.Invoke();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -35,7 +43,8 @@ public class CollisionHandler : MonoBehaviour
         if (go.TryGetComponent(out IHighlight highlight))
             highlight.HighlightOff();
 
-        if (go.TryGetComponent<IShowKey>(out _))
-            HideHindPressF?.Invoke();
+        if (go.TryGetComponent(out IShowKey showKey))
+            if (!showKey.IsActivated)
+                HideHindPressF?.Invoke();
     }
 }
