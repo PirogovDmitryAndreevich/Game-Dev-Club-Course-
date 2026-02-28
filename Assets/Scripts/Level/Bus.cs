@@ -16,14 +16,14 @@ public class Bus : MonoBehaviour
 
     private void OnEnable()
     {
-        /*Vector3 scale = transform.localScale;
+        Vector3 scale = transform.localScale;
 
         if (!_isToRight)
             scale.x = -Mathf.Abs(scale.x);
         else
             scale.x = Mathf.Abs(scale.x);
 
-        transform.localScale = scale;*/
+        transform.localScale = scale;
     }
 
     private void OnDestroy()
