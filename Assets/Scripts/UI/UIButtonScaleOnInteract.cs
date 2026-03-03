@@ -9,31 +9,31 @@ public class UIButtonScaleOnInteract : MonoBehaviour,
     IPointerUpHandler
 {
     [Header("Scale Settings")]
-    [SerializeField] private float hoverScale = 1.04f;
-    [SerializeField] private float pressedScale = 0.97f;
+    [SerializeField] private float _hoverScale = 1.04f;
+    [SerializeField] private float _pressedScale = 0.97f;
 
     [Header("Animation")]
-    [SerializeField] private float duration = 0.1f;
-    [SerializeField] private Ease ease = Ease.OutQuad;
+    [SerializeField] private float _duration = 0.1f;
+    [SerializeField] private Ease _ease = Ease.OutQuad;
 
-    private RectTransform rectTransform;
-    private Tween scaleTween;
-    private Vector3 initialScale;
+    private RectTransform _rectTransform;
+    private Tween _scaleTween;
+    private Vector3 _initialScale;
 
     private void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
-        initialScale = rectTransform.localScale;
+        _rectTransform = GetComponent<RectTransform>();
+        _initialScale = _rectTransform.localScale;
     }
 
     private void OnDisable()
     {
-        scaleTween?.Kill();
+        _scaleTween?.Kill();
     }    
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ScaleTo(hoverScale);
+        ScaleTo(_hoverScale);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -43,20 +43,21 @@ public class UIButtonScaleOnInteract : MonoBehaviour,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        ScaleTo(pressedScale);
+        ScaleTo(_pressedScale);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        ScaleTo(hoverScale);
+        ScaleTo(_hoverScale);
     }
 
     private void ScaleTo(float scale)
     {
-        scaleTween?.Kill();
-        scaleTween = rectTransform
-            .DOScale(initialScale * scale, duration)
-            .SetEase(ease)
+        _scaleTween?.Kill();
+        _scaleTween = _rectTransform
+            .DOScale(_initialScale * scale, _duration)
+            .SetUpdate(true)
+            .SetEase(_ease)
             .Play();
     }
 }

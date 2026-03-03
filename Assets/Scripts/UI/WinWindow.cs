@@ -14,11 +14,13 @@ public class WinWindow : PauseBase
     [SerializeField] private float _appearanceButton = 0.5f;
 
     private CanvasGroup _canvasGroup;
+    private Image _nextButtonImage;
     private int _nextSceneIndex;
 
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
+        _nextButtonImage = _nextButton.GetComponent<Image>();
         _canvasGroup.alpha = 0f;
     }
 
@@ -55,7 +57,9 @@ public class WinWindow : PauseBase
     {
         base.Enable();
         _nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        _nextButton.interactable = SceneManager.sceneCountInBuildSettings > _nextSceneIndex;
+        bool isNextLevel = SceneManager.sceneCountInBuildSettings > _nextSceneIndex;
+        _nextButton.interactable = isNextLevel;
+        _nextButtonImage.color = isNextLevel ? _nextButtonImage.color : Color.gray;
 
         _restartButton.onClick.AddListener(Restart);
         _exitButton.onClick.AddListener(Exit);
