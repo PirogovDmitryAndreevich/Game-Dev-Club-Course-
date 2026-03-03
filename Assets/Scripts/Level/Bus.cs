@@ -8,23 +8,10 @@ public class Bus : MonoBehaviour
 
     [SerializeField] private Animator _animator;
     [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private bool _isFromTheRight;
 
     private Tween _moveTween;
 
     public event Action MovementCompleted; 
-
-    private void OnEnable()
-    {
-        Vector3 scale = transform.localScale;
-
-        if (!_isToRight)
-            scale.x = -Mathf.Abs(scale.x);
-        else
-            scale.x = Mathf.Abs(scale.x);
-
-        transform.localScale = scale;
-    }
 
     private void OnDestroy()
     {
@@ -34,6 +21,16 @@ public class Bus : MonoBehaviour
     public void StartToBusStop(Vector2 busStopPosition) => Move(busStopPosition);
 
     public void StartGoOut(Vector2 endPosition) => Move(endPosition);
+
+    public void SetFlip(bool isFromRight)
+    {
+        Vector3 scale = transform.localScale;
+
+        if (!isFromRight)
+            scale.x = -Mathf.Abs(scale.x);
+
+        transform.localScale = scale;
+    }
 
     private void Move(Vector2 target)
     {

@@ -13,6 +13,7 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private Bus _bus;
     [SerializeField] private FinishWithBusStop _busStopFinisher;
     [SerializeField] private float _playerSpeed;
+    [SerializeField] private bool _isBusFromRightToBusStop;
 
     private bool _finishStarted;
 
@@ -59,6 +60,7 @@ public class GameLogic : MonoBehaviour
         _finishStarted = true;
 
         var spawnedBus = Instantiate(_bus, _finalBusStop.BusSpawnPoint.position, Quaternion.identity);
+        spawnedBus.SetFlip(_isBusFromRightToBusStop);
         _busStopFinisher.SetCutscene(_finalBusStop, spawnedBus, _player, _finalBusStop.BusEndedPoint.position, _playerSpeed);
         _busStopFinisher.Play();
     }
