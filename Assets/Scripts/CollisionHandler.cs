@@ -20,17 +20,10 @@ public class CollisionHandler : MonoBehaviour
 
         if (go.TryGetComponent(out IItem item))
             InteractWithItem?.Invoke(item);
-    }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out IShowKey showKey))
-        {
+        if (go.TryGetComponent(out IShowKey showKey))
             if (!showKey.IsActivated)
                 ShowingHindePressF?.Invoke();
-            else if (showKey.IsActivated)
-                HideHindPressF?.Invoke();
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
