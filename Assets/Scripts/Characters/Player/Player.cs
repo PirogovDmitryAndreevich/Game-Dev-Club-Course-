@@ -153,6 +153,13 @@ public class Player : Character
         if (item is Key)
             AddKey((Key)item);
 
+
+        if (item is Coin)
+            AddCoin((Coin)item);
+
+        if (item is Gem)
+            AddGem((Gem)item);
+
         item.Collect();
     }
 
@@ -198,5 +205,21 @@ public class Player : Character
     private void AddKey(Key key)
     {
         _inventory.Add(key);
+    }
+
+    private void AddCoin(Coin coin)
+    {
+        SaveData.PlayerData.Coins += coin.Value;
+        _sound.PlaySound(coin.Sound);
+        SaveData.Save();
+        Debug.Log($"Add coin: {coin.Value}");
+    }
+
+    private void AddGem(Gem gem)
+    {
+        SaveData.PlayerData.Gems += gem.Value;
+        _sound.PlaySound(gem.Sound);
+        SaveData.Save();
+        Debug.Log($"Add gem: {gem.Value}");
     }
 }

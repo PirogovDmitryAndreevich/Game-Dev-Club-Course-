@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public enum FXType
 {
     DamageNumber,
@@ -5,5 +8,7 @@ public enum FXType
     Bullet,
     DamageArea,
     EnemyDeath,
-    BombYellow
+    BombYellow,
+    Gem,
+    Coin
 }
