@@ -146,6 +146,7 @@ MonoBehaviour:
   _view: {fileID: 800540414641979217}
   _floatHeight: 0.21
   _duration: 1
+  _sound: {fileID: 8300000, guid: 6b71fc7629de66b4a90215e843bfa0be, type: 3}
 --- !u!61 &7351155814948585935
 BoxCollider2D:
   m_ObjectHideFlags: 0

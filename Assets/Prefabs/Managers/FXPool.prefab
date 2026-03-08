@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8288647404313998705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 105794104733644733}
+  - component: {fileID: 3868654358352880030}
+  m_Layer: 0
+  m_Name: FXPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &105794104733644733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288647404313998705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.658008, y: 4.0161495, z: -0.05740738}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3868654358352880030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288647404313998705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9b136d1d59d6b4991f02c250fd20b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fxList:
+  - type: 0
+    prefab: {fileID: 2714277430196339932, guid: 4250a31c4b7fd4f45a7907fc29d8a583,
+      type: 3}
+    preloadCount: 8
+  - type: 1
+    prefab: {fileID: 9045473629763714334, guid: 6fcd062ea701a3e4a83bb8d166356c0c,
+      type: 3}
+    preloadCount: 2
+  - type: 2
+    prefab: {fileID: 5359571587115207854, guid: 00aae18a94a284449b2d8b19743576a5,
+      type: 3}
+    preloadCount: 2
+  - type: 4
+    prefab: {fileID: 5152345084211029823, guid: b51b8a18334fc6f4090a1fa4f94b1220,
+      type: 3}
+    preloadCount: 1
+  - type: 7
+    prefab: {fileID: 4929562857115738092, guid: b712d6f3a3b6cfe4f8db6818e02c2bea,
+      type: 3}
+    preloadCount: 5
+  - type: 6
+    prefab: {fileID: 922982116330110861, guid: 87bc773772108924bbf19f198497ad2d, type: 3}
+    preloadCount: 5

@@ -4971,7 +4971,7 @@ MonoBehaviour:
   _view: {fileID: 4499573404853404463}
   _floatHeight: 0.25
   _duration: 1
-  _sound: {fileID: 8300000, guid: 951b96d96188f9640b12fa2d7fade185, type: 3}
+  _sound: {fileID: 8300000, guid: 7da886a070ddeee4ba6bc0fd415e462c, type: 3}
   _value: 10
 --- !u!61 &1566851289207462324
 BoxCollider2D:

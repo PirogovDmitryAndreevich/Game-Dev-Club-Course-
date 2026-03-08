@@ -10000,7 +10000,7 @@ MonoBehaviour:
   _view: {fileID: 5755245439906691628}
   _floatHeight: 0.25
   _duration: 1
-  _sound: {fileID: 8300000, guid: 24eaeae153b524bb6a55fdcc7ee3c735, type: 3}
+  _sound: {fileID: 8300000, guid: 9a5756877d4815c4eb1b8f5d301cbd38, type: 3}
   _value: 10
 --- !u!1 &3828234212319334212
 GameObject:
