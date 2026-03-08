@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerSounds : CharacterSounds
 {
     [Header("Player Clips")]
+    [SerializeField] private AudioClip _dash;
     [SerializeField] private AudioClip[] _stepsSounds;
     [SerializeField] private AudioClip[] _attackSounds;
     [SerializeField] private AudioClip[] _hitSound;
@@ -12,4 +13,5 @@ public class PlayerSounds : CharacterSounds
     public void PlayStepsSound() => PlayTimedRandomIndexSound(_stepsSounds, ref _nextPlayStepTime);
     public void PlayAttackSound() => PlayRandomIndexSound(_attackSounds);
     public void PlayHitSound() => PlayRandomIndexSound(_hitSound);
+    public void PlayDash() => PlaySound(_dash);
 }
