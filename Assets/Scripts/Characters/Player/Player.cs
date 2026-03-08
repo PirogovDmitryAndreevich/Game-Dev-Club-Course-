@@ -110,6 +110,7 @@ public class Player : Character
             Mover.Stop();
             Mover.Dash(_inputReader.Direction);
             Animator.SetPlayerDashTrigger();
+            _sound.PlayDash();
         }
 
         if (_inputReader.GetIsAttack() && Attacker.CanAttack)
@@ -153,6 +154,8 @@ public class Player : Character
         if (item is Key)
             AddKey((Key)item);
 
+        if (item is Trophy trophy)
+            _sound.PlaySound(trophy.TrophySound);
 
         if (item is Coin)
             AddCoin((Coin)item);
@@ -181,9 +184,12 @@ public class Player : Character
     {
         if (_inventory.Contains(currentLock.Key))
         {
+            _sound.PlaySound(currentLock.UnlockSound);
             _inventory.Remove(currentLock.Key);
             return true;
         }
+
+        _sound.PlaySound(currentLock.NegativeSound);
 
         return false;
     }
@@ -204,6 +210,7 @@ public class Player : Character
 
     private void AddKey(Key key)
     {
+        _sound.PlaySound(key.KeySound);
         _inventory.Add(key);
     }
 
