@@ -16,7 +16,7 @@ public class BusStop : MonoBehaviour, IInteractable, IHighlight, IShowKey
 
     public Transform BusSpawnPoint => _busSpawnPoint;
     public Transform BusEndedPoint => _busEndedPoint;
-
+    public bool CanInteract { get; set; }
     public bool IsActivated { get; private set; }
 
     private void Awake()
@@ -29,6 +29,9 @@ public class BusStop : MonoBehaviour, IInteractable, IHighlight, IShowKey
 
     public void Interact()
     {
+        if (!CanInteract)
+            return;
+
         IsActivated = true;
         _spriteRenderer.sprite = _activatedSprite;
         Interacted?.Invoke();
@@ -36,6 +39,9 @@ public class BusStop : MonoBehaviour, IInteractable, IHighlight, IShowKey
 
     public void HighlightOn()
     {
+        if (!CanInteract)
+            return;
+
         _spriteRenderer.GetPropertyBlock(_materialPropertyBlock);
         _materialPropertyBlock.SetFloat("_Highlight", 1f);
         _spriteRenderer.SetPropertyBlock(_materialPropertyBlock);

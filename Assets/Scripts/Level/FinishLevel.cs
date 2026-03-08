@@ -21,7 +21,7 @@ public class FinishLevel : MonoBehaviour
 
     private void Awake()
     {
-        if (_enemies != null)
+        if (_enemies != null && _enemies.Length > 0)
         {
             foreach (Enemy enemy in _enemies)
             {
@@ -32,7 +32,7 @@ public class FinishLevel : MonoBehaviour
             AddNewCondition(_enemies.Length, TaskType.Enemies);
         }
 
-        if (_trophies != null)
+        if (_trophies != null && _trophies.Length > 0)
         {
             foreach (Trophy trophy in _trophies)
             {
@@ -46,11 +46,16 @@ public class FinishLevel : MonoBehaviour
 
     private void Start()
     {
+        if (_conditionsData.Count < 0)
+            return;
+
         foreach (var condition in _conditionsData)
         {
             _taskView.AddCondition(condition.Value.Type,
                 DefaultStartValueCondition, condition.Value.Task);
         }
+
+        CheckFinished();
     }
 
     private void OnDestroy()

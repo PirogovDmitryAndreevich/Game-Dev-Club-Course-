@@ -4,9 +4,11 @@ using UnityEngine;
 public class Key : Interactable, IItem, IInventoryObject
 {
     [SerializeField] private SpriteRenderer _icon;
+    [SerializeField] private AudioClip _sound;
 
     private Color _color = Color.white;
 
+    public AudioClip KeySound => _sound;
     public Sprite Icon => _icon.sprite;
     public Color SpriteColor 
     { 

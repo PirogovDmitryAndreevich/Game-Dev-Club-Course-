@@ -6,6 +6,8 @@ public class Lock : MonoBehaviour, IInteractable, IShowKey
     [SerializeField] private SpriteRenderer _padlock;
     [SerializeField] private Transform _barriers;
     [SerializeField] private Key _key;
+    [SerializeField] private AudioClip _negativeSound;
+    [SerializeField] private AudioClip _unlockSound;
     [SerializeField] private bool _isLock;
 
     [Header("Animation settings")]
@@ -18,6 +20,8 @@ public class Lock : MonoBehaviour, IInteractable, IShowKey
     private Transform[] _barrierPieces;
     private Sequence _animation;
 
+    public AudioClip NegativeSound => _negativeSound;
+    public AudioClip UnlockSound => _unlockSound;
     public bool IsLock => _isLock;
     public Key Key => _key;
     private bool IsAnimating => _animation != null && _animation.active;
