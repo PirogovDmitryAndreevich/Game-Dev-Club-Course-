@@ -10,18 +10,20 @@ public class SceneLoader
     public SceneLoader(ICoroutineRunner coroutineRunner) =>
         _coroutineRunner = coroutineRunner;
 
-    public void Load(string nextScene, Action onLoad = null) =>
+    public void Load(SceneID nextScene, Action onLoad = null) =>
         _coroutineRunner.StartCoroutine(LoadScene(nextScene, onLoad));
 
-    private IEnumerator LoadScene(string nextScene, Action onLoad = null)
+    private IEnumerator LoadScene(SceneID nextScene, Action onLoad = null)
     {
-        if (SceneManager.GetActiveScene().name == nextScene)
+        string nextSceneName = nextScene.ToString();
+
+        if (SceneManager.GetActiveScene().name == nextSceneName)
         {
             onLoad?.Invoke();
             yield break;
         }
 
-        AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
+        AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextSceneName);
 
         while (!waitNextScene.isDone)
             yield return null;

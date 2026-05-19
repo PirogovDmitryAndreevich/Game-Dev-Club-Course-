@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IInputServices
+public interface IInputServices : IService
 {
     Vector2 Direction { get; }
 

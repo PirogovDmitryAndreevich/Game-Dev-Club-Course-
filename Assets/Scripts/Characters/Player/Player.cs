@@ -66,7 +66,7 @@ public class Player : Character
         Animator = GetComponent<CharacterAnimator>();
         Fliper = GetComponent<Fliper>();
 
-        _input = Game.InputServices;
+        _input = AllServices.Container.Single<IInputServices>();
 
         _inventory = new Inventory();
 
