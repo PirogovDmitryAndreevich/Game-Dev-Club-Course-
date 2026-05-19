@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerAttacker : Attacker
 {
+    [Header("Scene settings")]
+    [SerializeField] private AttacksData _attacksData;
+
     [Header("Player attacker")]
     [SerializeField] private int _superHitCount = 3;
     [SerializeField] private float _comboCooldown = 1.2f;
@@ -18,6 +21,11 @@ public class PlayerAttacker : Attacker
 
     private List<AttackBase> _superAttacks = new();
     private Collider2D[] _hits = new Collider2D[16];
+
+    private void OnDestroy()
+    {
+        _attacksData.Initialized -= InitializeAttack;
+    }
 
     public override void StartAttack(CameraShake camera)
     {
@@ -70,8 +78,17 @@ public class PlayerAttacker : Attacker
     protected override void AttackAwake()
     {
         base.AttackAwake();
-        _defaultAttack = AttacksData.Attacks[AttacksType.PlayerDefaultAttack];
-        _superAttacks.Add(AttacksData.Attacks[AttacksType.PlayerSuperAttack]);
+
+        if (_attacksData.IsInitialized)
+            InitializeAttack();
+        else
+            _attacksData.Initialized += InitializeAttack;
+    }
+
+    private void InitializeAttack()
+    {
+        _defaultAttack = _attacksData.Attacks[AttacksType.PlayerDefaultAttack];
+        _superAttacks.Add(_attacksData.Attacks[AttacksType.PlayerSuperAttack]);
         AttackType = _defaultAttack;
     }
 

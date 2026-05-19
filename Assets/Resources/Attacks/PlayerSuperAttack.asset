@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSuperAttack
   m_EditorClassIdentifier: 
   _type: 1
-  _damage: 8
+  _damage: 10
   _radius: 0.85
   _offset: 0.85
   _isKnockback: 1

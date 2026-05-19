@@ -6,23 +6,14 @@ public class AttacksData : MonoBehaviour
 {
     [SerializeField] private AttackBase[] _attacksArray;
 
-    public static Dictionary<AttacksType, AttackBase> Attacks = new();
+    public bool IsInitialized;
 
-    public static event Action Initialized;
+    public Dictionary<AttacksType, AttackBase> Attacks = new();
 
-    public static AttacksData Instance { get; private set; }
+    public event Action Initialized;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         Initialize();
     }
 
@@ -39,6 +30,7 @@ public class AttacksData : MonoBehaviour
                 Attacks.Add(attack.Type, attack);
         }
 
+        IsInitialized = true;
         Initialized?.Invoke();
     }
 }

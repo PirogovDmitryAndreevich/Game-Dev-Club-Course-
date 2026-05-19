@@ -7,16 +7,16 @@
         false,
         false
     ],
-    "idSave": 73,
+    "idSave": 89,
     "GameSaveData": {
-        "_soundValue": 0.6590242385864258,
-        "_musicValue": 0.6238765120506287,
+        "_soundValue": 1.0,
+        "_musicValue": 0.09080913662910462,
         "_isSoundMute": false,
-        "_isMusicMute": true
+        "_isMusicMute": false
     },
     "PlayerSaveData": {
-        "_coins": 215,
-        "_gems": 30,
+        "_coins": 225,
+        "_gems": 35,
         "_score": 0,
         "_damage": 5,
         "_defense": 0,

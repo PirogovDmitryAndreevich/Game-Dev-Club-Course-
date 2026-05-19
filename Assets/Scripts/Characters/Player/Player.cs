@@ -10,6 +10,7 @@ public class Player : Character
     [SerializeField] private PlayerFX _playerFX;
     [SerializeField] private ArrowTracking _arrowTracking;
 
+    private IInputServices _input;
     private InputReader _inputReader;
     private CollisionHandler _collisionHandler;
     private CameraShake _camera;
@@ -32,7 +33,7 @@ public class Player : Character
         if (SaveData.IsLoaded)
             InitializeHealth();
         else
-            SaveData.Loaded += InitializeHealth;
+            SaveData.Loaded += InitializeHealth;        
     }
 
     public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
@@ -65,6 +66,8 @@ public class Player : Character
         Animator = GetComponent<CharacterAnimator>();
         Fliper = GetComponent<Fliper>();
 
+        _input = Game.InputServices;
+
         _inventory = new Inventory();
 
         _collisionHandler.InteractStarted += OnInteractStarted;
@@ -92,28 +95,39 @@ public class Player : Character
         if (_isCutscene)
             return;
 
-        Animator.SetIsWalk(_inputReader.Direction.x != 0
-                            || _inputReader.Direction.y != 0);
+        /*Animator.SetIsWalk(_inputReader.Direction.x != 0
+                            || _inputReader.Direction.y != 0);*/
 
-        if (_inputReader.Direction != null && !Attacker.IsAttack)
+        Animator.SetIsWalk(_input.Direction.x != 0
+            || _input.Direction.y != 0);
+
+        //if (_inputReader.Direction != null && !Attacker.IsAttack)
+        if (_input.Direction != null && !Attacker.IsAttack)
         {
-            Mover.Move(_inputReader.Direction);
-            Fliper.LookAtTarget((Vector2)transform.position + Vector2.right * _inputReader.Direction);
+            // Mover.Move(_inputReader.Direction);
+            Mover.Move(_input.Direction);
+            //Fliper.LookAtTarget((Vector2)transform.position + Vector2.right * _inputReader.Direction);
+            Fliper.LookAtTarget((Vector2)transform.position + Vector2.right * _input.Direction);
 
-            if (_inputReader.Direction != Vector2.zero)
+            //if (_inputReader.Direction != Vector2.zero)
+            if (_input.Direction != Vector2.zero)
                 _sound.PlayStepsSound();
         }
 
-        if (_inputReader.GetIsDash()
-        && _inputReader.Direction != null)
+        /* if (_inputReader.GetIsDash()
+         && _inputReader.Direction != null)*/
+        if (_input.GetIsDash()
+        && _input.Direction != null)
         {
             Mover.Stop();
-            Mover.Dash(_inputReader.Direction);
+            //Mover.Dash(_inputReader.Direction);
+            Mover.Dash(_input.Direction);
             Animator.SetPlayerDashTrigger();
             _sound.PlayDash();
         }
 
-        if (_inputReader.GetIsAttack() && Attacker.CanAttack)
+        //if (_inputReader.GetIsAttack() && Attacker.CanAttack)
+        if (_input.GetIsAttack() && Attacker.CanAttack)
         {
             Attacker.StartAttack(_camera);
             Animator.SetDefaultPlayerAttackTrigger();
@@ -122,7 +136,8 @@ public class Player : Character
             _sound.PlayAttackSound();
         }
 
-        if (_inputReader.GetIsInteract() && _interactable != null)
+        // if (_inputReader.GetIsInteract() && _interactable != null)
+        if (_input.GetIsInteract() && _interactable != null)
             Interact();
     }
 

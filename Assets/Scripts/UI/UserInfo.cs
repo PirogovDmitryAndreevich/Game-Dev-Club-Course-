@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class UserInfo : MonoBehaviour
 {
+    [Header("Scene settings")]
+    [SerializeField] private AttacksData _attacksData;
+
     [SerializeField] private TMP_Text _damageText;
 
     private AttackBase _defaultPlayerAttack;
     private void Start()
     {
-        if (AttacksData.Instance != null && AttacksData.Attacks.Count != 0)
+        if (_attacksData != null && _attacksData.Attacks.Count != 0)
             Init();
         else
-            AttacksData.Initialized += Init;
+            _attacksData.Initialized += Init;
     }
 
     private void OnDisable()
@@ -21,10 +24,10 @@ public class UserInfo : MonoBehaviour
 
     private void Init()
     {
-        AttacksData.Initialized -= Init;
+        _attacksData.Initialized -= Init;
 
         _defaultPlayerAttack =
-            AttacksData.Attacks[AttacksType.PlayerDefaultAttack];
+            _attacksData.Attacks[AttacksType.PlayerDefaultAttack];
 
         _defaultPlayerAttack.DamageChanged += SetDamage;
         SetDamage(_defaultPlayerAttack.Damage);

@@ -21,8 +21,3 @@ class EnemyStateMachine : StateMachine
         ChangeState<PatrolState>();
     }
 }
-
-
-
-
-

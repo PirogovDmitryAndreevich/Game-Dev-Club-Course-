@@ -21,13 +21,13 @@ public class InputReader : MonoBehaviour
 
         Direction = new Vector2(_movementX, _movementY);
 
-        if (Input.GetKeyDown(KeyCode.Space))        
+        if (Input.GetKeyDown(KeyCode.Space))
             _isDash = true;        
 
         if (Input.GetKeyDown(KeyCode.F))
             _isInteract = true;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.G))
             _isAttack = true;
     }
 

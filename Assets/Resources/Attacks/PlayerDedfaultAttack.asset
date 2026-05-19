@@ -18,3 +18,4 @@ MonoBehaviour:
   _offset: 0.85
   _isKnockback: 1
   _knockbackForce: 1
+  _isCrit: 0
