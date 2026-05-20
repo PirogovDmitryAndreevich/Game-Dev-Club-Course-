@@ -9,11 +9,17 @@ public class SettingsWidow : PauseBase
     [SerializeField] private CanvasGroup _anticlicker;
     [SerializeField] private Button _closeButton;
 
+    [Header("AudioSettings")]
+    [SerializeField] private AudioSettings _audioSettings;
+    [SerializeField] private AudioClip _hideShowSound;
+
     [Header("Animation setting")]
     [SerializeField] private float _ACDuration;
     [SerializeField] private float _panelScaleDuration;
 
     private RectTransform _panelRectTransform;
+
+    public AudioSettings AudioSlider => _audioSettings;
 
     private void Awake()
     {
@@ -22,8 +28,15 @@ public class SettingsWidow : PauseBase
         _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 
+    public void Construct(AudioHandler audio)
+    {
+        CurrentAudioManager = audio;        
+    }
+
     public override void Hide(Action callback)
     {
+        CurrentAudioManager.PlaySound(_hideShowSound);
+
         KillCurrentAnimationIfActive();
 
         Animation = DOTween.Sequence();
@@ -39,7 +52,10 @@ public class SettingsWidow : PauseBase
 
     public override void Show()
     {
+        CurrentAudioManager.PlaySound(_hideShowSound);
+
         _panelView.gameObject.SetActive(true);
+
         KillCurrentAnimationIfActive();
 
         Animation = DOTween.Sequence();
@@ -54,11 +70,11 @@ public class SettingsWidow : PauseBase
 
     protected override void Enable()
     {
-        _closeButton.onClick.AddListener(Continue);
+        _closeButton.onClick.AddListener(Continue);        
     }
 
     protected override void Disable()
     {
-        _closeButton.onClick.RemoveListener(Continue);
+        _closeButton.onClick.RemoveListener(Continue);        
     }
 }

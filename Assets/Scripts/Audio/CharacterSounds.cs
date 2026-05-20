@@ -2,8 +2,7 @@ using UnityEngine;
 
 public abstract class CharacterSounds : MonoBehaviour
 {
-    [Header("Scene Settings")]
-    [SerializeField] protected AudioManager CurrentAudioManager;
+    protected AudioHandler CurrentAudioManager;
 
     private Transform _transform;
 
@@ -16,10 +15,13 @@ public abstract class CharacterSounds : MonoBehaviour
         CurrentAudioManager.PlaySound(clip);
     }
 
+    public void Construct(AudioHandler manager)
+    {
+        CurrentAudioManager = manager;
+    }
+
     protected virtual void PlayRandomIndexSound(AudioClip[] clips)
     {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
 
         int clipIndex = Random.Range(0, clips.Length);
         CurrentAudioManager.PlaySound(clips[clipIndex]);
@@ -27,9 +29,6 @@ public abstract class CharacterSounds : MonoBehaviour
 
     protected virtual void PlayTimedRandomIndexSound(AudioClip[] clips, ref float nextPlayTime)
     {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
-
         if (nextPlayTime < Time.time)
         {
             int clipIndex = Random.Range(0, clips.Length);
@@ -41,17 +40,11 @@ public abstract class CharacterSounds : MonoBehaviour
 
     protected virtual void PlayRandomPitchSound(AudioClip clip)
     {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
-
         CurrentAudioManager.PlayRandomPithSound(clip);
     }
 
     protected virtual void PlayTimedPitchSound(AudioClip clip, ref float nextPlaytime)
     {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
-
         if (CurrentAudioManager.CanBeHeard(_transform.position))
         {
             if (nextPlaytime < Time.time)

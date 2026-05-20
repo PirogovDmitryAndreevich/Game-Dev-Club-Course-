@@ -11,6 +11,8 @@ public class Player : Character
     [SerializeField] private ArrowTracking _arrowTracking;
 
     private IInputServices _input;
+    private SaveData _progress;
+    private ISaveLoadService _save;
     private InputReader _inputReader;
     private CollisionHandler _collisionHandler;
     private CameraShake _camera;
@@ -28,12 +30,11 @@ public class Player : Character
         _inventory.ItemRemoved += _inventoryView.Remove;
     }
 
-    private void Start()
+    public void Construct(IPersistentProgressService progress, ISaveLoadService save)
     {
-        if (SaveData.IsLoaded)
-            InitializeHealth();
-        else
-            SaveData.Loaded += InitializeHealth;        
+        _progress = progress.Progress;
+        _save = save;
+        InitializeHealth(_progress);
     }
 
     public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
@@ -181,12 +182,10 @@ public class Player : Character
         item.Collect();
     }
 
-    private void InitializeHealth()
+    private void InitializeHealth(SaveData save)
     {
-        SaveData.Loaded -= InitializeHealth;
-
-        MaxHealth = SaveData.PlayerData.Health;
-        var defense = SaveData.PlayerData.Defense;
+        MaxHealth = save.PlayerData.Health;
+        var defense = save.PlayerData.Defense;
         var isShield = defense > 0;
 
         Health = new Health(MaxHealth, defense, isShield);
@@ -231,17 +230,17 @@ public class Player : Character
 
     private void AddCoin(Coin coin)
     {
-        SaveData.PlayerData.Coins += coin.Value;
+        _progress.PlayerData.SetStat(StatsType.Coins, _progress.PlayerData.Coins + coin.Value);
         _sound.PlaySound(coin.Sound);
-        SaveData.Save();
+        _save.SaveProgress();
         Debug.Log($"Add coin: {coin.Value}");
     }
 
     private void AddGem(Gem gem)
     {
-        SaveData.PlayerData.Gems += gem.Value;
+        _progress.PlayerData.SetStat(StatsType.Gem, _progress.PlayerData.Gems + gem.Value);
         _sound.PlaySound(gem.Sound);
-        SaveData.Save();
+        _save.SaveProgress();
         Debug.Log($"Add gem: {gem.Value}");
     }
 }

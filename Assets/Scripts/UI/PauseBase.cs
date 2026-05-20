@@ -7,8 +7,7 @@ public abstract class PauseBase : MonoBehaviour
 {
     private const int MainMenuSceneIndex = 0;
 
-    [Header("Scene Settings")]
-    [SerializeField] protected AudioManager CurrentAudioManager;
+    protected AudioHandler CurrentAudioManager;
 
     protected Sequence Animation;
 
@@ -18,7 +17,7 @@ public abstract class PauseBase : MonoBehaviour
         Enable();
 
     private void OnDisable() =>
-        Disable();    
+        Disable();        
 
     public abstract void Show();
 

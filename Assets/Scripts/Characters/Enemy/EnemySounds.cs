@@ -10,35 +10,15 @@ public class EnemySounds : CharacterSounds
 
     private float _nextPlayStepTime;
 
-    public void PlayStepsSound()
-    {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
-
+    public void PlayStepsSound() => 
         PlayTimedPitchSound(_stepsSounds, ref _nextPlayStepTime);
-    }
 
-    public virtual void PlayAttackSound()
-    {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
-
+    public virtual void PlayAttackSound() => 
         PlayRandomIndexSound(_attackSounds);
-    }
 
-    public void PlayHitSound()
-    {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
-
+    public void PlayHitSound() => 
         PlayRandomIndexSound(_hitSounds);
-    }
 
-    public void PlayDeathSound()
-    {
-        if (!CurrentAudioManager.IsLoaded)
-            return;
-
+    public void PlayDeathSound() => 
         PlayRandomIndexSound(_deathSounds);
-    }
 }

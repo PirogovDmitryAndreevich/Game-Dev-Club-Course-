@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static YG.YG2;
 
 public class AudioSettings : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class AudioSettings : MonoBehaviour
     private Image _musicImage;
 
     private GameSaveData _playerData;
+    private ISaveLoadService _save;
 
     private void Awake()
     {
@@ -26,19 +28,7 @@ public class AudioSettings : MonoBehaviour
         _musicImage = _musicButton.GetComponent<Image>();
     }
 
-    private void OnEnable()
-    {
-        _soundSlider.onValueChanged.AddListener(ChangedSoundVolume);
-        _musicSlider.onValueChanged.AddListener(ChangedMusicVolume);
-
-        _soundButton.onClick.AddListener(SwitchMuteSound);
-        _musicButton.onClick.AddListener(SwitchMuteMusic);
-
-        _playerData = SaveData.GameData;
-        ResetSettings();
-    }
-
-    private void OnDisable()
+    private void OnDestroy()
     {
         _soundSlider.onValueChanged.RemoveListener(ChangedSoundVolume);
         _musicSlider.onValueChanged.RemoveListener(ChangedMusicVolume);
@@ -46,22 +36,36 @@ public class AudioSettings : MonoBehaviour
         _soundButton.onClick.RemoveListener(SwitchMuteSound);
         _musicButton.onClick.RemoveListener(SwitchMuteMusic);
 
-        SaveData.Save();
+        _save.SaveProgress();
+    }
+
+    public void Construct(IPersistentProgressService progressService, ISaveLoadService save)
+    {
+        _playerData = progressService.Progress.GameData;
+        _save = save;
+
+        _soundSlider.onValueChanged.AddListener(ChangedSoundVolume);
+        _musicSlider.onValueChanged.AddListener(ChangedMusicVolume);
+
+        _soundButton.onClick.AddListener(SwitchMuteSound);
+        _musicButton.onClick.AddListener(SwitchMuteMusic);
+
+        ResetSettings();
     }
 
     private void ChangedSoundVolume(float value)
     {
-        _playerData.SoundValue = value;
+        _playerData.ChangeSoundVolume(value);
 
         if (value <= 0f)
         {
             if (!_playerData.IsSoundMute)
-                _playerData.IsSoundMute = true;
+                _playerData.SwitchSoundMute(true);
         }
         else
         {
             if (_playerData.IsSoundMute)
-                _playerData.IsSoundMute = false;
+                _playerData.SwitchSoundMute(false);
         }
 
         _soundImage.sprite = _playerData.IsSoundMute ? _soundOff : _soundOn;
@@ -69,17 +73,17 @@ public class AudioSettings : MonoBehaviour
 
     private void ChangedMusicVolume(float value)
     {
-        _playerData.MusicValue = value;
+        _playerData.ChangeMusicVolume(value);
 
         if (value <= 0f)
         {
             if (!_playerData.IsMusicMute)
-                _playerData.IsMusicMute = true;
+                _playerData.SwitchMusicMute(true);
         }
         else
         {
             if (_playerData.IsMusicMute)
-                _playerData.IsMusicMute = false;
+                _playerData.SwitchMusicMute(false);
         }
 
         _musicImage.sprite = _playerData.IsMusicMute ? _musicOff : _musicOn;
@@ -87,27 +91,29 @@ public class AudioSettings : MonoBehaviour
 
     private void SwitchMuteSound()
     {
-        _playerData.IsSoundMute = !_playerData.IsSoundMute;
+        _playerData.SwitchSoundMute(!_playerData.IsSoundMute);
         SetSoundSprite();
-        SaveData.Save();
+        _save.SaveProgress();
     }
 
     private void SwitchMuteMusic()
     {
-        _playerData.IsMusicMute = !_playerData.IsMusicMute;
+        _playerData.SwitchMusicMute(!_playerData.IsMusicMute);
         SetMusicSprite();
-        SaveData.Save();
+        _save.SaveProgress();
     }
 
-    private void SetSoundSprite()
-    {
-        _soundImage.sprite = _playerData.IsSoundMute ? _soundOff : _soundOn;
-    }
+    private void SetSoundSprite() => 
+        _soundImage.sprite =
+        _playerData.IsSoundMute
+        ? _soundOff
+        : _soundOn;
 
-    private void SetMusicSprite()
-    {
-        _musicImage.sprite = _playerData.IsMusicMute ? _musicOff : _musicOn;
-    }
+    private void SetMusicSprite() => 
+        _musicImage.sprite = 
+        _playerData.IsMusicMute
+        ? _musicOff 
+        : _musicOn;
 
     private void ResetSettings()
     {

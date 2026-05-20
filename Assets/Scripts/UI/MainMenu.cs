@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private Stat[] _stats;
+    [SerializeField] private ButtonPlaySoundOnInteract[] _buttonPlaySounds; 
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private SceneID _firstLevelForLoad;
@@ -24,9 +26,18 @@ public class MainMenu : MonoBehaviour
         _settingsButton.onClick.RemoveListener(ShowSettings);
     }
 
-    public void Construct(GameStateMachine gameStateMachine)
+    public void Construct(GameStateMachine gameStateMachine, IPersistentProgressService progress, IHandlersContainer handlers, ISaveLoadService save)
     {
-        _gameStateMachine = gameStateMachine;
+        _gameStateMachine = gameStateMachine;        
+
+        _settingsWindow.Construct(handlers.Audio);
+        _settingsWindow.AudioSlider.Construct(progress, save);
+
+        foreach (Stat stat in _stats)
+            stat.Construct(progress);
+
+        foreach (ButtonPlaySoundOnInteract button in _buttonPlaySounds)
+            button.Construct(handlers.Audio);
     }
 
     private void LoadScene() => 

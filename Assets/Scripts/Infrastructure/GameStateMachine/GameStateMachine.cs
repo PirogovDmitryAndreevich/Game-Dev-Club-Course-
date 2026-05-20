@@ -11,6 +11,12 @@ public class GameStateMachine
         _states = new Dictionary<Type, IExitableState>()
         {
             [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
+
+            [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(),
+            services.Single<ISaveLoadService>()),
+
+            [typeof(PersistentHandlersCreateState)] = new PersistentHandlersCreateState(this, services.Single<IHandlersContainer>()),
+
             [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, services.Single<IUIFactory>()),
         };
     }

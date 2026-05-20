@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameLogic : MonoBehaviour
 {
     [Header("Scene Settings")]
-    [SerializeField] private AudioManager _currentAudioManager;
+    [SerializeField] private AudioHandler _currentAudioManager;
     [SerializeField] private Player _player;
     [SerializeField] private AudioClip _gameMusic;
     [SerializeField] private FailWindow _failWindow;
@@ -23,11 +23,6 @@ public class GameLogic : MonoBehaviour
 
         _finalBusStop.Interacted += StartFinishProcess;
 
-        if (_currentAudioManager.IsLoaded)
-            InitMusic();
-        else
-            _currentAudioManager.Loaded += InitMusic;
-
         _finisher.FinishLevelConditionsCompleted += FinishLevelConditionsCompleted;
 
         _busStopFinisher.CutsceneEnded += ShowWinWindow;
@@ -42,8 +37,6 @@ public class GameLogic : MonoBehaviour
 
     private void InitMusic()
     {
-        _currentAudioManager.Loaded -= InitMusic;
-
         _currentAudioManager.PlayMusic(_gameMusic);
     }
 

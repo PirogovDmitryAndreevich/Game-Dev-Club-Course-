@@ -6,6 +6,7 @@ public class BombYellow : MonoBehaviour
 {
     [SerializeField] private AudioClip _bombEffect;
 
+    private SaveData _progress;
     private AudioSource _bombSource;
     private ParticleSystem _particles;
     private bool _isPlaying;
@@ -43,6 +44,11 @@ public class BombYellow : MonoBehaviour
         ExplosionStopped?.Invoke();
     }
 
+    public void Construct(IPersistentProgressService progressService)
+    {
+        _progress = progressService.Progress;
+    }
+
     public void Play(Vector2 point)
     {
         transform.position = point;
@@ -52,8 +58,8 @@ public class BombYellow : MonoBehaviour
 
         _isPlaying = true;
 
-        _bombSource.volume = SaveData.GameData.SoundValue;
-        _bombSource.mute = SaveData.GameData.IsSoundMute;
+        _bombSource.volume = _progress.GameData.SoundValue;
+        _bombSource.mute = _progress.GameData.IsSoundMute;
 
         _bombSource.PlayOneShot(_bombEffect);
         _particles.Play();
