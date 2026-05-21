@@ -1,33 +1,39 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyDirectionOfView), typeof(Attacker), typeof(EnemyAI))]
+[RequireComponent(typeof(EnemyDirectionOfView), typeof(EnemyAI))]
 public class Enemy : Character, ITask
 {
-    [SerializeField] private RewardsSpawner _rewardsSpawner;
-    [SerializeField] private WayPoint[] _wayPoints;
+    //[SerializeField] private RewardsSpawner _rewardsSpawner;
+    [SerializeField] private EnemyAI _enemyAI;
+    [SerializeField] private EnemySounds _sounds;
+    [SerializeField] private EnemyDirectionOfView _view;
+    [SerializeField] private Attacker _attacker;
     [SerializeField] private int _rewardCoins;
     [SerializeField] private int _rewardGems;
-    [SerializeField] private float _waitTime = 2.0f;
-    [SerializeField] private float _tryFindTime = 1f;
-    [SerializeField] private float _maxSqrDistance = 13.7f;
 
     public event Action<Enemy> EnemyDied;
     public event Action<ITask> TaskCompleted;
 
     private EnemyStateMachine _stateMachine;
-    protected EnemySounds Sound;
 
+    public CharacterAnimator EnemyAnimator => Animator;
+    public Fliper EnemyFliper => Fliper;
+    public Mover EnemyMover => Mover;
+    public EnemyAI AI => _enemyAI;
+    public EnemySounds Sound => _sounds;
+    public EnemyDirectionOfView View => _view;
+    public Attacker Attacker => _attacker;
+    public WayPoint[] WayPoints { get; private set; }
+    public EnemyHealth Health { get; private set; }
+    public EnemyStaticData StaticData { get; private set; }
     public TaskType Type => TaskType.Enemies;
 
-    private void Start()
+    public void Construct(EnemyStaticData data)
     {
-        var view = GetComponent<EnemyDirectionOfView>();
-        var enemyAI = GetComponent<EnemyAI>();
-        Sound = GetComponent<EnemySounds>();
-
-        _stateMachine = new EnemyStateMachine(Fliper, Mover, view, _wayPoints, Animator, _maxSqrDistance,
-            transform, _waitTime, _tryFindTime, Attacker, enemyAI, Sound);
+        StaticData = data;
+        Health = new EnemyHealth(StaticData);
+        _stateMachine = new EnemyStateMachine(this);
     }
 
     public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
@@ -36,40 +42,29 @@ public class Enemy : Character, ITask
 
         base.ApplyDamage(damageInfo, damageSource, pushDirection);
 
-        var damageNumber = FXPool.Get(FXType.DamageNumber) as DamageValueAnimation;
-        damageNumber.Play(damageSource, damageInfo.Damage, damageInfo.IsCrit);
+        //var damageNumber = FXPool.Get(FXType.DamageNumber) as DamageValueAnimation;
+        //damageNumber.Play(damageSource, damageInfo.Damage, damageInfo.IsCrit);
 
         if (Health.HealthCurrent <= 0)
         {
             Mover.Stop();
 
             Sound.PlayDeathSound();
-            var deathParticles = FXPool.Get(FXType.EnemyDeath);
-            deathParticles.Play(transform.position);
+            //var deathParticles = FXPool.Get(FXType.EnemyDeath);
+            //deathParticles.Play(transform.position);
 
-            SpawnRewards();
+            //SpawnRewards();
 
             Destroy(gameObject);
         }
     }
 
-    protected override void CharacterFixUpdate()
-    {
+    private void FixedUpdate() => 
         _stateMachine.Update();
-    }
 
-    protected override void OnDied()
+    private void OnDied()
     {
         TaskCompleted?.Invoke(this);
         EnemyDied?.Invoke(this);
-    }
-       
-    private void SpawnRewards() 
-    {
-        if (_rewardCoins != 0)
-            _rewardsSpawner.CreateCoins(_rewardCoins, transform.position);
-
-        if (_rewardGems != 0)
-            _rewardsSpawner.CreateGems(_rewardGems, transform.position);
     }
 }

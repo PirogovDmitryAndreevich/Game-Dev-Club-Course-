@@ -7,11 +7,11 @@
         false,
         false
     ],
-    "idSave": 1,
+    "idSave": 10,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
-            "MusicValue": 1.0,
+            "MusicValue": 0.6799944639205933,
             "IsSoundMute": false,
             "IsMusicMute": false
         },

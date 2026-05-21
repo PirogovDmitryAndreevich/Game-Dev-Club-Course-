@@ -1,10 +1,7 @@
-using UnityEditor;
-using UnityEngine;
-
 class WayPointReachedTransition : ReachedTransition
 {
-    public WayPointReachedTransition(StateMachine stateMachine, IMoveState moveState, float maxSqrDistance, Transform transform) :
-        base(stateMachine, moveState, maxSqrDistance, transform) { }
+    public WayPointReachedTransition(StateMachine stateMachine, IMoveState moveState, Enemy enemy) :
+        base(stateMachine, moveState, enemy) { }
 
     public override void Transit()
     {

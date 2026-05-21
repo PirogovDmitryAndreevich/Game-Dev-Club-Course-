@@ -6,23 +6,17 @@ public abstract class CharacterSounds : MonoBehaviour
 
     private Transform _transform;
 
-    private void Awake()
-    {
+    private void Awake() => 
         _transform = GetComponent<Transform>();
-    }
-    public void PlaySound(AudioClip clip)
-    {
-        CurrentAudioManager.PlaySound(clip);
-    }
 
-    public void Construct(AudioHandler manager)
-    {
+    public void PlaySound(AudioClip clip) => 
+        CurrentAudioManager.PlaySound(clip);
+
+    public void Construct(AudioHandler manager) => 
         CurrentAudioManager = manager;
-    }
 
     protected virtual void PlayRandomIndexSound(AudioClip[] clips)
     {
-
         int clipIndex = Random.Range(0, clips.Length);
         CurrentAudioManager.PlaySound(clips[clipIndex]);
     }
@@ -38,10 +32,8 @@ public abstract class CharacterSounds : MonoBehaviour
         }
     }
 
-    protected virtual void PlayRandomPitchSound(AudioClip clip)
-    {
+    protected virtual void PlayRandomPitchSound(AudioClip clip) => 
         CurrentAudioManager.PlayRandomPithSound(clip);
-    }
 
     protected virtual void PlayTimedPitchSound(AudioClip clip, ref float nextPlaytime)
     {

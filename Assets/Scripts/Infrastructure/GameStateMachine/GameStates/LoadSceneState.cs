@@ -1,53 +1,34 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public class LoadSceneState : IPayloadState<SceneID>
 {
     private readonly GameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
-    private Dictionary<SceneID, IScene> _scenes;
+    private readonly LoadingCurtain _curtain;
+    private readonly IScenesLogicContainer _scenesContainer;
     private IScene loadedScene;
 
-    public LoadSceneState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IUIFactory uiFactory)
+    public LoadSceneState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IScenesLogicContainer scenesContainer)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
-
-        _scenes = new Dictionary<SceneID, IScene>
-        {
-            [SceneID.Initial] = new InitialScene(),
-            [SceneID.MainMenu] = new MainMenuScene(uiFactory),
-
-        };
+        _curtain = curtain;
+        _scenesContainer = scenesContainer;
     }
 
     public void Enter(SceneID sceneId)
     {
-        loadedScene = _scenes[sceneId];
+        _curtain.Show();
+        loadedScene = _scenesContainer.Scenes[sceneId];
         _sceneLoader.Load(sceneId, OnLoaded);
     }
 
     private void OnLoaded()
     {
         loadedScene.InitGameObjects();
+        _gameStateMachine.Enter<GameLoopState>();
     }
 
     public void Exit()
     {
-    }
-}
-
-public class LoadLevel : IScene
-{
-    private readonly GameStateMachine _gameStateMachine;
-
-    public LoadLevel(GameStateMachine gameStateMachine)
-    {
-        _gameStateMachine = gameStateMachine;
-    }
-
-    public void InitGameObjects()
-    {
-        throw new System.NotImplementedException();
+        _curtain.Hide();
     }
 }

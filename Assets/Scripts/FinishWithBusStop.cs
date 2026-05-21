@@ -42,7 +42,7 @@ public class FinishWithBusStop : MonoBehaviour
     private void PutPlayerOnBus()
     {
         _bus.MovementCompleted -= PutPlayerOnBus;
-        _player.StartMovingInCutscene();
+        //_player.StartMovingInCutscene();
 
         float distance = (_bus.transform.position - _player.transform.position).magnitude;
         float duration = distance / _playerSpeed;

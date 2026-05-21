@@ -4,12 +4,11 @@ using UnityEngine;
 public class RedEnemyAttacker : Attacker
 {
     [Header("Red enemy")]
+    [SerializeField] private Mover _mover;
+    [SerializeField] private RedEnemySound _enemySounds;
+    [SerializeField] private CharacterAnimator _animator;
     [SerializeField] private float _runSpeed;
     [SerializeField] private Vector2 _attackBoxSize = new Vector2(0.5f, 0.5f);
-
-    private Mover _mover;
-    private RedEnemySound _enemySounds;
-    private CharacterAnimator _animator;
 
     private Player _targetPlayer;
     private Vector2 _attackTargetPosition;
@@ -21,7 +20,7 @@ public class RedEnemyAttacker : Attacker
 
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[4];
 
-    protected override void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, _attackBoxSize);
@@ -39,15 +38,15 @@ public class RedEnemyAttacker : Attacker
         Vector2 direction = (_attackTargetPosition - currentPos).normalized;
 
         _enemySounds.PlayAttackSound();
-
+        
         _mover.RunAttack(_attackTargetPosition, _runSpeed);
 
         TryHit(direction);
 
         if ((currentPos - _attackTargetPosition).sqrMagnitude <= 0.0025f)
         {
-            EndWaitTime = Time.time + Delay;
-            OnAttackEndedEvent();
+            ColldownAttack = Time.time + Delay;
+            AttackEnded();
         }
     }
 
@@ -55,6 +54,8 @@ public class RedEnemyAttacker : Attacker
     {
         if (_attackInProgress || !CanAttack)
             return;
+
+        _animator.SetEnemyAttackBool(IsAttack);
 
         _attackInProgress = true;
 
@@ -69,30 +70,14 @@ public class RedEnemyAttacker : Attacker
         _hasHitPlayer = false;
     }
 
-    public override void OnAttackEndedEvent()
+    private void AttackEnded()
     {
+        EndedAttack();
         _hasHitPlayer = false;
         _attackInProgress = false;
-        IsAttack = false;
         _animator.SetEnemyAttackBool(IsAttack);
     }
 
-    public override void StartAttack()
-    {
-        if (_attackInProgress)
-            return;
-
-        IsAttack = true;
-        _animator.SetEnemyAttackBool(IsAttack);
-    }
-
-    protected override void AttackAwake()
-    {
-        base.AttackAwake();
-        _animator = GetComponent<CharacterAnimator>();
-        _mover = GetComponent<Mover>();
-        _enemySounds = GetComponent<RedEnemySound>();
-    }
 
     private void TryHit(Vector2 direction)
     {

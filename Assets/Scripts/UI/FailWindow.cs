@@ -52,7 +52,7 @@ public class FailWindow : PauseBase
     internal void Initialize(Player player)
     {
         _player = player;
-        _player.CharacterDied += OnPlayerDied;
+        //_player.CharacterDied += OnPlayerDied;
     }
 
     protected override void Enable()
@@ -67,7 +67,7 @@ public class FailWindow : PauseBase
         base.Disable();
         _restartButton.onClick.RemoveListener(Restart);
         _exitButton.onClick.RemoveListener(Exit);
-        _player.CharacterDied -= OnPlayerDied;
+        //_player.CharacterDied -= OnPlayerDied;
     }
 
     private void OnPlayerDied()

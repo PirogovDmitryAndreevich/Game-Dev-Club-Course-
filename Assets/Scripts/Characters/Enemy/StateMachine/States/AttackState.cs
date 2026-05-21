@@ -2,55 +2,48 @@ using UnityEngine;
 
 class AttackState : State
 {
-    private Attacker _attacker;
-    private CharacterAnimator _animator;
-    private EnemyDirectionOfView _vision;
+    private Enemy _enemy;
     private LostTargetTransition _lostTargetTransition;
     private Transform _target;
-    private Fliper _fliper;
 
-    public AttackState(StateMachine stateMachine, CharacterAnimator animator, Attacker attacker,
-        Fliper flipper, EnemyDirectionOfView vision, float tryFindTime) : base(stateMachine)
+    public AttackState(StateMachine stateMachine, Enemy enemy) : base(stateMachine)
     {
-        _attacker = attacker;
-        _animator = animator;
-        _fliper = flipper;
-        _vision = vision;
+        _enemy = enemy;
 
-        _lostTargetTransition = new LostTargetTransition(stateMachine, vision, tryFindTime);
+        _lostTargetTransition = new LostTargetTransition(stateMachine, enemy);
 
         Transitions = new Transition[]
             {
-                new SeeTargetTransition(stateMachine,vision,vision.transform, _attacker.SqrAttackDistance),
+                new SeeTargetTransition(stateMachine,enemy),
                 _lostTargetTransition
             };
     }
 
     public override void Enter()
     {
-        _vision.TrySeeTarget(out _target);
+        _enemy.View.TrySeeTarget(out _target);
         _lostTargetTransition.IsNeedTransit();
     }
 
     public override void Update()
     {
-        if (_attacker.IsAttack == false)
-            _fliper.LookAtTarget(_target.position);
+        if (_enemy.Attacker.IsAttack == false)
+            _enemy.EnemyFliper.LookAtTarget(_target.position);
 
-        if (_attacker.CanAttack)
+        if (_enemy.Attacker.CanAttack)
         {
-            _attacker.StartAttack();
+            _enemy.Attacker.StartAttack();
 
-            if (_attacker.type != AttacksType.RedEnemyAttack)
+            if (_enemy.Attacker.type != AttacksType.RedEnemyAttack)
             {
-                _animator.SetEnemyAttackTrigger();
+                _enemy.EnemyAnimator.SetEnemyAttackTrigger();
             }
         }
     }
 
     public override void TryTransit()
     {
-        if (_attacker.IsAttack == false)
+        if (_enemy.Attacker.IsAttack == false)
             base.TryTransit();
     }
 }

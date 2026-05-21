@@ -42,7 +42,7 @@ public class GameLogic : MonoBehaviour
 
     private void FinishLevelConditionsCompleted()
     {
-        _player.FinishLevelConditionsCompleted();
+        //_player.FinishLevelConditionsCompleted();
         _finalBusStop.CanInteract = true;
     }
 

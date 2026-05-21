@@ -2,20 +2,17 @@ using UnityEngine;
 
 class IdleState : State
 {
-    CharacterAnimator _animator;
+    private Enemy _enemy;
 
     private float _endWaitTime;
-    private float _waitTime;
 
-    public IdleState(StateMachine stateMachine, EnemyDirectionOfView vision, CharacterAnimator animator,
-        float waitTime, float sqrAttackDistance) : base(stateMachine)
+    public IdleState(StateMachine stateMachine, Enemy enemy) : base(stateMachine)
     {
-        _waitTime = waitTime;
-        _animator = animator;
+        _enemy = enemy;
 
         Transitions = new Transition[]
             {
-                new SeeTargetTransition(stateMachine,vision,vision.transform, sqrAttackDistance),
+                new SeeTargetTransition(stateMachine,enemy),
                 new EndIdleTransition(stateMachine, this)
             };
     }
@@ -24,8 +21,8 @@ class IdleState : State
 
     public override void Enter()
     {
-        _endWaitTime = Time.time + _waitTime;
-        _animator.SetIsWalk(false);
+        _endWaitTime = Time.time + _enemy.StaticData.WaitTime;
+        _enemy.EnemyAnimator.SetIsWalk(false);
     }
 
 }

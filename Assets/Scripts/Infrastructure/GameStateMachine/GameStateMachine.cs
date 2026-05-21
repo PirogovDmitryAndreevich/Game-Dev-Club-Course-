@@ -6,7 +6,7 @@ public class GameStateMachine
     private readonly Dictionary<Type, IExitableState> _states;
     private IExitableState _currentState;
 
-    public GameStateMachine(SceneLoader sceneLoader, AllServices services)
+    public GameStateMachine(SceneLoader sceneLoader, AllServices services, LoadingCurtain curtain)
     {
         _states = new Dictionary<Type, IExitableState>()
         {
@@ -17,7 +17,11 @@ public class GameStateMachine
 
             [typeof(PersistentHandlersCreateState)] = new PersistentHandlersCreateState(this, services.Single<IHandlersContainer>()),
 
-            [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, services.Single<IUIFactory>()),
+            [typeof(RegisterLevelsState)] = new RegisterLevelsState(this, services),
+
+            [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, curtain, services.Single<IScenesLogicContainer>()),
+
+            [typeof(GameLoopState)] = new GameLoopState(),
         };
     }
 

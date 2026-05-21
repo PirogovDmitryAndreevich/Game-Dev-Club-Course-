@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera _camera;
     [SerializeField] private float _punch = .8f;
     [SerializeField] private float _superPunch = 2.5f;
     [SerializeField] private float _fgSuper;
@@ -12,6 +11,7 @@ public class CameraShake : MonoBehaviour
     [SerializeField] private float _duration = 0.25f;
 
     private Tween shakeTween;
+    private CinemachineVirtualCamera _camera;
     private CinemachineBasicMultiChannelPerlin noise;
 
     private void Awake()
@@ -19,6 +19,9 @@ public class CameraShake : MonoBehaviour
         noise = _camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         ResetNoise();
     }
+
+    public void Construct(CinemachineVirtualCamera camera) => 
+        _camera = camera;
 
     public void ShakePunch() => Shake(_punch);
     public void ShakeSuperPunch() => Shake(_superPunch);

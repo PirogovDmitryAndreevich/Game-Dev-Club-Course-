@@ -2,16 +2,17 @@ using UnityEngine;
 
 [RequireComponent(typeof(Fliper))]
 public abstract class Attacker : MonoBehaviour
-{
+{    
+    [SerializeField] private Fliper _fliper;
     [SerializeField] protected float Delay = 2f;
     [SerializeField] protected AttackBase AttackType;
     [SerializeField] protected LayerMask TargetLayer;
 
     protected Fliper Fliper;
-    protected CameraShake Camera;
-    protected float EndWaitTime;
+    protected float ColldownAttack;
+    private bool _isAttacking = false;
 
-    public virtual bool CanAttack => EndWaitTime <= Time.time;
+    public virtual bool CanAttack => ColldownAttack <= Time.time && !_isAttacking;
     public virtual bool IsAttack { get; protected set; }
     public float CurrentDelay => Delay;
     public float SqrAttackDistance => Offset * Offset;
@@ -19,33 +20,18 @@ public abstract class Attacker : MonoBehaviour
     protected float Offset => AttackType.Offset;
     protected float Radius => AttackType.Radius;
 
-    private void Awake() =>
-        AttackAwake();
-
-    protected virtual void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(GetAttackOrigin(), Radius);
-    }
-
     public abstract void Attack();
 
-    public virtual void StartAttack()
+    public void StartAttack()
     {
-        EndWaitTime = Time.time + Delay;
         IsAttack = true;
-    }
-    public virtual void StartAttack(CameraShake camera)
-    {
-        StartAttack();
-        Camera = camera;
+        Attack();
     }
 
-    public virtual void OnAttackEndedEvent() => IsAttack = false;
-
-    protected virtual void AttackAwake()
+    protected void EndedAttack()
     {
-        Fliper = GetComponent<Fliper>();
+        IsAttack = false;
+        ColldownAttack = Time.time + Delay;
     }
 
     protected virtual Vector2 GetAttackOrigin()

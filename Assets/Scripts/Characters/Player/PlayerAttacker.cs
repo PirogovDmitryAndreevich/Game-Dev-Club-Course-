@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,30 +7,32 @@ public class PlayerAttacker : Attacker
     [SerializeField] private AttacksData _attacksData;
 
     [Header("Player attacker")]
+    [SerializeField] private AnimationEvent _attackEvent;
+    [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private int _superHitCount = 3;
     [SerializeField] private float _comboCooldown = 1.2f;
 
     private AttackBase _defaultAttack;
-    private bool _isAttacking = false;
+   
     private int _hitCounter;
     private float _lastHitTime;
 
-    public override bool CanAttack => !_isAttacking;
     public override AttacksType type => AttackType.Type;
 
     private List<AttackBase> _superAttacks = new();
     private Collider2D[] _hits = new Collider2D[16];
 
-    private void OnDestroy()
+    private void OnDrawGizmos()
     {
-        _attacksData.Initialized -= InitializeAttack;
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(GetAttackOrigin(), Radius);
     }
 
-    public override void StartAttack(CameraShake camera)
-    {
-        base.StartAttack(camera);
-        _isAttacking = true;
-    }
+    private void OnDestroy() => 
+        _attackEvent.AttackEnded -= OnEndedAttackEvent;
+
+    private void Start() => 
+        _attackEvent.AttackEnded += OnEndedAttackEvent;
 
     public override void Attack()
     {
@@ -47,11 +48,11 @@ public class PlayerAttacker : Attacker
 
         if (isSuperHit)
         {
-            Camera.ShakeSuperPunch();
+            _cameraShake.ShakeSuperPunch();
         }
         else
         {
-            Camera.ShakePunch();
+            _cameraShake.ShakePunch();
         }
 
         for (int i =0; i < countHits; i++)
@@ -69,21 +70,8 @@ public class PlayerAttacker : Attacker
         }        
     }
 
-    public override void OnAttackEndedEvent()
-    {
-        base.OnAttackEndedEvent();
-        _isAttacking = false;
-    }
-
-    protected override void AttackAwake()
-    {
-        base.AttackAwake();
-
-        if (_attacksData.IsInitialized)
-            InitializeAttack();
-        else
-            _attacksData.Initialized += InitializeAttack;
-    }
+    private void OnEndedAttackEvent() => 
+        EndedAttack();
 
     private void InitializeAttack()
     {

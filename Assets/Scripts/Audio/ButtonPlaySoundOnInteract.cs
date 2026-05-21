@@ -16,11 +16,8 @@ public class ButtonPlaySoundOnInteract : MonoBehaviour,
 
     private AudioHandler _audioManger;
 
-    public void Construct(AudioHandler audio)
-    {
+    public void Construct(AudioHandler audio) => 
         _audioManger = audio;
-        Debug.Log($"ButtonSound {gameObject.name} - {_audioManger != null}");
-    }
 
     public void OnPointerDown(PointerEventData eventData) => 
         PlaySound(_pointerDown);

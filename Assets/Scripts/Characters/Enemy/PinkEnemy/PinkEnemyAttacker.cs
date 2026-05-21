@@ -4,12 +4,15 @@ using UnityEngine;
 [RequireComponent(typeof(EnemySounds))]
 public class PinkEnemyAttacker : Attacker
 {
+    [SerializeField] private AnimationEvent _attackEvent;
+    [SerializeField] private EnemySounds _sound;
     [SerializeField] private float _offsetDamage = 1f;
     [SerializeField] private FXPool _fxPool;
 
-    private EnemySounds _sound;
-
     public override AttacksType type => AttackType.Type;
+
+    private void Start() =>
+        _attackEvent.AttackEnded += OnEndedAttackEvent;
 
     public override void Attack()
     {
@@ -27,9 +30,6 @@ public class PinkEnemyAttacker : Attacker
         }       
     }
 
-    protected override void AttackAwake()
-    {
-        _sound = GetComponent<EnemySounds>();
-        base.AttackAwake();
-    }
+    private void OnEndedAttackEvent() =>
+        EndedAttack();
 }

@@ -2,21 +2,17 @@ using UnityEngine;
 
 class LostTargetTransition : Transition
 {
-    EnemyDirectionOfView _view;
     private float _endFindTime;
-    private float _tryFindTime = 1f;
+    private Enemy _enemy;
 
-    public LostTargetTransition(StateMachine stateMachine, EnemyDirectionOfView view, float tryFindTime) : base(stateMachine)
-    {
-        _tryFindTime = tryFindTime;
-        _view = view;
-    }
+    public LostTargetTransition(StateMachine stateMachine, Enemy enemy) : base(stateMachine) => 
+        _enemy = enemy;
 
     public override bool IsNeedTransit()
     {
-        if (_view.TrySeeTarget(out Transform _))
+        if (_enemy.View.TrySeeTarget(out Transform _))
         {
-            _endFindTime = Time.time + _tryFindTime;
+            _endFindTime = Time.time + _enemy.StaticData.TryFindTime;
         }
         else if (_endFindTime < Time.time)
         {

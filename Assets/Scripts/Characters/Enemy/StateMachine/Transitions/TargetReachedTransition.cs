@@ -1,9 +1,7 @@
-using UnityEngine;
-
 class TargetReachedTransition : ReachedTransition
 {
-    public TargetReachedTransition(StateMachine stateMachine, IMoveState moveState, float maxSqrDistance,
-        Transform transform) : base(stateMachine, moveState, maxSqrDistance, transform) { }
+    public TargetReachedTransition(StateMachine stateMachine, IMoveState moveState, Enemy enemy) 
+        : base(stateMachine, moveState, enemy) { }
 
     public override void Transit()
     {

@@ -2,19 +2,17 @@ using UnityEngine;
 
 class SeeTargetTransition : Transition
 {
-    EnemyDirectionOfView _view;
-    Transform _transform;
-    private float _sqrAttackDistance;
+    private Enemy _enemy;
+    private Transform _transform;
 
-    public SeeTargetTransition(StateMachine stateMachine, EnemyDirectionOfView view, Transform transform, float sqrAttackDistance) : base(stateMachine)
+    public SeeTargetTransition(StateMachine stateMachine, Enemy enemy) : base(stateMachine)
     {
-        _view = view;
-        _transform = transform;
-        _sqrAttackDistance = sqrAttackDistance;
+        _enemy = enemy;
+        _transform = _enemy.transform;
     }
 
-    public override bool IsNeedTransit() => _view.TrySeeTarget(out Transform target) 
-        && (_transform.position - target.position).sqrMagnitude > _sqrAttackDistance;
+    public override bool IsNeedTransit() => _enemy.View.TrySeeTarget(out Transform target) 
+        && (_transform.position - target.position).sqrMagnitude > _enemy.Attacker.SqrAttackDistance;
 
     public override void Transit()
     {

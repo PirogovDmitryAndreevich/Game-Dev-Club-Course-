@@ -2,34 +2,21 @@ using UnityEngine;
 
 class PatrolState : State, IMoveState
 {
-    private WayPoint[] _wayPoints;
-
-    private Fliper _fliper;
-    private Mover _mover;
+    private Enemy _enemy;
     private Transform _target;
-    private CharacterAnimator _animator;
-    private EnemyAI _enemyAI;
-    private EnemySounds _sounds;
     private int _wayPointIndex;
 
-    public PatrolState(StateMachine stateMachine, EnemyAI enemyAI, Fliper fliper, Mover mover, EnemyDirectionOfView view,
-                       WayPoint[] wayPoints, float maxSqrDistance, Transform transform,
-                       CharacterAnimator animator, float sqrAttackDistance, EnemySounds sounds) : base(stateMachine)
+    public PatrolState(StateMachine stateMachine, Enemy enemy) : base(stateMachine)
     {
-        _animator = animator;
-        _fliper = fliper;
-        _mover = mover;
-        _wayPoints = wayPoints;
+        _enemy = enemy;
         _wayPointIndex = -1;
-        _enemyAI = enemyAI;
-        _sounds = sounds;
 
-        var targetReachedTransition = new WayPointReachedTransition(stateMachine, this, maxSqrDistance, transform);
+        var targetReachedTransition = new WayPointReachedTransition(stateMachine, this, enemy);
         targetReachedTransition.Transiting += ChangeTarget;
 
         Transitions = new Transition[]
         {
-            new SeeTargetTransition(stateMachine, view, transform, sqrAttackDistance),
+            new SeeTargetTransition(stateMachine,enemy),
             targetReachedTransition
         };
 
@@ -40,37 +27,37 @@ class PatrolState : State, IMoveState
 
     public override void Enter()
     {        
-        _enemyAI.BuildPath(_target);
-        _animator.SetIsWalk(true);
+        _enemy.AI.BuildPath(_target);
+        _enemy.EnemyAnimator.SetIsWalk(true);
     }
 
     public override void Exit()
     {
-        _animator.SetIsWalk(false);
+        _enemy.EnemyAnimator.SetIsWalk(false);
     }
 
     public override void Update()
     {
         Vector2 target;
 
-        if (_enemyAI.HasPath)
+        if (_enemy.AI.HasPath)
         {
-            target = _enemyAI.CurrentPoint;
-            _enemyAI.AdvanceIfReached();
+            target = _enemy.AI.CurrentPoint;
+            _enemy.AI.AdvanceIfReached();
         }
         else
         {
             target = _target.position;
         }
 
-        _fliper.LookAtTarget(_target.position);
-        _mover.Walk(target);
-        _sounds.PlayStepsSound();
+        _enemy.EnemyFliper.LookAtTarget(_target.position);
+        _enemy.EnemyMover.Walk(target);
+        _enemy.Sound.PlayStepsSound();
     }
 
     private void ChangeTarget()
     {
-        _wayPointIndex = ++_wayPointIndex % _wayPoints.Length;
-        _target = _wayPoints[_wayPointIndex].transform;
+        _wayPointIndex = ++_wayPointIndex % _enemy.WayPoints.Length;
+        _target = _enemy.WayPoints[_wayPointIndex].transform;
     }
 }
