@@ -14,14 +14,11 @@ public class CameraShake : MonoBehaviour
     private CinemachineVirtualCamera _camera;
     private CinemachineBasicMultiChannelPerlin noise;
 
-    private void Awake()
+    public void Construct(CinemachineVirtualCamera camera)
     {
-        noise = _camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _camera = camera;
         ResetNoise();
     }
-
-    public void Construct(CinemachineVirtualCamera camera) => 
-        _camera = camera;
 
     public void ShakePunch() => Shake(_punch);
     public void ShakeSuperPunch() => Shake(_superPunch);

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - TypeId: 0
+    MaxHealth: 100
     Damage: 5
     Radius: 0.85
     Offset: 0.85
     KnockbackForce: 0.5
-    MaxSqrDistance: 13.7
+    MaxSqrDistance: 0.3
     TryFindTime: 1
     WaitTime: 2
     IsKnockback: 1

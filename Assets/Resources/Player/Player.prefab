@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 841452606230542629}
   - component: {fileID: 357485461133262346}
   - component: {fileID: 3162247971610878494}
+  - component: {fileID: 2128498662344484686}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -252,11 +253,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea37601c99ada0447bacdac401d0d065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mover: {fileID: 4292471312159565258}
+  Fliper: {fileID: 841452606230542629}
   HitFlash: {fileID: 8184059301439737951}
   AnimationEvent: {fileID: 1633683109253868779}
-  MaxHealth: 100
+  Animator: {fileID: 357485461133262346}
+  _playerFX: {fileID: 4933531219186024200}
   _arrowTracking: {fileID: 7438643703429730435}
-  _sounds: {fileID: 3162247971610878494}
+  _playerSounds: {fileID: 3162247971610878494}
+  _cameraShake: {fileID: 2128498662344484686}
 --- !u!114 &1931453704566832429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +371,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7d12aa9f60307b14db4dc20118aa97f4, type: 3}
   - {fileID: 8300000, guid: 020de07bb4f9e024fbe4f59bed06ad49, type: 3}
   - {fileID: 8300000, guid: 5b427cffd6cc19e428f739d2b2591eaf, type: 3}
+--- !u!114 &2128498662344484686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728467383515744571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cc03c696fd9b845b70fc91a67ed73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _punch: 0.8
+  _superPunch: 2.5
+  _fgSuper: 0
+  _fgPunch: 0
+  _duration: 0.25
 --- !u!1 &3975444971596480113
 GameObject:
   m_ObjectHideFlags: 0

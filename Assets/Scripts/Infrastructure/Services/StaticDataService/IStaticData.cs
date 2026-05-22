@@ -1,5 +1,6 @@
 ﻿public interface IStaticData : IService
 {
+    public void Load();
     EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId);
-    void LoadEnemies();
+    LevelData ForLevel(string sceneKey);
 }

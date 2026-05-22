@@ -46,7 +46,7 @@ public class BootstrapState : IState
     private void RegisterStaticData()
     {
         IStaticData staticData = new StaticDataService();
-        staticData.LoadEnemies();
+        staticData.Load();
         _services.RegisterSingle<IStaticData>(staticData);
     }
 

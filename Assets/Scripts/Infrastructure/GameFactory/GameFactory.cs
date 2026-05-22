@@ -1,8 +1,11 @@
 using Cinemachine;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameFactory : IGameFactory
 {
+    private const string EnemySpawnerParentName = "EnemySpawners";
+
     private readonly IAssets _assets;
     private readonly IPersistentProgressService _progressService;
     private readonly ISaveLoadService _save;
@@ -40,15 +43,54 @@ public class GameFactory : IGameFactory
         player.FX.Construct(player.Health, player.Defense);
 
         return player;
-    }    
+    }
 
-    public Enemy CreateEnemy(EnemyTypeId id,Vector2 at, WayPoint[] wayPoints)
+    public Enemy CreateEnemy(EnemyTypeId id, Vector2 at, List<WayPoint> wayPoints)
     {
         EnemyStaticData data = _staticData.ForEnemy(enemyTypeId: id);
-        Enemy enemy = Object.Instantiate(data.EnemyPrefab);
-        enemy.Construct(data);
+        Enemy enemy = Object.Instantiate(data.EnemyPrefab, position: at, Quaternion.identity);
+        enemy.Construct(data , wayPoints);
         enemy.Sound.Construct(_handlers.Audio);
 
         return null;
+    }
+
+    public List<EnemySpawner> CreateEnemySpawners(string sceneKey)
+    {
+        LevelData levelData = _staticData.ForLevel(sceneKey);
+
+        Transform parent = new GameObject(EnemySpawnerParentName).transform;
+
+        List<EnemySpawner> spawners = new List<EnemySpawner>();
+
+        foreach (EnemySpawnerData spawnerData in levelData.EnemySpawnerDatas)
+        {
+            EnemySpawner spawner = CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.TypeId, spawnerData.WayPoints, parent);
+            spawners.Add(spawner);
+        }
+
+        return spawners;
+    }
+
+    private EnemySpawner CreateSpawner(Vector2 position, string id, EnemyTypeId typeId, List<WayPointData> wayPointsData, Transform parent)
+    {
+        EnemySpawner spawner = _assets.Instantiate(AssetsPath.SpawnerPath, position)
+            .GetComponent<EnemySpawner>();
+
+        List<WayPoint> wayPointsList = new List<WayPoint>();
+
+        foreach (WayPointData point in wayPointsData)
+        {
+            WayPoint wayPoint = _assets.Instantiate(AssetsPath.WayPoinPath, point.Position)
+                .GetComponent<WayPoint>();
+
+            wayPoint.transform.SetParent(spawner.transform);
+            wayPointsList.Add(wayPoint);
+        }
+
+        spawner.transform.SetParent(parent);
+        spawner.Construct(this, typeId, wayPointsList);
+
+        return spawner;
     }
 }

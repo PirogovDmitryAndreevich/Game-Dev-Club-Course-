@@ -12,8 +12,8 @@ public abstract class Attacker : MonoBehaviour
     protected float ColldownAttack;
     private bool _isAttacking = false;
 
-    public virtual bool CanAttack => ColldownAttack <= Time.time && !_isAttacking;
-    public virtual bool IsAttack { get; protected set; }
+    public bool CanAttack => ColldownAttack <= Time.time && !_isAttacking;
+    public bool IsAttack { get; protected set; }
     public float CurrentDelay => Delay;
     public float SqrAttackDistance => Offset * Offset;
     public abstract AttacksType type { get; }

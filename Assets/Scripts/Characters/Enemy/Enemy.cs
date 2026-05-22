@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyDirectionOfView), typeof(EnemyAI))]
@@ -29,9 +30,10 @@ public class Enemy : Character, ITask
     public EnemyStaticData StaticData { get; private set; }
     public TaskType Type => TaskType.Enemies;
 
-    public void Construct(EnemyStaticData data)
+    public void Construct(EnemyStaticData data, List<WayPoint> wayPoints)
     {
         StaticData = data;
+        WayPoints = wayPoints.ToArray();
         Health = new EnemyHealth(StaticData);
         _stateMachine = new EnemyStateMachine(this);
     }
