@@ -8,6 +8,8 @@ public class PinkEnemyAttacker : EnemyAttacker
     [SerializeField] private EnemySounds _sound;
     [SerializeField] private float _offsetDamage = 1f;
 
+    public override float AttackRange => throw new NotImplementedException();
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;

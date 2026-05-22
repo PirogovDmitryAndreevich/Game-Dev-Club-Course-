@@ -12,7 +12,7 @@ class SeeTargetTransition : Transition
     }
 
     public override bool IsNeedTransit() => _enemy.View.TrySeeTarget(out Transform target) 
-        && (_transform.position - target.position).sqrMagnitude > _enemy.Attacker.SqrAttackDistance;
+        && (_transform.position - target.position).sqrMagnitude > _enemy.Attacker.AttackRange;
 
     public override void Transit()
     {

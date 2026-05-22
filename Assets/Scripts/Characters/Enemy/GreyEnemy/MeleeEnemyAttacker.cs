@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class MeleeEnemyAttacker : EnemyAttacker
@@ -5,10 +6,14 @@ public class MeleeEnemyAttacker : EnemyAttacker
     [SerializeField] private AnimationEvent _attackEvent;
     [SerializeField] private CharacterAnimator _animator;
 
+    private Collider2D[] _hits = new Collider2D[1];
+
+    public override float AttackRange => Offset * Offset;
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(GetAttackOrigin(), Radius);
+        Gizmos.DrawWireSphere(GetAttackOrigin(), AttackRange);
     }
 
     private void Start()
@@ -24,7 +29,9 @@ public class MeleeEnemyAttacker : EnemyAttacker
     {
         Vector2 origin = GetAttackOrigin();
 
-        Collider2D hit = Physics2D.OverlapCircle(origin, Radius, TargetLayer);
+        int countHits = Physics2D.OverlapCircleNonAlloc(GetAttackOrigin(), Radius, _hits, TargetLayer);
+
+        Collider2D hit = _hits.FirstOrDefault();
 
         if (hit != null && hit.TryGetComponent(out Player player))
         {
@@ -32,7 +39,7 @@ public class MeleeEnemyAttacker : EnemyAttacker
                                         ? Vector2.right
                                             : Vector2.left;
 
-            player.ApplyDamage(Damage, KnockbackForce, hit.ClosestPoint(origin), pushDirection);
+            player.ApplyDamage(Data.Damage, Data.KnockbackForce, hit.ClosestPoint(origin), pushDirection);
         }
     }
 

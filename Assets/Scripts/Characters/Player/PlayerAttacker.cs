@@ -19,7 +19,6 @@ public class PlayerAttacker : Attacker
     public override float Offset => _staticData.AttackOffset;
     public override float Radius => _staticData.AttackRadius;
 
-    private List<AttackBase> _superAttacks = new();
     private Collider2D[] _hits = new Collider2D[16];
 
     private void OnDrawGizmos()

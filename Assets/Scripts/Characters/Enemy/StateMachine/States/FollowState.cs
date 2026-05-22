@@ -15,7 +15,7 @@ class FollowState : State, IMoveState
         Transitions = new Transition[]
         {
             new LostTargetTransition(stateMachine, enemy),
-            new TargetReachedTransition(stateMachine, this, enemy)
+            new TargetReachedTransition(stateMachine, this, enemy.Attacker.AttackRange,enemy)
         };
     }
 

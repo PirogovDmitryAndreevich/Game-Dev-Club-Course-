@@ -10,6 +10,9 @@ public class EnemyStaticData
     public float TryFindTime = 1f;
     public float WaitTime = 2.0f;
 
+    [Header("Mover Data")]
+    public float RunSpeed;
+
     [Header("Attack Data")]
     public int Damage;
     public float AttackRadius;
@@ -18,4 +21,5 @@ public class EnemyStaticData
     public float KnockbackForce;
 
     public Enemy EnemyPrefab;
+
 }

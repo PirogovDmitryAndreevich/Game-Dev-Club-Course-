@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyDirectionOfView : MonoBehaviour
@@ -7,6 +8,8 @@ public class EnemyDirectionOfView : MonoBehaviour
     [SerializeField] private float _ariaSizeRadius;
     [SerializeField] private LayerMask _targetLayer;
     [SerializeField] private LayerMask _ignoreLayers;
+
+    Collider2D[] _hits = new Collider2D[1];
 
     private void OnDrawGizmos()
     {
@@ -18,7 +21,9 @@ public class EnemyDirectionOfView : MonoBehaviour
     {
         target = null;
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, _ariaSizeRadius, _targetLayer);
+        Physics2D.OverlapCircleNonAlloc(transform.position, _ariaSizeRadius,_hits, _targetLayer);
+
+        Collider2D hit = _hits.FirstOrDefault();
 
         if (hit == null)
             return false;

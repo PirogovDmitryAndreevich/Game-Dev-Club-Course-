@@ -11,7 +11,7 @@ class PatrolState : State, IMoveState
         _enemy = enemy;
         _wayPointIndex = -1;
 
-        var targetReachedTransition = new WayPointReachedTransition(stateMachine, this, enemy);
+        var targetReachedTransition = new WayPointReachedTransition(stateMachine, this, enemy.StaticData.MaxSqrDistance,enemy);
         targetReachedTransition.Transiting += ChangeTarget;
 
         Transitions = new Transition[]

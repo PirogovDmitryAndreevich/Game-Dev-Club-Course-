@@ -52,9 +52,9 @@ public class GameFactory : IGameFactory
     {
         EnemyStaticData data = _staticData.ForEnemy(enemyTypeId: id);
         Enemy enemy = Object.Instantiate(data.EnemyPrefab, position: at, Quaternion.identity);
+        enemy.Attacker.Construct(data);
         enemy.Construct(data , wayPoints);
         enemy.Sound.Construct(_handlers.Audio);
-        enemy.Attacker.Construct(data);
 
         return null;
     }

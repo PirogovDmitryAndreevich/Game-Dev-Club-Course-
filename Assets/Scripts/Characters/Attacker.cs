@@ -20,6 +20,9 @@ public abstract class Attacker : MonoBehaviour
 
     public void StartAttack()
     {
+        if (IsAttack)
+            return;
+
         IsAttack = true;
         Attack();
     }

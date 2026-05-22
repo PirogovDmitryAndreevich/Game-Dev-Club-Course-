@@ -18,10 +18,24 @@ MonoBehaviour:
     MaxSqrDistance: 0.3
     TryFindTime: 1
     WaitTime: 2
+    RunSpeed: 0
     Damage: 5
     AttackRadius: 0.85
     AttackOffset: 0.85
     ColdawnAttack: 1
     KnockbackForce: 0.5
     EnemyPrefab: {fileID: 2187496069501321270, guid: 2175b97b942a70246ae3f325b1e0c69a,
+      type: 3}
+  - TypeId: 2
+    MaxHealth: 100
+    MaxSqrDistance: 0.3
+    TryFindTime: 1
+    WaitTime: 2
+    RunSpeed: 3
+    Damage: 10
+    AttackRadius: 5
+    AttackOffset: 0
+    ColdawnAttack: 3
+    KnockbackForce: 3
+    EnemyPrefab: {fileID: 6191971096430851480, guid: 4835f8d3bd78d2c4ea37e499f761cb64,
       type: 3}

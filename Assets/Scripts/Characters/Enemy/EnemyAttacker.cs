@@ -1,17 +1,12 @@
 public abstract class EnemyAttacker : Attacker
 {
-    private EnemyStaticData _data;
+    protected EnemyStaticData Data;
 
-    public int Damage => _data.Damage;
-
-    public float KnockbackForce => _data.KnockbackForce;
-
-    public override float CooldownTime => _data.ColdawnAttack;
-
-    public override float Offset => _data.AttackOffset;
-
-    public override float Radius => _data.AttackRadius;
+    public abstract float AttackRange {get;}
+    public override float CooldownTime => Data.ColdawnAttack;
+    public override float Offset => Data.AttackOffset;
+    public override float Radius => Data.AttackRadius;
 
     public void Construct(EnemyStaticData data) => 
-        _data = data;
+        Data = data;
 }
