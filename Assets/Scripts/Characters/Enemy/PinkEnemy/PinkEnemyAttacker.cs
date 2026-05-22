@@ -2,14 +2,17 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemySounds))]
-public class PinkEnemyAttacker : Attacker
+public class PinkEnemyAttacker : EnemyAttacker
 {
     [SerializeField] private AnimationEvent _attackEvent;
     [SerializeField] private EnemySounds _sound;
     [SerializeField] private float _offsetDamage = 1f;
-    [SerializeField] private FXPool _fxPool;
 
-    public override AttacksType type => AttackType.Type;
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(GetAttackOrigin(), Radius);
+    }
 
     private void Start() =>
         _attackEvent.AttackEnded += OnEndedAttackEvent;
@@ -22,11 +25,11 @@ public class PinkEnemyAttacker : Attacker
 
         if (hit != null && hit.TryGetComponent(out Player player))
         {
-            var bullet = _fxPool.Get(FXType.Bullet) as Bullet;
+            //var bullet = _fxPool.Get(FXType.Bullet) as Bullet;
 
             Vector2 point = player.transform.position;
             point.y -= _offsetDamage;
-            bullet.Play(transform.position, point, AttackType, TargetLayer);
+            //bullet.Play(transform.position, point, AttackType, TargetLayer);
         }       
     }
 

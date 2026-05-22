@@ -26,8 +26,8 @@ public class UserInfo : MonoBehaviour
     {
         _attacksData.Initialized -= Init;
 
-        _defaultPlayerAttack =
-            _attacksData.Attacks[AttacksType.PlayerDefaultAttack];
+        /*_defaultPlayerAttack =
+            _attacksData.Attacks[AttacksType.PlayerDefaultAttack];*/
 
         _defaultPlayerAttack.DamageChanged += SetDamage;
         SetDamage(_defaultPlayerAttack.Damage);

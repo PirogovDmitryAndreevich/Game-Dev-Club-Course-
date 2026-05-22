@@ -10,11 +10,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected AnimationEvent AnimationEvent;
     [SerializeField] protected CharacterAnimator Animator;
 
-    public virtual void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
+    public virtual void ApplyDamage(int damage, float knockbackForce, Vector2 damageSource, Vector2 pushDirection)
     {
-        if (damageInfo.IsKnockback)
-            Mover.Knockback(pushDirection, damageInfo.KnockbackForce);
-
+        Mover.Knockback(pushDirection, knockbackForce);
         HitFlash.Play();
     }
 }

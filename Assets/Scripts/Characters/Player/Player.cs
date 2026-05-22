@@ -8,6 +8,7 @@ public class Player : Character
     [SerializeField] private ArrowTracking _arrowTracking;
     [SerializeField] private PlayerSounds _playerSounds;
     [SerializeField] private CameraShake _cameraShake;
+    [SerializeField] private PlayerAttacker _attacker;
 
     private IInputServices _input;
 
@@ -15,6 +16,7 @@ public class Player : Character
     public PlayerFX FX => _playerFX;
     public ArrowTracking ArrowTracking => _arrowTracking;
     public PlayerSounds PlayerSounds => _playerSounds;
+    public PlayerAttacker Attacker => _attacker;
     public PlayerHealth Health { get; private set; }
     public PlayerDefense Defense { get; private set; }
 
@@ -31,7 +33,7 @@ public class Player : Character
         Animator.SetIsWalk(_input.Direction.x != 0
             || _input.Direction.y != 0);
 
-        if (_input.Direction != null) //&& !Attacker.IsAttack
+        if (_input.Direction != null && !Attacker.IsAttack)
         {
             Mover.Move(_input.Direction);
             Fliper.LookAtTarget((Vector2)transform.position + Vector2.right * _input.Direction);
@@ -49,9 +51,9 @@ public class Player : Character
             _playerSounds.PlayDash();
         }
 
-        if (_input.GetIsAttack()) //&& Attacker.CanAttack
+        if (_input.GetIsAttack() && Attacker.CanAttack)
         {
-            //Attacker.StartAttack(_camera);
+            Attacker.StartAttack();
             Animator.SetDefaultPlayerAttackTrigger();
             Mover.Stop();
             Mover.AttackStep();
@@ -59,9 +61,9 @@ public class Player : Character
         }
     }
 
-    public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
+    public override void ApplyDamage(int damage, float knockbackForce, Vector2 damageSource, Vector2 pushDirection)
     {
-        base.ApplyDamage(damageInfo, damageSource, pushDirection);
+        base.ApplyDamage(damage, knockbackForce, damageSource, pushDirection);
         _playerSounds.PlayHitSound();
     }
 }

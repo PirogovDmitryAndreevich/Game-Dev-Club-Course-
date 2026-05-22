@@ -93,7 +93,7 @@ public class Bullet : FXBase
                     ((Vector2)player.transform.position - (Vector2)damageArea.position)
                     .normalized;
 
-                player.ApplyDamage(attack, damageArea.position, knockbackDir);
+                //player.ApplyDamage(attack, damageArea.position, knockbackDir);
                 break; 
             }
         }

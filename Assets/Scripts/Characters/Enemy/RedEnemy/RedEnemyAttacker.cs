@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(RedEnemySound))]
-public class RedEnemyAttacker : Attacker
+public class RedEnemyAttacker : EnemyAttacker
 {
     [Header("Red enemy")]
     [SerializeField] private Mover _mover;
@@ -14,9 +14,7 @@ public class RedEnemyAttacker : Attacker
     private Vector2 _attackTargetPosition;
 
     private bool _hasHitPlayer;
-    private bool _attackInProgress;
-
-    public override AttacksType type => AttackType.Type;
+    private bool _attackInProgress;      
 
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[4];
 
@@ -45,7 +43,7 @@ public class RedEnemyAttacker : Attacker
 
         if ((currentPos - _attackTargetPosition).sqrMagnitude <= 0.0025f)
         {
-            ColldownAttack = Time.time + Delay;
+            //_colldownAttack = Time.time + CooldownTime;
             AttackEnded();
         }
     }
@@ -105,11 +103,11 @@ public class RedEnemyAttacker : Attacker
                 Vector2 knockbackDir =
                     (player.transform.position - transform.position).normalized;
 
-                player.ApplyDamage(
+                /*player.ApplyDamage(
                     AttackType,
                     _hits[i].collider.ClosestPoint(origin),
                     knockbackDir
-                );
+                );*/
 
                 _hasHitPlayer = true;
                 break;

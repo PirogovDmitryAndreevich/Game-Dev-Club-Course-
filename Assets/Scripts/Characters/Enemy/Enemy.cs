@@ -9,7 +9,7 @@ public class Enemy : Character, ITask
     [SerializeField] private EnemyAI _enemyAI;
     [SerializeField] private EnemySounds _sounds;
     [SerializeField] private EnemyDirectionOfView _view;
-    [SerializeField] private Attacker _attacker;
+    [SerializeField] private EnemyAttacker _attacker;
     [SerializeField] private int _rewardCoins;
     [SerializeField] private int _rewardGems;
 
@@ -24,7 +24,7 @@ public class Enemy : Character, ITask
     public EnemyAI AI => _enemyAI;
     public EnemySounds Sound => _sounds;
     public EnemyDirectionOfView View => _view;
-    public Attacker Attacker => _attacker;
+    public EnemyAttacker Attacker => _attacker;
     public WayPoint[] WayPoints { get; private set; }
     public EnemyHealth Health { get; private set; }
     public EnemyStaticData StaticData { get; private set; }
@@ -38,11 +38,11 @@ public class Enemy : Character, ITask
         _stateMachine = new EnemyStateMachine(this);
     }
 
-    public override void ApplyDamage(AttackBase damageInfo, Vector2 damageSource, Vector2 pushDirection)
+    public override void ApplyDamage(int damage, float knockbackForce, Vector2 damageSource, Vector2 pushDirection)
     {
         Sound.PlayHitSound();
 
-        base.ApplyDamage(damageInfo, damageSource, pushDirection);
+        base.ApplyDamage(damage, knockbackForce, damageSource, pushDirection);
 
         //var damageNumber = FXPool.Get(FXType.DamageNumber) as DamageValueAnimation;
         //damageNumber.Play(damageSource, damageInfo.Damage, damageInfo.IsCrit);

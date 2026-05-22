@@ -3,4 +3,5 @@
     public void Load();
     EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId);
     LevelData ForLevel(string sceneKey);
+    PlayerStaticData ForPlayer();
 }

@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 357485461133262346}
   - component: {fileID: 3162247971610878494}
   - component: {fileID: 2128498662344484686}
+  - component: {fileID: 5426562644204872532}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -262,6 +263,7 @@ MonoBehaviour:
   _arrowTracking: {fileID: 7438643703429730435}
   _playerSounds: {fileID: 3162247971610878494}
   _cameraShake: {fileID: 2128498662344484686}
+  _attacker: {fileID: 5426562644204872532}
 --- !u!114 &1931453704566832429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +390,26 @@ MonoBehaviour:
   _fgSuper: 0
   _fgPunch: 0
   _duration: 0.25
+--- !u!114 &5426562644204872532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728467383515744571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d567c3e115913c643aa5211b2b138aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fliper: {fileID: 841452606230542629}
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _attackEvent: {fileID: 1633683109253868779}
+  _cameraShake: {fileID: 2128498662344484686}
+  _superHitCount: 3
+  _comboCooldown: 1.2
 --- !u!1 &3975444971596480113
 GameObject:
   m_ObjectHideFlags: 0

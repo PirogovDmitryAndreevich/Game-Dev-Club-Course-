@@ -2,23 +2,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Fliper))]
 public abstract class Attacker : MonoBehaviour
-{    
+{
     [SerializeField] private Fliper _fliper;
-    [SerializeField] protected float Delay = 2f;
-    [SerializeField] protected AttackBase AttackType;
     [SerializeField] protected LayerMask TargetLayer;
 
-    protected Fliper Fliper;
-    protected float ColldownAttack;
-    private bool _isAttacking = false;
+    private float _colldownAttack;
 
-    public bool CanAttack => ColldownAttack <= Time.time && !_isAttacking;
-    public bool IsAttack { get; protected set; }
-    public float CurrentDelay => Delay;
+    public abstract float CooldownTime { get; }
+    public abstract float Offset { get; }
+    public abstract float Radius { get; }
+    public bool CanAttack => _colldownAttack <= Time.time && !IsAttack;
     public float SqrAttackDistance => Offset * Offset;
-    public abstract AttacksType type { get; }
-    protected float Offset => AttackType.Offset;
-    protected float Radius => AttackType.Radius;
+    public bool IsAttack { get; protected set; } = false;
+    protected Fliper Fliper => _fliper;
 
     public abstract void Attack();
 
@@ -31,7 +27,7 @@ public abstract class Attacker : MonoBehaviour
     protected void EndedAttack()
     {
         IsAttack = false;
-        ColldownAttack = Time.time + Delay;
+        _colldownAttack = Time.time + CooldownTime;
     }
 
     protected virtual Vector2 GetAttackOrigin()

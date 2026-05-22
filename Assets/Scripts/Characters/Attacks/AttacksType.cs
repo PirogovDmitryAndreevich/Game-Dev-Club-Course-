@@ -1,9 +1,8 @@
-[System.Serializable]
+using System;
+
+[Serializable]
 public enum AttacksType 
 {
-   PlayerDefaultAttack, 
-   PlayerSuperAttack,
-   GreyEnemyAttack,
-   PinkEnemyAttack,
-   RedEnemyAttack
+   DefaultAttack, 
+   Kick,
 }

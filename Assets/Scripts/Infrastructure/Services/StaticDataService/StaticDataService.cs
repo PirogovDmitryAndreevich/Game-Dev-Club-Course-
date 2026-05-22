@@ -6,6 +6,7 @@ public class StaticDataService : IStaticData
 {
     private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
     private Dictionary<string, LevelData> _levels;
+    private PlayerStaticData _playerData;
 
     public void Load()
     {
@@ -14,7 +15,8 @@ public class StaticDataService : IStaticData
 
         _levels = Resources.Load<LevelStaticData>("StaticData/LevelData")
             .LevelsGraveyard.ToDictionary(x => x.LevelKey, x => x);
-            
+
+        _playerData = Resources.Load<PlayerStaticData>("StaticData/PlayerData");            
     }
 
     public EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId) =>
@@ -26,4 +28,7 @@ public class StaticDataService : IStaticData
         _levels.TryGetValue(sceneKey, out LevelData data)
         ? data
         : null;
+
+    public PlayerStaticData ForPlayer() =>
+        _playerData;
 }

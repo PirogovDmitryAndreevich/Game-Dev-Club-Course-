@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
 
-public class MeleeEnemyAttacker : Attacker
+public class MeleeEnemyAttacker : EnemyAttacker
 {
     [SerializeField] private AnimationEvent _attackEvent;
-
-    public override AttacksType type => AttackType.Type;
+    [SerializeField] private CharacterAnimator _animator;
 
     private void OnDrawGizmos()
     {
@@ -13,10 +11,16 @@ public class MeleeEnemyAttacker : Attacker
         Gizmos.DrawWireSphere(GetAttackOrigin(), Radius);
     }
 
-    private void Start() =>
+    private void Start()
+    {
         _attackEvent.AttackEnded += OnEndedAttackEvent;
+        _attackEvent.DealDamage += OnDealDamage;
+    }
 
-    public override void Attack()
+    public override void Attack() => 
+        _animator.SetEnemyAttackTrigger();
+
+    private void OnDealDamage()
     {
         Vector2 origin = GetAttackOrigin();
 
@@ -28,10 +32,10 @@ public class MeleeEnemyAttacker : Attacker
                                         ? Vector2.right
                                             : Vector2.left;
 
-            player.ApplyDamage(AttackType, hit.ClosestPoint(origin), pushDirection);
+            player.ApplyDamage(Damage, KnockbackForce, hit.ClosestPoint(origin), pushDirection);
         }
     }
 
-    private void OnEndedAttackEvent() =>
+    private void OnEndedAttackEvent() => 
         EndedAttack();
 }

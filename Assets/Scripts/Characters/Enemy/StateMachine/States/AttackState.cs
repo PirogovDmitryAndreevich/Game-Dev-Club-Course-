@@ -27,23 +27,16 @@ class AttackState : State
 
     public override void Update()
     {
-        if (_enemy.Attacker.IsAttack == false)
+        if (!_enemy.Attacker.IsAttack)
             _enemy.EnemyFliper.LookAtTarget(_target.position);
 
-        if (_enemy.Attacker.CanAttack)
-        {
-            _enemy.Attacker.StartAttack();
-
-            if (_enemy.Attacker.type != AttacksType.RedEnemyAttack)
-            {
-                _enemy.EnemyAnimator.SetEnemyAttackTrigger();
-            }
-        }
+        if (_enemy.Attacker.CanAttack)        
+            _enemy.Attacker.StartAttack();        
     }
 
     public override void TryTransit()
     {
-        if (_enemy.Attacker.IsAttack == false)
+        if (!_enemy.Attacker.IsAttack)
             base.TryTransit();
     }
 }
