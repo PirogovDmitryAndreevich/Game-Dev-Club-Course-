@@ -8,4 +8,7 @@ public interface IGameFactory : IService
     CinemachineVirtualCamera CreateVirtualCamera();
     Enemy CreateEnemy(EnemyTypeId id, Vector2 at, List<WayPoint> wayPoints);
     List<EnemySpawner> CreateEnemySpawners(string sceneKey);
+    Bomb CreateBomb();
+    BombDamageArea CreateDamageArea();
+    BombYellow CreateExplosion();
 }

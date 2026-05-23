@@ -6,4 +6,7 @@ public static class AssetsPath
     public const string VirtualCameraPath = "VirtualCamera/Virtual Camera";
     public const string SpawnerPath = "Logic/EnemySpawner";
     public const string WayPoinPath = "Logic/WayPoint";
+    public const string BombPath = "Enemies/RangeEnemy/Bullet";
+    public const string BombAreaPath = "Enemies/RangeEnemy/DamageArea";
+    public const string BombExplosionPath = "Enemies/RangeEnemy/Bomb_Yellow";
 }

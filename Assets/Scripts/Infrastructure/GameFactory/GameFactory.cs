@@ -1,5 +1,6 @@
 using Cinemachine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameFactory : IGameFactory
@@ -12,9 +13,10 @@ public class GameFactory : IGameFactory
     private readonly IInputServices _input;
     private readonly IHandlersContainer _handlers;
     private readonly IStaticData _staticData;
+    private readonly IPoolService _poolService;
 
     public GameFactory(IAssets assets, IPersistentProgressService progressService, ISaveLoadService save, IInputServices input,
-        IHandlersContainer handlers, IStaticData staticData)
+        IHandlersContainer handlers, IStaticData staticData, IPoolService poolService)
     {
         _assets = assets;
         _progressService = progressService;
@@ -22,6 +24,7 @@ public class GameFactory : IGameFactory
         _input = input;
         _handlers = handlers;
         _staticData = staticData;
+        _poolService = poolService;
     }
 
     public CinemachineVirtualCamera CreateVirtualCamera()
@@ -53,10 +56,43 @@ public class GameFactory : IGameFactory
         EnemyStaticData data = _staticData.ForEnemy(enemyTypeId: id);
         Enemy enemy = Object.Instantiate(data.EnemyPrefab, position: at, Quaternion.identity);
         enemy.Attacker.Construct(data);
-        enemy.Construct(data , wayPoints);
+        enemy.Construct(data, wayPoints);
         enemy.Sound.Construct(_handlers.Audio);
 
+        if (id == EnemyTypeId.Range)
+        {
+            enemy.TryGetComponent(out EnemyBulletSpawner bulletSpawner);
+            bulletSpawner?.Construct(_poolService, this);
+        }
+
         return null;
+    }
+
+    public Bomb CreateBomb()
+    {
+        var bomb = _assets.Instantiate(AssetsPath.BombPath)
+            .GetComponent<Bomb>();
+
+        bomb.Construct(_poolService);
+        return bomb;
+    }
+
+    public BombDamageArea CreateDamageArea()
+    {
+        var area = _assets.Instantiate(AssetsPath.BombAreaPath)
+            .GetComponent<BombDamageArea>();
+
+        area.Construct(_poolService);
+        return area;
+    }
+
+    public BombYellow CreateExplosion()
+    {
+        var explosion = _assets.Instantiate(AssetsPath.BombExplosionPath)
+            .GetComponent<BombYellow>();
+
+        explosion.Construct(_poolService, _handlers.Audio);
+        return explosion;
     }
 
     public List<EnemySpawner> CreateEnemySpawners(string sceneKey)

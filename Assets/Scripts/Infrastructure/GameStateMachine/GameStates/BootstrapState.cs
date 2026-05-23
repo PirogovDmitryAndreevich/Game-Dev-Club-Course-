@@ -27,6 +27,7 @@ public class BootstrapState : IState
         _services.RegisterSingle<IAssets>(new AssetProvider());
         _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
         _services.RegisterSingle<IScenesLogicContainer>(new ScenesLogicContainer());
+        _services.RegisterSingle<IPoolService>(new PoolService());
 
         _services.RegisterSingle<IPersistentHandlersFactory>(new PersistentHandlersFactory(_services.Single<IAssets>(),
             _services.Single<IPersistentProgressService>()));
@@ -35,9 +36,14 @@ public class BootstrapState : IState
 
         _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>()));
 
-        _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>(), _services.Single<IPersistentProgressService>(),
-            _services.Single<ISaveLoadService>(), _services.Single<IInputServices>(), _services.Single<IHandlersContainer>(),
-            _services.Single<IStaticData>()));
+        _services.RegisterSingle<IGameFactory>(new GameFactory(
+            _services.Single<IAssets>(),
+            _services.Single<IPersistentProgressService>(),
+            _services.Single<ISaveLoadService>(),
+            _services.Single<IInputServices>(),
+            _services.Single<IHandlersContainer>(),
+            _services.Single<IStaticData>(),
+            _services.Single<IPoolService>()));
 
         _services.RegisterSingle<IUIFactory>(new UIFactory(_gameStateMachine, _services.Single<IAssets>(), _services.Single<IHandlersContainer>(),
             _services.Single<IPersistentProgressService>(), _services.Single<ISaveLoadService>()));

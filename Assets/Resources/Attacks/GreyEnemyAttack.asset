@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ebae97a80f0f840bebc2b8c1def7e1, type: 3}
   m_Name: GreyEnemyAttack
   m_EditorClassIdentifier: 
-  _type: 2
+  _type: 0
   _damage: 5
   _radius: 0.85
   _offset: 0.85

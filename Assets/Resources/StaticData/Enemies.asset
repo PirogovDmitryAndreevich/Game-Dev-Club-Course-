@@ -39,3 +39,16 @@ MonoBehaviour:
     KnockbackForce: 3
     EnemyPrefab: {fileID: 6191971096430851480, guid: 4835f8d3bd78d2c4ea37e499f761cb64,
       type: 3}
+  - TypeId: 1
+    MaxHealth: 100
+    MaxSqrDistance: 0.3
+    TryFindTime: 1
+    WaitTime: 2
+    RunSpeed: 3
+    Damage: 10
+    AttackRadius: 5
+    AttackOffset: 0
+    ColdawnAttack: 1.5
+    KnockbackForce: 3
+    EnemyPrefab: {fileID: 8500915133401570751, guid: c74dc63b0b8864a449191d0edd428957,
+      type: 3}

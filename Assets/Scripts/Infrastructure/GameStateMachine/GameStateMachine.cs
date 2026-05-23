@@ -19,7 +19,8 @@ public class GameStateMachine
 
             [typeof(RegisterLevelsState)] = new RegisterLevelsState(this, services),
 
-            [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, curtain, services.Single<IScenesLogicContainer>()),
+            [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, curtain, services.Single<IScenesLogicContainer>(),
+            services.Single<IPoolService>()),
 
             [typeof(GameLoopState)] = new GameLoopState(),
         };

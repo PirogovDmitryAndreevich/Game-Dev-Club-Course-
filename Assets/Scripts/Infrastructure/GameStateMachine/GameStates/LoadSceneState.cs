@@ -4,19 +4,23 @@ public class LoadSceneState : IPayloadState<SceneID>
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _curtain;
     private readonly IScenesLogicContainer _scenesContainer;
+    private readonly IPoolService _poolService;
     private IScene loadedScene;
 
-    public LoadSceneState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IScenesLogicContainer scenesContainer)
+    public LoadSceneState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IScenesLogicContainer scenesContainer,
+        IPoolService poolService)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
         _curtain = curtain;
         _scenesContainer = scenesContainer;
+        _poolService = poolService;
     }
 
     public void Enter(SceneID sceneId)
     {
         _curtain.Show();
+        _poolService.Cleanup();
         loadedScene = _scenesContainer.Scenes[sceneId];
         _sceneLoader.Load(sceneId, OnLoaded);
     }
@@ -29,6 +33,6 @@ public class LoadSceneState : IPayloadState<SceneID>
 
     public void Exit()
     {
-        _curtain.Hide();
+        _curtain.Hide();        
     }
 }

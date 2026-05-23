@@ -1,25 +1,18 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(ParticleSystem), typeof(AudioSource))]
+[RequireComponent(typeof(ParticleSystem))]
 public class BombYellow : MonoBehaviour
 {
-    [SerializeField] private AudioClip _bombEffect;
+    [SerializeField] private AudioClip _bombSound;
+    [SerializeField] private ParticleSystem _particles;
 
-    private SaveData _progress;
-    private AudioSource _bombSource;
-    private ParticleSystem _particles;
+    private AudioHandler _handler;    
     private bool _isPlaying;
-
-    public Action ExplosionStopped;
+    private IPoolService _pool;
 
     private void Awake()
-    {
-        _particles = GetComponent<ParticleSystem>();
-        _bombSource = GetComponent<AudioSource>();
-        _bombSource.playOnAwake = false;
-        _bombSource.loop = false;
-
+    {  
         var main = _particles.main;
         main.stopAction = ParticleSystemStopAction.Callback;
 
@@ -40,13 +33,13 @@ public class BombYellow : MonoBehaviour
             return;
 
         _isPlaying = false;
-
-        ExplosionStopped?.Invoke();
+        _pool.Return(this);
     }
 
-    public void Construct(IPersistentProgressService progressService)
+    public void Construct(IPoolService poolService, AudioHandler handler)
     {
-        _progress = progressService.Progress;
+        _handler = handler;
+        _pool = poolService;
     }
 
     public void Play(Vector2 point)
@@ -58,10 +51,7 @@ public class BombYellow : MonoBehaviour
 
         _isPlaying = true;
 
-        _bombSource.volume = _progress.GameData.SoundValue;
-        _bombSource.mute = _progress.GameData.IsSoundMute;
-
-        _bombSource.PlayOneShot(_bombEffect);
+        _handler.PlaySound(_bombSound);
         _particles.Play();
     }
 }
