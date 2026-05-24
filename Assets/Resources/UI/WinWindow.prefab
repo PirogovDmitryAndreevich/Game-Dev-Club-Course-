@@ -147,8 +147,10 @@ GameObject:
   - component: {fileID: 193346082903147361}
   - component: {fileID: 7676163686098463215}
   - component: {fileID: 2757438412694257858}
+  - component: {fileID: 3046969447783399640}
+  - component: {fileID: 8665162251337341814}
   m_Layer: 5
-  m_Name: WinCanvas
+  m_Name: WinWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,6 +239,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &3046969447783399640
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228966903764158793}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &8665162251337341814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228966903764158793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e6d9f6960a7e34a8c6462df307aab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _restartButton: {fileID: 2395728877738192276}
+  _exitButton: {fileID: 5072279650097419700}
+  _nextButton: {fileID: 2433971265326798633}
+  _nextButtonImage: {fileID: 1875404355500879013}
+  _canvasGroup: {fileID: 6853324835705932002}
+  _appearanceDuration: 0.15
+  _appearanceButton: 0.5
 --- !u!1 &748289365499557479
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aeb2f40500f1e45bf87a7c308975d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManger: {fileID: 0}
   _pointerDown: {fileID: 8300000, guid: 9abb3a81b78d7cb4e8e1e42cad3709ef, type: 3}
   _pointerEnter: {fileID: 8300000, guid: a0ce1b3be119945678e20f87d908d853, type: 3}
   _pointerExit: {fileID: 0}
@@ -390,10 +422,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12822357519453c4680ed3f69f0a0454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverScale: 1.04
-  pressedScale: 0.97
-  duration: 0.1
-  ease: 6
+  _hoverScale: 1.04
+  _pressedScale: 0.97
+  _duration: 0.1
+  _ease: 6
 --- !u!1 &2310072436837320787
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +512,6 @@ GameObject:
   - component: {fileID: 4943906441594433143}
   - component: {fileID: 4266262876259666130}
   - component: {fileID: 6853324835705932002}
-  - component: {fileID: 3985410643748649406}
   m_Layer: 5
   m_Name: WinWindow
   m_TagString: Untagged
@@ -532,24 +563,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &3985410643748649406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2687829335666096733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2e6d9f6960a7e34a8c6462df307aab0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentAudioManager: {fileID: 0}
-  _restartButton: {fileID: 2395728877738192276}
-  _exitButton: {fileID: 5072279650097419700}
-  _nextButton: {fileID: 2433971265326798633}
-  _appearanceDuration: 0.15
-  _appearanceButton: 0.5
 --- !u!1 &3774852572288021992
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aeb2f40500f1e45bf87a7c308975d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManger: {fileID: 0}
   _pointerDown: {fileID: 8300000, guid: 9abb3a81b78d7cb4e8e1e42cad3709ef, type: 3}
   _pointerEnter: {fileID: 8300000, guid: a0ce1b3be119945678e20f87d908d853, type: 3}
   _pointerExit: {fileID: 0}
@@ -913,10 +925,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12822357519453c4680ed3f69f0a0454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverScale: 1.04
-  pressedScale: 0.97
-  duration: 0.1
-  ease: 6
+  _hoverScale: 1.04
+  _pressedScale: 0.97
+  _duration: 0.1
+  _ease: 6
 --- !u!1 &4957573668753374351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,10 +1065,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12822357519453c4680ed3f69f0a0454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverScale: 1.04
-  pressedScale: 0.97
-  duration: 0.1
-  ease: 6
+  _hoverScale: 1.04
+  _pressedScale: 0.97
+  _duration: 0.1
+  _ease: 6
 --- !u!114 &2297243028144826837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,7 +1081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aeb2f40500f1e45bf87a7c308975d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManger: {fileID: 0}
   _pointerDown: {fileID: 8300000, guid: 9abb3a81b78d7cb4e8e1e42cad3709ef, type: 3}
   _pointerEnter: {fileID: 8300000, guid: a0ce1b3be119945678e20f87d908d853, type: 3}
   _pointerExit: {fileID: 0}

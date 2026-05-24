@@ -7,15 +7,17 @@ public class UIFactory : IUIFactory
     private readonly IHandlersContainer _handlersContainer;
     private readonly IPersistentProgressService _progressService;
     private readonly ISaveLoadService _save;
+    private readonly IStaticData _staticData;
 
     public UIFactory(GameStateMachine gameStateMachine, IAssets assetProvider, IHandlersContainer handlersContainer,
-        IPersistentProgressService progressService, ISaveLoadService save)
+        IPersistentProgressService progressService, ISaveLoadService save, IStaticData staticData)
     {
         _gameStateMachine = gameStateMachine;
         _assets = assetProvider;
         _handlersContainer = handlersContainer;
         _progressService = progressService;
         _save = save;
+        _staticData = staticData;
     }
 
     public void CreateMainMenu()
@@ -26,15 +28,37 @@ public class UIFactory : IUIFactory
         menu.Construct(_gameStateMachine, _progressService, _handlersContainer, _save);
     }
 
-    public void CreateHud(bool isDesktop, SceneID currentScene, Player player)
+    public void CreateWinWindow(string sceneKey)
     {
+        LevelData levelData = _staticData.ForLevel(sceneKey);
+
+        WinWindow window = _assets.Instantiate(AssetsPath.WinWindowPath)
+            .GetComponent<WinWindow>();
+
+        window.Construct(levelData.ID, levelData.NextSceneID, _gameStateMachine, _handlersContainer.Audio);
+    }
+
+    public void CreateFailWindow(string sceneKey, Player player)
+    {
+        LevelData levelData = _staticData.ForLevel(sceneKey);
+
+        FailWindow window = _assets.Instantiate(AssetsPath.FailWindowPath)
+            .GetComponent<FailWindow>();
+
+        window.Construct(levelData.ID,_gameStateMachine,_handlersContainer.Audio,player);
+    }
+
+    public void CreateHud(bool isDesktop, string sceneKey, Player player)
+    {
+        LevelData levelData = _staticData.ForLevel(sceneKey);
+
         GameObject hudObject = isDesktop
             ? CreateHudDesktop()
             : CreateHudMobile();
 
         Hud _hud = hudObject.GetComponent<Hud>();
 
-        PauseWindow pauseWindow = CreatePauseWindow(currentScene);
+        PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);
         
         _hud.Construct(pauseWindow);
 

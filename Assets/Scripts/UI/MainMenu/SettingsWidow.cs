@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsWidow : PauseBase
+public class SettingsWidow : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _panelView;
     [SerializeField] private CanvasGroup _anticlicker;
@@ -18,24 +18,29 @@ public class SettingsWidow : PauseBase
     [SerializeField] private float _panelScaleDuration;
 
     private RectTransform _panelRectTransform;
+    private Sequence Animation;
+    AudioHandler AudioHandler;
 
     public AudioSettings AudioSlider => _audioSettings;
+    private bool IsAnimating =>
+        Animation != null && Animation.active;
 
-    private void Awake()
-    {
-        _panelView.alpha = 0f;
-        _anticlicker.alpha = 0f;
-        _panelRectTransform = _panelView.GetComponent<RectTransform>();
-    }
+
+    private void OnEnable() => 
+        _closeButton.onClick.AddListener(OnClickCloseButton);
+
+    private void OnDisable() => 
+        _closeButton.onClick.RemoveListener(OnClickCloseButton);
 
     public void Construct(AudioHandler audio)
     {
-        CurrentAudioManager = audio;        
+        AudioHandler = audio;
+        _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 
-    public override void Hide(Action callback)
+    public void Hide(Action callback)
     {
-        CurrentAudioManager.PlaySound(_hideShowSound);
+        AudioHandler.PlaySound(_hideShowSound);
 
         KillCurrentAnimationIfActive();
 
@@ -50,9 +55,9 @@ public class SettingsWidow : PauseBase
             .OnComplete(() => callback?.Invoke());
     }
 
-    public override void Show()
+    public void Show()
     {
-        CurrentAudioManager.PlaySound(_hideShowSound);
+        AudioHandler.PlaySound(_hideShowSound);
 
         _panelView.gameObject.SetActive(true);
 
@@ -68,13 +73,12 @@ public class SettingsWidow : PauseBase
             .Play();
     }
 
-    protected override void Enable()
+    private void KillCurrentAnimationIfActive()
     {
-        _closeButton.onClick.AddListener(Continue);        
+        if (IsAnimating)
+            Animation.Kill();
     }
 
-    protected override void Disable()
-    {
-        _closeButton.onClick.RemoveListener(Continue);        
-    }
+    private void OnClickCloseButton() => 
+        Hide(() => gameObject.SetActive(false));
 }

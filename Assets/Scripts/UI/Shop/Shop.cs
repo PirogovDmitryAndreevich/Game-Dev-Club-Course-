@@ -20,6 +20,10 @@ public class Shop : PauseBase
 
     private CanvasGroup _canvasGroup;
 
+    protected override AudioHandler AudioHandler { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    protected override GameStateMachine GameStateMachine { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    protected override SceneID CurrentScene { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();

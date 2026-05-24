@@ -17,10 +17,10 @@ public class LevelStaticDataEditor : Editor
         {
             string sceneKey = SceneManager.GetActiveScene().name;
 
-            if (levelData.LevelsGraveyard == null)
-                levelData.LevelsGraveyard = new List<LevelData>();
+            if (levelData.LevelData == null)
+                levelData.LevelData = new List<LevelData>();
 
-            LevelData data = levelData.LevelsGraveyard
+            LevelData data = levelData.LevelData
                 .FirstOrDefault(x => x.LevelKey == sceneKey);
 
             if (data == null)
@@ -28,7 +28,7 @@ public class LevelStaticDataEditor : Editor
                 data = new LevelData();
                 data.LevelKey = sceneKey;
 
-                levelData.LevelsGraveyard.Add(data);
+                levelData.LevelData.Add(data);
             }
 
             data.EnemySpawnerDatas = FindObjectsOfType<EnemySpawnMarker>()

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f97c8b6d40b8af479b13e018404b175, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  LevelsGraveyard:
+  LevelData:
   - LevelKey: Level_1
+    ID: 2
+    NextSceneID: 15
     EnemySpawnerDatas:
     - Id: Level_1_ae8a5849-c2a8-402d-b62a-0562c5f4ea87
       TypeId: 1

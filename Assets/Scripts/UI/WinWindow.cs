@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
@@ -10,18 +9,23 @@ public class WinWindow : PauseBase
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _nextButton;
+    [SerializeField] private Image _nextButtonImage;
+    [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private float _appearanceDuration = 0.5f;
     [SerializeField] private float _appearanceButton = 0.5f;
 
-    private CanvasGroup _canvasGroup;
-    private Image _nextButtonImage;
-    private int _nextSceneIndex;
+    private SceneID _nextSceneID;
 
-    private void Awake()
+    protected override AudioHandler AudioHandler { get; set; }
+    protected override GameStateMachine GameStateMachine { get; set; }
+    protected override SceneID CurrentScene { get; set; }
+
+    public void Construct(SceneID current, SceneID next, GameStateMachine stateMachine, AudioHandler handler)
     {
-        _canvasGroup = GetComponent<CanvasGroup>();
-        _nextButtonImage = _nextButton.GetComponent<Image>();
-        _canvasGroup.alpha = 0f;
+        CurrentScene = current;
+        GameStateMachine = stateMachine;
+        AudioHandler = handler;
+        _nextSceneID = next;
     }
 
     public override void Show()
@@ -56,8 +60,7 @@ public class WinWindow : PauseBase
     protected override void Enable()
     {
         base.Enable();
-        _nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        bool isNextLevel = SceneManager.sceneCountInBuildSettings > _nextSceneIndex;
+        bool isNextLevel = _nextSceneID != SceneID.Non;
         _nextButton.interactable = isNextLevel;
         _nextButtonImage.color = isNextLevel ? _nextButtonImage.color : Color.gray;
 
@@ -74,8 +77,6 @@ public class WinWindow : PauseBase
         _nextButton.onClick.RemoveListener(NextLevel);
     }
 
-    private void NextLevel()
-    {
-        //LoadScene(_nextSceneIndex);
-    }
+    private void NextLevel() => 
+        LoadScene(_nextSceneID);
 }

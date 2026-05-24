@@ -4,11 +4,11 @@ using DG.Tweening;
 
 public abstract class PauseBase : MonoBehaviour
 {
-    protected AudioHandler CurrentAudioManager;
-    protected GameStateMachine GameStateMachine;
     protected Sequence Animation;
 
-    protected SceneID CurrentScene { get; set; }
+    protected abstract AudioHandler AudioHandler { get; set; }
+    protected abstract GameStateMachine GameStateMachine { get; set; }
+    protected abstract SceneID CurrentScene { get; set; }
 
     private bool IsAnimating =>
         Animation != null && Animation.active;

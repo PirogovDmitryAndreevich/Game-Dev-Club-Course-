@@ -12,4 +12,6 @@ public static class AssetsPath
     public const string HudMobilePath = "UI/Hud/HudMobile";
     public const string HudDesktopPath = "UI/Hud/HudDesktop";
     public const string PauseWindowPath = "UI/PauseWindow";
+    public const string WinWindowPath = "UI/WinWindow";
+    public const string FailWindowPath = "UI/FailWindow";
 }

@@ -18,7 +18,7 @@ public class StaticDataService : IStaticData
             .Enemies.ToDictionary(x => x.TypeId, x => x);
 
         _levels = Resources.Load<LevelStaticData>(LevelDataPath)
-            .LevelsGraveyard.ToDictionary(x => x.LevelKey, x => x);
+            .LevelData.ToDictionary(x => x.LevelKey, x => x);
 
         _playerData = Resources.Load<PlayerStaticData>(PlayerDataPath);            
     }

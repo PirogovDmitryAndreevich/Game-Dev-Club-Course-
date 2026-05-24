@@ -19,8 +19,6 @@ public class GameLogic : MonoBehaviour
 
     private void Awake()
     {
-        _failWindow.Initialize(_player);
-
         _finalBusStop.Interacted += StartFinishProcess;
 
         _finisher.FinishLevelConditionsCompleted += FinishLevelConditionsCompleted;

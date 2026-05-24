@@ -6,5 +6,8 @@ public class LevelData
 {
     public string LevelKey;
 
+    public SceneID ID;
+    public SceneID NextSceneID;
+
     public List<EnemySpawnerData> EnemySpawnerDatas;
 }

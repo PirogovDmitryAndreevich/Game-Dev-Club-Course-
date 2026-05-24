@@ -26,18 +26,17 @@ public class PauseWindow : PauseBase
 
     public AudioSettings AudioSettings => _audioSettings;
 
-    private void Awake()
-    {
-        _panelView.alpha = 0f;
-        _anticlicker.alpha = 0f;
-        _panelRectTransform = _panelView.GetComponent<RectTransform>();
-    }
+    protected override AudioHandler AudioHandler { get; set; }
+    protected override GameStateMachine GameStateMachine { get; set; }
+    protected override SceneID CurrentScene { get; set; }
 
     public void Construct(SceneID id, AudioHandler handler, GameStateMachine stateMachine)
     {
-        CurrentAudioManager = handler;
+        AudioHandler = handler;
         GameStateMachine = stateMachine;
         CurrentScene = id;
+
+        _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 
     public override void Show()
@@ -58,7 +57,7 @@ public class PauseWindow : PauseBase
             .Play();
 
         if (_showSound != null)
-            CurrentAudioManager.PlaySound(_showSound);
+            AudioHandler.PlaySound(_showSound);
     }
 
     public override void Hide(Action callback)
@@ -76,7 +75,7 @@ public class PauseWindow : PauseBase
             .OnComplete(() => callback?.Invoke());
 
         if (_hideSound != null)
-            CurrentAudioManager.PlaySound(_hideSound);
+            AudioHandler.PlaySound(_hideSound);
     }
 
     protected override void Enable()

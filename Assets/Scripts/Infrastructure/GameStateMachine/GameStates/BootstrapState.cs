@@ -45,8 +45,13 @@ public class BootstrapState : IState
             _services.Single<IStaticData>(),
             _services.Single<IPoolService>()));
 
-        _services.RegisterSingle<IUIFactory>(new UIFactory(_gameStateMachine, _services.Single<IAssets>(), _services.Single<IHandlersContainer>(),
-            _services.Single<IPersistentProgressService>(), _services.Single<ISaveLoadService>()));
+        _services.RegisterSingle<IUIFactory>(new UIFactory(
+            _gameStateMachine,
+            _services.Single<IAssets>(),
+            _services.Single<IHandlersContainer>(),
+            _services.Single<IPersistentProgressService>(),
+            _services.Single<ISaveLoadService>(),
+            _services.Single<IStaticData>()));
     }
 
     private void RegisterStaticData()

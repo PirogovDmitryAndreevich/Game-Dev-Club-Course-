@@ -8,16 +8,33 @@ public class FailWindow : PauseBase
 {
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _exitButton;
+    [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private float _appearanceDuration = 0.5f;
     [SerializeField] private float _appearanceButton = 0.5f;
 
     private Player _player;
-    private CanvasGroup _canvasGroup;
 
-    private void Awake()
+    protected override AudioHandler AudioHandler { get; set; }
+    protected override GameStateMachine GameStateMachine { get; set; }
+    protected override SceneID CurrentScene { get; set; }
+
+    private void OnDestroy()
     {
-        _canvasGroup = GetComponent<CanvasGroup>();
-        _canvasGroup.alpha = 0f;
+        _player.Health.Died -= OnPlayerDied;
+        _restartButton.onClick.RemoveListener(Restart);
+        _exitButton.onClick.RemoveListener(Exit);
+    }
+
+    public void Construct(SceneID current, GameStateMachine stateMachine, AudioHandler audio, Player player)
+    {
+        CurrentScene = current;
+        GameStateMachine = stateMachine;
+        AudioHandler = audio;
+        _player = player;
+
+        _player.Health.Died += OnPlayerDied;
+        _restartButton.onClick.AddListener(Restart);
+        _exitButton.onClick.AddListener(Exit);
     }
 
     public override void Show()
@@ -47,27 +64,6 @@ public class FailWindow : PauseBase
             .Append(_canvasGroup.DOFade(0f, _appearanceDuration)).SetEase(Ease.Flash)
             .Play()
             .OnComplete(() => callback?.Invoke());
-    }    
-
-    internal void Initialize(Player player)
-    {
-        _player = player;
-        //_player.CharacterDied += OnPlayerDied;
-    }
-
-    protected override void Enable()
-    {
-        base.Enable();
-        _restartButton.onClick.AddListener(Restart);
-        _exitButton.onClick.AddListener(Exit);
-    }
-
-    protected override void Disable()
-    {
-        base.Disable();
-        _restartButton.onClick.RemoveListener(Restart);
-        _exitButton.onClick.RemoveListener(Exit);
-        //_player.CharacterDied -= OnPlayerDied;
     }
 
     private void OnPlayerDied()
