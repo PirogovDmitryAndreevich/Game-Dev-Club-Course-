@@ -23,7 +23,7 @@ public class PlayerHealth : IHealth
 
     public void ApplyDamage(int damage)
     {
-        if (damage < 0)
+        if (damage <= 0)
             return;
 
         ChangeHealth(-damage);

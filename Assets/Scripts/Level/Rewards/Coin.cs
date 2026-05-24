@@ -1,1 +1,4 @@
-public class Coin : RewardForKillEnemy{ }
+public class Coin
+{
+
+}

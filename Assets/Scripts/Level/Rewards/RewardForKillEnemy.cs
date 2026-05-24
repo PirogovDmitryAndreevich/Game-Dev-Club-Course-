@@ -1,15 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public abstract class RewardForKillEnemy : FXBase, IItem
+public abstract class RewardForKillEnemy 
 {
     private const float MinJumpDistance = 1f;
 
     [Header("Base settings")]
     [SerializeField] private AudioClip _sound;
     [SerializeField] private Transform _view;
-    [SerializeField] private FXType _type;
 
     [Header("Animation settings")]
     [SerializeField] private float _idleHeight = 0.1f;
@@ -24,7 +22,6 @@ public abstract class RewardForKillEnemy : FXBase, IItem
     private Tween _idleAnimation;
     private BoxCollider2D _collider;
 
-    public override FXType Type => _type;
     public int Value => _value;
     public AudioClip Sound => _sound;
 
@@ -37,7 +34,7 @@ public abstract class RewardForKillEnemy : FXBase, IItem
             .SetAutoKill(false)
             .Pause();
 
-        _collider = GetComponent<BoxCollider2D>();
+        //_collider = GetComponent<BoxCollider2D>();
     }
 
     private void OnEnable()
@@ -51,15 +48,15 @@ public abstract class RewardForKillEnemy : FXBase, IItem
         _idleAnimation.Pause();
     }
 
-    public override void Play(Vector2 point)
+    public  void Play(Vector2 point)
     {
-        gameObject.SetActive(true);
+        /*gameObject.SetActive(true);
 
         transform.DOKill();
         _idleAnimation.Pause();
 
         transform.position = point;
-        _view.localScale = Vector3.zero;
+        _view.localScale = Vector3.zero;*/
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
         float randomDistance = Random.Range(MinJumpDistance, _maxJumpDistance);
@@ -72,15 +69,15 @@ public abstract class RewardForKillEnemy : FXBase, IItem
         _appearAnimation
             .Append(_view.DOScale(1f, 0.25f).From(0f)
                 .SetEase(Ease.OutBack))
-            .Join(transform.DOJump(targetPos, _jumpPower, _numJumps, _jumpDuration)
-                .SetEase(Ease.OutBounce))
+            /*.Join(transform.DOJump(targetPos, _jumpPower, _numJumps, _jumpDuration)
+                .SetEase(Ease.OutBounce))*/
             .OnComplete(Moving)
             .Play();
     }
 
     public void Collect()
     {
-        ReturnToPool?.Invoke(this);
+       // ReturnToPool?.Invoke(this);
     }
 
     public void SetReward(int value)

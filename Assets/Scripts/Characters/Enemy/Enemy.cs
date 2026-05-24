@@ -44,6 +44,8 @@ public class Enemy : Character, ITask
 
         base.ApplyDamage(damage, knockbackForce, damageSource, pushDirection);
 
+        Health.ApplyDamage(damage);
+
         //var damageNumber = FXPool.Get(FXType.DamageNumber) as DamageValueAnimation;
         //damageNumber.Play(damageSource, damageInfo.Damage, damageInfo.IsCrit);
 

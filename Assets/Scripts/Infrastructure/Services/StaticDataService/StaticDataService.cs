@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class StaticDataService : IStaticData
 {
+    private const string EnemiesPath = "StaticData/Enemies";
+    private const string LevelDataPath = "StaticData/LevelData";
+    private const string PlayerDataPath = "StaticData/PlayerData";
+
     private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
     private Dictionary<string, LevelData> _levels;
     private PlayerStaticData _playerData;
 
     public void Load()
     {
-        _enemies = Resources.Load<AllEnemiesStaticData>("StaticData/Enemies")
+        _enemies = Resources.Load<AllEnemiesStaticData>(EnemiesPath)
             .Enemies.ToDictionary(x => x.TypeId, x => x);
 
-        _levels = Resources.Load<LevelStaticData>("StaticData/LevelData")
+        _levels = Resources.Load<LevelStaticData>(LevelDataPath)
             .LevelsGraveyard.ToDictionary(x => x.LevelKey, x => x);
 
-        _playerData = Resources.Load<PlayerStaticData>("StaticData/PlayerData");            
+        _playerData = Resources.Load<PlayerStaticData>(PlayerDataPath);            
     }
 
     public EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId) =>

@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c19b4eddfcba4da7042a6f3f3c2e3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  SuperHitCount: 3
+  ComboCooldown: 1.2
   CooldownTime: 0.35
   AttackOffset: 0.85
   AttackRadius: 0.85
+  Attacks:
+  - Type: 0
+    Damage: 5
+    AttackOffset: 0.85
+    AttackRadius: 0.85
+    KnockbackForce: 0.5
+    IsCreat: 0

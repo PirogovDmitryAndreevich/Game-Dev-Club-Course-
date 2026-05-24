@@ -1,15 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ParticleSystem))]
-public class EnemyDeathParticles : FXBase
+public class EnemyDeathParticles 
 {
     private ParticleSystem _particles;
 
-    public override FXType Type => FXType.EnemyDeath;
 
     private void Awake()
     {
-        _particles = GetComponent<ParticleSystem>();
+        //_particles = GetComponent<ParticleSystem>();
 
         var main = _particles.main;
         main.stopAction = ParticleSystemStopAction.Callback;
@@ -20,12 +18,12 @@ public class EnemyDeathParticles : FXBase
 
     private void OnParticleSystemStopped()
     {
-        ReturnToPool?.Invoke(this);
+       // ReturnToPool?.Invoke(this);
     }
 
-    public override void Play(Vector2 point)
+    public  void Play(Vector2 point)
     {
-        transform.position = point;
+        //transform.position = point;
         _particles.Play();
     }
 }

@@ -4,32 +4,23 @@ public class CharacterAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
 
-    public void SetIsWalk(bool isWalk)
-    {
+    public void SetIsWalk(bool isWalk) => 
         _animator.SetBool(ConstantsData.AnimatorParameters.IsWalk, isWalk);
-    }
-    public void SetHitTrigger()
-    {
+    public void SetHitTrigger() => 
         _animator.SetTrigger(ConstantsData.AnimatorParameters.Hit);
-    }
 
-    public void SetEnemyAttackTrigger()
-    {
+    public void SetEnemyAttackTrigger() => 
         _animator.SetTrigger(ConstantsData.AnimatorParameters.IsAttack);
-    }
 
-    public void SetEnemyAttackBool(bool isAttackEnded)
-    {
+    public void SetEnemyAttackBool(bool isAttackEnded) => 
         _animator.SetBool(ConstantsData.AnimatorParameters.IsAttackBool, isAttackEnded);
-    }
 
-    public void SetPlayerDashTrigger()
-    {
+    public void SetPlayerDashTrigger() => 
         _animator.SetTrigger(ConstantsData.AnimatorParameters.IsDash);
-    }
 
-    public void SetDefaultPlayerAttackTrigger()
-    {
+    public void SetDefaultPlayerAttackTrigger() => 
         _animator.SetTrigger(ConstantsData.AnimatorParameters.IsAttack);
-    }
+
+    public void SetPlayerAttack(PlayerAttackType type) =>
+        _animator.SetTrigger(type.ToString());
 }

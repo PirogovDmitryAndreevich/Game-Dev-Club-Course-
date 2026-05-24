@@ -1,57 +1,48 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public abstract class PauseBase : MonoBehaviour
 {
-    private const int MainMenuSceneIndex = 0;
-
     protected AudioHandler CurrentAudioManager;
-
+    protected GameStateMachine GameStateMachine;
     protected Sequence Animation;
 
-    protected bool IsAnimating => Animation != null && Animation.active;
+    protected SceneID CurrentScene { get; set; }
+
+    private bool IsAnimating =>
+        Animation != null && Animation.active;
 
     private void OnEnable() =>
         Enable();
 
     private void OnDisable() =>
-        Disable();        
+        Disable();
+
+    private void Start() =>
+        gameObject.SetActive(false);
 
     public abstract void Show();
 
     public abstract void Hide(Action callback);
 
-    protected virtual void Restart()
-    {
-        LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    protected virtual void Restart() => 
+        LoadScene(CurrentScene);
 
-    protected virtual void Continue()
-    {
+    protected virtual void Continue() => 
         Hide(() => gameObject.SetActive(false));
-    }
 
-    protected virtual void Exit()
-    {
-        LoadScene(MainMenuSceneIndex);
-    }
+    protected virtual void Exit() => 
+        LoadScene(SceneID.MainMenu);
 
-    protected virtual void Enable()
-    {
+    protected virtual void Enable() => 
         TimeManager.Pause();
-    }
 
-    protected virtual void Disable()
-    {
+    protected virtual void Disable() => 
         TimeManager.Run();
-    }
 
-    protected void LoadScene(int index)
-    {
-        SceneManager.LoadScene(index);
-    }
+    protected void LoadScene(SceneID index) => 
+        GameStateMachine.Enter<LoadSceneState, SceneID>(index);
 
     protected void KillCurrentAnimationIfActive()
     {

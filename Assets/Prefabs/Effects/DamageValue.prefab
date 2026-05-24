@@ -111,7 +111,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8951871663846460656}
-  - component: {fileID: 2714277430196339932}
   m_Layer: 0
   m_Name: DamageValue
   m_TagString: Untagged
@@ -135,27 +134,6 @@ Transform:
   - {fileID: 4373185896752893513}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2714277430196339932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466740674794415260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075aab3a9de115e44b35c63853d63ba5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsActive: 0
-  _value: {fileID: 6612199084625980445}
-  moveDuration: 0.7
-  fadeDelay: 0.2
-  fadeDuration: 0.2
-  moveY: 1
-  randomX: 1
-  startScale: 0.6
-  punchScale: 0.4
 --- !u!1 &6356608671274399038
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +209,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3

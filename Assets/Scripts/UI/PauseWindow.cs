@@ -8,6 +8,7 @@ public class PauseWindow : PauseBase
 {
     [SerializeField] private CanvasGroup _panelView;
     [SerializeField] private CanvasGroup _anticlicker;
+    [SerializeField] private AudioSettings _audioSettings;
 
     [Header("Animation setting")]
     [SerializeField] private float _ACDuration;
@@ -23,11 +24,20 @@ public class PauseWindow : PauseBase
 
     private RectTransform _panelRectTransform;
 
+    public AudioSettings AudioSettings => _audioSettings;
+
     private void Awake()
     {
         _panelView.alpha = 0f;
         _anticlicker.alpha = 0f;
         _panelRectTransform = _panelView.GetComponent<RectTransform>();
+    }
+
+    public void Construct(SceneID id, AudioHandler handler, GameStateMachine stateMachine)
+    {
+        CurrentAudioManager = handler;
+        GameStateMachine = stateMachine;
+        CurrentScene = id;
     }
 
     public override void Show()
@@ -47,7 +57,7 @@ public class PauseWindow : PauseBase
             .Join(_exitButton.transform.DOScale(1f, 0.15f).SetEase(Ease.OutQuad))
             .Play();
 
-        if(_showSound != null)
+        if (_showSound != null)
             CurrentAudioManager.PlaySound(_showSound);
     }
 

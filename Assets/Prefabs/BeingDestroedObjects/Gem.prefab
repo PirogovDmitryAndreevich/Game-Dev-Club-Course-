@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4074006699645166918}
-  - component: {fileID: 922982116330110861}
   - component: {fileID: 5703697757744596243}
   m_Layer: 0
   m_Name: Gem
@@ -34,27 +33,6 @@ Transform:
   - {fileID: 4434749900943542454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &922982116330110861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4948617061168791339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aedd6154e291a14478a699b16f84d6d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sound: {fileID: 8300000, guid: 4c1cdd2d676aa7641a10626c5984b2bd, type: 3}
-  _view: {fileID: 4434749900943542454}
-  _type: 6
-  _idleHeight: 0.1
-  _idleDuration: 1.5
-  _jumpPower: 3
-  _numJumps: 2
-  _jumpDuration: 0.6
-  _maxJumpDistance: 2.5
 --- !u!61 &5703697757744596243
 BoxCollider2D:
   m_ObjectHideFlags: 0

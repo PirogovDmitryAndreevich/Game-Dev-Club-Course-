@@ -239,7 +239,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3774552375175471001}
-  - component: {fileID: 4929562857115738092}
   - component: {fileID: 5707860603938858642}
   m_Layer: 0
   m_Name: Coin
@@ -264,27 +263,6 @@ Transform:
   - {fileID: 8487759224834420822}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4929562857115738092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5328080580126646967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b498329527dfa7a4ab17e454653cbbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sound: {fileID: 8300000, guid: 4c1cdd2d676aa7641a10626c5984b2bd, type: 3}
-  _view: {fileID: 8487759224834420822}
-  _type: 7
-  _idleHeight: 0.1
-  _idleDuration: 1.5
-  _jumpPower: 3
-  _numJumps: 2
-  _jumpDuration: 0.6
-  _maxJumpDistance: 2.5
 --- !u!61 &5707860603938858642
 BoxCollider2D:
   m_ObjectHideFlags: 0

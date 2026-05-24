@@ -17,12 +17,6 @@ public class SceneLoader
     {
         string nextSceneName = nextScene.ToString();
 
-        if (SceneManager.GetActiveScene().name == nextSceneName)
-        {
-            onLoad?.Invoke();
-            yield break;
-        }
-
         AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextSceneName);
 
         while (!waitNextScene.isDone)

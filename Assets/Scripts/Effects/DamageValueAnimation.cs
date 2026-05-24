@@ -2,7 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class DamageValueAnimation : FXBase
+public class DamageValueAnimation 
 {
     private static readonly Color CritColor = Color.red;
     private static readonly Color NormalColor = Color.white;
@@ -20,28 +20,18 @@ public class DamageValueAnimation : FXBase
     private Transform _transform;
     private Sequence _sequence;
 
-    public override FXType Type => FXType.DamageNumber;
-
-    private void Awake()
-    {
-        _transform = transform;
-    }
 
     private void OnDisable()
     {
         KillSequence();
     }
 
-    public override void Play(Vector2 point)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void Play(Vector2 position, int damage, bool isCrit = false)
     {
         KillSequence(true);
 
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
 
         _transform.position = position;
         _transform.rotation = Quaternion.Euler(0, 0, Random.Range(-10f, 10f));
@@ -105,7 +95,7 @@ public class DamageValueAnimation : FXBase
         _value.alpha = 1f;
         _transform.localScale = Vector3.one;
 
-        ReturnToPool?.Invoke(this);
+       // ReturnToPool?.Invoke(this);
     }
 
     private void KillSequence(bool complete = false)

@@ -407,9 +407,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _attackEvent: {fileID: 1633683109253868779}
+  _animator: {fileID: 357485461133262346}
   _cameraShake: {fileID: 2128498662344484686}
-  _superHitCount: 3
-  _comboCooldown: 1.2
 --- !u!1 &3975444971596480113
 GameObject:
   m_ObjectHideFlags: 0

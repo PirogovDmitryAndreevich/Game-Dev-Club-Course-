@@ -5,7 +5,6 @@ public class RewardsSpawner : MonoBehaviour
 {
     private const int MaxSpawnCoins = 5;
 
-    [SerializeField] private FXPool _pool;
 
     public void CreateCoins(int rewardValue, Vector2 spawnPoint)
     {
@@ -13,7 +12,7 @@ public class RewardsSpawner : MonoBehaviour
             return;
 
         int coinsToSpawn = CalculateSpawnCount(rewardValue);
-        StartCoroutine(StartSpawn(rewardValue, coinsToSpawn, spawnPoint, FXType.Coin));
+        //StartCoroutine(StartSpawn(rewardValue, coinsToSpawn, spawnPoint, FXType.Coin));
     }
 
     public void CreateGems(int rewardValue, Vector2 spawnPoint)
@@ -22,10 +21,10 @@ public class RewardsSpawner : MonoBehaviour
             return;
 
         int gemsToSpawn = CalculateSpawnCount(rewardValue);
-        StartCoroutine(StartSpawn(rewardValue, gemsToSpawn, spawnPoint, FXType.Gem));
+        //StartCoroutine(StartSpawn(rewardValue, gemsToSpawn, spawnPoint, FXType.Gem));
     }
 
-    private IEnumerator StartSpawn(int totalReward, int count, Vector2 point, FXType type)
+    /*private IEnumerator StartSpawn(int totalReward, int count, Vector2 point, FXType type)
     {
         int valuePerCoin = totalReward / count;
         int remainder = totalReward % count;
@@ -54,7 +53,7 @@ public class RewardsSpawner : MonoBehaviour
             item.Play(point);
         }
     }
-
+*/
     private int CalculateSpawnCount(int rewardValue)
     {
         int calculated = rewardValue / MaxSpawnCoins;

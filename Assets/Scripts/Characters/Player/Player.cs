@@ -53,8 +53,7 @@ public class Player : Character
 
         if (_input.GetIsAttack() && Attacker.CanAttack)
         {
-            Attacker.StartAttack();
-            Animator.SetDefaultPlayerAttackTrigger();
+            Attacker.StartAttack();            
             Mover.Stop();
             Mover.AttackStep();
             _playerSounds.PlayAttackSound();
@@ -65,5 +64,6 @@ public class Player : Character
     {
         base.ApplyDamage(damage, knockbackForce, damageSource, pushDirection);
         _playerSounds.PlayHitSound();
+        Health.ApplyDamage(damage);
     }
 }

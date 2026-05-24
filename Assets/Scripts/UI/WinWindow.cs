@@ -76,6 +76,6 @@ public class WinWindow : PauseBase
 
     private void NextLevel()
     {
-        LoadScene(_nextSceneIndex);
+        //LoadScene(_nextSceneIndex);
     }
 }
