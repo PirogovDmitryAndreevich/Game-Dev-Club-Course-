@@ -2,11 +2,8 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class DamageValueAnimation 
+public class DamageValueAnimation : MonoBehaviour
 {
-    private static readonly Color CritColor = Color.red;
-    private static readonly Color NormalColor = Color.white;
-
     [SerializeField] private TMP_Text _value;
 
     [Header("Timing")]
@@ -19,38 +16,34 @@ public class DamageValueAnimation
 
     private Transform _transform;
     private Sequence _sequence;
+    private IPoolService _pool;
 
-
-    private void OnDisable()
+    public void Construct(IPoolService pool)
     {
-        KillSequence();
+        _pool = pool;
+        _transform = transform;
     }
 
-
-    public void Play(Vector2 position, int damage, bool isCrit = false)
+    public void Play(Vector2 position, int damage)
     {
-        KillSequence(true);
+        gameObject.SetActive(true);
 
-        //gameObject.SetActive(true);
+        KillSequence();
+        _sequence = DOTween.Sequence();
+        _sequence.SetUpdate(true);
 
         _transform.position = position;
         _transform.rotation = Quaternion.Euler(0, 0, Random.Range(-10f, 10f));
-        _transform.localScale = Vector3.one * 0.2f;
 
         _value.text = damage.ToString();
-        _value.color = isCrit ? CritColor : NormalColor;
-        _value.alpha = 1f;
 
         float sideOffset = Random.Range(-randomX, randomX);
 
         Vector3 peakPos = position + new Vector2(sideOffset, moveY * 0.6f);
-        Vector3 endPos = position + new Vector2(sideOffset * 1.5f, moveY);
-
-        _sequence = DOTween.Sequence();
-        _sequence.SetUpdate(true);
+        Vector3 endPos = position + new Vector2(sideOffset * 1.5f, moveY);        
 
         _sequence.Append(
-            _transform.DOScale(1.4f, 0.15f)
+            _transform.DOScale(1.4f, 0.15f).From(0f)
                 .SetEase(Ease.OutBack)
         );
 
@@ -90,12 +83,12 @@ public class DamageValueAnimation
 
     private void Finish()
     {
-        KillSequence(false);
+        KillSequence();
 
         _value.alpha = 1f;
         _transform.localScale = Vector3.one;
 
-       // ReturnToPool?.Invoke(this);
+        _pool.Return(this);
     }
 
     private void KillSequence(bool complete = false)

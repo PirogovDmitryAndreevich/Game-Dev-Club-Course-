@@ -1,16 +1,21 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class PunchAnimation 
+public class PunchAnimation : MonoBehaviour
 {
-    public  void Play(Vector2 point)
+    [SerializeField] private Animator _animator;
+
+    private IPoolService _pool;
+
+    public void Construct(IPoolService poolService)
     {
-        //transform.position = point;
-    }    
+        _pool = poolService;
+    }
+
+    public void Play(Vector2 point) => 
+        transform.position = point;
 
     // Called in animator
-    private void AnimationEnded()
-    {
-       // ReturnToPool?.Invoke(this);
-    }
+    private void OnAnimationEnded() => 
+        _pool.Return(this);
 }

@@ -1,7 +1,7 @@
 public interface IUIFactory : IService
 {
     void CreateMainMenu();
-    void CreateWinWindow(string sceneKey);
-    void CreateFailWindow(string sceneKey, Player player);
-    void CreateHud(bool isDesktop, string sceneKey, Player player);
+    void CreateWinWindow(LevelData levelData);
+    void CreateFailWindow(LevelData levelData, Player player);
+    void CreateHud(bool isDesktop, LevelData levelData, Player player);
 }

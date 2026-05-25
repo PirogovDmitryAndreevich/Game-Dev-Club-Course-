@@ -55,13 +55,22 @@ public class GameFactory : IGameFactory
         EnemyStaticData data = _staticData.ForEnemy(enemyTypeId: id);
         Enemy enemy = Object.Instantiate(data.EnemyPrefab, position: at, Quaternion.identity);
         enemy.Attacker.Construct(data);
-        enemy.Construct(data, wayPoints);
+        enemy.Construct(data, wayPoints, _poolService);
         enemy.Sound.Construct(_handlers.Audio);
+
+        _poolService.RegisterFactory(() => CreateDamageEffect());
+        _poolService.RegisterFactory(() => CreateEnemyDeathEffect());
+        _poolService.RegisterFactory(() => CreatePunchEffect());
 
         if (id == EnemyTypeId.Range)
         {
             enemy.TryGetComponent(out EnemyBulletSpawner bulletSpawner);
-            bulletSpawner?.Construct(_poolService, this);
+
+            _poolService.RegisterFactory(() => CreateBomb());
+            _poolService.RegisterFactory(() => CreateDamageArea());
+            _poolService.RegisterFactory(() => CreateExplosion());
+
+            bulletSpawner?.Construct(_poolService);
         }
 
         return null;
@@ -87,17 +96,45 @@ public class GameFactory : IGameFactory
 
     public BombYellow CreateExplosion()
     {
-        var explosion = _assets.Instantiate(AssetsPath.BombExplosionPath)
+        BombYellow explosion = _assets.Instantiate(AssetsPath.BombExplosionPath)
             .GetComponent<BombYellow>();
 
         explosion.Construct(_poolService, _handlers.Audio);
         return explosion;
     }
 
-    public List<EnemySpawner> CreateEnemySpawners(string sceneKey)
+    public DamageValueAnimation CreateDamageEffect()
     {
-        LevelData levelData = _staticData.ForLevel(sceneKey);
+        DamageValueAnimation effect = _assets.Instantiate(AssetsPath.DamageEffectPath)
+            .GetComponent<DamageValueAnimation>();
 
+        effect.Construct(_poolService);
+
+        return effect;
+    }
+
+    public EnemyDeathParticles CreateEnemyDeathEffect()
+    {
+        EnemyDeathParticles effect = _assets.Instantiate(AssetsPath.EnemyDeathPath)
+            .GetComponent<EnemyDeathParticles>();
+
+        effect.Construct(_poolService);
+
+        return effect;
+    }
+
+    public PunchAnimation CreatePunchEffect()
+    {
+        PunchAnimation effect = _assets.Instantiate(AssetsPath.PunchEffectPath)
+            .GetComponent<PunchAnimation>();
+
+        effect.Construct(_poolService);
+
+        return effect;
+    }
+
+    public List<EnemySpawner> CreateEnemySpawners(LevelData levelData)
+    {
         Transform parent = new GameObject(EnemySpawnerParentName).transform;
 
         List<EnemySpawner> spawners = new List<EnemySpawner>();

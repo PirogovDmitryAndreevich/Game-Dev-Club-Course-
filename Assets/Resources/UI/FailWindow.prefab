@@ -346,10 +346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12822357519453c4680ed3f69f0a0454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverScale: 1.04
-  pressedScale: 0.97
-  duration: 0.1
-  ease: 6
+  _hoverScale: 1.04
+  _pressedScale: 0.97
+  _duration: 0.1
+  _ease: 6
 --- !u!114 &7114566542952952123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aeb2f40500f1e45bf87a7c308975d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManger: {fileID: 0}
   _pointerDown: {fileID: 8300000, guid: 9abb3a81b78d7cb4e8e1e42cad3709ef, type: 3}
   _pointerEnter: {fileID: 8300000, guid: a0ce1b3be119945678e20f87d908d853, type: 3}
   _pointerExit: {fileID: 0}
@@ -377,7 +376,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1847163359709232014}
   - component: {fileID: 6816578858435573872}
-  - component: {fileID: 3053278985657035329}
   - component: {fileID: 4005830315202509532}
   m_Layer: 5
   m_Name: FailWindow
@@ -417,23 +415,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2810252158317165531}
   m_CullTransparentMesh: 1
---- !u!114 &3053278985657035329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2810252158317165531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253c1958c8a987e47b00c3f9cb9a4560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentAudioManager: {fileID: 0}
-  _restartButton: {fileID: 1547965871775056730}
-  _exitButton: {fileID: 6496424508398688925}
-  _appearanceDuration: 0.15
-  _appearanceButton: 0.5
 --- !u!225 &4005830315202509532
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -458,6 +439,8 @@ GameObject:
   - component: {fileID: 5911473917603171535}
   - component: {fileID: 2954301337858115721}
   - component: {fileID: 1610845686190978733}
+  - component: {fileID: 793182432708794566}
+  - component: {fileID: 5181226451250884131}
   m_Layer: 5
   m_Name: FailWindow
   m_TagString: Untagged
@@ -548,6 +531,35 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &793182432708794566
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815274616282476532}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &5181226451250884131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815274616282476532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253c1958c8a987e47b00c3f9cb9a4560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _restartButton: {fileID: 1547965871775056730}
+  _exitButton: {fileID: 6496424508398688925}
+  _canvasGroup: {fileID: 4005830315202509532}
+  _appearanceDuration: 0.15
+  _appearanceButton: 0.5
 --- !u!1 &4504632570513746624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,7 +1205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aeb2f40500f1e45bf87a7c308975d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManger: {fileID: 0}
   _pointerDown: {fileID: 8300000, guid: 9abb3a81b78d7cb4e8e1e42cad3709ef, type: 3}
   _pointerEnter: {fileID: 8300000, guid: a0ce1b3be119945678e20f87d908d853, type: 3}
   _pointerExit: {fileID: 0}
@@ -1210,7 +1221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12822357519453c4680ed3f69f0a0454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverScale: 1.04
-  pressedScale: 0.97
-  duration: 0.1
-  ease: 6
+  _hoverScale: 1.04
+  _pressedScale: 0.97
+  _duration: 0.1
+  _ease: 6

@@ -17,6 +17,7 @@ public class Enemy : Character, ITask
     public event Action<ITask> TaskCompleted;
 
     private EnemyStateMachine _stateMachine;
+    private IPoolService _pool;
 
     public CharacterAnimator EnemyAnimator => Animator;
     public Fliper EnemyFliper => Fliper;
@@ -30,12 +31,14 @@ public class Enemy : Character, ITask
     public EnemyStaticData StaticData { get; private set; }
     public TaskType Type => TaskType.Enemies;
 
-    public void Construct(EnemyStaticData data, List<WayPoint> wayPoints)
+    public void Construct(EnemyStaticData data, List<WayPoint> wayPoints, IPoolService poolService)
     {
         StaticData = data;
         WayPoints = wayPoints.ToArray();
         Health = new EnemyHealth(StaticData);
         _stateMachine = new EnemyStateMachine(this);
+
+        _pool = poolService;
     }
 
     public override void ApplyDamage(int damage, float knockbackForce, Vector2 damageSource, Vector2 pushDirection)
@@ -46,16 +49,19 @@ public class Enemy : Character, ITask
 
         Health.ApplyDamage(damage);
 
-        //var damageNumber = FXPool.Get(FXType.DamageNumber) as DamageValueAnimation;
-        //damageNumber.Play(damageSource, damageInfo.Damage, damageInfo.IsCrit);
+        PunchAnimation punch = _pool.Get<PunchAnimation>();
+        punch.Play(damageSource);
+
+        DamageValueAnimation damageNumber = _pool.Get<DamageValueAnimation>();
+        damageNumber.Play(damageSource, damage);
 
         if (Health.HealthCurrent <= 0)
         {
             Mover.Stop();
 
             Sound.PlayDeathSound();
-            //var deathParticles = FXPool.Get(FXType.EnemyDeath);
-            //deathParticles.Play(transform.position);
+            EnemyDeathParticles deathParticles = _pool.Get<EnemyDeathParticles>();
+            deathParticles.Play(transform.position);
 
             //SpawnRewards();
 

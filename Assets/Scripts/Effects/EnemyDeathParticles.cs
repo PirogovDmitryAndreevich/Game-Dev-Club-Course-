@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public class EnemyDeathParticles 
+public class EnemyDeathParticles : MonoBehaviour
 {
-    private ParticleSystem _particles;
+    [SerializeField] private ParticleSystem _particles;
 
+    private IPoolService _pool;
 
     private void Awake()
     {
-        //_particles = GetComponent<ParticleSystem>();
-
         var main = _particles.main;
         main.stopAction = ParticleSystemStopAction.Callback;
 
@@ -16,14 +15,15 @@ public class EnemyDeathParticles
         _particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
-    private void OnParticleSystemStopped()
-    {
-       // ReturnToPool?.Invoke(this);
-    }
+    private void OnParticleSystemStopped() => 
+        _pool.Return(this);
+
+    public void Construct(IPoolService poolService) => 
+        _pool = poolService;
 
     public  void Play(Vector2 point)
     {
-        //transform.position = point;
+        transform.position = point;
         _particles.Play();
     }
 }

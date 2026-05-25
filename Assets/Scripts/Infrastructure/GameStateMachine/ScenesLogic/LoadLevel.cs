@@ -7,14 +7,14 @@ using YG;
 public class LoadLevel : IScene
 {
     private const string PlayerInitialPointTag = "PlayerInitialPoint";
-    private readonly SceneID _id;
+    private readonly IStaticData _staticData;
     private readonly IGameFactory _gameFactory;
     private readonly IUIFactory _uiFactory;
     private readonly IHandlersContainer _handlers;
 
-    public LoadLevel(SceneID id, IGameFactory gameFactory, IUIFactory uiFactory, IHandlersContainer handlers)
+    public LoadLevel(IStaticData staticData, IGameFactory gameFactory, IUIFactory uiFactory, IHandlersContainer handlers)
     {
-        _id = id;
+        _staticData = staticData;
         _gameFactory = gameFactory;
         _uiFactory = uiFactory;
         _handlers = handlers;
@@ -23,28 +23,30 @@ public class LoadLevel : IScene
     public void InitGameObjects()
     {
         string sceneKey = SceneManager.GetActiveScene().name;
+        LevelData levelData = _staticData.ForLevel(sceneKey);
 
         CinemachineVirtualCamera camera = _gameFactory.CreateVirtualCamera();
-        Player player = _gameFactory.CreatePlayerHero(at: GameObject.FindWithTag(PlayerInitialPointTag).transform.position, camera);
+        Player player = _gameFactory.CreatePlayerHero(at: levelData.PlayerInitial.Position, camera);
 
-        InitEnemySpawners(sceneKey);
-        InitUI(sceneKey, player);
+        InitEnemySpawners(levelData);
+        InitUI(levelData, player);
 
         camera.Follow = player.transform;
     }
 
-    private void InitUI(string sceneKey, Player player)
+    private void InitUI(LevelData levelData, Player player)
     {
-        _uiFactory.CreateHud(YG2.envir.isDesktop, sceneKey, player);
-        _uiFactory.CreateFailWindow(sceneKey, player);
+        _uiFactory.CreateHud(YG2.envir.isDesktop, levelData, player);
+        _uiFactory.CreateWinWindow(levelData);
+        _uiFactory.CreateFailWindow(levelData, player);
     }
 
-    private void InitEnemySpawners(string sceneKey)
+    private void InitEnemySpawners(LevelData levelData)
     {
         AudioListener listener = Camera.main.GetComponent<AudioListener>();
         _handlers.Audio.SetListener(listener);
-        
-        List<EnemySpawner> spawners = _gameFactory.CreateEnemySpawners(sceneKey);
+
+        List<EnemySpawner> spawners = _gameFactory.CreateEnemySpawners(levelData);
 
         foreach (var spawner in spawners)
             spawner.Spawn();

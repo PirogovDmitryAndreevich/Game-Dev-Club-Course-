@@ -16,17 +16,11 @@ public class AudioSettings : MonoBehaviour
     [SerializeField] private Sprite _musicOn;
     [SerializeField] private Sprite _musicOff;
 
-    private Image _soundImage;
-    private Image _musicImage;
+    [SerializeField] private Image _soundImage;
+    [SerializeField] private Image _musicImage;
 
     private GameSaveData _playerData;
     private ISaveLoadService _save;
-
-    private void Awake()
-    {
-        _soundImage = _soundButton.GetComponent<Image>();
-        _musicImage = _musicButton.GetComponent<Image>();
-    }
 
     private void OnDestroy()
     {
@@ -35,8 +29,6 @@ public class AudioSettings : MonoBehaviour
 
         _soundButton.onClick.RemoveListener(SwitchMuteSound);
         _musicButton.onClick.RemoveListener(SwitchMuteMusic);
-
-        _save.SaveProgress();
     }
 
     public void Construct(IPersistentProgressService progressService, ISaveLoadService save)

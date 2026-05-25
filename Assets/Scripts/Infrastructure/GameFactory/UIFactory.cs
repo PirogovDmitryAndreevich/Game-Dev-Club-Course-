@@ -28,30 +28,24 @@ public class UIFactory : IUIFactory
         menu.Construct(_gameStateMachine, _progressService, _handlersContainer, _save);
     }
 
-    public void CreateWinWindow(string sceneKey)
+    public void CreateWinWindow(LevelData levelData)
     {
-        LevelData levelData = _staticData.ForLevel(sceneKey);
-
         WinWindow window = _assets.Instantiate(AssetsPath.WinWindowPath)
             .GetComponent<WinWindow>();
 
         window.Construct(levelData.ID, levelData.NextSceneID, _gameStateMachine, _handlersContainer.Audio);
     }
 
-    public void CreateFailWindow(string sceneKey, Player player)
+    public void CreateFailWindow(LevelData levelData, Player player)
     {
-        LevelData levelData = _staticData.ForLevel(sceneKey);
-
         FailWindow window = _assets.Instantiate(AssetsPath.FailWindowPath)
             .GetComponent<FailWindow>();
 
-        window.Construct(levelData.ID,_gameStateMachine,_handlersContainer.Audio,player);
+        window.Construct(levelData.ID, _gameStateMachine, _handlersContainer.Audio, player);
     }
 
-    public void CreateHud(bool isDesktop, string sceneKey, Player player)
+    public void CreateHud(bool isDesktop, LevelData levelData, Player player)
     {
-        LevelData levelData = _staticData.ForLevel(sceneKey);
-
         GameObject hudObject = isDesktop
             ? CreateHudDesktop()
             : CreateHudMobile();
@@ -59,7 +53,7 @@ public class UIFactory : IUIFactory
         Hud _hud = hudObject.GetComponent<Hud>();
 
         PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);
-        
+
         _hud.Construct(pauseWindow);
 
         _hud.HealthBar.Construct(player.Health, player.Defense);

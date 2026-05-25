@@ -14,4 +14,7 @@ public static class AssetsPath
     public const string PauseWindowPath = "UI/PauseWindow";
     public const string WinWindowPath = "UI/WinWindow";
     public const string FailWindowPath = "UI/FailWindow";
+    public const string DamageEffectPath = "FX/DamageValue";
+    public const string EnemyDeathPath = "FX/DeathEnemy";
+    public const string PunchEffectPath = "FX/Punch";
 }

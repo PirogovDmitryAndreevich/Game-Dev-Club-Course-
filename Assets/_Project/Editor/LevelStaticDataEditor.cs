@@ -31,6 +31,12 @@ public class LevelStaticDataEditor : Editor
                 levelData.LevelData.Add(data);
             }
 
+            if(data.PlayerInitial == null)
+                data.PlayerInitial = new PlayerInitialData();
+
+            data.PlayerInitial.Position = FindObjectOfType<PlayerInitialMarker>()
+                .transform.position;
+
             data.EnemySpawnerDatas = FindObjectsOfType<EnemySpawnMarker>()
                 .Select(x => new EnemySpawnerData(
                     x.GetComponent<UniqueId>().Id,

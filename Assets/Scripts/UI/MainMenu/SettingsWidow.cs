@@ -25,6 +25,8 @@ public class SettingsWidow : MonoBehaviour
     private bool IsAnimating =>
         Animation != null && Animation.active;
 
+    private void Start() => 
+        gameObject.SetActive(false);
 
     private void OnEnable() => 
         _closeButton.onClick.AddListener(OnClickCloseButton);

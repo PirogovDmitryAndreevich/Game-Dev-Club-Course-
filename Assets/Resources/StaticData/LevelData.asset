@@ -16,6 +16,8 @@ MonoBehaviour:
   - LevelKey: Level_1
     ID: 2
     NextSceneID: 15
+    PlayerInitial:
+      Position: {x: -7.4, y: 5.4}
     EnemySpawnerDatas:
     - Id: Level_1_ae8a5849-c2a8-402d-b62a-0562c5f4ea87
       TypeId: 1

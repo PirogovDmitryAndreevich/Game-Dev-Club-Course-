@@ -9,5 +9,7 @@ public class LevelData
     public SceneID ID;
     public SceneID NextSceneID;
 
+    public PlayerInitialData PlayerInitial;
+
     public List<EnemySpawnerData> EnemySpawnerDatas;
 }
