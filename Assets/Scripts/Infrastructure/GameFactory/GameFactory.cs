@@ -50,6 +50,26 @@ public class GameFactory : IGameFactory
         return player;
     }
 
+    public MedKit CreateMedKit(Vector2 at, PlayerHealth health, int value)
+    {
+        var medKit = _assets.Instantiate(AssetsPath.MedKitPath, at: at)
+            .GetComponent<MedKit>();
+
+        medKit.Construct(_handlers.Audio, health, value);
+
+        return medKit;
+    }
+
+    public Defense CreateDefense(Vector2 at, PlayerDefense playerDefense, int value)
+    {
+        var defense = _assets.Instantiate(AssetsPath.DefensePath, at: at)
+            .GetComponent<Defense>();
+
+        defense.Construct(_handlers.Audio, playerDefense, value);
+
+        return defense;
+    }
+
     public Enemy CreateEnemy(EnemyTypeId id, Vector2 at, List<WayPoint> wayPoints)
     {
         EnemyStaticData data = _staticData.ForEnemy(enemyTypeId: id);

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class Key : Interactable, IItem, IInventoryObject
+public class Key : Interactable, IInteractable
 {
     [SerializeField] private SpriteRenderer _icon;
     [SerializeField] private AudioClip _sound;
@@ -29,9 +29,8 @@ public class Key : Interactable, IItem, IInventoryObject
         Moving();
     }
 
-    public void Collect()
+    public void Interact()
     {
         Destroy(gameObject);
     }
-
 }

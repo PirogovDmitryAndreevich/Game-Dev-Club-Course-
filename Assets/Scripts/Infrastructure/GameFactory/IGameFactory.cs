@@ -6,6 +6,8 @@ public interface IGameFactory : IService
 {
     Player CreatePlayerHero(Vector2 at, CinemachineVirtualCamera camera);
     CinemachineVirtualCamera CreateVirtualCamera();
+    MedKit CreateMedKit(Vector2 at, PlayerHealth health, int value);
+    Defense CreateDefense(Vector2 at, PlayerDefense playerDefense, int value);
     Enemy CreateEnemy(EnemyTypeId id, Vector2 at, List<WayPoint> wayPoints);
     List<EnemySpawner> CreateEnemySpawners(LevelData levelData);
     Bomb CreateBomb();

@@ -264,6 +264,7 @@ MonoBehaviour:
   _playerSounds: {fileID: 3162247971610878494}
   _cameraShake: {fileID: 2128498662344484686}
   _attacker: {fileID: 5426562644204872532}
+  _collisionHandler: {fileID: 1931453704566832429}
 --- !u!114 &1931453704566832429
 MonoBehaviour:
   m_ObjectHideFlags: 0

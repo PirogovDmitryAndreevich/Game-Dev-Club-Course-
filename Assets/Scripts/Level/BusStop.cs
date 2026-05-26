@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class BusStop : MonoBehaviour, IInteractable, IHighlight, IShowKey
+public class BusStop : MonoBehaviour, IHighlight, IShowKey
 {
     [SerializeField] private Sprite _activatedSprite;
     [SerializeField] private Transform _busSpawnPoint;
@@ -25,6 +25,18 @@ public class BusStop : MonoBehaviour, IInteractable, IHighlight, IShowKey
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultSprite = _spriteRenderer.sprite;
         _materialPropertyBlock = new MaterialPropertyBlock();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Player _))        
+            HighlightOn();        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Player _))        
+            HighlightOff();        
     }
 
     public void Interact()

@@ -28,6 +28,18 @@ public class LoadLevel : IScene
         CinemachineVirtualCamera camera = _gameFactory.CreateVirtualCamera();
         Player player = _gameFactory.CreatePlayerHero(at: levelData.PlayerInitial.Position, camera);
 
+        if (levelData.MedKits != null && levelData.MedKits.Count > 0)
+        {
+            foreach (var data in levelData.MedKits)
+                _gameFactory.CreateMedKit(at: data.Position, player.Health, data.Value);
+        }
+
+        if (levelData.Defenses != null && levelData.Defenses.Count > 0)
+        {
+            foreach (var data in levelData.Defenses)
+                _gameFactory.CreateDefense(at: data.Position, player.Defense, data.Value);
+        }
+
         InitEnemySpawners(levelData);
         InitUI(levelData, player);
 

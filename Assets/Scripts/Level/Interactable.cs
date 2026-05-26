@@ -9,6 +9,9 @@ public class Interactable : MonoBehaviour
 
     private Vector3 _startPos;
 
+    private void Start() => 
+        Moving();
+
     protected virtual void Moving()
     {
         _startPos = _view.position;
@@ -19,8 +22,6 @@ public class Interactable : MonoBehaviour
             .Play();
     }
 
-    protected virtual void OnDisable()
-    {
+    protected virtual void OnDisable() => 
         _view.DOKill();
-    }
 }

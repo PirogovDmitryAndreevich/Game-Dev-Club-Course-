@@ -17,9 +17,6 @@ public class LevelStaticDataEditor : Editor
         {
             string sceneKey = SceneManager.GetActiveScene().name;
 
-            if (levelData.LevelData == null)
-                levelData.LevelData = new List<LevelData>();
-
             LevelData data = levelData.LevelData
                 .FirstOrDefault(x => x.LevelKey == sceneKey);
 
@@ -31,11 +28,20 @@ public class LevelStaticDataEditor : Editor
                 levelData.LevelData.Add(data);
             }
 
-            if(data.PlayerInitial == null)
-                data.PlayerInitial = new PlayerInitialData();
-
             data.PlayerInitial.Position = FindObjectOfType<PlayerInitialMarker>()
                 .transform.position;
+
+            data.MedKits = FindObjectsOfType<MedKitInitialMarker>()
+                .Select(x => new MedKitData(
+                    x.transform.position,
+                    x.Value))
+                .ToList();
+
+            data.Defenses = FindObjectsOfType<DefenseInitialMarker>()
+                .Select(x => new DefenseData(
+                    x.transform.position,
+                    x.Value))
+                .ToList();
 
             data.EnemySpawnerDatas = FindObjectsOfType<EnemySpawnMarker>()
                 .Select(x => new EnemySpawnerData(

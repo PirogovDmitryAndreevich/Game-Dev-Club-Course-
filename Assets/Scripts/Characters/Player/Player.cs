@@ -9,8 +9,10 @@ public class Player : Character
     [SerializeField] private PlayerSounds _playerSounds;
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private PlayerAttacker _attacker;
+    [SerializeField] private CollisionHandler _collisionHandler;
 
     private IInputServices _input;
+    private IInteractable _interactable;
 
     public CameraShake CameraShake => _cameraShake;
     public PlayerFX FX => _playerFX;
@@ -20,12 +22,19 @@ public class Player : Character
     public PlayerHealth Health { get; private set; }
     public PlayerDefense Defense { get; private set; }
 
+    private void OnDestroy()
+    {
+        _collisionHandler.InteractStarted -= SetInteractable;
+    }
+
     public void Construct(IPersistentProgressService progress, ISaveLoadService save, IInputServices input)
     {
         _input = input;
 
         Health = new PlayerHealth(progress);
         Defense = new PlayerDefense(progress);
+
+        _collisionHandler.InteractStarted += SetInteractable;
     }
 
     private void FixedUpdate()
@@ -58,6 +67,11 @@ public class Player : Character
             Mover.AttackStep();
             _playerSounds.PlayAttackSound();
         }
+
+        if (_input.GetIsInteract() && _interactable != null)
+        {
+            _interactable.Interact();
+        }
     }
 
     public override void ApplyDamage(int damage, float knockbackForce, Vector2 damageSource, Vector2 pushDirection)
@@ -66,4 +80,7 @@ public class Player : Character
         _playerSounds.PlayHitSound();
         Health.ApplyDamage(damage);
     }
+
+    private void SetInteractable(IInteractable interactable) =>
+        _interactable = interactable;
 }

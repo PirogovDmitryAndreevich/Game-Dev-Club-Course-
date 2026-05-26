@@ -4,7 +4,6 @@ using UnityEngine;
 public class CollisionHandler : MonoBehaviour
 {
     public event Action<IInteractable> InteractStarted;
-    public event Action<IItem> InteractWithItem;
     public event Action ShowingHindePressF;
     public event Action HideHindPressF;
 
@@ -14,12 +13,6 @@ public class CollisionHandler : MonoBehaviour
 
         if (go.TryGetComponent(out IInteractable interactable))
             InteractStarted?.Invoke(interactable);
-
-        if (go.TryGetComponent(out IHighlight highlight))
-            highlight.HighlightOn();
-
-        if (go.TryGetComponent(out IItem item))
-            InteractWithItem?.Invoke(item);
 
         if (go.TryGetComponent(out IShowKey showKey))
             if (!showKey.IsActivated)
@@ -32,9 +25,6 @@ public class CollisionHandler : MonoBehaviour
 
         if (go.TryGetComponent(out IInteractable interactable))
             InteractStarted?.Invoke(null);
-
-        if (go.TryGetComponent(out IHighlight highlight))
-            highlight.HighlightOff();
 
         if (go.TryGetComponent(out IShowKey showKey))
             if (!showKey.IsActivated)

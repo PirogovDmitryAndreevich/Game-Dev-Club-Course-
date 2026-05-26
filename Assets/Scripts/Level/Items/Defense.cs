@@ -1,25 +1,25 @@
 using System;
 using UnityEngine;
 
-public class Defense : Interactable, IInteractable, IShowKey
+public class Defense : Interactable, IInteractable
 {
     [SerializeField] private AudioClip _sound;
-    [SerializeField] private int _value = 10;
 
-    public AudioClip DefenseSound => _sound;
-    public int Value => _value;
+    private AudioHandler _handler;
+    private PlayerDefense _defense;
+    private int _value;
 
-    public bool IsActivated { get; private set; }
-
-    private void OnEnable()
+    public void Construct(AudioHandler handler, PlayerDefense defense,int value)
     {
-        IsActivated = false;
-        Moving();
+        _handler = handler;
+        _defense = defense;
+        _value = value;
     }
 
     public void Interact()
     {
-        IsActivated = true;
+        _handler.PlaySound(_sound);
+        _defense.AddDefense(_value);
         Destroy(gameObject);
     }
 

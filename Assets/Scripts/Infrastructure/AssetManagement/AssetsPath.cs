@@ -17,4 +17,6 @@ public static class AssetsPath
     public const string DamageEffectPath = "FX/DamageValue";
     public const string EnemyDeathPath = "FX/DeathEnemy";
     public const string PunchEffectPath = "FX/Punch";
+    public const string MedKitPath = "Interactable/MedKit";
+    public const string DefensePath = "Interactable/Defense";
 }

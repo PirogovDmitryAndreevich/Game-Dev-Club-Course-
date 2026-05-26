@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Lock : MonoBehaviour, IInteractable, IShowKey
+public class Lock : MonoBehaviour, IShowKey
 {
     [SerializeField] private SpriteRenderer _padlock;
     [SerializeField] private Transform _barriers;

@@ -1,24 +1,25 @@
 using UnityEngine;
 
-public class MedKit : Interactable, IInteractable, IShowKey
+[RequireComponent(typeof(Collider2D))]
+public class MedKit : Interactable, IInteractable
 {
     [SerializeField] private AudioClip _sound;
-    [SerializeField] private int _value = 10;
 
-    public AudioClip MedKitSound => _sound;
-    public int Value => _value;
+    private AudioHandler _handler;
+    private PlayerHealth _health;
+    private int _value;
 
-    public bool IsActivated { get; private set; }
-
-    private void OnEnable()
+    public void Construct(AudioHandler handler, PlayerHealth health,int value)
     {
-        IsActivated = false;
-        Moving();
+        _handler = handler;
+        _health = health;
+        _value = value;
     }
 
     public void Interact()
     {
-        IsActivated = true;
+        _handler.PlaySound(_sound);
+        _health.Heal(_value);
         Destroy(gameObject);
     }
 }
