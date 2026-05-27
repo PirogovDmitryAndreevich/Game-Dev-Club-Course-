@@ -2,28 +2,23 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class BusStop : MonoBehaviour, IHighlight, IShowKey
+public class BusStop : MonoBehaviour
 {
     [SerializeField] private Sprite _activatedSprite;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Transform _busSpawnPoint;
     [SerializeField] private Transform _busEndedPoint;
 
     private MaterialPropertyBlock _materialPropertyBlock;
-    private SpriteRenderer _spriteRenderer;
-    private Sprite _defaultSprite;
 
     public event Action Interacted;
 
     public Transform BusSpawnPoint => _busSpawnPoint;
     public Transform BusEndedPoint => _busEndedPoint;
     public bool CanInteract { get; set; }
-    public bool IsActivated { get; private set; }
 
     private void Awake()
     {
-        IsActivated = false;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _defaultSprite = _spriteRenderer.sprite;
         _materialPropertyBlock = new MaterialPropertyBlock();
     }
 
@@ -44,7 +39,6 @@ public class BusStop : MonoBehaviour, IHighlight, IShowKey
         if (!CanInteract)
             return;
 
-        IsActivated = true;
         _spriteRenderer.sprite = _activatedSprite;
         Interacted?.Invoke();
     }

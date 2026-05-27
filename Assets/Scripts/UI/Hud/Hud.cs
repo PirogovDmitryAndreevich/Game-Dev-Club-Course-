@@ -5,12 +5,14 @@ public class Hud : MonoBehaviour
 {
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private UserInfo _userInfo;
+    [SerializeField] private Inventory _inventoryView;
     [SerializeField] private Button _pauseButton;
 
     private PauseWindow _pauseWindow;
 
     public HealthBar HealthBar => _healthBar;
     public UserInfo UserInfo => _userInfo;
+    public Inventory Inventory => _inventoryView;
 
     private void OnDestroy()
     {

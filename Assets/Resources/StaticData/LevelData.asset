@@ -14,15 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelData:
   - LevelKey: Level_1
-    ID: 0
-    NextSceneID: 0
+    ID: 2
+    NextSceneID: 15
     PlayerInitial:
       Position: {x: -7.3999996, y: 5.4}
+    Locks:
+    - Position: {x: 16.47, y: 16.068018}
+      Color: {r: 1, g: 0.625, b: 0, a: 1}
+      Key:
+        Position: {x: 16.42, y: 13.608018}
+    Trophies:
+    - Position: {x: 16.55, y: 12.116307}
     MedKits:
-    - Position: {x: 0.67, y: 4.62}
+    - Position: {x: 0.6700001, y: 4.62}
       Value: 20
     Defenses:
-    - Position: {x: 3.15, y: 4.43}
+    - Position: {x: 3.1499996, y: 4.43}
       Value: 10
     EnemySpawnerDatas:
     - Id: Level_1_ae8a5849-c2a8-402d-b62a-0562c5f4ea87

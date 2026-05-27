@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -29,7 +28,15 @@ public class LevelStaticDataEditor : Editor
             }
 
             data.PlayerInitial.Position = FindObjectOfType<PlayerInitialMarker>()
-                .transform.position;
+                .transform.position;            
+
+            data.Locks = FindObjectsOfType<LockInitialMarker>()
+                .Select(x => new LockData(x.transform.position,x.Color, new KeyData(x.Key.transform.position)))
+                .ToList();
+
+            data.Trophies = FindObjectsOfType<TrophyInitialMarker>()
+                .Select(x => new TrophyData(x.transform.position))
+            .ToList();
 
             data.MedKits = FindObjectsOfType<MedKitInitialMarker>()
                 .Select(x => new MedKitData(

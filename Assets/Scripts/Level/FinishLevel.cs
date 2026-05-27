@@ -36,7 +36,7 @@ public class FinishLevel : MonoBehaviour
         {
             foreach (Trophy trophy in _trophies)
             {
-                _tasks.Add(trophy);
+                //_tasks.Add(trophy);
                 trophy.TaskCompleted += UpdateCondition;
             }
 

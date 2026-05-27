@@ -50,6 +50,28 @@ public class GameFactory : IGameFactory
         return player;
     }
 
+    public Lock CreateLock(LockData data, Inventory inventory)
+    {
+        Lock lockBarrier = _assets.Instantiate(AssetsPath.LockPath, data.Position)
+            .GetComponent<Lock>();
+
+        Key key = CreateKey(data.Key, data.Color, inventory);
+
+        lockBarrier.Construct(key, data.Color, inventory);
+
+        return lockBarrier;
+    }
+
+    public Trophy CreateTrophy(Vector2 at)
+    {
+        var trophy = _assets.Instantiate(AssetsPath.TrophyPath, at: at)
+            .GetComponent<Trophy>();
+
+        trophy.Construct(_handlers.Audio);
+
+        return trophy;
+    }
+
     public MedKit CreateMedKit(Vector2 at, PlayerHealth health, int value)
     {
         var medKit = _assets.Instantiate(AssetsPath.MedKitPath, at: at)
@@ -188,5 +210,15 @@ public class GameFactory : IGameFactory
         spawner.Construct(this, typeId, wayPointsList);
 
         return spawner;
+    }
+
+    private Key CreateKey(KeyData data, Color color, Inventory inventory)
+    {
+        Key key = _assets.Instantiate(AssetsPath.KeyPath, data.Position)
+            .GetComponent<Key>();
+
+        key.Construct(_handlers.Audio, color, inventory);
+
+        return key;
     }
 }

@@ -11,12 +11,16 @@ public static class AssetsPath
     public const string BombExplosionPath = "Enemies/RangeEnemy/Bomb_Yellow";
     public const string HudMobilePath = "UI/Hud/HudMobile";
     public const string HudDesktopPath = "UI/Hud/HudDesktop";
-    public const string PauseWindowPath = "UI/PauseWindow";
-    public const string WinWindowPath = "UI/WinWindow";
-    public const string FailWindowPath = "UI/FailWindow";
+    public const string PauseWindowPath = "UI/Windows/PauseWindow";
+    public const string WinWindowPath = "UI/Windows/WinWindow";
+    public const string FailWindowPath = "UI/Windows/FailWindow";
     public const string DamageEffectPath = "FX/DamageValue";
     public const string EnemyDeathPath = "FX/DeathEnemy";
     public const string PunchEffectPath = "FX/Punch";
     public const string MedKitPath = "Interactable/MedKit";
     public const string DefensePath = "Interactable/Defense";
+    public const string TrophyPath = "Collectables/Trophy";
+    public const string LockPath = "Interactable/Lock";
+    public const string KeyPath = "Collectables/Key";
+    public const string ItemViewPath = "UI/Inventory/InventoryItem";
 }

@@ -6,7 +6,6 @@ using YG;
 
 public class LoadLevel : IScene
 {
-    private const string PlayerInitialPointTag = "PlayerInitialPoint";
     private readonly IStaticData _staticData;
     private readonly IGameFactory _gameFactory;
     private readonly IUIFactory _uiFactory;
@@ -28,6 +27,14 @@ public class LoadLevel : IScene
         CinemachineVirtualCamera camera = _gameFactory.CreateVirtualCamera();
         Player player = _gameFactory.CreatePlayerHero(at: levelData.PlayerInitial.Position, camera);
 
+        Hud hud = CreateHud(levelData, player);
+
+        if (levelData.Locks != null && levelData.Locks.Count > 0)
+        {
+            foreach(var data in levelData.Locks)
+                _gameFactory.CreateLock(data, hud.Inventory);
+        }
+
         if (levelData.MedKits != null && levelData.MedKits.Count > 0)
         {
             foreach (var data in levelData.MedKits)
@@ -40,15 +47,24 @@ public class LoadLevel : IScene
                 _gameFactory.CreateDefense(at: data.Position, player.Defense, data.Value);
         }
 
+        if (levelData.Trophies != null && levelData.Trophies.Count > 0)
+        {
+            foreach (var data in levelData.Trophies)
+                _gameFactory.CreateTrophy(at: data.Position);
+        }
+
         InitEnemySpawners(levelData);
         InitUI(levelData, player);
 
         camera.Follow = player.transform;
     }
 
+    private Hud CreateHud(LevelData levelData, Player player) =>
+        _uiFactory.CreateHud(YG2.envir.isDesktop, levelData, player);
+
     private void InitUI(LevelData levelData, Player player)
     {
-        _uiFactory.CreateHud(YG2.envir.isDesktop, levelData, player);
+        
         _uiFactory.CreateWinWindow(levelData);
         _uiFactory.CreateFailWindow(levelData, player);
     }

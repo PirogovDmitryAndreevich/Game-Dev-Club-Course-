@@ -1,14 +1,14 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Lock : MonoBehaviour, IShowKey
+public class Lock : MonoBehaviour, IInteractable
 {
     [SerializeField] private SpriteRenderer _padlock;
+    [SerializeField] private Transform _padlockTransform;
     [SerializeField] private Transform _barriers;
-    [SerializeField] private Key _key;
+    [SerializeField] private Transform[] _barrierPieces;
     [SerializeField] private AudioClip _negativeSound;
     [SerializeField] private AudioClip _unlockSound;
-    [SerializeField] private bool _isLock;
 
     [Header("Animation settings")]
     [SerializeField] private float jumpUpDistance = 150f;
@@ -16,45 +16,35 @@ public class Lock : MonoBehaviour, IShowKey
     [SerializeField] private float rotateAmount = 25f;
     [SerializeField] private float downDistance = 0.5f;
 
-    private Transform _padlockTransform;
-    private Transform[] _barrierPieces;
+    private Key _key;
+    private Inventory _inventory;
     private Sequence _animation;
 
-    public AudioClip NegativeSound => _negativeSound;
-    public AudioClip UnlockSound => _unlockSound;
-    public bool IsLock => _isLock;
-    public Key Key => _key;
     private bool IsAnimating => _animation != null && _animation.active;
+    public bool IsActivated { get; private set; } = false;
 
-    public bool IsActivated { get; private set; }
-
-    private void Awake()
-    {
-        IsActivated = false;
-        _padlockTransform = _padlock.GetComponent<Transform>();
-        _barrierPieces = _barriers.GetComponentsInChildren<Transform>();
-        _key.SpriteColor = _padlock.color;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Vector3 startPosBarriers = _barriers.transform.position;
-        Vector3 upRightPosBarriers = startPosBarriers + Vector3.up * jumpUpDistance;
-        Gizmos.DrawLine(transform.position, upRightPosBarriers);
-        Vector3 fallPosBarriers = upRightPosBarriers + Vector3.down * downDistance;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(upRightPosBarriers, fallPosBarriers);
-    }
-
-    private void OnDestroy()
-    {
+    private void OnDestroy() =>
         KillAnimations();
+
+    public void Construct(Key key, Color color, Inventory inventory)
+    {
+        _key = key;
+        _inventory = inventory;
+        _padlock.color = color;
     }
 
     public void Interact()
     {
-        PlayUnlockAnimationAndDestroy();
+        if (_inventory.Contains(_key))
+            PlayUnlockAnimationAndDestroy();
+        else
+            PlayLockAnimation();
+
+    }
+
+    private void PlayLockAnimation()
+    {
+        
     }
 
     private void PlayUnlockAnimationAndDestroy()
@@ -146,6 +136,7 @@ public class Lock : MonoBehaviour, IShowKey
         _animation.OnComplete(() =>
         {
             IsActivated = true;
+            _inventory.RemoveKey(_key);
             Destroy(gameObject);
         });
     }

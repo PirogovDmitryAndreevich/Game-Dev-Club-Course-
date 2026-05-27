@@ -14,9 +14,9 @@ public class CollisionHandler : MonoBehaviour
         if (go.TryGetComponent(out IInteractable interactable))
             InteractStarted?.Invoke(interactable);
 
-        if (go.TryGetComponent(out IShowKey showKey))
+        /*if (go.TryGetComponent(out IShowKey showKey))
             if (!showKey.IsActivated)
-                ShowingHindePressF?.Invoke();
+                ShowingHindePressF?.Invoke();*/
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -26,8 +26,9 @@ public class CollisionHandler : MonoBehaviour
         if (go.TryGetComponent(out IInteractable interactable))
             InteractStarted?.Invoke(null);
 
-        if (go.TryGetComponent(out IShowKey showKey))
+       /* if (go.TryGetComponent(out IShowKey showKey))
+        * 
             if (!showKey.IsActivated)
-                HideHindPressF?.Invoke();
+                HideHindPressF?.Invoke();*/
     }
 }

@@ -44,19 +44,32 @@ public class UIFactory : IUIFactory
         window.Construct(levelData.ID, _gameStateMachine, _handlersContainer.Audio, player);
     }
 
-    public void CreateHud(bool isDesktop, LevelData levelData, Player player)
+    public Hud CreateHud(bool isDesktop, LevelData levelData, Player player)
     {
         GameObject hudObject = isDesktop
             ? CreateHudDesktop()
             : CreateHudMobile();
 
-        Hud _hud = hudObject.GetComponent<Hud>();
+        Hud hud = hudObject.GetComponent<Hud>();
 
         PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);
 
-        _hud.Construct(pauseWindow);
+        hud.Construct(pauseWindow);
 
-        _hud.HealthBar.Construct(player.Health, player.Defense);
+        hud.HealthBar.Construct(player.Health, player.Defense);
+        hud.Inventory.Construct(this);
+
+        return hud;
+    }
+
+    public ItemView CreateUIKey(Color color, Transform parent)
+    {
+        ItemView view = _assets.Instantiate(AssetsPath.ItemViewPath, parent)
+            .GetComponent<ItemView>();
+
+        view.Construct(color);
+
+        return view;
     }
 
     private PauseWindow CreatePauseWindow(SceneID currentScene)
