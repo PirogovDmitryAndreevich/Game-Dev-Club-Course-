@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4ab6dc756e18f48a54fd72344a167e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 284312094155591987}
+  View: {fileID: 284312094155591987}
   _floatHeight: 0.5
   _duration: 1.5
   _icon: {fileID: 1522500790192544972}

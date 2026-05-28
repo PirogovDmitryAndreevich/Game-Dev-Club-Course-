@@ -9997,7 +9997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f61d5fb21eed4f46b9b93f64591790d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 5755245439906691628}
+  View: {fileID: 5755245439906691628}
   _floatHeight: 0.25
   _duration: 1
   _sound: {fileID: 8300000, guid: 9a5756877d4815c4eb1b8f5d301cbd38, type: 3}

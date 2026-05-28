@@ -180,7 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7af59cda0abb944b208bfdaf3cc4d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pool: {fileID: 0}
 --- !u!1 &7374812244164385635
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +303,7 @@ MonoBehaviour:
   HitFlash: {fileID: 3630158972183369486}
   AnimationEvent: {fileID: 8227777856491728310}
   Animator: {fileID: 4385278224339377722}
+  _rewardsSpawner: {fileID: 1091098946024168213}
   _enemyAI: {fileID: 2350956842844721339}
   _sounds: {fileID: 4704137200303515724}
   _view: {fileID: 3590810295805204401}

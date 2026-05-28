@@ -18,6 +18,8 @@ MonoBehaviour:
     MaxSqrDistance: 0.3
     TryFindTime: 1
     WaitTime: 2
+    Reward: 200
+    GemPercent: 30
     RunSpeed: 0
     Damage: 5
     AttackRadius: 0.85
@@ -31,6 +33,8 @@ MonoBehaviour:
     MaxSqrDistance: 0.3
     TryFindTime: 1
     WaitTime: 2
+    Reward: 500
+    GemPercent: 30
     RunSpeed: 3
     Damage: 10
     AttackRadius: 5
@@ -44,6 +48,8 @@ MonoBehaviour:
     MaxSqrDistance: 0.3
     TryFindTime: 1
     WaitTime: 2
+    Reward: 400
+    GemPercent: 30
     RunSpeed: 3
     Damage: 10
     AttackRadius: 5

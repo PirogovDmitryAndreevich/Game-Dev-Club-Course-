@@ -23,4 +23,6 @@ public static class AssetsPath
     public const string LockPath = "Interactable/Lock";
     public const string KeyPath = "Collectables/Key";
     public const string ItemViewPath = "UI/Inventory/InventoryItem";
+    public const string RewardCoinPath = "Collectables/Coin";
+    public const string RewardGemPath = "Collectables/Gem";
 }

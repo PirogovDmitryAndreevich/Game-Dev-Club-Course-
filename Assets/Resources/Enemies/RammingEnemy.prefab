@@ -80,6 +80,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f17eb78e51807c40a07773e4410ecfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2789993125502045663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3255500619436354873}
+  - component: {fileID: 5730329149907467990}
+  m_Layer: 7
+  m_Name: RewardSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3255500619436354873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2789993125502045663}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6517943198848235257}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5730329149907467990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2789993125502045663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7af59cda0abb944b208bfdaf3cc4d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3644988766087619508
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +166,7 @@ Transform:
   m_Children:
   - {fileID: 412822578294338281}
   - {fileID: 5060276752306946920}
+  - {fileID: 3255500619436354873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6287513713316514231
@@ -203,6 +248,7 @@ MonoBehaviour:
   HitFlash: {fileID: 7732790331789163371}
   AnimationEvent: {fileID: 1661084676070963875}
   Animator: {fileID: 5326923678501098764}
+  _rewardsSpawner: {fileID: 5730329149907467990}
   _enemyAI: {fileID: 8853386946924061287}
   _sounds: {fileID: 2069457571880390258}
   _view: {fileID: 2095788623854318530}

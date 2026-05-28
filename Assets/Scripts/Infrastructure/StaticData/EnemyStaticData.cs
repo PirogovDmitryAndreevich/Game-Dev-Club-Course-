@@ -9,6 +9,8 @@ public class EnemyStaticData
     public float MaxSqrDistance = 13.7f;
     public float TryFindTime = 1f;
     public float WaitTime = 2.0f;
+    public int Reward = 200;
+    public int GemPercent = 30;
 
     [Header("Mover Data")]
     public float RunSpeed;

@@ -99,10 +99,13 @@ public class GameFactory : IGameFactory
         enemy.Attacker.Construct(data);
         enemy.Construct(data, wayPoints, _poolService);
         enemy.Sound.Construct(_handlers.Audio);
+        enemy.RewardsSpawner.Construct(_poolService);
 
         _poolService.RegisterFactory(() => CreateDamageEffect());
         _poolService.RegisterFactory(() => CreateEnemyDeathEffect());
         _poolService.RegisterFactory(() => CreatePunchEffect());
+        _poolService.RegisterFactory(() => CreateCoinReward());
+        _poolService.RegisterFactory(() => CreateGemReward());
 
         if (id == EnemyTypeId.Range)
         {
@@ -115,7 +118,7 @@ public class GameFactory : IGameFactory
             bulletSpawner?.Construct(_poolService);
         }
 
-        return null;
+        return enemy;
     }
 
     public Bomb CreateBomb()
@@ -173,6 +176,26 @@ public class GameFactory : IGameFactory
         effect.Construct(_poolService);
 
         return effect;
+    }
+
+    public Coin CreateCoinReward()
+    {
+        Coin coin = _assets.Instantiate(AssetsPath.RewardCoinPath)
+            .GetComponent<Coin>();
+
+        coin.Construct(_poolService, _progressService, _save);
+
+        return coin;
+    }
+
+    public Gem CreateGemReward()
+    {
+        Gem gem = _assets.Instantiate(AssetsPath.RewardGemPath)
+            .GetComponent<Gem>();
+
+        gem.Construct(_poolService, _progressService, _save);
+
+        return gem;
     }
 
     public List<EnemySpawner> CreateEnemySpawners(LevelData levelData)

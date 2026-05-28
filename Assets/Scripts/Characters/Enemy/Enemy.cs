@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyDirectionOfView), typeof(EnemyAI))]
 public class Enemy : Character, ITask
 {
-    //[SerializeField] private RewardsSpawner _rewardsSpawner;
+    [SerializeField] private RewardsSpawner _rewardsSpawner;
     [SerializeField] private EnemyAI _enemyAI;
     [SerializeField] private EnemySounds _sounds;
     [SerializeField] private EnemyDirectionOfView _view;
@@ -26,6 +26,7 @@ public class Enemy : Character, ITask
     public EnemySounds Sound => _sounds;
     public EnemyDirectionOfView View => _view;
     public EnemyAttacker Attacker => _attacker;
+    public RewardsSpawner RewardsSpawner => _rewardsSpawner;
     public WayPoint[] WayPoints { get; private set; }
     public EnemyHealth Health { get; private set; }
     public EnemyStaticData StaticData { get; private set; }
@@ -63,7 +64,10 @@ public class Enemy : Character, ITask
             EnemyDeathParticles deathParticles = _pool.Get<EnemyDeathParticles>();
             deathParticles.Play(transform.position);
 
-            //SpawnRewards();
+            RewardsSpawner.CreateCoins(StaticData.Reward);
+
+            if (UnityEngine.Random.Range(0f, 100f) < StaticData.GemPercent)
+                RewardsSpawner.CreateGems();
 
             Destroy(gameObject);
         }

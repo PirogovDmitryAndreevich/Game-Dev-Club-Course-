@@ -15,11 +15,9 @@ MonoBehaviour:
   SuperHitCount: 3
   ComboCooldown: 1.2
   CooldownTime: 0.35
-  AttackOffset: 0.85
-  AttackRadius: 0.85
   Attacks:
   - Type: 0
-    Damage: 5
+    Damage: 50
     AttackOffset: 0.85
     AttackRadius: 0.85
     KnockbackForce: 0.5

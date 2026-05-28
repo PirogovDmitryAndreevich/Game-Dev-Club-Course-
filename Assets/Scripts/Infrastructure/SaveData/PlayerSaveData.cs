@@ -44,32 +44,32 @@ public class PlayerSaveData
         {
             case StatsType.Coins:
                 if (Coins == value) return;
-                Coins = value;
+                Coins += value;
                 break;
 
             case StatsType.Gem:
                 if (Gems == value) return;
-                Gems = value;
+                Gems += value;
                 break;
 
             case StatsType.Score:
                 if (Score == value) return;
-                Score = value;
+                Score += value;
                 break;
 
             case StatsType.Damage:
                 if (Damage == value) return;
-                Damage = value;
+                Damage += value;
                 break;
 
             case StatsType.Defense:
                 if (Defense == value) return;
-                Defense = value;
+                Defense += value;
                 break;
 
             case StatsType.Health:
                 if (Health == value) return;
-                Health = value;
+                Health += value;
                 break;
 
             default:

@@ -74,7 +74,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.15
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -172,8 +172,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8316403087117589218}
   m_Father: {fileID: 3774552375175471001}
@@ -240,6 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3774552375175471001}
   - component: {fileID: 5707860603938858642}
+  - component: {fileID: 3974540760799144945}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -308,3 +309,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &3974540760799144945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5328080580126646967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b498329527dfa7a4ab17e454653cbbc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  View: {fileID: 8487759224834420822}
+  _floatHeight: 0.5
+  _duration: 1.5
+  _flyDistance: 1.5
+  _flyDuration: 0.35
+  _reward: 100

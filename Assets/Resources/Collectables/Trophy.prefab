@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c169f9cfc19b9ab46b032c995d96f73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 800540414641979217}
+  View: {fileID: 800540414641979217}
   _floatHeight: 0.21
   _duration: 1
   _sound: {fileID: 8300000, guid: 6b71fc7629de66b4a90215e843bfa0be, type: 3}
