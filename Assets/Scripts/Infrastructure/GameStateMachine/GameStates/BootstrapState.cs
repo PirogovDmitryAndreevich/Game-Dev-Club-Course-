@@ -1,3 +1,5 @@
+using YG;
+
 public class BootstrapState : IState
 {
     private readonly GameStateMachine _gameStateMachine;
@@ -65,6 +67,11 @@ public class BootstrapState : IState
     {
     }
 
-    private IInputServices RegisterInputService() =>
-        new StandaloneInput();
+    private IInputServices RegisterInputService()
+    {
+        if (YG2.envir.isDesktop)
+            return new StandaloneInput();
+        else
+            return new MobileInput();
+    }
 }

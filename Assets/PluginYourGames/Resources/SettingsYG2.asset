@@ -67,6 +67,7 @@ MonoBehaviour:
     platform: {fileID: 11400000, guid: c2a303d33a9fd394bae4c4b88b9a1c44, type: 2}
     autoApplySettings: 1
     autoPauseGame: 1
+    editTimeScale: 1
     editEventSystem: 1
     autoGRA: 1
     logInEditor: 1
@@ -78,12 +79,14 @@ MonoBehaviour:
     initDelaySimulation: 0
     buildNumber: 5
   Simulation:
-    device: 0
+    device: 1
     language: ru
+    enableInterAdv: 1
     advIntervalSimulation: 60
     durationAdv: 0.5
     loadAdv: 0
     testFailAds: 0
+    pauseOnFocusGame: 0
   Templates:
     logoImageFormat: 0
     backgroundImgFormat: 0
