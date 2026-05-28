@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionHandler), typeof(PlayerSounds))]
@@ -12,7 +13,8 @@ public class Player : Character
     [SerializeField] private CollisionHandler _collisionHandler;
 
     private IInputServices _input;
-    private IInteractable _interactable;
+
+    public event Action WasSetInteractable;
 
     public CameraShake CameraShake => _cameraShake;
     public PlayerFX FX => _playerFX;
@@ -21,6 +23,7 @@ public class Player : Character
     public PlayerAttacker Attacker => _attacker;
     public PlayerHealth Health { get; private set; }
     public PlayerDefense Defense { get; private set; }
+    public IInteractable Interactable { get; private set; }
 
     private void OnDestroy()
     {
@@ -68,9 +71,9 @@ public class Player : Character
             _playerSounds.PlayAttackSound();
         }
 
-        if (_input.GetIsInteract() && _interactable != null)
+        if (_input.GetIsInteract() && Interactable != null)
         {
-            _interactable.Interact();
+            Interactable.Interact();
         }
     }
 
@@ -81,6 +84,9 @@ public class Player : Character
         Health.ApplyDamage(damage);
     }
 
-    private void SetInteractable(IInteractable interactable) =>
-        _interactable = interactable;
+    private void SetInteractable(IInteractable interactable)
+    {
+        Interactable = interactable;
+        WasSetInteractable?.Invoke();
+    }
 }

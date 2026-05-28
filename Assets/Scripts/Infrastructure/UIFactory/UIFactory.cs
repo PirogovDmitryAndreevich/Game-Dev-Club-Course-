@@ -54,7 +54,7 @@ public class UIFactory : IUIFactory
 
         PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);
 
-        hud.Construct(pauseWindow);
+        hud.Construct(pauseWindow, player);
 
         hud.HealthBar.Construct(player.Health, player.Defense);
         hud.Inventory.Construct(this);
