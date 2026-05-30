@@ -32,6 +32,9 @@ public class Enemy : Character, ITask
     public EnemyStaticData StaticData { get; private set; }
     public TaskType Type => TaskType.Enemies;
 
+    private void OnDestroy() => 
+        Health.Died -= OnDied;
+
     public void Construct(EnemyStaticData data, List<WayPoint> wayPoints, IPoolService poolService)
     {
         StaticData = data;
@@ -40,6 +43,8 @@ public class Enemy : Character, ITask
         _stateMachine = new EnemyStateMachine(this);
 
         _pool = poolService;
+
+        Health.Died += OnDied;
     }
 
     public override void ApplyDamage(int damage, float knockbackForce, Vector2 damageSource, Vector2 pushDirection)
@@ -55,22 +60,6 @@ public class Enemy : Character, ITask
 
         DamageValueAnimation damageNumber = _pool.Get<DamageValueAnimation>();
         damageNumber.Play(damageSource, damage);
-
-        if (Health.HealthCurrent <= 0)
-        {
-            Mover.Stop();
-
-            Sound.PlayDeathSound();
-            EnemyDeathParticles deathParticles = _pool.Get<EnemyDeathParticles>();
-            deathParticles.Play(transform.position);
-
-            RewardsSpawner.CreateCoins(StaticData.Reward);
-
-            if (UnityEngine.Random.Range(0f, 100f) < StaticData.GemPercent)
-                RewardsSpawner.CreateGems();
-
-            Destroy(gameObject);
-        }
     }
 
     private void FixedUpdate() => 
@@ -78,7 +67,19 @@ public class Enemy : Character, ITask
 
     private void OnDied()
     {
-        TaskCompleted?.Invoke(this);
         EnemyDied?.Invoke(this);
+
+        Mover.Stop();
+
+        Sound.PlayDeathSound();
+        EnemyDeathParticles deathParticles = _pool.Get<EnemyDeathParticles>();
+        deathParticles.Play(transform.position);
+
+        RewardsSpawner.CreateCoins(StaticData.Reward);
+
+        if (UnityEngine.Random.Range(0f, 100f) < StaticData.GemPercent)
+            RewardsSpawner.CreateGems();
+
+        Destroy(gameObject);
     }
 }

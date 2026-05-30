@@ -26,12 +26,16 @@ public class LoadLevel : IScene
 
         CinemachineVirtualCamera camera = _gameFactory.CreateVirtualCamera();
         Player player = _gameFactory.CreatePlayerHero(at: levelData.PlayerInitial.Position, camera);
+        BusStop busStop = _gameFactory.CreateBusStop(levelData.BusStop.Position);
 
         Hud hud = CreateHud(levelData, player);
 
+        List<Enemy> enemies = new List<Enemy>();
+        List<Trophy> trophies = new List<Trophy>();
+
         if (levelData.Locks != null && levelData.Locks.Count > 0)
         {
-            foreach(var data in levelData.Locks)
+            foreach (var data in levelData.Locks)
                 _gameFactory.CreateLock(data, hud.Inventory);
         }
 
@@ -50,13 +54,25 @@ public class LoadLevel : IScene
         if (levelData.Trophies != null && levelData.Trophies.Count > 0)
         {
             foreach (var data in levelData.Trophies)
-                _gameFactory.CreateTrophy(at: data.Position);
+            {
+                var trophy = _gameFactory.CreateTrophy(at: data.Position);
+                trophies.Add(trophy);
+            }
         }
 
-        InitEnemySpawners(levelData);
+        InitEnemySpawners(levelData, enemies);
+        WinWindow winWindow = _uiFactory.CreateWinWindow(levelData);
+
         InitUI(levelData, player);
 
         camera.Follow = player.transform;
+
+        InitGameLogic(enemies, trophies, hud, winWindow, busStop);
+    }
+
+    public void InitGameLogic(List<Enemy> enemies, List<Trophy> trophies, Hud hud, WinWindow winWindow, BusStop busStop)
+    {
+        var finish = new FinishLevelLogic(enemies, trophies, hud.TaskView, winWindow, busStop);
     }
 
     private Hud CreateHud(LevelData levelData, Player player) =>
@@ -64,19 +80,22 @@ public class LoadLevel : IScene
 
     private void InitUI(LevelData levelData, Player player)
     {
-        
-        _uiFactory.CreateWinWindow(levelData);
         _uiFactory.CreateFailWindow(levelData, player);
     }
 
-    private void InitEnemySpawners(LevelData levelData)
+    private void InitEnemySpawners(LevelData levelData, List<Enemy> enemies)
     {
         AudioListener listener = Camera.main.GetComponent<AudioListener>();
         _handlers.Audio.SetListener(listener);
 
         List<EnemySpawner> spawners = _gameFactory.CreateEnemySpawners(levelData);
 
+        Enemy enemy;
+
         foreach (var spawner in spawners)
-            spawner.Spawn();
+        {
+            enemy = spawner.Spawn();
+            enemies.Add(enemy);
+        }
     }
 }

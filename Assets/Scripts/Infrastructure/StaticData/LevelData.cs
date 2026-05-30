@@ -10,6 +10,7 @@ public class LevelData
     public SceneID NextSceneID;
 
     public PlayerInitialData PlayerInitial;
+    public BusStopData BusStop;
 
     public List<LockData> Locks;
     public List<TrophyData> Trophies;

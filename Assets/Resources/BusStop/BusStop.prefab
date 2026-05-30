@@ -208,5 +208,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activatedSprite: {fileID: -280573538, guid: 53279b4c35455b2459070b55be2bd9ee, type: 3}
+  _spriteRenderer: {fileID: 6690563082343917128}
   _busSpawnPoint: {fileID: 2535974430356440777}
   _busEndedPoint: {fileID: 8954795591585626794}

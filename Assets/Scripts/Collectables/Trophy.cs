@@ -7,10 +7,7 @@ public class Trophy : Interactable
 
     private AudioHandler _handler;
 
-    public AudioClip TrophySound => _sound;
-    public TaskType Type => TaskType.Trophy;
-
-    public event Action<ITask> TaskCompleted;
+    public event Action<Trophy> Collected;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,6 +23,7 @@ public class Trophy : Interactable
     public void Collect()
     {
         _handler.PlaySound(_sound);
+        Collected?.Invoke(this);
         Destroy(gameObject);
     }
 }

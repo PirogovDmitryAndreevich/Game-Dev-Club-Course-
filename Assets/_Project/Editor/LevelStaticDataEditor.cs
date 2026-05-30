@@ -28,7 +28,9 @@ public class LevelStaticDataEditor : Editor
             }
 
             data.PlayerInitial.Position = FindObjectOfType<PlayerInitialMarker>()
-                .transform.position;            
+                .transform.position;
+
+            data.BusStop.Position = FindObjectOfType<BusStopMarker>().transform.position;
 
             data.Locks = FindObjectsOfType<LockInitialMarker>()
                 .Select(x => new LockData(x.transform.position,x.Color, new KeyData(x.Key.transform.position)))

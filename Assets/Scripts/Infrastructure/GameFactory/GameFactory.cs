@@ -50,6 +50,16 @@ public class GameFactory : IGameFactory
         return player;
     }
 
+    public BusStop CreateBusStop(Vector2 at)
+    {
+        BusStop busStop = _assets.Instantiate(AssetsPath.BusStopPath, at)
+            .GetComponent<BusStop>();
+
+        busStop.Construct(_handlers.Audio);
+
+        return busStop;
+    }
+
     public Lock CreateLock(LockData data, Inventory inventory)
     {
         Lock lockBarrier = _assets.Instantiate(AssetsPath.LockPath, data.Position)

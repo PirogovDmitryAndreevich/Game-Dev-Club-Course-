@@ -7,6 +7,7 @@ public class Hud : MonoBehaviour
     [SerializeField] private UserInfo _userInfo;
     [SerializeField] private Inventory _inventoryView;
     [SerializeField] private IndicateInteractButton _indicate;
+    [SerializeField] private TasksView _tasksView;
     [SerializeField] private Button _pauseButton;
 
     private PauseWindow _pauseWindow;
@@ -15,6 +16,7 @@ public class Hud : MonoBehaviour
     public HealthBar HealthBar => _healthBar;
     public UserInfo UserInfo => _userInfo;
     public Inventory Inventory => _inventoryView;
+    public TasksView TaskView => _tasksView; 
 
     private void OnDestroy()
     {

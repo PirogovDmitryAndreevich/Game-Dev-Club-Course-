@@ -1,43 +1,21 @@
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class TasksView : MonoBehaviour
 {
-    [SerializeField] private ConditionView[] _conditionsPrefabs;
-    [SerializeField] private Transform _conditionsContain;
+    [SerializeField] private TMP_Text _counter;
+    [SerializeField] private Image _view;
+    [SerializeField] private Color _reachedColor;
 
-    private Dictionary<TaskType, ConditionView> _conditionViews;
-    private Dictionary<TaskType, ConditionView> _templates;
+    public void UpdateCounter(int diedEnemies, int taskEnemies) => 
+        _counter.text = $"{diedEnemies}/{taskEnemies}";
 
-    private void Awake()
+    public void Reached()
     {
-        _conditionViews = new Dictionary<TaskType, ConditionView>();
-        _templates = new Dictionary<TaskType, ConditionView>();
-
-        foreach (var prefab in _conditionsPrefabs)
-            _templates[prefab.Type] = prefab;
-    }
-
-    public void AddCondition(TaskType type, int current, int value)
-    {
-        if (!_templates.ContainsKey(type))
-            return;
-
-        var newCondition = Instantiate(_templates[type], _conditionsContain);
-
-        _conditionViews[type] = newCondition;
-        newCondition.SetCondition(current, value);
-    }
-
-    public void ChangeValueTask(int value, TaskType type)
-    {
-        if (_conditionViews.ContainsKey(type))
-            _conditionViews[type].UpdateCount(value);
-    }
-
-    public void TaskReached(TaskType type)
-    {
-        if (_conditionViews.ContainsKey(type))
-            _conditionViews[type].Reached();
+        _view.DOColor(_reachedColor, 0.5f)
+            .Play()
+            .SetEase(Ease.OutBounce);
     }
 }

@@ -16,4 +16,5 @@ public interface IGameFactory : IService
     BombDamageArea CreateDamageArea();
     BombYellow CreateExplosion();
     DamageValueAnimation CreateDamageEffect();
+    BusStop CreateBusStop(Vector2 position);
 }

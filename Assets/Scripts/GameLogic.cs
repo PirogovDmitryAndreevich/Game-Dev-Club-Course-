@@ -8,27 +8,27 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private AudioClip _gameMusic;
     [SerializeField] private FailWindow _failWindow;
     [SerializeField] private WinWindow _winWindow;
-    [SerializeField] private FinishLevel _finisher;
     [SerializeField] private BusStop _finalBusStop;
     [SerializeField] private Bus _bus;
     [SerializeField] private FinishWithBusStop _busStopFinisher;
     [SerializeField] private float _playerSpeed;
     [SerializeField] private bool _isBusFromRightToBusStop;
 
+    private FinishLevelLogic _finisher;
     private bool _finishStarted;
 
     private void Awake()
     {
         _finalBusStop.Interacted += StartFinishProcess;
 
-        _finisher.FinishLevelConditionsCompleted += FinishLevelConditionsCompleted;
+        //_finisher.FinishLevelConditionsCompleted += FinishLevelConditionsCompleted;
 
         _busStopFinisher.CutsceneEnded += ShowWinWindow;
     }
 
     private void OnDestroy()
     {
-        _finisher.FinishLevelConditionsCompleted -= FinishLevelConditionsCompleted;
+        //_finisher.FinishLevelConditionsCompleted -= FinishLevelConditionsCompleted;
         _finalBusStop.Interacted -= StartFinishProcess;
         _busStopFinisher.CutsceneEnded -= ShowWinWindow;
     }
@@ -41,7 +41,7 @@ public class GameLogic : MonoBehaviour
     private void FinishLevelConditionsCompleted()
     {
         //_player.FinishLevelConditionsCompleted();
-        _finalBusStop.CanInteract = true;
+       // _finalBusStop.CanInteract = true;
     }
 
     private void StartFinishProcess()

@@ -28,12 +28,15 @@ public class UIFactory : IUIFactory
         menu.Construct(_gameStateMachine, _progressService, _handlersContainer, _save);
     }
 
-    public void CreateWinWindow(LevelData levelData)
+    public WinWindow CreateWinWindow(LevelData levelData)
     {
         WinWindow window = _assets.Instantiate(AssetsPath.WinWindowPath)
             .GetComponent<WinWindow>();
 
         window.Construct(levelData.ID, levelData.NextSceneID, _gameStateMachine, _handlersContainer.Audio);
+        window.TrophyCounter.Construct(_handlersContainer.Audio);
+
+        return window;
     }
 
     public void CreateFailWindow(LevelData levelData, Player player)

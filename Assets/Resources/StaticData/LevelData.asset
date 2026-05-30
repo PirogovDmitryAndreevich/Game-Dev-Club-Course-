@@ -18,6 +18,8 @@ MonoBehaviour:
     NextSceneID: 15
     PlayerInitial:
       Position: {x: -7.3999996, y: 5.4}
+    BusStop:
+      Position: {x: 7.0505543, y: 24.23}
     Locks: []
     Trophies:
     - Position: {x: 16.55, y: 12.116307}

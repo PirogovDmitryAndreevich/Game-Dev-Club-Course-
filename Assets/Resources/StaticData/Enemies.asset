@@ -21,7 +21,7 @@ MonoBehaviour:
     Reward: 200
     GemPercent: 30
     RunSpeed: 0
-    Damage: 5
+    Damage: 50
     AttackRadius: 0.85
     AttackOffset: 0.85
     ColdawnAttack: 1

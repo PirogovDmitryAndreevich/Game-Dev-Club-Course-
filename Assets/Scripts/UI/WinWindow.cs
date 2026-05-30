@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +11,16 @@ public class WinWindow : PauseBase
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _nextButton;
     [SerializeField] private Image _nextButtonImage;
+    [SerializeField] private TrophyCounter _trophyCounter;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private float _appearanceDuration = 0.5f;
     [SerializeField] private float _appearanceButton = 0.5f;
 
     private SceneID _nextSceneID;
+    private int _trophies;
+    private int _allTrophies;
 
+    public TrophyCounter TrophyCounter => _trophyCounter;
     protected override AudioHandler AudioHandler { get; set; }
     protected override GameStateMachine GameStateMachine { get; set; }
     protected override SceneID CurrentScene { get; set; }
@@ -26,6 +31,12 @@ public class WinWindow : PauseBase
         GameStateMachine = stateMachine;
         AudioHandler = handler;
         _nextSceneID = next;
+    }
+
+    public void Initialize(int trophyReached, int trophies)
+    {
+        _trophies = trophyReached;
+        _allTrophies = trophies;
     }
 
     public override void Show()
@@ -39,7 +50,8 @@ public class WinWindow : PauseBase
             .Append(_canvasGroup.DOFade(1f, _appearanceDuration)).SetEase(Ease.Flash)
             .Append(_restartButton.transform.DOScale(1f, _appearanceButton).From(0f).SetEase(Ease.OutBounce))
             .Join(_exitButton.transform.DOScale(1f, _appearanceButton).From(0f).SetEase(Ease.OutBounce))
-            .Play();
+            .Play()
+            .OnComplete(ShowTrophyCounter);
     }
 
     public override void Hide(Action callback)
@@ -79,4 +91,9 @@ public class WinWindow : PauseBase
 
     private void NextLevel() => 
         LoadScene(_nextSceneID);
+
+    private void ShowTrophyCounter()
+    {
+        _trophyCounter.Show(_trophies, _allTrophies);
+    }
 }

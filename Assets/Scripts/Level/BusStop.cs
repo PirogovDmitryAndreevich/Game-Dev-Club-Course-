@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class BusStop : MonoBehaviour
+public class BusStop : MonoBehaviour, IInteractable
 {
     [SerializeField] private Sprite _activatedSprite;
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -10,12 +10,13 @@ public class BusStop : MonoBehaviour
     [SerializeField] private Transform _busEndedPoint;
 
     private MaterialPropertyBlock _materialPropertyBlock;
+    private AudioHandler _handler;
 
     public event Action Interacted;
 
     public Transform BusSpawnPoint => _busSpawnPoint;
     public Transform BusEndedPoint => _busEndedPoint;
-    public bool CanInteract { get; set; }
+    public bool CanInteract { get; private set; } = false;
 
     private void Awake()
     {
@@ -34,6 +35,11 @@ public class BusStop : MonoBehaviour
             HighlightOff();        
     }
 
+    public void Construct(AudioHandler handler)
+    {
+        _handler = handler;
+    }
+
     public void Interact()
     {
         if (!CanInteract)
@@ -42,6 +48,9 @@ public class BusStop : MonoBehaviour
         _spriteRenderer.sprite = _activatedSprite;
         Interacted?.Invoke();
     }
+
+    public void EnableInteract() => 
+        CanInteract = true;
 
     public void HighlightOn()
     {
