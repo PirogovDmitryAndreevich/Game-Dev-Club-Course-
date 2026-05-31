@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyDirectionOfView), typeof(EnemyAI))]
-public class Enemy : Character, ITask
+public class Enemy : Character
 {
     [SerializeField] private RewardsSpawner _rewardsSpawner;
     [SerializeField] private EnemyAI _enemyAI;
@@ -14,7 +14,6 @@ public class Enemy : Character, ITask
     [SerializeField] private int _rewardGems;
 
     public event Action<Enemy> EnemyDied;
-    public event Action<ITask> TaskCompleted;
 
     private EnemyStateMachine _stateMachine;
     private IPoolService _pool;
@@ -30,7 +29,6 @@ public class Enemy : Character, ITask
     public WayPoint[] WayPoints { get; private set; }
     public EnemyHealth Health { get; private set; }
     public EnemyStaticData StaticData { get; private set; }
-    public TaskType Type => TaskType.Enemies;
 
     private void OnDestroy() => 
         Health.Died -= OnDied;

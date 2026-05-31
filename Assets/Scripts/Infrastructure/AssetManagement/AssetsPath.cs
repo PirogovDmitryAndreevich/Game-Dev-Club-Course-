@@ -26,4 +26,5 @@ public static class AssetsPath
     public const string RewardCoinPath = "Collectables/Coin";
     public const string RewardGemPath = "Collectables/Gem";
     public const string BusStopPath = "BusStop/BusStop";
+    public const string BusPath = "Bus/Bus";
 }

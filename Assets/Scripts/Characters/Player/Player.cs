@@ -13,6 +13,7 @@ public class Player : Character
     [SerializeField] private CollisionHandler _collisionHandler;
 
     private IInputServices _input;
+    private bool _isFinishing;
 
     public event Action WasSetInteractable;
 
@@ -33,6 +34,7 @@ public class Player : Character
     public void Construct(IPersistentProgressService progress, ISaveLoadService save, IInputServices input)
     {
         _input = input;
+        _isFinishing = false;
 
         Health = new PlayerHealth(progress);
         Defense = new PlayerDefense(progress);
@@ -42,6 +44,9 @@ public class Player : Character
 
     private void FixedUpdate()
     {
+        if (_isFinishing)
+            return;
+
         Animator.SetIsWalk(_input.Direction.x != 0
             || _input.Direction.y != 0);
 
@@ -83,6 +88,9 @@ public class Player : Character
         _playerSounds.PlayHitSound();
         Health.ApplyDamage(damage);
     }
+
+    public void StartFinishing() =>
+        _isFinishing = true;
 
     private void SetInteractable(IInteractable interactable)
     {

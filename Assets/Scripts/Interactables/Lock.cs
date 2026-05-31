@@ -14,7 +14,6 @@ public class Lock : MonoBehaviour, IInteractable
     [SerializeField] private float jumpUpDistance = 150f;
     [SerializeField] private float moveRightDistance = 60f;
     [SerializeField] private float rotateAmount = 25f;
-    [SerializeField] private float downDistance = 0.5f;
 
     private Key _key;
     private Inventory _inventory;

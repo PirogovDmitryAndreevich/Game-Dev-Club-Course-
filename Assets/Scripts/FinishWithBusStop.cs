@@ -2,73 +2,77 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 
-public class FinishWithBusStop : MonoBehaviour
+public class FinishWithBusStop
 {
-    private BusStop _busStop;
-    private Bus _bus;
-    private Player _player;
-    private Vector2 _endBusPosition;
-    private float _playerSpeed;
-    private Tween _moveTween;
+    private const float BusSpeed = 5f;
+    private const float PlayerSpeed = 5f;
+
+    private readonly BusStop _busStop;
+    private readonly Bus _bus;
+    private readonly Player _player;
+
+    public FinishWithBusStop(BusStop busStop, Bus bus, Player player)
+    {
+        _busStop = busStop;
+        _bus = bus;
+        _player = player;
+    }
 
     public event Action CutsceneEnded;
 
-    private void OnDestroy()
-    {
-        _moveTween?.Kill();
-
-        if (_bus != null)
-        {
-            _bus.MovementCompleted -= PutPlayerOnBus;
-            _bus.MovementCompleted -= EndingCutscene;
-        }
-    }
-
-    public void SetCutscene(BusStop busStop, Bus bus, Player player, Vector2 endBusPosition ,float playerSpeed)
-    {
-        _busStop = busStop;
-        _bus = bus; 
-        _player = player;
-        _playerSpeed = playerSpeed;
-        _endBusPosition = endBusPosition;
-    }
-
     public void Play()
     {
-        _bus.StartToBusStop(_busStop.transform.position);
-        _bus.MovementCompleted += PutPlayerOnBus;
+        _player.StartFinishing();
+        _player.CharacterAnimator.SetIsWalk(false);
+
+        _bus.gameObject.SetActive(true);
+
+        float distance = Mathf.Abs(_bus.transform.position.x - _busStop.transform.position.x);
+        float duration = distance / BusSpeed;
+
+        _bus.SetAnimation(true);
+
+        _bus.transform.DOMoveX(_busStop.transform.position.x, duration)
+            .SetEase(Ease.Linear)
+            .Play()
+            .OnComplete(PutPlayerOnBus);
     }
 
     private void PutPlayerOnBus()
     {
-        _bus.MovementCompleted -= PutPlayerOnBus;
-        //_player.StartMovingInCutscene();
+        _bus.SetAnimation(false);
+
+        _player.CharacterMover.enabled = false;
+        _player.CharacterAnimator.SetIsWalk(true);
 
         float distance = (_bus.transform.position - _player.transform.position).magnitude;
-        float duration = distance / _playerSpeed;
+        float duration = distance / PlayerSpeed;
 
-        _moveTween = _player.transform.DOMove(_bus.transform.position, duration)
+        _player.transform.DOMove(_bus.transform.position, duration)
             .SetEase(Ease.Linear)
             .Play()
-            .OnComplete(() =>
-            {
-                _moveTween = null;
-                _player.gameObject.SetActive(false);
-                BusGoOut();
-            }
-                );
+            .OnComplete(BusGoOut);
     }
 
     private void BusGoOut()
     {
-        _bus.MovementCompleted += EndingCutscene;
-        _bus.StartGoOut(_endBusPosition);
+        _player.gameObject.SetActive(false);
+
+        float distance = Mathf.Abs(_busStop.BusEndedPoint.position.x - _bus.transform.position.x);
+        float duration = distance / BusSpeed;
+
+        _bus.SetAnimation(true);
+
+        _bus.transform.DOMoveX(_busStop.BusEndedPoint.position.x, duration)
+            .SetEase(Ease.Linear)
+            .Play()
+            .OnComplete(EndingCutscene);
 
     }
 
     private void EndingCutscene()
     {
-        _bus.MovementCompleted -= EndingCutscene;
+        _bus.gameObject.SetActive(false);
         CutsceneEnded?.Invoke();
     }
 }

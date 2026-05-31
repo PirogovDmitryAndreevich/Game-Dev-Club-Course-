@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 public class FinishLevelLogic
@@ -13,10 +12,9 @@ public class FinishLevelLogic
 
     private List<Enemy> _enemies;
     private List<Trophy> _trophies;
+    private FinishWithBusStop _finishWithBusStop;
 
-    public event Action EnemiesCountUpdate;
-
-    public FinishLevelLogic(List<Enemy> enemies, List<Trophy> trophies, TasksView taskView, WinWindow winWindow, BusStop busStop)
+    public FinishLevelLogic(List<Enemy> enemies, List<Trophy> trophies, TasksView taskView, WinWindow winWindow, BusStop busStop, Bus bus, Player player)
     {
         _busStop = busStop;
         _taskView = taskView;
@@ -35,6 +33,11 @@ public class FinishLevelLogic
 
         foreach (Trophy trophy in trophies)
             trophy.Collected += TrophyCollected;
+
+         _finishWithBusStop = new FinishWithBusStop(busStop, bus, player);
+        bus.gameObject.SetActive(false);
+
+        _finishWithBusStop.CutsceneEnded += ShowWinWindow;
 
         UpdateCounter();
     }
@@ -66,12 +69,18 @@ public class FinishLevelLogic
     {
         _taskView.Reached();
         _busStop.EnableInteract();
-        _busStop.Interacted += ShowWinWindow;
+        _busStop.Interacted += StartCutscene;
+    }
+
+    private void StartCutscene()
+    {
+        _busStop.Interacted -= StartCutscene;
+        _finishWithBusStop.Play();
     }
 
     private void ShowWinWindow()
     {
-        _busStop.Interacted -= ShowWinWindow;
+        _finishWithBusStop.CutsceneEnded -= ShowWinWindow;        
 
         _winWindow.gameObject.SetActive(true);
         _winWindow.Initialize(_trophiesCollected, _allTrophies);

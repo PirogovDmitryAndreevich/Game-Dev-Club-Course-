@@ -67,13 +67,15 @@ public class LoadLevel : IScene
 
         camera.Follow = player.transform;
 
-        InitGameLogic(enemies, trophies, hud, winWindow, busStop);
+        Bus bus = _gameFactory.CreateBus(at: busStop.BusSpawnPoint.position);
+
+        InitGameLogic(enemies, trophies, hud, winWindow, busStop, bus, player);
     }
 
-    public void InitGameLogic(List<Enemy> enemies, List<Trophy> trophies, Hud hud, WinWindow winWindow, BusStop busStop)
-    {
-        var finish = new FinishLevelLogic(enemies, trophies, hud.TaskView, winWindow, busStop);
-    }
+    public void InitGameLogic(List<Enemy> enemies, List<Trophy> trophies, Hud hud, WinWindow winWindow, BusStop busStop
+        ,Bus bus, Player player) =>
+        new FinishLevelLogic(enemies, trophies, hud.TaskView, winWindow, busStop, bus, player);
+    
 
     private Hud CreateHud(LevelData levelData, Player player) =>
         _uiFactory.CreateHud(YG2.envir.isDesktop, levelData, player);

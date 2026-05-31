@@ -23,14 +23,12 @@ public class GameLogic : MonoBehaviour
 
         //_finisher.FinishLevelConditionsCompleted += FinishLevelConditionsCompleted;
 
-        _busStopFinisher.CutsceneEnded += ShowWinWindow;
     }
 
     private void OnDestroy()
     {
         //_finisher.FinishLevelConditionsCompleted -= FinishLevelConditionsCompleted;
         _finalBusStop.Interacted -= StartFinishProcess;
-        _busStopFinisher.CutsceneEnded -= ShowWinWindow;
     }
 
     private void InitMusic()
@@ -53,8 +51,8 @@ public class GameLogic : MonoBehaviour
 
         var spawnedBus = Instantiate(_bus, _finalBusStop.BusSpawnPoint.position, Quaternion.identity);
         spawnedBus.SetFlip(_isBusFromRightToBusStop);
-        _busStopFinisher.SetCutscene(_finalBusStop, spawnedBus, _player, _finalBusStop.BusEndedPoint.position, _playerSpeed);
-        _busStopFinisher.Play();
+        //_busStopFinisher.SetCutscene(_finalBusStop, spawnedBus, _player, _finalBusStop.BusEndedPoint.position, _playerSpeed);
+        //_busStopFinisher.Play();
     }
 
     private void ShowWinWindow()

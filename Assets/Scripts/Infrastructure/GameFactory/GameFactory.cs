@@ -131,6 +131,14 @@ public class GameFactory : IGameFactory
         return enemy;
     }
 
+    public Bus CreateBus(Vector2 at)
+    {
+        Bus bus = _assets.Instantiate(AssetsPath.BusPath, at: at)
+            .GetComponent<Bus>();
+
+        return bus;
+    }
+
     public Bomb CreateBomb()
     {
         var bomb = _assets.Instantiate(AssetsPath.BombPath)

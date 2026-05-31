@@ -10,6 +10,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected AnimationEvent AnimationEvent;
     [SerializeField] protected CharacterAnimator Animator;
 
+    public Mover CharacterMover => Mover;
+    public CharacterAnimator CharacterAnimator => Animator;
+
     public virtual void ApplyDamage(int damage, float knockbackForce, Vector2 damageSource, Vector2 pushDirection)
     {
         Mover.Knockback(pushDirection, knockbackForce);
