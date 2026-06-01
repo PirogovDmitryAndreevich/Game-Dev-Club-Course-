@@ -27,4 +27,6 @@ public static class AssetsPath
     public const string RewardGemPath = "Collectables/Gem";
     public const string BusStopPath = "BusStop/BusStop";
     public const string BusPath = "Bus/Bus";
+    public const string LevelCardPath = "UI/LevelCard/LevelCard";
+    internal static string SelectLevelWindow;
 }

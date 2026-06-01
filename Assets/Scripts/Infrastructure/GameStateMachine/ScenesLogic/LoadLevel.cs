@@ -1,18 +1,19 @@
 using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using YG;
 
 public class LoadLevel : IScene
 {
+    private readonly SceneID _id;
     private readonly IStaticData _staticData;
     private readonly IGameFactory _gameFactory;
     private readonly IUIFactory _uiFactory;
     private readonly IHandlersContainer _handlers;
 
-    public LoadLevel(IStaticData staticData, IGameFactory gameFactory, IUIFactory uiFactory, IHandlersContainer handlers)
+    public LoadLevel(SceneID id ,IStaticData staticData, IGameFactory gameFactory, IUIFactory uiFactory, IHandlersContainer handlers)
     {
+        _id = id;
         _staticData = staticData;
         _gameFactory = gameFactory;
         _uiFactory = uiFactory;
@@ -21,8 +22,7 @@ public class LoadLevel : IScene
 
     public void InitGameObjects()
     {
-        string sceneKey = SceneManager.GetActiveScene().name;
-        LevelData levelData = _staticData.ForLevel(sceneKey);
+        LevelData levelData = _staticData.ForLevel(_id);
 
         CinemachineVirtualCamera camera = _gameFactory.CreateVirtualCamera();
         Player player = _gameFactory.CreatePlayerHero(at: levelData.PlayerInitial.Position, camera);

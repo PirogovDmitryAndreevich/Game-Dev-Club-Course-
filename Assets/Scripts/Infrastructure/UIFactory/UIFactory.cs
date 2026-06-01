@@ -25,7 +25,10 @@ public class UIFactory : IUIFactory
         MainMenu menu = _assets.Instantiate(AssetsPath.MainMenuPath)
             .GetComponent<MainMenu>();
 
-        menu.Construct(_gameStateMachine, _progressService, _handlersContainer, _save);
+        menu.Construct(_gameStateMachine, _progressService, _handlersContainer);
+        menu.Settings.Construct(_handlersContainer.Audio);
+        menu.Settings.AudioSlider.Construct(_progressService, _save);
+        menu.LevelSelector.Construct(_gameStateMachine, _handlersContainer.Audio, _staticData, this);
     }
 
     public WinWindow CreateWinWindow(LevelData levelData)
@@ -55,7 +58,7 @@ public class UIFactory : IUIFactory
 
         Hud hud = hudObject.GetComponent<Hud>();
 
-        PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);
+        PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);       
 
         hud.Construct(pauseWindow, player);
 
@@ -73,6 +76,16 @@ public class UIFactory : IUIFactory
         view.Construct(color);
 
         return view;
+    }
+
+    public LevelCard CreateLevelCard(LevelData data, Transform parent)
+    {
+        LevelCard card = _assets.Instantiate(AssetsPath.LevelCardPath, parent)
+            .GetComponent<LevelCard>();
+
+        card.Construct(data.Name, data.Sprite, data.ID);
+
+        return card;
     }
 
     private PauseWindow CreatePauseWindow(SceneID currentScene)

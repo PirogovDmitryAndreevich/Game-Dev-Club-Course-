@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class LevelData
 {
     public string LevelKey;
+    public string Name;
+    public Sprite Sprite;
 
     public SceneID ID;
     public SceneID NextSceneID;

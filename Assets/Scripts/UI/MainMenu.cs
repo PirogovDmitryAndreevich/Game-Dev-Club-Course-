@@ -11,33 +11,41 @@ public class MainMenu : MonoBehaviour
 
     [Header("Popups")]
     [SerializeField] private SettingsWidow _settingsWindow;
+    [SerializeField] private SelectLevelWindow _levelSelector;
 
     private GameStateMachine _gameStateMachine;
 
+    public SelectLevelWindow LevelSelector => _levelSelector;
+    public SettingsWidow Settings => _settingsWindow;
+
     private void OnEnable()
     {
-        _startButton.onClick.AddListener(LoadScene);
+        _startButton.onClick.AddListener(ShowLevelSelecter);
         _settingsButton.onClick.AddListener(ShowSettings);
     }
 
     private void OnDisable()
     {
-        _startButton.onClick.RemoveListener(LoadScene);
+        _startButton.onClick.RemoveListener(ShowLevelSelecter);
         _settingsButton.onClick.RemoveListener(ShowSettings);
     }
 
-    public void Construct(GameStateMachine gameStateMachine, IPersistentProgressService progress, IHandlersContainer handlers, ISaveLoadService save)
+    public void Construct(GameStateMachine gameStateMachine, IPersistentProgressService progress, IHandlersContainer handlers)
     {
-        _gameStateMachine = gameStateMachine;        
+        _gameStateMachine = gameStateMachine;
 
-        _settingsWindow.Construct(handlers.Audio);
-        _settingsWindow.AudioSlider.Construct(progress, save);
+        _levelSelector.gameObject.SetActive(false);
 
         foreach (Stat stat in _stats)
             stat.Construct(progress);
 
         foreach (ButtonPlaySoundOnInteract button in _buttonPlaySounds)
             button.Construct(handlers.Audio);
+    }
+
+    private void ShowLevelSelecter()
+    {
+        _levelSelector.gameObject.SetActive(true);
     }
 
     private void LoadScene() => 
