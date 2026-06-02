@@ -30,7 +30,14 @@ public class LevelStaticDataEditor : Editor
             data.PlayerInitial.Position = FindObjectOfType<PlayerInitialMarker>()
                 .transform.position;
 
-            data.BusStop.Position = FindObjectOfType<BusStopMarker>().transform.position;
+            BusStopMarker busStopMarker = FindObjectOfType<BusStopMarker>();
+
+            data.BusStop = new BusStopData(
+                busStopMarker.transform.position,
+                new BusData(
+                    busStopMarker.BusSpawnPoint.transform.position,
+                    busStopMarker.EndBusPoint.transform.position,
+                    busStopMarker.BusSpawnPoint.IsRight));
 
             data.Locks = FindObjectsOfType<LockInitialMarker>()
                 .Select(x => new LockData(x.transform.position,x.Color, new KeyData(x.Key.transform.position)))

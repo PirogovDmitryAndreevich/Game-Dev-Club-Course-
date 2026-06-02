@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f97c8b6d40b8af479b13e018404b175, type: 3}
+  m_Name: LevelData
+  m_EditorClassIdentifier: 
+  LevelData:
+  - LevelKey: Level_1
+    Name: Level 1
+    Sprite: {fileID: 21300000, guid: 047b8aa7e3a30444abf0ed61f1ecab84, type: 3}
+    ID: 2
+    NextSceneID: 3
+    PlayerInitial:
+      Position: {x: -7.3999996, y: 5.4}
+    BusStop:
+      Position: {x: 7.0505543, y: 24.23}
+      BusData:
+        SpawnPosition: {x: 22.785215, y: 22.27375}
+        EndMovePoint: {x: -8.616692, y: 22.27375}
+        IsRight: 1
+    Locks: []
+    Trophies:
+    - Position: {x: 16.55, y: 12.116307}
+    MedKits: []
+    Defenses: []
+    EnemySpawnerDatas:
+    - Id: Level_1_ae8a5849-c2a8-402d-b62a-0562c5f4ea87
+      TypeId: 0
+      Position: {x: 17.07, y: 3.62}
+      WayPoints:
+      - Position: {x: 13.402594, y: 3.796537}
+      - Position: {x: 17.14, y: 6.33}
+  - LevelKey: Level_2
+    Name: Level 2
+    Sprite: {fileID: 21300000, guid: f3b7e31eb60b84b17870d0b5d926cfad, type: 3}
+    ID: 3
+    NextSceneID: 4
+    PlayerInitial:
+      Position: {x: 2.2999997, y: 4.4000006}
+    BusStop:
+      Position: {x: -3.888534, y: 46.52625}
+      BusData:
+        SpawnPosition: {x: 7.733812, y: 44.611664}
+        EndMovePoint: {x: -15.996267, y: 44.611664}
+        IsRight: 1
+    Locks:
+    - Position: {x: -3.5367255, y: 31.969997}
+      Color: {r: 1, g: 0.92, b: 0, a: 1}
+      Key:
+        Position: {x: 2.9932752, y: 28.48}
+    Trophies:
+    - Position: {x: -6.6, y: 13.633401}
+    - Position: {x: 37.410942, y: 16.325089}
+    - Position: {x: 15.051718, y: 11.842183}
+    MedKits: []
+    Defenses: []
+    EnemySpawnerDatas:
+    - Id: Level_2_93735ff2-df67-4f7d-a441-9a7ac82ebb31
+      TypeId: 0
+      Position: {x: 9.209999, y: 11.68}
+      WayPoints:
+      - Position: {x: 12.98, y: 12.6}
+      - Position: {x: 6.89, y: 10.780001}
+    - Id: Level_2_7748b909-a0b2-4134-94b2-d9cb8b67b3d2
+      TypeId: 0
+      Position: {x: -3.45, y: 25.83}
+      WayPoints:
+      - Position: {x: -3.54, y: 22.29}
+      - Position: {x: -3.68, y: 29.04}
+    - Id: _ffc5b2f0-5be2-46c2-acac-6a60d8d2b4a4
+      TypeId: 0
+      Position: {x: 18.91, y: 11.833401}
+      WayPoints:
+      - Position: {x: 16.61, y: 10.5334015}
+      - Position: {x: 21.37, y: 12.523401}
+    - Id: Level_2_a158bef4-13ad-4f5f-b459-408fe54101b0
+      TypeId: 0
+      Position: {x: 36.788567, y: 18.649822}
+      WayPoints:
+      - Position: {x: 37.208565, y: 17.359821}
+      - Position: {x: 32.818565, y: 20.259823}
+  - LevelKey: Level_3
+    Name: Level 3
+    Sprite: {fileID: 21300000, guid: b76446236559e4a7ebfbdc6519fa9d07, type: 3}
+    ID: 4
+    NextSceneID: 15
+    PlayerInitial:
+      Position: {x: -6.789999, y: 4.8}
+    BusStop:
+      Position: {x: -35.82, y: 7.41}
+      BusData:
+        SpawnPosition: {x: -24.197655, y: 5.495414}
+        EndMovePoint: {x: -47.927734, y: 5.495414}
+        IsRight: 1
+    Locks: []
+    Trophies:
+    - Position: {x: -24.71906, y: -6.211982}
+    - Position: {x: -13.499766, y: -2.7263756}
+    - Position: {x: -15.188107, y: -12.856419}
+    - Position: {x: 10.463774, y: -12.420717}
+    - Position: {x: 11.3847065, y: -5.3308144}
+    MedKits: []
+    Defenses: []
+    EnemySpawnerDatas:
+    - Id: Level_3_02b2d70f-59c3-419a-8d1d-b3414304377a
+      TypeId: 0
+      Position: {x: -24.770811, y: -7.1713505}
+      WayPoints:
+      - Position: {x: -26.290812, y: -4.8913507}
+      - Position: {x: -22.880812, y: -8.641351}
+    - Id: Level_3_6dddb911-fac9-4636-915a-435d9a9b7b27
+      TypeId: 0
+      Position: {x: -10.946301, y: -8.630829}
+      WayPoints:
+      - Position: {x: -13.556301, y: -5.050829}
+      - Position: {x: -10.956302, y: -8.720829}
+    - Id: Level_3_c997141a-6d3c-4831-b867-ee7ddf9d51e2
+      TypeId: 0
+      Position: {x: -3.770565, y: -14.347122}
+      WayPoints:
+      - Position: {x: -11.940565, y: -13.607122}
+      - Position: {x: -3.7805653, y: -13.417122}
+    - Id: Level_3_18ee47d7-8171-43a1-8d94-c5e650b8cc3f
+      TypeId: 0
+      Position: {x: 6.9300003, y: -13.37}
+      WayPoints:
+      - Position: {x: 3.4300003, y: -10.88}
+      - Position: {x: 10.320002, y: -13.34}
+    - Id: _ffc5b2f0-5be2-46c2-acac-6a60d8d2b4a4
+      TypeId: 0
+      Position: {x: 4.1754875, y: -1.9415579}
+      WayPoints:
+      - Position: {x: 3.5054874, y: -6.261558}
+      - Position: {x: 10.405489, y: -1.7415581}
