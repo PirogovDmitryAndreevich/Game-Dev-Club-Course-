@@ -12,6 +12,11 @@ public class LevelData
     public SceneID ID;
     public SceneID NextSceneID;
 
+    [Header("Rewards Data")]
+    public int Coins;
+    public int Gems;
+    public int ScoreMultiply;
+
     public PlayerInitialData PlayerInitial;
     public BusStopData BusStop;
 

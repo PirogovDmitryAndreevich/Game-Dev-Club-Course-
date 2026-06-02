@@ -39,8 +39,8 @@ public class UIFactory : IUIFactory
             .GetComponent<WinWindow>();
 
         window.Construct(levelData.ID, levelData.NextSceneID, _gameStateMachine, _handlersContainer.Audio,
-            _progressService, _save);
-        window.TrophyCounter.Construct(_handlersContainer.Audio);
+            _progressService, _save, levelData);
+        window.TrophyCounter.Construct(levelData);
 
         return window;
     }
