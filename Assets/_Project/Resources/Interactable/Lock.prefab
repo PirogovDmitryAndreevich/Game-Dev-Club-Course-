@@ -53,13 +53,11 @@ MonoBehaviour:
   _barrierPieces:
   - {fileID: 6626373243292239155}
   - {fileID: 3677053215617232458}
-  _negativeSound: {fileID: 8300000, guid: 4e002e449fed29440b6a89814af2e231, type: 3}
+  _negativeSound: {fileID: 8300000, guid: cf6c0e7fbef9449c98a0cdb5ea0c4d9f, type: 3}
   _unlockSound: {fileID: 8300000, guid: f278cd6d52b634e41bed073e26359a34, type: 3}
-  _isLock: 0
   jumpUpDistance: 0.5
   moveRightDistance: 0.3
   rotateAmount: 25
-  downDistance: 1
 --- !u!61 &6966423576080411055
 BoxCollider2D:
   m_ObjectHideFlags: 0

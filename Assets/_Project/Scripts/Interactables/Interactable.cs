@@ -14,13 +14,15 @@ public class Interactable : MonoBehaviour
         Moving();
 
     private void OnDestroy() =>
-        Animation.Kill();
+        Animation?.Kill();
 
     protected virtual void Moving()
     {
-        _startPos = View.position;
+        Animation?.Kill();
 
-        Animation = View.DOMoveY(_startPos.y + _floatHeight, _duration)
+        View.localPosition = Vector3.zero;
+
+        Animation = View.DOLocalMoveY(_floatHeight, _duration)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo)
             .Play();

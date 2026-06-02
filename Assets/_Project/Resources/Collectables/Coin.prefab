@@ -324,6 +324,9 @@ MonoBehaviour:
   View: {fileID: 8487759224834420822}
   _floatHeight: 0.5
   _duration: 1.5
+  _collider: {fileID: 5707860603938858642}
   _flyDistance: 1.5
   _flyDuration: 0.35
   _reward: 100
+  _spawnSound: {fileID: 8300000, guid: 10c2cb89f89ea41c781d05ab6a18aad9, type: 3}
+  _collectSound: {fileID: 8300000, guid: 19a5b18b079f844bba783a9ec5f32efa, type: 3}

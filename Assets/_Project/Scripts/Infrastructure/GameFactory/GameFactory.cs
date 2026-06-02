@@ -203,7 +203,7 @@ public class GameFactory : IGameFactory
         Coin coin = _assets.Instantiate(AssetsPath.RewardCoinPath)
             .GetComponent<Coin>();
 
-        coin.Construct(_poolService, _progressService, _save);
+        coin.Construct(_poolService, _progressService, _save, _handlers.Audio);
 
         return coin;
     }
@@ -213,7 +213,7 @@ public class GameFactory : IGameFactory
         Gem gem = _assets.Instantiate(AssetsPath.RewardGemPath)
             .GetComponent<Gem>();
 
-        gem.Construct(_poolService, _progressService, _save);
+        gem.Construct(_poolService, _progressService, _save, _handlers.Audio);
 
         return gem;
     }

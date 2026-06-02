@@ -134,7 +134,7 @@ MonoBehaviour:
   _floatHeight: 0.5
   _duration: 1.5
   _icon: {fileID: 1522500790192544972}
-  _sound: {fileID: 8300000, guid: 4c1cdd2d676aa7641a10626c5984b2bd, type: 3}
+  _sound: {fileID: 8300000, guid: 5d7766689d89c524ca1dc8a52f26b36b, type: 3}
 --- !u!61 &3932381851172983314
 BoxCollider2D:
   m_ObjectHideFlags: 0

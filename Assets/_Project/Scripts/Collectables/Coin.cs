@@ -3,19 +3,23 @@ using UnityEngine;
 
 public class Coin : Interactable
 {
+    [SerializeField] private Collider2D _collider;
     [SerializeField] private float _flyDistance = 1.5f;
     [SerializeField] private float _flyDuration = 0.35f;
     [SerializeField] private int _reward = 100;
+    [SerializeField] private AudioClip _spawnSound;
+    [SerializeField] private AudioClip _collectSound;
 
     private ISaveLoadService _save;
     private IPersistentProgressService _progress;
     private IPoolService _pool;
+    private AudioHandler _audio;
     private Sequence seq;
 
     private void OnDisable()
     {
-        Animation.Kill();
-        seq.Kill();
+        Animation?.Kill();
+        seq?.Kill();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,15 +28,17 @@ public class Coin : Interactable
             Collect();
     }
 
-    public void Construct(IPoolService poolService, IPersistentProgressService progress, ISaveLoadService save)
+    public void Construct(IPoolService poolService, IPersistentProgressService progress, ISaveLoadService save, AudioHandler audio)
     {
         _save = save;
         _progress = progress;
         _pool = poolService;
+        _audio = audio;
     }
 
     private void Collect()
     {
+        _audio.PlaySound(_collectSound);
         _progress.Progress.PlayerData.SetStat(StatsType.Coins, _reward);
         _save.SaveProgress();
         _pool.Return(this);
@@ -40,8 +46,11 @@ public class Coin : Interactable
 
     public void Spawn(Vector2 position)
     {
-        transform.position = position;
+        _collider.enabled = false;
         Animation?.Kill();
+        transform.position = position;
+
+        _audio.PlaySound(_spawnSound);
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
@@ -60,17 +69,12 @@ public class Coin : Interactable
                 .SetEase(Ease.OutQuad)
         );
 
-        seq.Join(
-            transform.DORotate(
-                new Vector3(0, 0, Random.Range(-180, 180)),
-                _flyDuration
-            )
-        );
-
         seq.Play();
 
         seq.OnComplete(() =>
         {
+            _collider.enabled = true;
+            _collider.offset = Vector3.zero;
             seq.Kill();
             Moving();
         });

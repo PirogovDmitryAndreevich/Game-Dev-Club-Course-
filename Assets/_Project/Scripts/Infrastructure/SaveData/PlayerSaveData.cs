@@ -43,32 +43,26 @@ public class PlayerSaveData
         switch (type)
         {
             case StatsType.Coins:
-                if (Coins == value) return;
                 Coins += value;
                 break;
 
             case StatsType.Gem:
-                if (Gems == value) return;
                 Gems += value;
                 break;
 
             case StatsType.Score:
-                if (Score == value) return;
                 Score += value;
                 break;
 
             case StatsType.Damage:
-                if (Damage == value) return;
                 Damage += value;
                 break;
 
             case StatsType.Defense:
-                if (Defense == value) return;
                 Defense += value;
                 break;
 
             case StatsType.Health:
-                if (Health == value) return;
                 Health += value;
                 break;
 

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Hud : MonoBehaviour
 {
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private StatusBar _statusBar;
     [SerializeField] private UserInfo _userInfo;
     [SerializeField] private Inventory _inventoryView;
     [SerializeField] private IndicateInteractButton _indicate;
@@ -17,6 +18,7 @@ public class Hud : MonoBehaviour
     public UserInfo UserInfo => _userInfo;
     public Inventory Inventory => _inventoryView;
     public TasksView TaskView => _tasksView; 
+    public StatusBar StatusBar => _statusBar;
 
     private void OnDestroy()
     {

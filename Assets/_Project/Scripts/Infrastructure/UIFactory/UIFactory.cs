@@ -67,6 +67,7 @@ public class UIFactory : IUIFactory
 
         hud.HealthBar.Construct(player.Health, player.Defense);
         hud.Inventory.Construct(this);
+        hud.StatusBar.Construct(_progressService);
 
         return hud;
     }
