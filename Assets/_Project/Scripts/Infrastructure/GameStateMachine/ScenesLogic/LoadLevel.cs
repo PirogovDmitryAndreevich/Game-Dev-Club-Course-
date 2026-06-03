@@ -72,6 +72,8 @@ public class LoadLevel : IScene
             levelData.BusStop.BusData.IsRight);
 
         InitGameLogic(enemies, trophies, hud, winWindow, busStop, bus, player);
+
+        _handlers.Audio.PlayMusic(levelData.BGMusic);
     }
 
     public void InitGameLogic(List<Enemy> enemies, List<Trophy> trophies, Hud hud, WinWindow winWindow, BusStop busStop

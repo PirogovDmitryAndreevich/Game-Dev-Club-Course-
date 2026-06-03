@@ -17,7 +17,7 @@ MonoBehaviour:
   CooldownTime: 0.35
   Attacks:
   - Type: 0
-    Damage: 50
+    Damage: 10
     AttackOffset: 0.85
     AttackRadius: 0.85
     KnockbackForce: 0.5

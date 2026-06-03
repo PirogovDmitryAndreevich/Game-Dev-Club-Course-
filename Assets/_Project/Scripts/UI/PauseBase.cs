@@ -1,6 +1,7 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
-using DG.Tweening;
+using YG;
 
 public abstract class PauseBase : MonoBehaviour
 {
@@ -26,14 +27,23 @@ public abstract class PauseBase : MonoBehaviour
 
     public abstract void Hide(Action callback);
 
-    protected virtual void Restart() => 
+    protected virtual void Restart()
+    {
+        YG2.InterstitialAdvShow();
         LoadScene(CurrentScene);
+    }
 
-    protected virtual void Continue() => 
+    protected virtual void Continue()
+    {
+        YG2.InterstitialAdvShow();
         Hide(() => gameObject.SetActive(false));
+    }
 
-    protected virtual void Exit() => 
+    protected virtual void Exit()
+    {
+        YG2.InterstitialAdvShow();
         LoadScene(SceneID.MainMenu);
+    }
 
     protected virtual void Enable() => 
         TimeManager.Pause();

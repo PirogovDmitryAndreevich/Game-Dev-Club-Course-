@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e6d9f6960a7e34a8c6462df307aab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showSound: {fileID: 8300000, guid: 06a0420f8524f54458b313c29fbfd2b1, type: 3}
   _advButton: {fileID: 5860198091235837369}
   _restartButton: {fileID: 2395728877738192276}
   _exitButton: {fileID: 5072279650097419700}

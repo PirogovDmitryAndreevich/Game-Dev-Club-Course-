@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 121,
+    "idSave": 179,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
@@ -16,9 +16,9 @@
             "IsMusicMute": true
         },
         "PlayerData": {
-            "Coins": 1100,
-            "Gems": 20,
-            "Score": 0,
+            "Coins": 8700,
+            "Gems": 87,
+            "Score": 9000,
             "Damage": 5,
             "Defense": 0,
             "Health": 100
@@ -37,7 +37,14 @@
                 3,
                 4,
                 4,
-                3
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                4
             ]
         }
     }

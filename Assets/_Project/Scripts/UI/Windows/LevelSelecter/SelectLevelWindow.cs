@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class SelectLevelWindow : MonoBehaviour
 {
@@ -53,6 +54,8 @@ public class SelectLevelWindow : MonoBehaviour
 
     public void Show()
     {
+        YG2.InterstitialAdvShow();
+
         gameObject.SetActive(true);
 
         LevelCard card = _cards[SceneID.Level_1];
@@ -60,8 +63,11 @@ public class SelectLevelWindow : MonoBehaviour
         OnSelectCard(card);
     }
 
-    public void Hide() => 
+    public void Hide()
+    {
+        YG2.InterstitialAdvShow();
         gameObject.SetActive(false);
+    }
 
     private void OnSelectCard(LevelCard card)
     {
@@ -76,6 +82,8 @@ public class SelectLevelWindow : MonoBehaviour
     {
         if (_currentSelected == null)
             return;
+
+        YG2.InterstitialAdvShow();
 
         _stateMachine.Enter<LoadSceneState, SceneID>(_currentSelected.LevelID);
     }

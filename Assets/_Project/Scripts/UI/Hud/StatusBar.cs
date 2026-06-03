@@ -38,5 +38,5 @@ public class StatusBar : MonoBehaviour
         _coins.text = _progress.Progress.PlayerData.Coins.ToString();
 
     private void UpdateGems() => 
-        _gems.text = _progress.Progress.PlayerData.Coins.ToString();
+        _gems.text = _progress.Progress.PlayerData.Gems.ToString();
 }

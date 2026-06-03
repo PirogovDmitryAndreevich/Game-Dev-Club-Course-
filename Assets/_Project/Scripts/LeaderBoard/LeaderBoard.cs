@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using YG;
@@ -11,7 +10,6 @@ public class LeaderBoard : MonoBehaviour
     [SerializeField] private TMP_Text _rankText;
 
     private IPersistentProgressService _progressService;
-    private LBData _lbData;
 
     private void Start() =>
         SetNewValueLB(StatsType.Score);
@@ -25,30 +23,22 @@ public class LeaderBoard : MonoBehaviour
     public void Construct(IPersistentProgressService progressService)
     {
         _progressService = progressService;
-        _progressService.Progress.PlayerData.StatsChanged += SetNewValueLB;
 
+        _progressService.Progress.PlayerData.StatsChanged += SetNewValueLB;
         YG2.onGetLeaderboard += SetLeaderboardData;
-        SetNewValueLB(StatsType.Score);
     }
     private void SetNewValueLB(StatsType type)
     {
         if (type != StatsType.Score)
             return;
 
-        _leaderboard.SetLeaderboard(_progressService.Progress.PlayerData.GetStat(type));
-        
-        if (_lbData != null)
-            SetScoreText();
+        _leaderboard.SetLeaderboard(_progressService.Progress.PlayerData.GetStat(type)); 
 
         _leaderboard.UpdateLB();
     }
-
-    private void SetScoreText()
+    private void SetLeaderboardData(LBData data)
     {
-        _scoreText.text = _lbData.currentPlayer.score.ToString();
-        _rankText.text = _lbData.currentPlayer.rank.ToString();
+        _scoreText.text = data.currentPlayer.score.ToString();
+        _rankText.text = data.currentPlayer.rank.ToString();
     }
-
-    private void SetLeaderboardData(LBData data) =>
-        _lbData = data;
 }

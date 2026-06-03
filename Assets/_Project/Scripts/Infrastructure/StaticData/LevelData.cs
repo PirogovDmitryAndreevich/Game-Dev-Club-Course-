@@ -8,6 +8,7 @@ public class LevelData
     public string LevelKey;
     public string Name;
     public Sprite Sprite;
+    public AudioClip BGMusic;
 
     public SceneID ID;
     public SceneID NextSceneID;

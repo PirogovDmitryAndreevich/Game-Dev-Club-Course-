@@ -29,6 +29,9 @@ public class AudioHandler : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    public void PlayMainMenuMusic() =>
+        PlayMusic(_defaultBGMusic);
+
     public void SetListener(AudioListener listener) => 
         _listenerTransform = listener.transform;
 
@@ -50,12 +53,11 @@ public class AudioHandler : MonoBehaviour
         _randomPitchSoundSource.pitch = Random.Range(_lowPith, _topPith);
         _randomPitchSoundSource.PlayOneShot(clip);
     }
+
     private void SettingSources()
     {
         _musicSource.playOnAwake = true;
         _musicSource.loop = true;
-
-        PlayMusic(_defaultBGMusic);
 
         _soundsSource.loop = false;
         _soundsSource.playOnAwake = false;

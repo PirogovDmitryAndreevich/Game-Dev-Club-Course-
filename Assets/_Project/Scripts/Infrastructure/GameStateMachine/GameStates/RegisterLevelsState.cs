@@ -15,7 +15,7 @@ public class RegisterLevelsState : IState
 
     public void Enter()
     {
-        _scenesContainer.AddNewScene(SceneID.MainMenu, new MainMenuScene(_services.Single<IUIFactory>()));
+        _scenesContainer.AddNewScene(SceneID.MainMenu, new MainMenuScene(_services.Single<IUIFactory>(), _services.Single<IHandlersContainer>()));
         _scenesContainer.AddNewScene(SceneID.Level_1, new LoadLevel(SceneID.Level_1, _services.Single<IStaticData>(), _services.Single<IGameFactory>(),
              _services.Single<IUIFactory>(), _services.Single<IHandlersContainer>()));
         _scenesContainer.AddNewScene(SceneID.Level_2, new LoadLevel(SceneID.Level_2, _services.Single<IStaticData>(), _services.Single<IGameFactory>(),
