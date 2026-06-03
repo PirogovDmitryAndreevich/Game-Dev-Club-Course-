@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Stat[] _stats;
+    [SerializeField] private LeaderBoard _leaderboard;
     [SerializeField] private ButtonPlaySoundOnInteract[] _buttonPlaySounds; 
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
@@ -13,6 +14,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private SettingsWidow _settingsWindow;
     [SerializeField] private SelectLevelWindow _levelSelector;
 
+    public LeaderBoard LeaderBoard => _leaderboard;
     public SelectLevelWindow LevelSelector => _levelSelector;
     public SettingsWidow Settings => _settingsWindow;
 

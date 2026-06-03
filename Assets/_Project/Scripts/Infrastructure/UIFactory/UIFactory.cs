@@ -31,6 +31,7 @@ public class UIFactory : IUIFactory
         menu.LevelSelector.StartButtonSound.Construct(_handlersContainer.Audio);
         menu.LevelSelector.ReturnButtonSound.Construct(_handlersContainer.Audio);
         menu.LevelSelector.Construct(_gameStateMachine, _handlersContainer.Audio, _staticData, this);
+        menu.LeaderBoard.Construct(_progressService);
     }
 
     public WinWindow CreateWinWindow(LevelData levelData)
