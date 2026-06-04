@@ -19,9 +19,9 @@ public class Player : Character
 
     public CameraShake CameraShake => _cameraShake;
     public PlayerFX FX => _playerFX;
-    public ArrowTracking ArrowTracking => _arrowTracking;
     public PlayerSounds PlayerSounds => _playerSounds;
     public PlayerAttacker Attacker => _attacker;
+    public ArrowTracking Arrow => _arrowTracking;
     public PlayerHealth Health { get; private set; }
     public PlayerDefense Defense { get; private set; }
     public IInteractable Interactable { get; private set; }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FinishLevelLogic
 {
@@ -12,6 +13,7 @@ public class FinishLevelLogic
 
     private List<Enemy> _enemies;
     private List<Trophy> _trophies;
+    private Player _player;
     private FinishWithBusStop _finishWithBusStop;
 
     public FinishLevelLogic(List<Enemy> enemies, List<Trophy> trophies, TasksView taskView,
@@ -22,6 +24,7 @@ public class FinishLevelLogic
         _winWindow = winWindow;
         _enemies = enemies;
         _trophies = trophies;
+        _player = player;
 
         _trophiesCollected = 0;
         _allTrophies = trophies.Count;
@@ -39,6 +42,7 @@ public class FinishLevelLogic
         bus.gameObject.SetActive(false);
 
         UpdateCounter();
+        SetTargetForPlayer();
     }
 
     private void TrophyCollected(Trophy trophy)
@@ -56,6 +60,7 @@ public class FinishLevelLogic
 
         _diedEnemies = _taskEnemies - _enemies.Count;
         UpdateCounter();
+        SetTargetForPlayer();
 
         if (_diedEnemies == _taskEnemies)
             Reached();
@@ -68,11 +73,14 @@ public class FinishLevelLogic
     {
         _taskView.Reached();
         _busStop.EnableInteract();
+        _player.Arrow.SetTarget(_busStop.transform);
         _busStop.Interacted += StartCutscene;
     }
 
     private void StartCutscene()
     {
+        _player.Arrow.SetTarget(null);
+
         _busStop.Interacted -= StartCutscene;
         _finishWithBusStop.CutsceneEnded += ShowWinWindow;
         _finishWithBusStop.Play();
@@ -87,5 +95,24 @@ public class FinishLevelLogic
         _winWindow.gameObject.SetActive(true);
         _winWindow.Initialize(_trophiesCollected, _allTrophies);
         _winWindow.Show();
+    }
+
+    private void SetTargetForPlayer()
+    {
+        float minDistance = float.MaxValue;
+        Enemy targetEnemy = null;
+
+        foreach (Enemy enemy in _enemies)
+        {
+            float distance = (enemy.transform.position - _player.transform.position).sqrMagnitude;
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                targetEnemy = enemy;
+            }
+        }
+
+        _player.Arrow.SetTarget(targetEnemy.transform);
     }
 }

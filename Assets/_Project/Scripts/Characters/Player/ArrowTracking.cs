@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class ArrowTracking : MonoBehaviour
 {
-    [SerializeField] private Transform _finishPoint;
     [SerializeField] private Transform _player;
+    [SerializeField] private Fliper _flipper;
+    [SerializeField] private Transform _view;
     [SerializeField] private float _radius;
 
+    private Transform _target;
     private Transform _cachedTransform;
 
-    private void Awake()
-    {
+    private void Awake() => 
         _cachedTransform = transform;
-    }
 
     private void OnDrawGizmos()
     {
@@ -24,24 +24,33 @@ public class ArrowTracking : MonoBehaviour
 
     private void Update()
     {
-        if (_player == null || _finishPoint == null || _radius <= 0f)
+        if (_player == null || _target == null || _radius <= 0f)
+        {
+            _view.gameObject.SetActive(false);
             return;
+        }
 
         UpdateArrow();
     }
 
+    public void SetTarget(Transform target) => 
+        _target = target;
+
     private void UpdateArrow()
     {
-        if (_player == null || _finishPoint == null) return;
+        Vector2 target = _target.position - _player.position;
 
-        Vector2 direction = (_finishPoint.position - _player.position).normalized;
+        Vector2 direction = target.normalized;
+        float sqrDistance = target.sqrMagnitude;
 
-        float flipCompensation = Mathf.Sign(_player.localScale.x);
-        direction.x *= flipCompensation;
+        _view.gameObject.SetActive(sqrDistance > _radius * _radius);
 
-        _cachedTransform.localPosition = direction * _radius;
+        if (_flipper.IsTernRight)
+            direction.x *= -1;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        _cachedTransform.localPosition = direction * _radius;
         _cachedTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 }
