@@ -762,6 +762,7 @@ GameObject:
   - component: {fileID: 7064118802137583859}
   - component: {fileID: 1483102351266641927}
   - component: {fileID: 2932713290841001182}
+  - component: {fileID: 448775443493119619}
   m_Layer: 5
   m_Name: Coins
   m_TagString: Untagged
@@ -874,6 +875,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &448775443493119619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325703175879213324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1c7f27a732f81428cb89dfe5b9fbd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: Coins
+  _button: {fileID: 2932713290841001182}
 --- !u!1 &425214819148470408
 GameObject:
   m_ObjectHideFlags: 0
@@ -3100,6 +3115,7 @@ GameObject:
   - component: {fileID: 3019924351754916730}
   - component: {fileID: 2102605964734039093}
   - component: {fileID: 8140533026789792334}
+  - component: {fileID: 4755044437784702306}
   m_Layer: 5
   m_Name: Mix
   m_TagString: Untagged
@@ -3218,6 +3234,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4755044437784702306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098271634338318306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1c7f27a732f81428cb89dfe5b9fbd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: Mix
+  _button: {fileID: 8140533026789792334}
 --- !u!1 &2149770962339470384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,13 +3448,14 @@ GameObject:
   - component: {fileID: 933418432398233468}
   - component: {fileID: 3117344440238720836}
   - component: {fileID: 3420097850811533218}
+  - component: {fileID: 2090039415144264079}
   m_Layer: 5
   m_Name: ShopCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &933418432398233468
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3485,6 +3516,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2090039415144264079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471356261386690347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c66d3ab56cc71745982569cb28c3dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2487164532498500147
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,7 +4511,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3166313426528056531}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4477,7 +4520,7 @@ RectTransform:
   - {fileID: 452928149922735528}
   - {fileID: 2169391408985934962}
   - {fileID: 7548670650331114695}
-  m_Father: {fileID: 4967873553642974757}
+  m_Father: {fileID: 2473857430407492158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6584,14 +6627,15 @@ GameObject:
   m_Component:
   - component: {fileID: 7177565202705318272}
   - component: {fileID: 4662968214465041089}
-  - component: {fileID: 840649648182226450}
+  - component: {fileID: 4006768002783802026}
+  - component: {fileID: 8588965654892597299}
   m_Layer: 5
   m_Name: ShopWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7177565202705318272
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6621,7 +6665,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4972202946779542079}
   m_CullTransparentMesh: 1
---- !u!114 &840649648182226450
+--- !u!225 &4006768002783802026
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972202946779542079}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &8588965654892597299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6630,16 +6686,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4972202946779542079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe8c6d9eba9ed243abc2f55ac7e4b2a, type: 3}
+  m_Script: {fileID: 11500000, guid: cc67a283a912a08459baa8e591a003b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelView: {fileID: 3548513673812262796}
-  _anticlicker: {fileID: 5830490947394135994}
-  _closeButton: {fileID: 3926937813200187560}
-  _audioSettings: {fileID: 0}
-  _hideShowSound: {fileID: 0}
-  _ACDuration: 0.15
-  _panelScaleDuration: 0.5
+  _canvasGroup: {fileID: 4006768002783802026}
+  _appearanceDuration: 0.5
+  _rewardDayButtons: []
+  _damageUpdate: {fileID: 2143598705919168137}
+  _defenseUpdate: {fileID: 8065593055254233176}
+  _healthUpdate: {fileID: 5270049434525299040}
 --- !u!1 &4986495264704094770
 GameObject:
   m_ObjectHideFlags: 0
@@ -11101,11 +11156,9 @@ RectTransform:
   - {fileID: 6629395167278640096}
   - {fileID: 8215863727878813350}
   - {fileID: 2428645698143848006}
-  - {fileID: 8969945237402077413}
   - {fileID: 3128817691308083747}
   - {fileID: 2438955773781977361}
   - {fileID: 2473857430407492158}
-  - {fileID: 1424099730614617485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11200,9 +11253,11 @@ MonoBehaviour:
   - {fileID: 6991963541314086813}
   _startButton: {fileID: 2075146505480235900}
   _settingsButton: {fileID: 8347002211019338499}
+  _shopButton: {fileID: 8687414469911579513}
   _firstLevelForLoad: 2
   _settingsWindow: {fileID: 6999854006475028163}
   _levelSelector: {fileID: 1065930338036473979}
+  _shopWindow: {fileID: 8588965654892597299}
 --- !u!1 &7889469319057967892
 GameObject:
   m_ObjectHideFlags: 0
@@ -12538,6 +12593,7 @@ GameObject:
   - component: {fileID: 4494654372634522755}
   - component: {fileID: 8835376469698471564}
   - component: {fileID: 7108307445123254862}
+  - component: {fileID: 3030917501325579595}
   m_Layer: 5
   m_Name: Gems
   m_TagString: Untagged
@@ -12650,6 +12706,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3030917501325579595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743569123504425360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1c7f27a732f81428cb89dfe5b9fbd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: Gems
+  _button: {fileID: 7108307445123254862}
 --- !u!1 &8745993470481344906
 GameObject:
   m_ObjectHideFlags: 0
@@ -13410,6 +13480,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 933418432398233468}
+  - {fileID: 8969945237402077413}
+  - {fileID: 1424099730614617485}
   m_Father: {fileID: 4967873553642974757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13498,7 +13570,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4967873553642974757}
+    m_TransformParent: {fileID: 2473857430407492158}
     m_Modifications:
     - target: {fileID: 1131653916924264006, guid: f290796d47ba5f54bb8264406480e701,
         type: 3}
@@ -13709,7 +13781,7 @@ PrefabInstance:
     - target: {fileID: 1741567000125770010, guid: 02ad267318a091e4e897698aacb1b3c5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 317.27002
       objectReference: {fileID: 0}
     - target: {fileID: 1741567000125770010, guid: 02ad267318a091e4e897698aacb1b3c5,
         type: 3}
@@ -13744,7 +13816,7 @@ PrefabInstance:
     - target: {fileID: 2255573498843837273, guid: 02ad267318a091e4e897698aacb1b3c5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 267
       objectReference: {fileID: 0}
     - target: {fileID: 2255573498843837273, guid: 02ad267318a091e4e897698aacb1b3c5,
         type: 3}

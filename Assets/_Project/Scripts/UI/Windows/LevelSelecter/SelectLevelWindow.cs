@@ -31,8 +31,8 @@ public class SelectLevelWindow : MonoBehaviour
         _startButton.onClick.RemoveListener(OnStartButton);
     }
 
-    private void Start() => 
-        Hide();
+    private void Start() =>
+        gameObject.SetActive(false);
 
     public void Construct(GameStateMachine stateMachine, AudioHandler audio, IStaticData staticData, IUIFactory factory)
     {

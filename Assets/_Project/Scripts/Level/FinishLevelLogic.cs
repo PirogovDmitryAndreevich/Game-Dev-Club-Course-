@@ -38,7 +38,7 @@ public class FinishLevelLogic
         foreach (Trophy trophy in trophies)
             trophy.Collected += TrophyCollected;
 
-         _finishWithBusStop = new FinishWithBusStop(busStop, bus, player);
+        _finishWithBusStop = new FinishWithBusStop(busStop, bus, player);
         bus.gameObject.SetActive(false);
 
         UpdateCounter();
@@ -88,7 +88,7 @@ public class FinishLevelLogic
 
     private void ShowWinWindow()
     {
-        _finishWithBusStop.CutsceneEnded -= ShowWinWindow;        
+        _finishWithBusStop.CutsceneEnded -= ShowWinWindow;
 
 
 
@@ -113,6 +113,7 @@ public class FinishLevelLogic
             }
         }
 
-        _player.Arrow.SetTarget(targetEnemy.transform);
+        if (targetEnemy != null)
+            _player.Arrow.SetTarget(targetEnemy.transform);
     }
 }

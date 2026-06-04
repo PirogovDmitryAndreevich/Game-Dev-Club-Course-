@@ -44,7 +44,7 @@ MonoBehaviour:
       - Position: {x: 17.14, y: 6.33}
   - LevelKey: Level_2
     Name: Level 2
-    Sprite: {fileID: 21300000, guid: f3b7e31eb60b84b17870d0b5d926cfad, type: 3}
+    Sprite: {fileID: 21300000, guid: 27aaf910dbd2c5447929df3996de49cd, type: 3}
     BGMusic: {fileID: 8300000, guid: 7e4c3d9c8f935464fb35a3e26955a5e2, type: 3}
     ID: 3
     NextSceneID: 4

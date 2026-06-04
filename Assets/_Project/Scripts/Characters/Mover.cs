@@ -28,6 +28,7 @@ public class Mover : MonoBehaviour
     private Vector2 _lastMoveDirection = Vector2.zero;
     private Tween _currentTween;
     private Collider2D[] _neighbors = new Collider2D[16];
+    private bool _isKnockback;
 
     private void Start()
     {
@@ -42,6 +43,9 @@ public class Mover : MonoBehaviour
 
     public void Dash(Vector2 direction)
     {
+        if (_isKnockback)
+            return;
+
         if (direction.sqrMagnitude < 0.01f) return;
 
         Stop();
@@ -70,6 +74,9 @@ public class Mover : MonoBehaviour
 
     public void AttackStep()
     {
+        if (_isKnockback)
+            return;
+
         if (_lastMoveDirection == Vector2.zero)
             return;
 
@@ -88,6 +95,8 @@ public class Mover : MonoBehaviour
     {
         Stop();
 
+        _isKnockback = true;
+
         pushDirection = new Vector2(Mathf.Sign(pushDirection.x), 0f);
 
         Vector2 startPos = _rigidbody.position;
@@ -98,7 +107,11 @@ public class Mover : MonoBehaviour
             .SetEase(Ease.OutQuad)
             .SetUpdate(UpdateType.Fixed)
             .Play()
-            .OnComplete(() => _currentTween = null);
+            .OnComplete(() =>
+            {
+                _isKnockback = false;
+                _currentTween = null;
+            });
     }
 
     public void Stop()
@@ -148,6 +161,9 @@ public class Mover : MonoBehaviour
 
     private void Move(Vector2 targetPoint, float speed)
     {
+        if (_isKnockback)
+            return;
+
         Vector2 moveDir = targetPoint - _rigidbody.position;
         Vector2 desired = moveDir.normalized;
 

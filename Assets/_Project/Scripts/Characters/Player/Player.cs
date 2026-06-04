@@ -60,7 +60,7 @@ public class Player : Character
         }
 
         if (_input.GetIsDash()
-        && _input.Direction != null)
+        && _input.Direction != null && !Attacker.IsAttack)
         {
             Mover.Stop();
             Mover.Dash(_input.Direction);
@@ -68,7 +68,7 @@ public class Player : Character
             _playerSounds.PlayDash();
         }
 
-        if (_input.GetIsAttack() && Attacker.CanAttack)
+        if (_input.GetIsAttack() && Attacker.CanAttack && !_input.GetIsDash())
         {
             Attacker.StartAttack();            
             Mover.Stop();

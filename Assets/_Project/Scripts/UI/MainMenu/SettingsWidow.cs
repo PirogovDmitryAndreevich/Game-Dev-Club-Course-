@@ -25,7 +25,7 @@ public class SettingsWidow : MonoBehaviour
     private bool IsAnimating =>
         Animation != null && Animation.active;
 
-    private void Start() => 
+    private void Start() =>
         gameObject.SetActive(false);
 
     private void OnEnable() => 
@@ -40,9 +40,9 @@ public class SettingsWidow : MonoBehaviour
         _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 
-    public void Hide(Action callback)
+    public void Hide()
     {
-        AudioHandler.PlaySound(_hideShowSound);
+        //AudioHandler.PlaySound(_hideShowSound);
 
         KillCurrentAnimationIfActive();
 
@@ -54,14 +54,14 @@ public class SettingsWidow : MonoBehaviour
             .Join(_panelView.DOFade(0f, _panelScaleDuration))
             .Append(_anticlicker.DOFade(0f, _ACDuration)).SetEase(Ease.Flash)
             .Play()
-            .OnComplete(() => callback?.Invoke());
+            .OnComplete(() => gameObject.SetActive(false));
     }
 
     public void Show()
     {
         AudioHandler.PlaySound(_hideShowSound);
 
-        _panelView.gameObject.SetActive(true);
+        gameObject.SetActive(true);
 
         KillCurrentAnimationIfActive();
 
@@ -82,5 +82,5 @@ public class SettingsWidow : MonoBehaviour
     }
 
     private void OnClickCloseButton() => 
-        Hide(() => gameObject.SetActive(false));
+        Hide();
 }
