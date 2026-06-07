@@ -33,6 +33,15 @@ public class UIFactory : IUIFactory
         menu.LevelSelector.Construct(_gameStateMachine, _handlersContainer.Audio, _staticData, this);
         menu.LeaderBoard.Construct(_progressService);
         menu.ShopWindow.Construct(_handlersContainer.Audio);
+        menu.SkillsWindow.ReturnButtonSound.Construct(_handlersContainer.Audio);
+
+        foreach (AttackData attack in _staticData.PlayerData.Attacks)
+        {
+            if (attack.Type == PlayerAttackType.Default)
+                continue;
+
+            CreateSkillView(attack, menu.SkillsWindow.Content);
+        }
     }
 
     public WinWindow CreateWinWindow(LevelData levelData)
@@ -93,6 +102,20 @@ public class UIFactory : IUIFactory
         card.Sound.Construct(_handlersContainer.Audio);
 
         return card;
+    }
+
+    private void CreateSkillView(AttackData attack,Transform parent)
+    {
+        Skill skill = _assets.Instantiate(AssetsPath.SkillPrefabPath, parent)
+            .GetComponent<Skill>();
+
+        skill.Construct(attack, _progressService.Progress.PlayerAttacksData, _save);
+        skill.ButtonSound.Construct(_handlersContainer.Audio);
+
+        skill.LockView.Construct(attack.Type,
+            _progressService.Progress.PlayerAttacksData,
+            _save,
+            _handlersContainer.Audio);
     }
 
     private PauseWindow CreatePauseWindow(SceneID currentScene)

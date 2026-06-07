@@ -45,7 +45,7 @@ public class GameFactory : IGameFactory
         player.PlayerSounds.Construct(_handlers.Audio);
         player.CameraShake.Construct(camera);
         player.FX.Construct(player.Health, player.Defense);
-        player.Attacker.Construct(data);
+        player.Attacker.Construct(data, _progressService);
 
         return player;
     }

@@ -11,6 +11,7 @@ public class StaticDataService : IStaticData
     private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
     private PlayerStaticData _playerData;
 
+    public PlayerStaticData PlayerData => _playerData;
     public Dictionary<SceneID, LevelData> LevelsData { get; private set; }
 
     public void Load()

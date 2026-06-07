@@ -10,7 +10,7 @@ public class ArrowTracking : MonoBehaviour
     private Transform _target;
     private Transform _cachedTransform;
 
-    private void Awake() => 
+    private void Awake() =>
         _cachedTransform = transform;
 
     private void OnDrawGizmos()
@@ -33,7 +33,7 @@ public class ArrowTracking : MonoBehaviour
         UpdateArrow();
     }
 
-    public void SetTarget(Transform target) => 
+    public void SetTarget(Transform target) =>
         _target = target;
 
     private void UpdateArrow()
@@ -45,8 +45,9 @@ public class ArrowTracking : MonoBehaviour
 
         _view.gameObject.SetActive(sqrDistance > _radius * _radius);
 
-        if (_flipper.IsTernRight)
-            direction.x *= -1;
+        direction *= _flipper.IsTernRight
+                              ? Vector2.right
+                              : Vector2.left;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 

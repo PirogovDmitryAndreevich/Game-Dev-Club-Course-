@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 43,
+    "idSave": 44,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
@@ -30,6 +30,22 @@
                 3,
                 4
             ]
+        },
+        "PlayerAttacksData": {
+            "OpenedAttacks": [
+                {
+                    "Type": 1,
+                    "Level": 1
+                }
+            ],
+            "FirstSlot": {
+                "IsEmpty": true,
+                "Type": 0
+            },
+            "SecondSlot": {
+                "IsEmpty": true,
+                "Type": 0
+            }
         }
     }
 }

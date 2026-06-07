@@ -7,5 +7,5 @@ public class PlayerStaticData : ScriptableObject
     public float ComboCooldown = 1.2f;
     public float CooldownTime;
 
-    public Attack[] Attacks;
+    public AttackData[] Attacks;
 }

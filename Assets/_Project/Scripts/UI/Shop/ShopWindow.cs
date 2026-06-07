@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -7,6 +6,7 @@ using YG;
 public class ShopWindow : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private AudioClip _hideShowSound;
     [SerializeField] private float _appearanceDuration = 0.5f;
 
     [Header("Buttons")]
@@ -53,6 +53,8 @@ public class ShopWindow : MonoBehaviour
     {
         KillCurrentAnimationIfActive();
 
+        _audioHandler.PlaySound(_hideShowSound);
+
         Animation = DOTween.Sequence();
 
         Animation
@@ -65,6 +67,8 @@ public class ShopWindow : MonoBehaviour
     public void Show()
     {
         KillCurrentAnimationIfActive();
+
+        _audioHandler.PlaySound(_hideShowSound);
 
         gameObject.SetActive(true);
 

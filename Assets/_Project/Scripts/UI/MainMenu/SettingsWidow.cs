@@ -42,7 +42,7 @@ public class SettingsWidow : MonoBehaviour
 
     public void Hide()
     {
-        //AudioHandler.PlaySound(_hideShowSound);
+        AudioHandler.PlaySound(_hideShowSound);
 
         KillCurrentAnimationIfActive();
 

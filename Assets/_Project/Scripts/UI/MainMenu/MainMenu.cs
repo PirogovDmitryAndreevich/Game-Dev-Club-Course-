@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -10,23 +11,26 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _shopButton;
-    [SerializeField] private SceneID _firstLevelForLoad;
+    [SerializeField] private Button _skillsButton;
 
     [Header("Popups")]
     [SerializeField] private SettingsWidow _settingsWindow;
     [SerializeField] private SelectLevelWindow _levelSelector;
     [SerializeField] private ShopWindow _shopWindow;
+    [SerializeField] private SkillsWindow _skillsWindow;
 
     public LeaderBoard LeaderBoard => _leaderboard;
     public SelectLevelWindow LevelSelector => _levelSelector;
     public SettingsWidow Settings => _settingsWindow;
     public ShopWindow ShopWindow => _shopWindow;    
+    public SkillsWindow SkillsWindow => _skillsWindow;
 
     private void OnEnable()
     {
         _startButton.onClick.AddListener(ShowLevelSelecter);
         _settingsButton.onClick.AddListener(ShowSettings);
         _shopButton.onClick.AddListener(ShowShop);
+        _skillsButton.onClick.AddListener(ShowSkillWindow);
     }
 
     private void OnDisable()
@@ -34,6 +38,7 @@ public class MainMenu : MonoBehaviour
         _startButton.onClick.RemoveListener(ShowLevelSelecter);
         _settingsButton.onClick.RemoveListener(ShowSettings);
         _shopButton.onClick.RemoveListener(ShowShop);
+        _skillsButton.onClick.RemoveListener(ShowSkillWindow);
     }
 
     public void Construct(IPersistentProgressService progress, IHandlersContainer handlers)
@@ -66,5 +71,12 @@ public class MainMenu : MonoBehaviour
         YG2.InterstitialAdvShow();
         ShopWindow.gameObject.SetActive(true);
         ShopWindow.Show();
+    }
+
+    private void ShowSkillWindow()
+    {
+        YG2.InterstitialAdvShow();
+        SkillsWindow.gameObject.SetActive(true);
+        SkillsWindow.Show();
     }
 }
