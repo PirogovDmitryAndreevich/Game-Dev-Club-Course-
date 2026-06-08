@@ -45,9 +45,9 @@ public class ArrowTracking : MonoBehaviour
 
         _view.gameObject.SetActive(sqrDistance > _radius * _radius);
 
-        direction *= _flipper.IsTernRight
-                              ? Vector2.right
-                              : Vector2.left;
+        direction.x *= _flipper.IsTernRight
+                              ? Vector2.left.x
+                              : Vector2.right.x;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 

@@ -9,6 +9,7 @@ public class StaticDataService : IStaticData
     private const string PlayerDataPath = "StaticData/PlayerData";
 
     private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
+    private Dictionary<PlayerAttackType, AttackData> _playerAttacks;
     private PlayerStaticData _playerData;
 
     public PlayerStaticData PlayerData => _playerData;
@@ -22,7 +23,9 @@ public class StaticDataService : IStaticData
         LevelsData = Resources.Load<LevelStaticData>(LevelDataPath)
             .LevelData.ToDictionary(x => x.ID, x => x);
 
-        _playerData = Resources.Load<PlayerStaticData>(PlayerDataPath);            
+        _playerData = Resources.Load<PlayerStaticData>(PlayerDataPath);   
+        
+        _playerAttacks = _playerData.Attacks.ToDictionary(x=>x.Type, x => x);
     }
 
     public EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId) =>
@@ -37,4 +40,9 @@ public class StaticDataService : IStaticData
 
     public PlayerStaticData ForPlayer() =>
         _playerData;
+
+    public AttackData ForPlayerAttack(PlayerAttackType type) =>
+        _playerAttacks.TryGetValue(type, out AttackData data)
+        ? data
+        : null;
 }

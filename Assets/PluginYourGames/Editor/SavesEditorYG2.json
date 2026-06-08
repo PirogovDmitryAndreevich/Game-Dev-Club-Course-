@@ -7,28 +7,25 @@
         false,
         false
     ],
-    "idSave": 44,
+    "idSave": 12,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
             "MusicValue": 1.0,
             "IsSoundMute": false,
-            "IsMusicMute": true
+            "IsMusicMute": false
         },
         "PlayerData": {
-            "Coins": 5300,
-            "Gems": 46,
-            "Score": 9000,
+            "Coins": 200,
+            "Gems": 0,
+            "Score": 0,
             "Damage": 5,
             "Defense": 0,
             "Health": 100
         },
         "LevelsProgress": {
             "ReachedLevels": [
-                2,
-                3,
-                3,
-                4
+                2
             ]
         },
         "PlayerAttacksData": {
@@ -36,15 +33,19 @@
                 {
                     "Type": 1,
                     "Level": 1
+                },
+                {
+                    "Type": 2,
+                    "Level": 1
                 }
             ],
             "FirstSlot": {
-                "IsEmpty": true,
-                "Type": 0
+                "IsEmpty": false,
+                "Type": 2
             },
             "SecondSlot": {
-                "IsEmpty": true,
-                "Type": 0
+                "IsEmpty": false,
+                "Type": 1
             }
         }
     }

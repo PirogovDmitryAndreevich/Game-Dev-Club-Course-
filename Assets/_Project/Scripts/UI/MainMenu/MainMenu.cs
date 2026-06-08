@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Stat[] _stats;
     [SerializeField] private LeaderBoard _leaderboard;
+    [SerializeField] private SkillsContainer _skills;
     [SerializeField] private ButtonPlaySoundOnInteract[] _buttonPlaySounds; 
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
@@ -20,6 +21,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private SkillsWindow _skillsWindow;
 
     public LeaderBoard LeaderBoard => _leaderboard;
+    public SkillsContainer Skills => _skills;
     public SelectLevelWindow LevelSelector => _levelSelector;
     public SettingsWidow Settings => _settingsWindow;
     public ShopWindow ShopWindow => _shopWindow;    

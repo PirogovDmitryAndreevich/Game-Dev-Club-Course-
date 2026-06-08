@@ -51,13 +51,18 @@ public class Skill : MonoBehaviour
         _toggle.onValueChanged.AddListener(OnToggleSelect);
 
         if (_progress.Contain(_attackData.Type))
-            OnUnlockView();
+            OnUnlockView(_attackData.Type);
         else
             OnLockView();
+
+        _progress.NewAttacksOpened += OnUnlockView;
     }
 
-    private void OnUnlockView()
+    private void OnUnlockView(PlayerAttackType type)
     {
+        if (type != _attackData.Type)
+            return;
+
         _lock.Hide();
         UpdateDamageData();
 

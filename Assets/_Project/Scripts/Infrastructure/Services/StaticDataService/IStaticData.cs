@@ -8,4 +8,5 @@ public interface IStaticData : IService
     EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId);
     LevelData ForLevel(SceneID id);
     PlayerStaticData ForPlayer();
+    AttackData ForPlayerAttack(PlayerAttackType type);
 }

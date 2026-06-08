@@ -11,6 +11,12 @@ public class SkillsWindow : MonoBehaviour
     public ButtonPlaySoundOnInteract ReturnButtonSound => _returnButtonSound;
     public Transform Content => _content;
 
+    private void OnEnable() => 
+        _returnButton.onClick.AddListener(Hide);
+
+    private void OnDisable() =>
+        _returnButton.onClick.RemoveListener(Hide);
+
     private void Start() => 
         Hide();
 

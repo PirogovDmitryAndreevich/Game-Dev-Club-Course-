@@ -14,12 +14,10 @@ public class PlayerAttacker : Attacker
     [SerializeField] private PlayerAttackType _attackType;
 
     private IPersistentProgressService _progress;
-    private PlayerStaticData _staticData;
-
+    private PlayerStaticData _playerData;
+    private IStaticData _staticData;
     private List<AttackData> _availableSuperAttacks = new();
     private Collider2D[] _hits = new Collider2D[16];
-
-    private Dictionary<PlayerAttackType, AttackData> _attacksByType;
 
     private AttackData _defaultAttack;
     private AttackData _currentAttack;
@@ -27,7 +25,7 @@ public class PlayerAttacker : Attacker
     private int _hitCounter;
     private float _lastHitTime;
 
-    public override float CooldownTime => _staticData.CooldownTime;
+    public override float CooldownTime => _playerData.CooldownTime;
     public override float Offset => _defaultAttack.AttackOffset;
     public override float Radius => _defaultAttack.AttackRadius;
 
@@ -61,24 +59,25 @@ public class PlayerAttacker : Attacker
         _attackEvent.DealDamage += OnDealDamage;
     }
 
-    public void Construct(PlayerStaticData data, IPersistentProgressService progressService)
+    public void Construct(IStaticData staticData, IPersistentProgressService progressService)
     {
         _progress = progressService;
-        _staticData = data;
+        _playerData = staticData.PlayerData;
+        _staticData = staticData;
 
         _availableSuperAttacks.Clear();
 
         PlayerAttacksData attacksData =
             _progress.Progress.PlayerAttacksData;
 
-        _defaultAttack = _staticData.Attacks
+        _defaultAttack = _playerData.Attacks
             .FirstOrDefault(x => x.Type == PlayerAttackType.Default);
 
         if (!attacksData.FirstSlot.IsEmpty)
-            AddSuperAttack(attacksData.FirstSlot.Type);
+            AddSuperAttack(_staticData.ForPlayerAttack(attacksData.FirstSlot.Type));
 
         if (!attacksData.SecondSlot.IsEmpty)
-            AddSuperAttack(attacksData.SecondSlot.Type);
+            AddSuperAttack(_staticData.ForPlayerAttack(attacksData.SecondSlot.Type));
 
         _currentAttack = _defaultAttack;
     }
@@ -137,20 +136,17 @@ public class PlayerAttacker : Attacker
         }
     }
 
-    private void AddSuperAttack(PlayerAttackType type)
+    private void AddSuperAttack(AttackData attack)
     {
-        if (_attacksByType.TryGetValue(type, out AttackData attack) &&
-            attack.Type != PlayerAttackType.Default)
-        {
+        if (attack.Type != PlayerAttackType.Default)        
             _availableSuperAttacks.Add(attack);
-        }
     }
 
     private bool RegisterHit()
     {
         float time = Time.time;
 
-        if (time - _lastHitTime > _staticData.ComboCooldown)
+        if (time - _lastHitTime > _playerData.ComboCooldown)
         {
             _hitCounter = 0;
         }
@@ -158,7 +154,7 @@ public class PlayerAttacker : Attacker
         _lastHitTime = time;
         _hitCounter++;
 
-        if (_hitCounter >= _staticData.SuperHitCount)
+        if (_hitCounter >= _playerData.SuperHitCount)
         {
             _hitCounter = 0;
             return true;

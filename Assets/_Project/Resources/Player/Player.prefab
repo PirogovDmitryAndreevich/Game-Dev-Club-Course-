@@ -410,6 +410,8 @@ MonoBehaviour:
   _attackEvent: {fileID: 1633683109253868779}
   _animator: {fileID: 357485461133262346}
   _cameraShake: {fileID: 2128498662344484686}
+  _playerStaticData: {fileID: 11400000, guid: 64c41eaca8c57b54da8d9f73141b9bda, type: 2}
+  _attackType: 1
 --- !u!1 &3792296651468293268
 GameObject:
   m_ObjectHideFlags: 0

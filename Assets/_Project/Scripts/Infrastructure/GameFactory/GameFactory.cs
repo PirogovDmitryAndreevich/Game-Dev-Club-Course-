@@ -36,8 +36,6 @@ public class GameFactory : IGameFactory
 
     public Player CreatePlayerHero(Vector2 at, CinemachineVirtualCamera camera)
     {
-        PlayerStaticData data = _staticData.ForPlayer();
-
         Player player = _assets.Instantiate(AssetsPath.PlayerPath, at: at)
             .GetComponent<Player>();
 
@@ -45,7 +43,7 @@ public class GameFactory : IGameFactory
         player.PlayerSounds.Construct(_handlers.Audio);
         player.CameraShake.Construct(camera);
         player.FX.Construct(player.Health, player.Defense);
-        player.Attacker.Construct(data, _progressService);
+        player.Attacker.Construct(_staticData, _progressService);
 
         return player;
     }
