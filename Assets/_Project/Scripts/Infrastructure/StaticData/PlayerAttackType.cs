@@ -6,4 +6,6 @@ public enum PlayerAttackType
    Default, 
    Kick,
    Fire,
+   Double,
+   Glove,
 }

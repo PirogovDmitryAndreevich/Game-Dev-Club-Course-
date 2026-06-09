@@ -65,11 +65,13 @@ MonoBehaviour:
       Key:
         Position: {x: 2.9932752, y: 28.48}
     Trophies:
-    - Position: {x: -6.6, y: 13.633401}
     - Position: {x: 37.410942, y: 16.325089}
     - Position: {x: 15.051718, y: 11.842183}
+    - Position: {x: -6.6, y: 13.633401}
     MedKits: []
-    Defenses: []
+    Defenses:
+    - Position: {x: 5.41, y: 4.46}
+      Value: 10
     EnemySpawnerDatas:
     - Id: Level_2_93735ff2-df67-4f7d-a441-9a7ac82ebb31
       TypeId: 0
@@ -77,12 +79,6 @@ MonoBehaviour:
       WayPoints:
       - Position: {x: 12.98, y: 12.6}
       - Position: {x: 6.89, y: 10.780001}
-    - Id: Level_2_7748b909-a0b2-4134-94b2-d9cb8b67b3d2
-      TypeId: 0
-      Position: {x: -3.45, y: 25.83}
-      WayPoints:
-      - Position: {x: -3.54, y: 22.29}
-      - Position: {x: -3.68, y: 29.04}
     - Id: _ffc5b2f0-5be2-46c2-acac-6a60d8d2b4a4
       TypeId: 0
       Position: {x: 18.91, y: 11.833401}
@@ -95,6 +91,12 @@ MonoBehaviour:
       WayPoints:
       - Position: {x: 37.208565, y: 17.359821}
       - Position: {x: 32.818565, y: 20.259823}
+    - Id: Level_2_7748b909-a0b2-4134-94b2-d9cb8b67b3d2
+      TypeId: 0
+      Position: {x: -3.45, y: 25.83}
+      WayPoints:
+      - Position: {x: -3.54, y: 22.29}
+      - Position: {x: -3.68, y: 29.04}
   - LevelKey: Level_3
     Name: Level 3
     Sprite: {fileID: 21300000, guid: f0473c1e23805b64c8b1ec478c789ce0, type: 3}
@@ -114,41 +116,43 @@ MonoBehaviour:
         IsRight: 1
     Locks: []
     Trophies:
-    - Position: {x: -24.71906, y: -6.211982}
-    - Position: {x: -13.499766, y: -2.7263756}
-    - Position: {x: -15.188107, y: -12.856419}
-    - Position: {x: 10.463774, y: -12.420717}
-    - Position: {x: 11.3847065, y: -5.3308144}
-    MedKits: []
+    - Position: {x: 15.44919, y: -2.5713506}
+    - Position: {x: 7.5891895, y: -19.791351}
+    - Position: {x: -32.47081, y: -12.841351}
+    - Position: {x: -12.350811, y: -9.761351}
+    - Position: {x: -12.150811, y: -27.76135}
+    MedKits:
+    - Position: {x: 15.51, y: -8.8}
+      Value: 20
     Defenses: []
     EnemySpawnerDatas:
-    - Id: Level_3_02b2d70f-59c3-419a-8d1d-b3414304377a
-      TypeId: 0
-      Position: {x: -24.770811, y: -7.1713505}
-      WayPoints:
-      - Position: {x: -26.290812, y: -4.8913507}
-      - Position: {x: -22.880812, y: -8.641351}
-    - Id: Level_3_6dddb911-fac9-4636-915a-435d9a9b7b27
-      TypeId: 0
-      Position: {x: -10.946301, y: -8.630829}
-      WayPoints:
-      - Position: {x: -13.556301, y: -5.050829}
-      - Position: {x: -10.956302, y: -8.720829}
-    - Id: Level_3_c997141a-6d3c-4831-b867-ee7ddf9d51e2
-      TypeId: 0
-      Position: {x: -3.770565, y: -14.347122}
-      WayPoints:
-      - Position: {x: -11.940565, y: -13.607122}
-      - Position: {x: -3.7805653, y: -13.417122}
     - Id: Level_3_18ee47d7-8171-43a1-8d94-c5e650b8cc3f
       TypeId: 0
-      Position: {x: 6.9300003, y: -13.37}
+      Position: {x: 14.549189, y: -19.90135}
       WayPoints:
-      - Position: {x: 3.4300003, y: -10.88}
-      - Position: {x: 10.320002, y: -13.34}
+      - Position: {x: 6.4991894, y: -17.191349}
+      - Position: {x: 16.239187, y: -18.701351}
     - Id: _ffc5b2f0-5be2-46c2-acac-6a60d8d2b4a4
       TypeId: 0
-      Position: {x: 4.1754875, y: -1.9415579}
+      Position: {x: 9.58919, y: -2.8913503}
       WayPoints:
-      - Position: {x: 3.5054874, y: -6.261558}
-      - Position: {x: 10.405489, y: -1.7415581}
+      - Position: {x: 5.4291897, y: -5.1013503}
+      - Position: {x: 15.779188, y: -3.5013504}
+    - Id: Level_3_6dddb911-fac9-4636-915a-435d9a9b7b27
+      TypeId: 0
+      Position: {x: -3.8808117, y: -10.841351}
+      WayPoints:
+      - Position: {x: -12.520812, y: -14.54135}
+      - Position: {x: -2.5508118, y: -10.281351}
+    - Id: Level_3_c997141a-6d3c-4831-b867-ee7ddf9d51e2
+      TypeId: 0
+      Position: {x: -2.7308102, y: -27.701351}
+      WayPoints:
+      - Position: {x: -12.68081, y: -22.621351}
+      - Position: {x: -2.6308098, y: -22.701351}
+    - Id: Level_3_02b2d70f-59c3-419a-8d1d-b3414304377a
+      TypeId: 0
+      Position: {x: -23.550812, y: -3.7513504}
+      WayPoints:
+      - Position: {x: -28.950811, y: -3.3113503}
+      - Position: {x: -22.43081, y: -7.7713504}

@@ -47,3 +47,14 @@ MonoBehaviour:
       Price: 10
     - Damage: 30
       Price: 15
+  - Type: 4
+    AttackOffset: 0.85
+    AttackRadius: 0.85
+    KnockbackForce: 1.1
+    IsCreat: 1
+    Icon: {fileID: 21300000, guid: de86fa6120948174dbfa98ab2bc52a52, type: 3}
+    Damage:
+    - Damage: 25
+      Price: 10
+    - Damage: 30
+      Price: 15
