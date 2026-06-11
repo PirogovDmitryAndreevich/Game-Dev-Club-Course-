@@ -28,7 +28,7 @@ MonoBehaviour:
   - Type: 1
     AttackOffset: 0.85
     AttackRadius: 0.85
-    KnockbackForce: 1.1
+    KnockbackForce: 1.8
     IsCreat: 1
     Icon: {fileID: 21300000, guid: fb220869ee6c4b04c98d2df8427d8ad6, type: 3}
     Damage:
@@ -47,10 +47,21 @@ MonoBehaviour:
       Price: 10
     - Damage: 30
       Price: 15
+  - Type: 3
+    AttackOffset: 0.85
+    AttackRadius: 0.85
+    KnockbackForce: 0.75
+    IsCreat: 1
+    Icon: {fileID: 21300000, guid: 328c4238be84d1444a8ab393d0ba033c, type: 3}
+    Damage:
+    - Damage: 10
+      Price: 10
+    - Damage: 15
+      Price: 15
   - Type: 4
     AttackOffset: 0.85
     AttackRadius: 0.85
-    KnockbackForce: 1.1
+    KnockbackForce: 1.8
     IsCreat: 1
     Icon: {fileID: 21300000, guid: de86fa6120948174dbfa98ab2bc52a52, type: 3}
     Damage:
