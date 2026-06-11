@@ -112,13 +112,10 @@ public class UIFactory : IUIFactory
         Skill skill = _assets.Instantiate(AssetsPath.SkillPrefabPath, parent)
             .GetComponent<Skill>();
 
-        skill.Construct(attack, _progressService.Progress.PlayerAttacksData, _save);
+        skill.Construct(attack, _progressService, _save);
         skill.ButtonSound.Construct(_handlersContainer.Audio);
 
-        skill.LockView.Construct(attack.Type,
-            _progressService.Progress.PlayerAttacksData,
-            _save,
-            _handlersContainer.Audio);
+        skill.LockView.Construct(_handlersContainer.Audio, attack.GetDamageData(1).Price);
     }
 
     private PauseWindow CreatePauseWindow(SceneID currentScene)

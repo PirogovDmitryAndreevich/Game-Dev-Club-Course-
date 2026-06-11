@@ -22,6 +22,8 @@ public class RegisterLevelsState : IState
              _services.Single<IUIFactory>(), _services.Single<IHandlersContainer>()));
         _scenesContainer.AddNewScene(SceneID.Level_3, new LoadLevel(SceneID.Level_3, _services.Single<IStaticData>(), _services.Single<IGameFactory>(),
              _services.Single<IUIFactory>(), _services.Single<IHandlersContainer>()));
+        _scenesContainer.AddNewScene(SceneID.Level_4, new LoadLevel(SceneID.Level_4, _services.Single<IStaticData>(), _services.Single<IGameFactory>(),
+             _services.Single<IUIFactory>(), _services.Single<IHandlersContainer>()));
 
         _gameStateMachine.Enter<LoadSceneState, SceneID>(SceneID.MainMenu);
     }

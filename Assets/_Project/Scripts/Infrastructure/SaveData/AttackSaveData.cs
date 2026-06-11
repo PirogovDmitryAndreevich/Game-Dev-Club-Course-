@@ -14,9 +14,14 @@ public class AttackSaveData
         Level = 1;
     }
 
-    public void LevelUp()
+    public void LevelUp(AttackData attack)
     {
-        Level++;
-        LevelUpped?.Invoke(Type);
+        DamageData damageData = attack.GetDamageData(Level + 1);
+
+        if (damageData != null)
+        {
+            Level++;
+            LevelUpped?.Invoke(Type);
+        }
     }
 }

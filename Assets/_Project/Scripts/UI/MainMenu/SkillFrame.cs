@@ -72,7 +72,6 @@ public class SkillFrame : MonoBehaviour
     private void ShowSkillWindow()
     {
         YG2.InterstitialAdvShow();
-        //_skillWindow.gameObject.SetActive(true);
         _skillWindow.Show();
     }
 }
