@@ -34,6 +34,10 @@ public class UIFactory : IUIFactory
         menu.LeaderBoard.Construct(_progressService);
         menu.ShopWindow.Construct(_handlersContainer.Audio);
         menu.SkillsWindow.ReturnButtonSound.Construct(_handlersContainer.Audio);
+        menu.SkillsWindow.Skills.Construct(_progressService);
+        menu.SkillsWindow.Skills.FirstSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
+        menu.SkillsWindow.Skills.SecondSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
+        menu.SkillsWindow.StatusBar.Construct(_progressService);
         menu.Skills.Construct(_progressService);
         menu.Skills.FirstSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
         menu.Skills.SecondSkill.Construct(_progressService, _staticData, menu.SkillsWindow);

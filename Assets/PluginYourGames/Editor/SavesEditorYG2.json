@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 42,
+    "idSave": 52,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
@@ -52,7 +52,7 @@
             },
             "SecondSlot": {
                 "IsEmpty": false,
-                "Type": 4
+                "Type": 2
             }
         }
     }

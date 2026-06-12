@@ -6,9 +6,13 @@ public class SkillsWindow : MonoBehaviour
 {
     [SerializeField] private Transform _content;
     [SerializeField] private Button _returnButton;
+    [SerializeField] private SkillsContainer _skills;
+    [SerializeField] private StatusBar _statusBar;
     [SerializeField] private ButtonPlaySoundOnInteract _returnButtonSound;
 
+    public SkillsContainer Skills => _skills;
     public ButtonPlaySoundOnInteract ReturnButtonSound => _returnButtonSound;
+    public StatusBar StatusBar => _statusBar;
     public Transform Content => _content;
 
     private void OnEnable() => 

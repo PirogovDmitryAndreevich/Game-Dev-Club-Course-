@@ -6,6 +6,7 @@ using YG;
 public class ShopWindow : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private Button _returnButton;
     [SerializeField] private AudioClip _hideShowSound;
     [SerializeField] private float _appearanceDuration = 0.5f;
 
@@ -26,6 +27,7 @@ public class ShopWindow : MonoBehaviour
         _damageUpdate.onClick.AddListener(OnUpdateDamageClick);
         _defenseUpdate.onClick.AddListener(OnUpdateDefenseClick);
         _healthUpdate.onClick.AddListener(OnUpdateHealthClick);
+        _returnButton.onClick.AddListener(Hide);
 
         YG2.onPurchaseSuccess += SuccessPurchased;
         YG2.onPurchaseFailed += FailedPurchased;
@@ -36,6 +38,7 @@ public class ShopWindow : MonoBehaviour
         _damageUpdate.onClick.RemoveListener(OnUpdateDamageClick);
         _defenseUpdate.onClick.RemoveListener(OnUpdateDefenseClick);
         _healthUpdate.onClick.RemoveListener(OnUpdateHealthClick);
+        _returnButton.onClick.RemoveListener(Hide);
 
         YG2.onPurchaseSuccess -= SuccessPurchased;
         YG2.onPurchaseFailed -= FailedPurchased;
