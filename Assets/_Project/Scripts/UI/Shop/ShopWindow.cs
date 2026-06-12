@@ -12,21 +12,25 @@ public class ShopWindow : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private DayRewardButton[] _rewardDayButtons;
-    [SerializeField] private Button _damageUpdate;
-    [SerializeField] private Button _defenseUpdate;
-    [SerializeField] private Button _healthUpdate;
+    [SerializeField] private ShopUpdateButton _defenseButton;
+    [SerializeField] private ShopUpdateButton _healthButton;
 
     private Sequence Animation;
 
+    private IPersistentProgressService _progress;
+    private ISaveLoadService _save;
+
     private AudioHandler _audioHandler { get; set; }
+
+    private ShopStaticData _staticData;
+
     private bool IsAnimating =>
         Animation != null && Animation.active;
 
     private void OnEnable()
     {
-        _damageUpdate.onClick.AddListener(OnUpdateDamageClick);
-        _defenseUpdate.onClick.AddListener(OnUpdateDefenseClick);
-        _healthUpdate.onClick.AddListener(OnUpdateHealthClick);
+        _defenseButton.ButtonPressed += OnUpdateDefenseClick;
+        _healthButton.ButtonPressed += OnUpdateHealthClick;
         _returnButton.onClick.AddListener(Hide);
 
         YG2.onPurchaseSuccess += SuccessPurchased;
@@ -35,9 +39,8 @@ public class ShopWindow : MonoBehaviour
 
     private void OnDisable()
     {
-        _damageUpdate.onClick.RemoveListener(OnUpdateDamageClick);
-        _defenseUpdate.onClick.RemoveListener(OnUpdateDefenseClick);
-        _healthUpdate.onClick.RemoveListener(OnUpdateHealthClick);
+        _defenseButton.ButtonPressed -= OnUpdateDefenseClick;
+        _healthButton.ButtonPressed -= OnUpdateHealthClick;
         _returnButton.onClick.RemoveListener(Hide);
 
         YG2.onPurchaseSuccess -= SuccessPurchased;
@@ -47,9 +50,17 @@ public class ShopWindow : MonoBehaviour
     private void Start() =>
         gameObject.SetActive(false);
 
-    public void Construct(AudioHandler handler)
+    public void Construct(AudioHandler handler, ShopStaticData staticData,IPersistentProgressService progressService, ISaveLoadService save)
     {
         _audioHandler = handler;
+        _staticData = staticData;
+        _progress = progressService;
+        _save = save;
+
+        _defenseButton.Initialize(_staticData.DefensePrice, _staticData.DefenseValue);
+        _healthButton.Initialize(
+            _staticData.HitPointsPrice * _progress.Progress.PlayerData.HitPointUpdateCount,
+            _staticData.HitPointsValue);
     }
 
     public void Hide()
@@ -83,34 +94,51 @@ public class ShopWindow : MonoBehaviour
             .Play();
     }
 
-    private void OnUpdateDamageClick()
-    {
-        Debug.Log("Update Damage click");
-    }
-
     private void OnUpdateDefenseClick()
     {
-        Debug.Log("Update Defense click");
+        int price = _staticData.DefensePrice;
+
+        if (_progress.Progress.PlayerData.Gems < price)
+            return;
+
+        int value = _staticData.DefenseValue;
+        _progress.Progress.PlayerData.SetStat(StatsType.Gem, -price);
+        _progress.Progress.PlayerData.SetStat(StatsType.Defense, value);
+        _save.SaveProgress();
+
+        _defenseButton.UpdateView(price, value);
     }
 
     private void OnUpdateHealthClick()
     {
-        Debug.Log("Update Health click");
+        int price = _staticData.HitPointsPrice * _progress.Progress.PlayerData.HitPointUpdateCount;
+
+        if (_progress.Progress.PlayerData.Gems < price)
+            return;
+
+        int value = _staticData.HitPointsValue;
+        _progress.Progress.PlayerData.SetStat(StatsType.Gem, -price);
+        _progress.Progress.PlayerData.SetStat(StatsType.Health, value);
+        _save.SaveProgress();
+
+        _healthButton.UpdateView(
+            _staticData.HitPointsPrice * _progress.Progress.PlayerData.HitPointUpdateCount,
+            _staticData.HitPointsValue);
     }
 
     private void SuccessPurchased(string id)
     {
         if (id == "Coins")
         {
-            Debug.Log("Coins In App");
+            UnityEngine.Debug.Log("Coins In App");
         }
         else if (id == "Gems")
         {
-            Debug.Log("Gems In App");
+            UnityEngine.Debug.Log("Gems In App");
         }
         else if (id == "Mix")
         {
-            Debug.Log("Mix In App");
+            UnityEngine.Debug.Log("Mix In App");
         }
     }
 

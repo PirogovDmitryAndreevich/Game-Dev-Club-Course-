@@ -9,7 +9,7 @@ public class PlayerHealth : IHealth
     {
         _progress = progressService;
 
-        MaxHealth = _progress.Progress.PlayerData.Health;
+        MaxHealth = _progress.Progress.PlayerData.GetStat(StatsType.Health);
 
         HealthCurrent = MaxHealth;
     }

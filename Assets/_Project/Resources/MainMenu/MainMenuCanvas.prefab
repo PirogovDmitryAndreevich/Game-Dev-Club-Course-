@@ -2291,6 +2291,7 @@ GameObject:
   - component: {fileID: 6230528305012239465}
   - component: {fileID: 8183884375121349213}
   - component: {fileID: 5270049434525299040}
+  - component: {fileID: 4534423170074723425}
   m_Layer: 5
   m_Name: HealthPoints
   m_TagString: Untagged
@@ -2404,6 +2405,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4534423170074723425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240456364434853145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3baa769a0eb0722468a8545de018416f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 5270049434525299040}
+  _priceText: {fileID: 1789199931918528257}
+  _valueText: {fileID: 3490135370501425892}
+  _scaleMultiplayer: 0.3
 --- !u!1 &1251408568978787128
 GameObject:
   m_ObjectHideFlags: 0
@@ -13302,6 +13319,7 @@ GameObject:
   - component: {fileID: 105178103577076393}
   - component: {fileID: 685369641473689205}
   - component: {fileID: 8065593055254233176}
+  - component: {fileID: 2653006905007593714}
   m_Layer: 5
   m_Name: Defense
   m_TagString: Untagged
@@ -13415,6 +13433,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2653006905007593714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790241428430243095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3baa769a0eb0722468a8545de018416f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 8065593055254233176}
+  _priceText: {fileID: 1901211648564557224}
+  _valueText: {fileID: 2726909119394914164}
+  _scaleMultiplayer: 0.3
 --- !u!1 &3819020580398543250
 GameObject:
   m_ObjectHideFlags: 0
@@ -15591,13 +15625,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 4006768002783802026}
-  _returnButton: {fileID: 0}
-  _hideShowSound: {fileID: 0}
+  _returnButton: {fileID: 3926937813200187560}
+  _hideShowSound: {fileID: 8300000, guid: 5b757d2f86abebb4186bef30a3eebbd6, type: 3}
   _appearanceDuration: 0.5
   _rewardDayButtons: []
-  _damageUpdate: {fileID: 0}
-  _defenseUpdate: {fileID: 8065593055254233176}
-  _healthUpdate: {fileID: 5270049434525299040}
+  _defenseButton: {fileID: 2653006905007593714}
+  _healthButton: {fileID: 4534423170074723425}
 --- !u!1 &4981448502383720038
 GameObject:
   m_ObjectHideFlags: 0
@@ -25011,8 +25044,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 123
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 50c12c23294124aa48490c44ac65a9e4, type: 2}
-  m_sharedMaterial: {fileID: 7746803525459343344, guid: 50c12c23294124aa48490c44ac65a9e4,
+  m_fontAsset: {fileID: 11400000, guid: 1212ac4e1f561524ca53abd181f155b5, type: 2}
+  m_sharedMaterial: {fileID: -390876925145658987, guid: 1212ac4e1f561524ca53abd181f155b5,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -25043,7 +25076,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 40
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -28004,8 +28037,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 123
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 50c12c23294124aa48490c44ac65a9e4, type: 2}
-  m_sharedMaterial: {fileID: 7746803525459343344, guid: 50c12c23294124aa48490c44ac65a9e4,
+  m_fontAsset: {fileID: 11400000, guid: 1212ac4e1f561524ca53abd181f155b5, type: 2}
+  m_sharedMaterial: {fileID: -390876925145658987, guid: 1212ac4e1f561524ca53abd181f155b5,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -28036,7 +28069,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 40
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535

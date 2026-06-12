@@ -32,7 +32,7 @@ public class UIFactory : IUIFactory
         menu.LevelSelector.ReturnButtonSound.Construct(_handlersContainer.Audio);
         menu.LevelSelector.Construct(_gameStateMachine, _handlersContainer.Audio, _staticData, this);
         menu.LeaderBoard.Construct(_progressService);
-        menu.ShopWindow.Construct(_handlersContainer.Audio);
+        menu.ShopWindow.Construct(_handlersContainer.Audio, _staticData.ShopData, _progressService, _save);
         menu.SkillsWindow.ReturnButtonSound.Construct(_handlersContainer.Audio);
         menu.SkillsWindow.Skills.Construct(_progressService);
         menu.SkillsWindow.Skills.FirstSkill.Construct(_progressService, _staticData, menu.SkillsWindow);

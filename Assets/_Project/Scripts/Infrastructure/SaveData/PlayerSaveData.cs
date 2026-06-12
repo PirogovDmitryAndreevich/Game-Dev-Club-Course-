@@ -9,6 +9,7 @@ public class PlayerSaveData
     public int Damage;
     public int Defense;
     public int Health ;
+    public int HitPointUpdateCount;
 
     public event Action<StatsType> StatsChanged;
 
@@ -20,6 +21,7 @@ public class PlayerSaveData
         Damage = 5;
         Defense = 0;
         Health = 100;
+        HitPointUpdateCount = 1;
     }
 
     public int GetStat(StatsType type)
@@ -63,6 +65,7 @@ public class PlayerSaveData
                 break;
 
             case StatsType.Health:
+                HitPointUpdateCount++;
                 Health += value;
                 break;
 

@@ -7,12 +7,15 @@ public class StaticDataService : IStaticData
     private const string EnemiesPath = "StaticData/Enemies";
     private const string LevelDataPath = "StaticData/LevelData";
     private const string PlayerDataPath = "StaticData/PlayerData";
+    private const string ShopDataPath = "StaticData/ShopData";
 
     private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
     private Dictionary<PlayerAttackType, AttackData> _playerAttacks;
     private PlayerStaticData _playerData;
+    private ShopStaticData _shopData;
 
     public PlayerStaticData PlayerData => _playerData;
+    public ShopStaticData ShopData => _shopData;
     public Dictionary<SceneID, LevelData> LevelsData { get; private set; }
 
     public void Load()
@@ -23,7 +26,9 @@ public class StaticDataService : IStaticData
         LevelsData = Resources.Load<LevelStaticData>(LevelDataPath)
             .LevelData.ToDictionary(x => x.ID, x => x);
 
-        _playerData = Resources.Load<PlayerStaticData>(PlayerDataPath);   
+        _playerData = Resources.Load<PlayerStaticData>(PlayerDataPath);
+
+        _shopData = Resources.Load<ShopStaticData>(ShopDataPath);
         
         _playerAttacks = _playerData.Attacks.ToDictionary(x=>x.Type, x => x);
     }
