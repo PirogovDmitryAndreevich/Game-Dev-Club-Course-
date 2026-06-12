@@ -190,8 +190,8 @@ MonoBehaviour:
       title: Mix
       description: 
       imageURI: demo image
-      price: 30 YAN
-      priceValue: 30
+      price: 500 YAN
+      priceValue: 500
       priceCurrencyCode: YAN
       currencyImageURL: https://yastatic.net/s3/games-static/static-data/images/payments/sdk/currency-icon-s@2x.png
       consumed: 1
@@ -199,8 +199,8 @@ MonoBehaviour:
       title: Coins
       description: 
       imageURI: demo image
-      price: 30 YAN
-      priceValue: 30
+      price: 10 YAN
+      priceValue: 10
       priceCurrencyCode: YAN
       currencyImageURL: https://yastatic.net/s3/games-static/static-data/images/payments/sdk/currency-icon-s@2x.png
       consumed: 1
@@ -208,8 +208,8 @@ MonoBehaviour:
       title: Gems
       description: 
       imageURI: demo image
-      price: 30 YAN
-      priceValue: 30
+      price: 100 YAN
+      priceValue: 100
       priceCurrencyCode: YAN
       currencyImageURL: https://yastatic.net/s3/games-static/static-data/images/payments/sdk/currency-icon-s@2x.png
       consumed: 1

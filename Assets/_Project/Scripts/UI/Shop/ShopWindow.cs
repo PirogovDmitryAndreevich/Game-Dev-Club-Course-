@@ -5,10 +5,19 @@ using YG;
 
 public class ShopWindow : MonoBehaviour
 {
+    private const string CoinsInAppID = "Coins";
+    private const string GemsInAppID = "Gems";
+    private const string MixInAppID = "Mix";
+
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button _returnButton;
     [SerializeField] private AudioClip _hideShowSound;
     [SerializeField] private float _appearanceDuration = 0.5f;
+
+    [Header("InApp Buttons")]
+    [SerializeField] private Button _coinsInApp;
+    [SerializeField] private Button _gemsInApp;
+    [SerializeField] private Button _mixInApp;
 
     [Header("Buttons")]
     [SerializeField] private DayRewardButton[] _rewardDayButtons;
@@ -128,15 +137,15 @@ public class ShopWindow : MonoBehaviour
 
     private void SuccessPurchased(string id)
     {
-        if (id == "Coins")
+        if (id == CoinsInAppID)
         {
             UnityEngine.Debug.Log("Coins In App");
         }
-        else if (id == "Gems")
+        else if (id == GemsInAppID)
         {
             UnityEngine.Debug.Log("Gems In App");
         }
-        else if (id == "Mix")
+        else if (id == MixInAppID)
         {
             UnityEngine.Debug.Log("Mix In App");
         }
