@@ -4,12 +4,14 @@ public class RegisterLevelsState : IState
 {
     private GameStateMachine _gameStateMachine;
     private AllServices _services;
+    private readonly ICoroutineRunner _coroutineRunner;
     private IScenesLogicContainer _scenesContainer;
 
-    public RegisterLevelsState(GameStateMachine gameStateMachine, AllServices services)
+    public RegisterLevelsState(GameStateMachine gameStateMachine, AllServices services, ICoroutineRunner coroutineRunner)
     {
         _gameStateMachine = gameStateMachine;
         _services = services;
+        _coroutineRunner = coroutineRunner;
         _scenesContainer = _services.Single<IScenesLogicContainer>();
     }
 
@@ -26,6 +28,8 @@ public class RegisterLevelsState : IState
              _services.Single<IUIFactory>(), _services.Single<IHandlersContainer>()));
         _scenesContainer.AddNewScene(SceneID.Level_5, new LoadLevel(SceneID.Level_5, _services.Single<IStaticData>(), _services.Single<IGameFactory>(),
              _services.Single<IUIFactory>(), _services.Single<IHandlersContainer>()));
+        _scenesContainer.AddNewScene(SceneID.Level_6, new LoadSixLevel(SceneID.Level_6, _services.Single<IStaticData>(), _services.Single<IGameFactory>(),
+             _services.Single<IUIFactory>(), _services.Single<IHandlersContainer>(), _coroutineRunner));
 
         _gameStateMachine.Enter<LoadSceneState, SceneID>(SceneID.MainMenu);
     }

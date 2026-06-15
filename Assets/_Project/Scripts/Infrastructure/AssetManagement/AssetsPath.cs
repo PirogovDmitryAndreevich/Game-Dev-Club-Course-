@@ -29,4 +29,5 @@ public static class AssetsPath
     public const string BusPath = "Bus/Bus";
     public const string LevelCardPath = "UI/LevelCard/LevelCard";
     public const string SkillPrefabPath = "UI/Windows/Skill/Skill";
+    public const string TimerPath = "UI/Timer/Timer";
 }

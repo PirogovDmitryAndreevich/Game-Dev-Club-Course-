@@ -76,7 +76,7 @@ public class LoadLevel : IScene
         _handlers.Audio.PlayMusic(levelData.BGMusic);
     }
 
-    public void InitGameLogic(List<Enemy> enemies, List<Trophy> trophies, Hud hud, WinWindow winWindow, BusStop busStop
+    private void InitGameLogic(List<Enemy> enemies, List<Trophy> trophies, Hud hud, WinWindow winWindow, BusStop busStop
         ,Bus bus, Player player) =>
         new FinishLevelLogic(enemies, trophies, hud.TaskView, winWindow, busStop, bus, player);
     

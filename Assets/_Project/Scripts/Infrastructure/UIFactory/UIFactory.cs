@@ -111,6 +111,9 @@ public class UIFactory : IUIFactory
         return card;
     }
 
+    public Timer CreateTimer() =>
+        _assets.Instantiate(AssetsPath.TimerPath).GetComponent<Timer>();
+
     private void CreateSkillView(AttackData attack,Transform parent)
     {
         Skill skill = _assets.Instantiate(AssetsPath.SkillPrefabPath, parent)

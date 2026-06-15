@@ -139,15 +139,22 @@ public class ShopWindow : MonoBehaviour
     {
         if (id == CoinsInAppID)
         {
-            UnityEngine.Debug.Log("Coins In App");
+            _progress.Progress.PlayerData.SetStat(StatsType.Coins, _staticData.CoinsValue);
+            _save.SaveProgress();
         }
         else if (id == GemsInAppID)
         {
-            UnityEngine.Debug.Log("Gems In App");
+            _progress.Progress.PlayerData.SetStat(StatsType.Gem, _staticData.GemsValue);
+            _save.SaveProgress();
         }
         else if (id == MixInAppID)
         {
-            UnityEngine.Debug.Log("Mix In App");
+            _progress.Progress.PlayerData.SetStat(StatsType.Coins, _staticData.Mix.Coins);
+            _progress.Progress.PlayerData.SetStat(StatsType.Gem, _staticData.Mix.Gems);
+            _progress.Progress.PlayerData.SetStat(StatsType.Health, _staticData.Mix.HitPoints);
+            _progress.Progress.PlayerData.SetStat(StatsType.Defense, _staticData.Mix.Defense);
+
+            _save.SaveProgress();
         }
     }
 

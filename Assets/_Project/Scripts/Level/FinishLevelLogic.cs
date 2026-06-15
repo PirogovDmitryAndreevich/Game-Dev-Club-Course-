@@ -89,8 +89,6 @@ public class FinishLevelLogic
     {
         _finishWithBusStop.CutsceneEnded -= ShowWinWindow;
 
-
-
         _winWindow.gameObject.SetActive(true);
         _winWindow.Initialize(_trophiesCollected, _allTrophies);
         _winWindow.Show();

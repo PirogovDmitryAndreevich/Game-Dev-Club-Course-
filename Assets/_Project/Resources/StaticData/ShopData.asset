@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c94c766a3052f44ac435e39d73120a, type: 3}
   m_Name: ShopData
   m_EditorClassIdentifier: 
+  CoinsValue: 5000
+  GemsValue: 100
+  Mix:
+    Gems: 500
+    Coins: 10000
+    Defense: 10
+    HitPoints: 10
   DefensePrice: 5
   DefenseValue: 10
   HitPointsPrice: 10
