@@ -11,5 +11,7 @@ public enum SceneID
     Level_4 = 5,
     Level_5 = 6,
     Level_6 = 7,
+    Level_7 = 8,
+    Level_8 = 9,
     Non = 15,
 }

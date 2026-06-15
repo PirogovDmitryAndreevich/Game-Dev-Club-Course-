@@ -303,7 +303,7 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: b71e7259c59a10b4e899af02ad95e7a3, type: 3}
     BGMusic: {fileID: 8300000, guid: a823b48b147b1244cb70636dd7eb6d64, type: 3}
     ID: 7
-    NextSceneID: 15
+    NextSceneID: 8
     Coins: 3000
     Gems: 10
     ScoreMultiply: 1000
@@ -338,3 +338,277 @@ MonoBehaviour:
       WayPoints:
       - Position: {x: -14.43, y: -3.06}
       - Position: {x: -10.990001, y: -2.98}
+  - LevelKey: Level_7
+    Name: 7
+    Sprite: {fileID: 21300000, guid: b71e7259c59a10b4e899af02ad95e7a3, type: 3}
+    BGMusic: {fileID: 8300000, guid: a823b48b147b1244cb70636dd7eb6d64, type: 3}
+    ID: 8
+    NextSceneID: 9
+    Coins: 1500
+    Gems: 1
+    ScoreMultiply: 1000
+    PlayerInitial:
+      Position: {x: -12.477798, y: -15.6565075}
+    BusStop:
+      Position: {x: 132.58974, y: -12.745815}
+      BusData:
+        SpawnPosition: {x: 120.482, y: -14.660401}
+        EndMovePoint: {x: 144.21208, y: -14.660401}
+        IsRight: 0
+    Locks: []
+    Trophies:
+    - Position: {x: 114.77193, y: -15.459391}
+    - Position: {x: 117.51489, y: -17.096981}
+    - Position: {x: 120.994774, y: -15.418452}
+    - Position: {x: 117.51489, y: -14.313078}
+    - Position: {x: 58.230762, y: -14.246315}
+    - Position: {x: 28.1194, y: -15.407739}
+    MedKits:
+    - Position: {x: 56.22809, y: -15.462223}
+      Value: 20
+    Defenses: []
+    EnemySpawnerDatas:
+    - Id: Level_7_ec17bd82-2c5e-40d7-9fe0-b331ae02e8b3
+      TypeId: 1
+      Position: {x: 97.94, y: -17.87}
+      WayPoints:
+      - Position: {x: 99.75, y: -17.990002}
+      - Position: {x: 98.01, y: -17.970001}
+    - Id: Level_7_f0f43053-fad7-4291-9621-a16a07702b36
+      TypeId: 1
+      Position: {x: 97.94, y: -15.82}
+      WayPoints:
+      - Position: {x: 99.75, y: -15.94}
+      - Position: {x: 98.01, y: -15.92}
+    - Id: Level_7_92e6df6b-d875-4d24-9d15-2262d95c8c48
+      TypeId: 1
+      Position: {x: 97.94, y: -13.72}
+      WayPoints:
+      - Position: {x: 99.75, y: -13.84}
+      - Position: {x: 98.01, y: -13.820001}
+    - Id: Level_7_8b0fd9cd-4c67-4c79-91e2-438cb0fbedae
+      TypeId: 2
+      Position: {x: 93.84, y: -13.72}
+      WayPoints:
+      - Position: {x: 95.649994, y: -13.84}
+      - Position: {x: 93.909996, y: -13.820001}
+    - Id: Level_7_d33522d0-cbf9-498b-b079-d6fc383fd11b
+      TypeId: 2
+      Position: {x: 93.84, y: -15.82}
+      WayPoints:
+      - Position: {x: 95.649994, y: -15.94}
+      - Position: {x: 93.909996, y: -15.92}
+    - Id: Level_7_6f7d26dc-7322-47c8-846c-7a9a8e1208b0
+      TypeId: 2
+      Position: {x: 93.84, y: -17.87}
+      WayPoints:
+      - Position: {x: 95.649994, y: -17.990002}
+      - Position: {x: 93.909996, y: -17.970001}
+    - Id: Level_7_818d707c-4931-4746-ad65-943a82a9912d
+      TypeId: 0
+      Position: {x: 89.57, y: -17.87}
+      WayPoints:
+      - Position: {x: 91.38, y: -17.990002}
+      - Position: {x: 89.64, y: -17.970001}
+    - Id: Level_7_f9e61102-6b64-4df8-81bd-29bb2896c8ed
+      TypeId: 0
+      Position: {x: 89.57, y: -15.82}
+      WayPoints:
+      - Position: {x: 91.38, y: -15.94}
+      - Position: {x: 89.64, y: -15.92}
+    - Id: Level_7_2014cbf8-e4c5-4c6c-be17-f4196ad9372d
+      TypeId: 0
+      Position: {x: 89.57, y: -13.72}
+      WayPoints:
+      - Position: {x: 91.38, y: -13.84}
+      - Position: {x: 89.64, y: -13.820001}
+    - Id: Level_7_fa5b3857-4602-45c5-87a2-9e088be40e72
+      TypeId: 1
+      Position: {x: 71.71, y: -15.71}
+      WayPoints:
+      - Position: {x: 73.520004, y: -15.83}
+      - Position: {x: 71.78, y: -15.81}
+    - Id: Level_7_59245665-c9a6-4ce4-b517-78c0bed89b5d
+      TypeId: 2
+      Position: {x: 68.04, y: -17.72}
+      WayPoints:
+      - Position: {x: 69.850006, y: -17.84}
+      - Position: {x: 68.11, y: -17.82}
+    - Id: Level_7_41b333d6-a8c1-4419-ace4-0949dbb938e0
+      TypeId: 2
+      Position: {x: 68.04, y: -15.79}
+      WayPoints:
+      - Position: {x: 69.850006, y: -15.91}
+      - Position: {x: 68.11, y: -15.89}
+    - Id: Level_7_9f55a1d0-1c50-4c07-ac07-2e93c1379756
+      TypeId: 2
+      Position: {x: 68.04, y: -13.86}
+      WayPoints:
+      - Position: {x: 69.850006, y: -13.98}
+      - Position: {x: 68.11, y: -13.96}
+    - Id: Level_7_84279a96-c234-4e20-9fc3-cb7343cffedf
+      TypeId: 1
+      Position: {x: 43.22, y: -17.62}
+      WayPoints:
+      - Position: {x: 45.03, y: -17.740002}
+      - Position: {x: 43.29, y: -17.720001}
+    - Id: Level_7_45fc580c-3812-40bd-8b4d-acfd6e688556
+      TypeId: 1
+      Position: {x: 39.18, y: -17.62}
+      WayPoints:
+      - Position: {x: 40.989998, y: -17.740002}
+      - Position: {x: 39.25, y: -17.720001}
+    - Id: Level_7_af41db72-0afa-4619-8a1a-c3a2186d53b5
+      TypeId: 0
+      Position: {x: 41.75, y: -13.97}
+      WayPoints:
+      - Position: {x: 41.910004, y: -15.88}
+      - Position: {x: 41.82, y: -14.070001}
+    - Id: Level_7_7c3f8919-ecf8-4746-b2a1-888ac9b57ab6
+      TypeId: 0
+      Position: {x: 39.18, y: -13.97}
+      WayPoints:
+      - Position: {x: 39.340004, y: -15.88}
+      - Position: {x: 39.25, y: -14.070001}
+    - Id: Level_7_35405a6b-e716-4c86-bd76-0762f21a9385
+      TypeId: 0
+      Position: {x: 35.869995, y: -15.06}
+      WayPoints:
+      - Position: {x: 36.03, y: -16.970001}
+      - Position: {x: 35.939995, y: -15.160001}
+    - Id: Level_7_b1d47e02-73e6-498f-8f44-50800aed43bd
+      TypeId: 1
+      Position: {x: 18.150002, y: -15.06}
+      WayPoints:
+      - Position: {x: 18.310005, y: -16.970001}
+      - Position: {x: 18.220001, y: -15.160001}
+    - Id: Level_7_adff1cf8-8404-478a-9ca0-0c6ccbe35942
+      TypeId: 1
+      Position: {x: 15.349998, y: -13.81}
+      WayPoints:
+      - Position: {x: 15.510002, y: -15.72}
+      - Position: {x: 15.419998, y: -13.910001}
+    - Id: Level_7_f7d4272d-266f-4ca6-9fd6-d14c043945ce
+      TypeId: 0
+      Position: {x: 12.199997, y: -16.46}
+      WayPoints:
+      - Position: {x: 12.439995, y: -16.439999}
+      - Position: {x: 12.349998, y: -14.739999}
+    - Id: _ffc5b2f0-5be2-46c2-acac-6a60d8d2b4a4
+      TypeId: 0
+      Position: {x: 8.709999, y: -16.23}
+      WayPoints:
+      - Position: {x: 8.760002, y: -16.32}
+      - Position: {x: 9.159996, y: -13.9}
+  - LevelKey: Level_8
+    Name: 8
+    Sprite: {fileID: 21300000, guid: b35792fd0705c8c45b5a60ade9fd0b6e, type: 3}
+    BGMusic: {fileID: 8300000, guid: 7e4c3d9c8f935464fb35a3e26955a5e2, type: 3}
+    ID: 9
+    NextSceneID: 15
+    Coins: 1000
+    Gems: 2
+    ScoreMultiply: 1000
+    PlayerInitial:
+      Position: {x: -12.477798, y: -15.6565075}
+    BusStop:
+      Position: {x: -0.39027405, y: -45.78013}
+      BusData:
+        SpawnPosition: {x: 11.232071, y: -47.694717}
+        EndMovePoint: {x: -12.498009, y: -47.694717}
+        IsRight: 1
+    Locks:
+    - Position: {x: 9.459999, y: -32.40155}
+      Color: {r: 0, g: 0.04376173, b: 1, a: 1}
+      Key:
+        Position: {x: 19.419998, y: -15.331551}
+    - Position: {x: 9.520004, y: -20.32}
+      Color: {r: 0, g: 1, b: 0.009856224, a: 1}
+      Key:
+        Position: {x: -16.949997, y: -26.25}
+    - Position: {x: -7.529999, y: -31.94}
+      Color: {r: 1, g: 0, b: 0.7564087, a: 1}
+      Key:
+        Position: {x: 27.479996, y: -48.339996}
+    - Position: {x: 32.550003, y: -31.72349}
+      Color: {r: 1, g: 0, b: 0.013001442, a: 1}
+      Key:
+        Position: {x: 25.910004, y: -15.31349}
+    - Position: {x: -7.419998, y: -43.36819}
+      Color: {r: 0, g: 1, b: 1, a: 1}
+      Key:
+        Position: {x: 27.980003, y: -37.26819}
+    - Position: {x: 27.435776, y: -43.044212}
+      Color: {r: 1, g: 0.48408312, b: 0, a: 1}
+      Key:
+        Position: {x: 12.735779, y: -37.624214}
+    - Position: {x: -7.4300003, y: -20.22}
+      Color: {r: 1, g: 0.84506273, b: 0, a: 1}
+      Key:
+        Position: {x: -2.4800034, y: -15.679999}
+    Trophies:
+    - Position: {x: 9.6050415, y: -37.294773}
+    - Position: {x: 22.596527, y: -15.32896}
+    - Position: {x: 1.3955307, y: -48.335274}
+    - Position: {x: 31.157654, y: -37.04021}
+    - Position: {x: 7.477623, y: -48.29274}
+    - Position: {x: 0.84041595, y: -26.507362}
+    - Position: {x: -16.247528, y: -37.362556}
+    - Position: {x: -11.084602, y: -37.141705}
+    - Position: {x: 30.309128, y: -48.49534}
+    - Position: {x: 23.86, y: -26.394814}
+    - Position: {x: -13.89711, y: -38.48435}
+    - Position: {x: -13.523178, y: -35.97367}
+    MedKits: []
+    Defenses:
+    - Position: {x: 24.384293, y: -14.183271}
+      Value: 3
+    EnemySpawnerDatas:
+    - Id: Level_7_2139217e-497a-4123-825e-bab1d2bee4e7
+      TypeId: 0
+      Position: {x: 13.849998, y: -37.67}
+      WayPoints:
+      - Position: {x: 10.239998, y: -37.559998}
+      - Position: {x: 16.379997, y: -37.57}
+    - Id: _ffc5b2f0-5be2-46c2-acac-6a60d8d2b4a4
+      TypeId: 0
+      Position: {x: -7.002899, y: -24.744493}
+      WayPoints:
+      - Position: {x: -10.6129, y: -24.634495}
+      - Position: {x: -4.4729004, y: -24.644493}
+    - Id: Level_7_72b2b103-061a-4229-bbee-52aa5ffcf16b
+      TypeId: 0
+      Position: {x: 9.690002, y: -16.74}
+      WayPoints:
+      - Position: {x: 6.080002, y: -16.63}
+      - Position: {x: 12.220001, y: -16.64}
+    - Id: Level_7_68f059d9-48ea-4d2b-92f9-a672128cc82e
+      TypeId: 0
+      Position: {x: 7.800003, y: -24.744493}
+      WayPoints:
+      - Position: {x: 4.1900024, y: -24.634495}
+      - Position: {x: 10.330002, y: -24.644493}
+    - Id: Level_7_29a3cb1e-3b47-4257-962f-212197bf042e
+      TypeId: 0
+      Position: {x: 31.54, y: -26.92}
+      WayPoints:
+      - Position: {x: 27.93, y: -26.810001}
+      - Position: {x: 34.07, y: -26.82}
+    - Id: Level_7_ee4cc2c7-0a04-408d-8b59-1ceae60f58ba
+      TypeId: 0
+      Position: {x: 28.82, y: -35.8}
+      WayPoints:
+      - Position: {x: 25.21, y: -35.69}
+      - Position: {x: 31.349998, y: -35.699997}
+    - Id: Level_7_2f6eb71b-b172-4d97-b143-81410af85fde
+      TypeId: 0
+      Position: {x: 22.270004, y: -16.53}
+      WayPoints:
+      - Position: {x: 18.660004, y: -16.42}
+      - Position: {x: 24.800003, y: -16.43}
+    - Id: Level_7_93f4c74c-5bae-4b1c-a909-4396868e06cb
+      TypeId: 0
+      Position: {x: 27.650002, y: -50}
+      WayPoints:
+      - Position: {x: 24.04, y: -49.89}
+      - Position: {x: 30.18, y: -49.9}

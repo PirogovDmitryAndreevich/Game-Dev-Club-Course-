@@ -55,14 +55,6 @@ public class LoadSixLevel : IScene
         List<Enemy> enemies = new List<Enemy>();
         List<EnemySpawner> spawners = _gameFactory.CreateEnemySpawners(levelData);
 
-        Enemy enemy;
-
-        foreach (var spawner in spawners)
-        {
-            enemy = spawner.Spawn();
-            enemies.Add(enemy);
-        }
-
         _winWindow = _uiFactory.CreateWinWindow(levelData);
 
         _uiFactory.CreateFailWindow(levelData, _player);
