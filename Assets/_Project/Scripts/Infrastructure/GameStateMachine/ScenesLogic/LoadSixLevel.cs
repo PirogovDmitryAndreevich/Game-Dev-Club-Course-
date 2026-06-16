@@ -24,6 +24,7 @@ public class LoadSixLevel : IScene
     private WinWindow _winWindow;
     private Timer _timer;
     private int _enemyOnScene = 0;
+    private bool _isPlayerDead;
     private List<Enemy> _enemies = new List<Enemy>();
 
     public LoadSixLevel(SceneID id, IStaticData staticData, IGameFactory gameFactory,
@@ -52,7 +53,6 @@ public class LoadSixLevel : IScene
         Hud hud = CreateHud(levelData, _player);
         _timer = _uiFactory.CreateTimer();
 
-        List<Enemy> enemies = new List<Enemy>();
         List<EnemySpawner> spawners = _gameFactory.CreateEnemySpawners(levelData);
 
         _winWindow = _uiFactory.CreateWinWindow(levelData);
@@ -70,6 +70,8 @@ public class LoadSixLevel : IScene
         _finishWithBusStop = new FinishWithBusStop(_busStop, _bus, _player);
 
         _coroutineRunner.StartCoroutine(StartTimer(spawners));
+
+        _player.Health.Died += OnPlayerDied;
     }
 
     private Hud CreateHud(LevelData levelData, Player player) =>
@@ -83,6 +85,9 @@ public class LoadSixLevel : IScene
 
         while (time > 0)
         {
+            if (_isPlayerDead)
+                yield break;
+
             time -= Time.deltaTime;
             _timer.UpdateTimer(time);
 
@@ -97,10 +102,19 @@ public class LoadSixLevel : IScene
 
         while (_enemies.Count > 0)
         {
+            if (_isPlayerDead)
+                yield break;
+
             yield return null;
         }
 
         Reached();
+    }
+
+    private void OnPlayerDied()
+    {
+        _player.Health.Died -= OnPlayerDied;
+        _isPlayerDead = true;
     }
 
     private void SpawnEnemy(List<EnemySpawner> spawners)
