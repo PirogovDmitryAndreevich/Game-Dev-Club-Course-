@@ -8,10 +8,15 @@ public class LevelCard : MonoBehaviour
     [SerializeField] private Transform _focusFrame;
     [SerializeField] private Image _levelImage;
     [SerializeField] private TMP_Text _name;
+    [SerializeField] private TMP_Text _trophyCount;
     [SerializeField] private Button _button;
     [SerializeField] private ButtonPlaySoundOnInteract _buttonSound;
+    [SerializeField] private GameObject _trophyFrame;
 
     private IPersistentProgressService _progress;
+    private LevelSaveData _levelSave;
+    private bool _isEnable;
+    private LevelData _levelData;
 
     public SceneID LevelID { get; private set; }
 
@@ -23,24 +28,29 @@ public class LevelCard : MonoBehaviour
     {
         _progress.Progress.LevelsProgress.OpenedLevel -= OnOpenNewLevel;
         _button.onClick.RemoveListener(OnClickButton);
+
+        if(_isEnable)
+            _levelSave.TrophyChanged -= UpdateTrophyCount;
     }
 
     private void Start()
     {
-        if (_progress.Progress.LevelsProgress.ReachedLevels.Contains(LevelID))
+        if (_progress.Progress.LevelsProgress.Contain(LevelID))
             EnableButton();
         else
-            DisableButton();        
+            DisableButton();
 
         Deselect();
     }
 
-    public void Construct(string name, Sprite levelSprite, SceneID levelId, IPersistentProgressService progressService)
+    public void Construct(LevelData levelData, IPersistentProgressService progressService)
     {
-        _name.text = name;
-        LevelID = levelId;
-        _levelImage.sprite = levelSprite;
+        _levelData = levelData;
         _progress = progressService;
+
+        _name.text = _levelData.Name;
+        LevelID = _levelData.ID;
+        _levelImage.sprite = _levelData.Sprite;
 
         _progress.Progress.LevelsProgress.OpenedLevel += OnOpenNewLevel;
         _button.onClick.AddListener(OnClickButton);
@@ -60,13 +70,33 @@ public class LevelCard : MonoBehaviour
 
     private void OnOpenNewLevel(SceneID sceneID)
     {
-        if(sceneID == LevelID)
+        if (sceneID == LevelID)
             EnableButton();
     }
 
-    private void EnableButton() => 
+    private void EnableButton()
+    {
+        _isEnable = true;
+
+        _levelSave = _progress.Progress.LevelsProgress.GetSaveData(LevelID);
+        _trophyFrame.gameObject.SetActive(true);
+
         _button.interactable = true;
 
-    private void DisableButton() => 
+        _levelSave.TrophyChanged += UpdateTrophyCount;
+        UpdateTrophyCount(LevelID);
+    }
+
+    private void DisableButton()
+    {
+        _isEnable = false;
+        _trophyFrame.gameObject.SetActive(false);
         _button.interactable = false;
+    }
+
+    private void UpdateTrophyCount(SceneID id)
+    {
+        if (id == LevelID)
+            _trophyCount.text = $"{_levelSave.ReachedTrophy} / {_levelSave.Trophy}";
+    }
 }

@@ -22,6 +22,7 @@ public class WinWindow : PauseBase
     private IPersistentProgressService _progress;
     private ISaveLoadService _save;
     private LevelData _levelData;
+    private IStaticData _staticData;
     private int _trophies;
     private int _allTrophies;
 
@@ -30,16 +31,17 @@ public class WinWindow : PauseBase
     protected override GameStateMachine GameStateMachine { get; set; }
     protected override SceneID CurrentScene { get; set; }
 
-    public void Construct(SceneID current, SceneID next, GameStateMachine stateMachine, AudioHandler handler,
-        IPersistentProgressService progressService, ISaveLoadService save, LevelData levelData)
+    public void Construct(LevelData levelData, IStaticData staticData, GameStateMachine stateMachine, AudioHandler handler,
+        IPersistentProgressService progressService, ISaveLoadService save)
     {
-        CurrentScene = current;
+        _levelData = levelData;
+        CurrentScene = _levelData.ID;
+        _nextSceneID = _levelData.NextSceneID;
         GameStateMachine = stateMachine;
         AudioHandler = handler;
-        _nextSceneID = next;
         _progress = progressService;
         _save = save;
-        _levelData = levelData;
+        _staticData = staticData;
 
         _advButton.interactable = true;
     }
@@ -72,7 +74,8 @@ public class WinWindow : PauseBase
 
         if (_nextSceneID != SceneID.Non)
         {
-            _progress.Progress.LevelsProgress.OpenNewLevel(_nextSceneID);
+            LevelData nexScene = _staticData.ForLevel(_nextSceneID);
+            _progress.Progress.LevelsProgress.OpenNewLevel(nexScene.ID, nexScene.Trophies.Count);
             _save.SaveProgress();
         }
     }
@@ -123,6 +126,8 @@ public class WinWindow : PauseBase
         _progress.Progress.PlayerData.SetStat(StatsType.Score, _trophies * _levelData.ScoreMultiply);
         _progress.Progress.PlayerData.SetStat(StatsType.Gem, _levelData.Gems);
         _progress.Progress.PlayerData.SetStat(StatsType.Coins, _levelData.Coins);
+
+        _progress.Progress.LevelsProgress.GetSaveData(CurrentScene).UpdateReachedTrophy(_trophies);
 
         _save.SaveProgress();
     }

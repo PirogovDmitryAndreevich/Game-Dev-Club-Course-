@@ -56,8 +56,8 @@ public class UIFactory : IUIFactory
         WinWindow window = _assets.Instantiate(AssetsPath.WinWindowPath)
             .GetComponent<WinWindow>();
 
-        window.Construct(levelData.ID, levelData.NextSceneID, _gameStateMachine, _handlersContainer.Audio,
-            _progressService, _save, levelData);
+        window.Construct(levelData, _staticData, _gameStateMachine, _handlersContainer.Audio,
+            _progressService, _save);
         window.TrophyCounter.Construct(levelData);
 
         return window;
@@ -105,7 +105,7 @@ public class UIFactory : IUIFactory
         LevelCard card = _assets.Instantiate(AssetsPath.LevelCardPath, parent)
             .GetComponent<LevelCard>();
 
-        card.Construct(data.Name, data.Sprite, data.ID, _progressService);
+        card.Construct(data, _progressService);
         card.Sound.Construct(_handlersContainer.Audio);
 
         return card;

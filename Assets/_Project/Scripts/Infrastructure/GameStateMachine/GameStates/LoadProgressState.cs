@@ -3,12 +3,15 @@ internal class LoadProgressState : IState
     private readonly GameStateMachine _gameStateMachine;
     private readonly IPersistentProgressService _persistentProgress;
     private readonly ISaveLoadService _saveLoadService;
+    private readonly IStaticData _staticData;
 
-    public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService persistentProgress, ISaveLoadService saveLoadService)
+    public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService persistentProgress,
+        ISaveLoadService saveLoadService, IStaticData staticData)
     {
         _gameStateMachine = gameStateMachine;
         _persistentProgress = persistentProgress;
         _saveLoadService = saveLoadService;
+        _staticData = staticData;
     }
 
     public void Enter()
@@ -21,11 +24,16 @@ internal class LoadProgressState : IState
     {
     }
 
-    private void LoadProgressOrInitNew() =>
+    private void LoadProgressOrInitNew()
+    {
         _persistentProgress.Progress =
             _saveLoadService.
             LoadProgress()
             ?? NewProgress();
+
+        LevelData levelData = _staticData.ForLevel(SceneID.Level_1);
+        _persistentProgress.Progress.LevelsProgress.OpenNewLevel(levelData.ID, levelData.Trophies.Count);
+    }
 
     private SaveData NewProgress() =>
         new SaveData();    

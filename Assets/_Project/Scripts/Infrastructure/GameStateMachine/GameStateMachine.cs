@@ -13,7 +13,7 @@ public class GameStateMachine
             [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
 
             [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(),
-            services.Single<ISaveLoadService>()),
+            services.Single<ISaveLoadService>(), services.Single<IStaticData>()),
 
             [typeof(PersistentHandlersCreateState)] = new PersistentHandlersCreateState(this, services.Single<IHandlersContainer>()),
 

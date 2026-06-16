@@ -308,7 +308,7 @@ MonoBehaviour:
   _musicSource: {fileID: 5755014849538744500}
   _lowPith: 1
   _topPith: 2
-  _defaultBGMusic: {fileID: 8300000, guid: 97a0655607d71448187c1411cbb714dd, type: 3}
+  _defaultBGMusic: {fileID: 8300000, guid: 9081be8f013476e4faa50587590f7758, type: 3}
   _sqrMaxDistanceToSource: 400
 --- !u!1 &8807623976405065625
 GameObject:
