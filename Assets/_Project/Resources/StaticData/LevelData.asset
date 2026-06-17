@@ -1101,3 +1101,43 @@ MonoBehaviour:
       WayPoints:
       - Position: {x: -9.14, y: -0.13000011}
       - Position: {x: -5.63, y: 0.39}
+  - LevelKey: Arena
+    Name: Arena
+    Sprite: {fileID: 21300000, guid: 1a62a92f3752e4aba801604f6a85b82e, type: 3}
+    BGMusic: {fileID: 8300000, guid: a823b48b147b1244cb70636dd7eb6d64, type: 3}
+    ID: 99
+    NextSceneID: 100
+    Coins: 0
+    Gems: 0
+    ScoreMultiply: 0
+    PlayerInitial:
+      Position: {x: -14.49, y: 2.17}
+    BusStop:
+      Position: {x: -3.3917565, y: -12.77996}
+      BusData:
+        SpawnPosition: {x: 8.23059, y: -14.694545}
+        EndMovePoint: {x: -15.499489, y: -14.694545}
+        IsRight: 1
+    Locks: []
+    Trophies: []
+    MedKits: []
+    Defenses: []
+    EnemySpawnerDatas:
+    - Id: Level_6_82db19a0-b905-400d-910c-3f0252ec1850
+      TypeId: 1
+      Position: {x: -11.31, y: -7.16}
+      WayPoints:
+      - Position: {x: -8.870001, y: -3.06}
+      - Position: {x: -5.4300003, y: -2.98}
+    - Id: Level_6_e91fd867-ddbe-495f-b444-678ed6818391
+      TypeId: 2
+      Position: {x: -3.49, y: 2.29}
+      WayPoints:
+      - Position: {x: -9.14, y: -0.13000011}
+      - Position: {x: -5.63, y: 0.39}
+    - Id: _ffc5b2f0-5be2-46c2-acac-6a60d8d2b4a4
+      TypeId: 0
+      Position: {x: -16.87, y: -7.16}
+      WayPoints:
+      - Position: {x: -14.43, y: -3.06}
+      - Position: {x: -10.990001, y: -2.98}

@@ -8,5 +8,6 @@ public interface IUIFactory : IService
     Hud CreateHud(bool isDesktop, LevelData levelData, Player player);
     ItemView CreateUIKey(Color color, Transform parent);
     LevelCard CreateLevelCard(LevelData data, Transform parent);
+    ArenaFinishWindow CreateArenaFinishWindow();
     Timer CreateTimer();
 }

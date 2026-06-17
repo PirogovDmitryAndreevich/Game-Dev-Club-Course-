@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelCard : MonoBehaviour
+public class LevelCard : MonoBehaviour, ILevelCard
 {
     [SerializeField] private Transform _focusFrame;
     [SerializeField] private Image _levelImage;
@@ -20,7 +20,7 @@ public class LevelCard : MonoBehaviour
 
     public SceneID LevelID { get; private set; }
 
-    public event Action<LevelCard> Selected;
+    public event Action<ILevelCard> Selected;
 
     public ButtonPlaySoundOnInteract Sound => _buttonSound;
 
@@ -29,7 +29,7 @@ public class LevelCard : MonoBehaviour
         _progress.Progress.LevelsProgress.OpenedLevel -= OnOpenNewLevel;
         _button.onClick.RemoveListener(OnClickButton);
 
-        if(_isEnable)
+        if (_isEnable)
             _levelSave.TrophyChanged -= UpdateTrophyCount;
     }
 

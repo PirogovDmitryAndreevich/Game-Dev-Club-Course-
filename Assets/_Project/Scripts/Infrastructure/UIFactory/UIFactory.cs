@@ -31,6 +31,8 @@ public class UIFactory : IUIFactory
         menu.LevelSelector.StartButtonSound.Construct(_handlersContainer.Audio);
         menu.LevelSelector.ReturnButtonSound.Construct(_handlersContainer.Audio);
         menu.LevelSelector.Construct(_gameStateMachine, _handlersContainer.Audio, _staticData, this);
+        menu.LevelSelector.ArenaLevelCard.Construct(_progressService);
+        menu.LevelSelector.ArenaLevelCard.Sound.Construct(_handlersContainer.Audio);
         menu.LeaderBoard.Construct(_progressService);
         menu.ShopWindow.Construct(_handlersContainer.Audio, _staticData.ShopData, _progressService, _save);
         menu.SkillsWindow.ReturnButtonSound.Construct(_handlersContainer.Audio);
@@ -79,7 +81,7 @@ public class UIFactory : IUIFactory
 
         Hud hud = hudObject.GetComponent<Hud>();
 
-        PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);       
+        PauseWindow pauseWindow = CreatePauseWindow(levelData.ID);
 
         hud.Construct(pauseWindow, player);
 
@@ -111,10 +113,20 @@ public class UIFactory : IUIFactory
         return card;
     }
 
+    public ArenaFinishWindow CreateArenaFinishWindow()
+    {
+        ArenaFinishWindow window = _assets.Instantiate(AssetsPath.ArenaFinishPath).
+            GetComponent<ArenaFinishWindow>();
+
+        window.Construct(_gameStateMachine, _handlersContainer.Audio, _progressService, _save);
+
+        return window;
+    }
+
     public Timer CreateTimer() =>
         _assets.Instantiate(AssetsPath.TimerPath).GetComponent<Timer>();
 
-    private void CreateSkillView(AttackData attack,Transform parent)
+    private void CreateSkillView(AttackData attack, Transform parent)
     {
         Skill skill = _assets.Instantiate(AssetsPath.SkillPrefabPath, parent)
             .GetComponent<Skill>();

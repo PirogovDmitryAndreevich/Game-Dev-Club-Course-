@@ -30,4 +30,5 @@ public static class AssetsPath
     public const string LevelCardPath = "UI/LevelCard/LevelCard";
     public const string SkillPrefabPath = "UI/Windows/Skill/Skill";
     public const string TimerPath = "UI/Timer/Timer";
+    public const string ArenaFinishPath = "UI/Windows/ArenaFinishWindow";
 }

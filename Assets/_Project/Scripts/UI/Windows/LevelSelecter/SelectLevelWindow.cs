@@ -10,22 +10,26 @@ public class SelectLevelWindow : MonoBehaviour
     [SerializeField] private ButtonPlaySoundOnInteract _startButtonSound;
     [SerializeField] private Button _returnButton;
     [SerializeField] private ButtonPlaySoundOnInteract _returnButtonSound;
+    [SerializeField] private ArenaLevelCard _arenaLevelCard;
 
     private IStaticData _staticData;
     private AudioHandler _audio;
     private GameStateMachine _stateMachine;
 
-    private LevelCard _currentSelected;
+    private ILevelCard _currentSelected;
 
-    private Dictionary<SceneID, LevelCard> _cards = new Dictionary<SceneID, LevelCard>();
+    private Dictionary<SceneID, ILevelCard> _cards = new Dictionary<SceneID, ILevelCard>();
 
     public ButtonPlaySoundOnInteract StartButtonSound => _startButtonSound;
     public ButtonPlaySoundOnInteract ReturnButtonSound => _returnButtonSound;
+    public ArenaLevelCard ArenaLevelCard => _arenaLevelCard;
 
     private void OnDestroy()
     {
         foreach(var card in _cards)
             card.Value.Selected -= OnSelectCard;
+
+        _arenaLevelCard.Selected -= OnSelectCard;
 
         _returnButton.onClick.RemoveListener(Hide);
         _startButton.onClick.RemoveListener(OnStartButton);
@@ -42,11 +46,17 @@ public class SelectLevelWindow : MonoBehaviour
 
         foreach (var level in _staticData.LevelsData)
         {
+            if (level.Key == SceneID.Arena)
+                continue;
+
             var card = factory.CreateLevelCard(level.Value, _content);
             _cards.Add(card.LevelID, card);
 
             card.Selected += OnSelectCard;
         }
+
+        _cards.Add(SceneID.Arena, _arenaLevelCard);
+        _arenaLevelCard.Selected += OnSelectCard;
 
         _startButton.onClick.AddListener(OnStartButton);
         _returnButton.onClick.AddListener(Hide);
@@ -55,12 +65,7 @@ public class SelectLevelWindow : MonoBehaviour
     public void Show()
     {
         YG2.InterstitialAdvShow();
-
         gameObject.SetActive(true);
-
-        LevelCard card = _cards[SceneID.Level_1];
-        card.Select();
-        OnSelectCard(card);
     }
 
     public void Hide()
@@ -69,7 +74,7 @@ public class SelectLevelWindow : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnSelectCard(LevelCard card)
+    private void OnSelectCard(ILevelCard card)
     {
         if (_currentSelected != null)
             _currentSelected.Deselect();

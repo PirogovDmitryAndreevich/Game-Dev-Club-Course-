@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 241,
+    "idSave": 242,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
@@ -16,15 +16,19 @@
             "IsMusicMute": true
         },
         "PlayerData": {
-            "Coins": 30475,
-            "Gems": 172,
-            "Score": 17000,
+            "Coins": 31475,
+            "Gems": 173,
+            "Score": 18000,
             "Damage": 5,
             "Defense": 0,
             "Health": 100,
             "HitPointUpdateCount": 1
         },
         "LevelsProgress": {
+            "ArenaSave": {
+                "RecordTime": 70.52922821044922,
+                "IsThereARecord": true
+            },
             "ReachedLevels": [
                 {
                     "ID": 0,
@@ -69,6 +73,11 @@
                 {
                     "ID": 4,
                     "Trophy": 4,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
                     "ReachedTrophy": 0
                 }
             ]
