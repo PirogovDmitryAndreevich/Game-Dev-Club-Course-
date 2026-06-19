@@ -4,7 +4,7 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Mover : MonoBehaviour
 {
-    private const float MinEnemySeparationDistance = 0.000001f;
+    private const float MinEnemySeparationDistance = 0.01f;
     private const float MinLengthMoveDirection = 0.01f;
 
     [Header("Move")]
@@ -20,8 +20,9 @@ public class Mover : MonoBehaviour
     [Header("Take Damage")]
     [SerializeField] private float _knockbackDuration = 0.5f;
     [Header("EnemySeparationSetting")]
-    [SerializeField] private float separationRadius = 1.2f;
-    [SerializeField] private float separationStrength = 1.5f;
+    [SerializeField] private float _separationRadius = 1.2f;
+    [SerializeField] private float _separationStrength = 0.35f;
+    [SerializeField] private float _maxSeparationForce = 0.7f;
     [SerializeField] private LayerMask enemyLayer;
 
     private Rigidbody2D _rigidbody;
@@ -125,38 +126,52 @@ public class Mover : MonoBehaviour
     {
         int countHits = Physics2D.OverlapCircleNonAlloc(
         _rigidbody.position,
-        separationRadius,
+        _separationRadius,
         _neighbors,
         enemyLayer
     );
 
         Vector2 separation = Vector2.zero;
-        int count = 0;
 
         for (int i = 0; i < countHits; i++)
         {
             var col = _neighbors[i];
 
-            if (col.attachedRigidbody == _rigidbody)
+            if (col == null)
                 continue;
 
-            Vector2 diff = _rigidbody.position - col.attachedRigidbody.position;
+            Rigidbody2D otherRb = col.attachedRigidbody;
+
+            if (otherRb == null || otherRb == _rigidbody)
+                continue;
+
+            Vector2 diff = _rigidbody.position - otherRb.position;
 
             float sqrDistance = diff.sqrMagnitude;
-            if (sqrDistance <= MinEnemySeparationDistance)
+
+            if (sqrDistance < MinEnemySeparationDistance)
                 continue;
 
-            float distance = Mathf.Sqrt(sqrDistance);
-            float weight = 1f - (sqrDistance / (separationRadius * separationRadius));
+            separation += diff / sqrDistance;
+
+            /*float distance = Mathf.Sqrt(sqrDistance);
+            float weight = 1f - (sqrDistance / (_separationRadius * _separationRadius));
 
             separation += diff.normalized * weight;
-            count++;
+            count++;*/
         }
 
-        if (count > 0)
+        separation *= _separationStrength;
+
+        if (separation.magnitude > _maxSeparationForce)
+            separation = separation.normalized * _maxSeparationForce;
+
+        /*if (count > 0)
             separation /= count;
 
-        return separation * separationStrength;
+        return separation * _separationStrength;*/
+
+        return separation;
     }
 
     private void Move(Vector2 targetPoint, float speed)
@@ -164,15 +179,27 @@ public class Mover : MonoBehaviour
         if (_isKnockback)
             return;
 
-        Vector2 moveDir = targetPoint - _rigidbody.position;
-        Vector2 desired = moveDir.normalized;
+        Vector2 toTarget = targetPoint - _rigidbody.position;
+
+        if (toTarget.sqrMagnitude < 0.0001f)
+            return;
+
+        Vector2 desiredDirection = toTarget.normalized;
 
         Vector2 separation = CalculateSeparation();
 
-        Vector2 finalDir = (desired + separation).normalized;
+        Vector2 finalDirection = desiredDirection + separation;
+
+        float sqrMagnitude = finalDirection.sqrMagnitude;
+
+        if (sqrMagnitude < 0.01f)
+            return;
+
+        if (sqrMagnitude > 1f)
+            finalDirection.Normalize();
 
         Vector2 newPosition = _rigidbody.position +
-            finalDir * speed * Time.fixedDeltaTime;
+            finalDirection * speed * Time.fixedDeltaTime;
 
         _rigidbody.MovePosition(newPosition);
     }

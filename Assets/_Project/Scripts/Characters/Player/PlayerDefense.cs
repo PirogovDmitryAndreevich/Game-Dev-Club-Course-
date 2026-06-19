@@ -1,25 +1,19 @@
 using System;
-using UnityEngine;
 
 public class PlayerDefense
 {
     private const int ArmorReductionInOneHit = 1;
 
-    private readonly IPersistentProgressService _progressService;
+    private PlayerSaveData _progress;
 
-    public PlayerDefense(IPersistentProgressService progressService)
-    {
-        _progressService = progressService;
-
-        Defense = _progressService.Progress.PlayerData.Defense;
-        IsShield = Defense > 0;
-    }
+    public PlayerDefense(IPersistentProgressService progressService) => 
+        _progress = progressService.Progress.PlayerData;
 
     public event Action DefenseChanged;
     public event Action AddedDefense;
 
-    public bool IsShield { get; private set; }
-    public int Defense { get; private set; }    
+    public bool IsShield => Defense > 0;
+    public int Defense => _progress.GetStat(StatsType.Defense);    
 
     public void AddDefense(int value)
     {
@@ -36,9 +30,7 @@ public class PlayerDefense
 
     private void ChangeDefense(int value)
     {
-        Defense = Mathf.Max(0, Defense + value);
-        IsShield = Defense > 0;
-
+        _progress.SetStat(StatsType.Defense, value);
         DefenseChanged?.Invoke();
     }
 }

@@ -12,6 +12,11 @@ public class SelectLevelWindow : MonoBehaviour
     [SerializeField] private ButtonPlaySoundOnInteract _returnButtonSound;
     [SerializeField] private ArenaLevelCard _arenaLevelCard;
 
+    [Header("StartButton Settings")]
+    [SerializeField] private Image _startButtonImage;
+    [SerializeField] private Color _readyColor;
+    [SerializeField] private Color _notReadyColor;
+
     private IStaticData _staticData;
     private AudioHandler _audio;
     private GameStateMachine _stateMachine;
@@ -66,6 +71,7 @@ public class SelectLevelWindow : MonoBehaviour
     {
         YG2.InterstitialAdvShow();
         gameObject.SetActive(true);
+        UpdateStartButtonView();
     }
 
     public void Hide()
@@ -81,6 +87,8 @@ public class SelectLevelWindow : MonoBehaviour
 
         _currentSelected = card;
         _currentSelected.Select();
+
+        UpdateStartButtonView();
     }
 
     private void OnStartButton()
@@ -91,5 +99,19 @@ public class SelectLevelWindow : MonoBehaviour
         YG2.InterstitialAdvShow();
 
         _stateMachine.Enter<LoadSceneState, SceneID>(_currentSelected.LevelID);
+    }
+
+    private void UpdateStartButtonView()
+    {
+        if (_currentSelected != null)
+        {
+            _startButton.interactable = true;
+            _startButtonImage.color = _readyColor;
+        }
+        else
+        {
+            _startButton.interactable = false;
+            _startButtonImage.color = _notReadyColor;
+        }
     }
 }

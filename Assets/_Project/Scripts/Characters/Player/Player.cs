@@ -11,7 +11,7 @@ public class Player : Character
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private PlayerAttacker _attacker;
     [SerializeField] private CollisionHandler _collisionHandler;
-
+    private ISaveLoadService _save;
     private IInputServices _input;
     private bool _isFinishing;
 
@@ -29,10 +29,12 @@ public class Player : Character
     private void OnDestroy()
     {
         _collisionHandler.InteractStarted -= SetInteractable;
+        _save.SaveProgress();
     }
 
     public void Construct(IPersistentProgressService progress, ISaveLoadService save, IInputServices input)
     {
+        _save = save;
         _input = input;
         _isFinishing = false;
 
@@ -86,7 +88,11 @@ public class Player : Character
     {
         base.ApplyDamage(damage, knockbackForce, damageSource, pushDirection);
         _playerSounds.PlayHitSound();
-        Health.ApplyDamage(damage);
+
+        if (Defense.IsShield)
+            Defense.SpendDefense();
+        else
+            Health.ApplyDamage(damage);
     }
 
     public void StartFinishing() =>

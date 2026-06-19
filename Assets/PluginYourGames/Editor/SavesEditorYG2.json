@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 242,
+    "idSave": 486,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
@@ -16,9 +16,9 @@
             "IsMusicMute": true
         },
         "PlayerData": {
-            "Coins": 31475,
-            "Gems": 173,
-            "Score": 18000,
+            "Coins": 56375,
+            "Gems": 347,
+            "Score": 22000,
             "Damage": 5,
             "Defense": 0,
             "Health": 100,
@@ -26,7 +26,7 @@
         },
         "LevelsProgress": {
             "ArenaSave": {
-                "RecordTime": 70.52922821044922,
+                "RecordTime": 142.43222045898438,
                 "IsThereARecord": true
             },
             "ReachedLevels": [
@@ -73,6 +73,51 @@
                 {
                     "ID": 4,
                     "Trophy": 4,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
                     "ReachedTrophy": 0
                 },
                 {

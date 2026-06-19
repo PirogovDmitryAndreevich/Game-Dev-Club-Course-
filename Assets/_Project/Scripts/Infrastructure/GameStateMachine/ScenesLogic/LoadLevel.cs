@@ -1,10 +1,12 @@
 using Cinemachine;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
 public class LoadLevel : IScene
 {
+    private const string TutorialTag = "Tutorial";
     private readonly SceneID _id;
     private readonly IStaticData _staticData;
     private readonly IGameFactory _gameFactory;
@@ -22,6 +24,9 @@ public class LoadLevel : IScene
 
     public void InitGameObjects()
     {
+        if (_id == SceneID.Level_1)
+            InitTutorial();
+
         LevelData levelData = _staticData.ForLevel(_id);
 
         CinemachineVirtualCamera camera = _gameFactory.CreateVirtualCamera();
@@ -74,6 +79,12 @@ public class LoadLevel : IScene
         InitGameLogic(enemies, trophies, hud, winWindow, busStop, bus, player);
 
         _handlers.Audio.PlayMusic(levelData.BGMusic);
+    }
+
+    private void InitTutorial()
+    {
+        TutorialLogic tutorial = GameObject.FindWithTag(TutorialTag).GetComponent<TutorialLogic>();
+        tutorial.SetTutorial(YG2.envir.isDesktop);
     }
 
     private void InitGameLogic(List<Enemy> enemies, List<Trophy> trophies, Hud hud, WinWindow winWindow, BusStop busStop

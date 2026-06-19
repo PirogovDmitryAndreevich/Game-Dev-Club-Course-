@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class PlayerSaveData
@@ -61,7 +62,7 @@ public class PlayerSaveData
                 break;
 
             case StatsType.Defense:
-                Defense += value;
+                Defense = Mathf.Max(0, Defense + value);
                 break;
 
             case StatsType.Health:

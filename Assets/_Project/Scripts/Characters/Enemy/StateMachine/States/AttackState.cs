@@ -30,8 +30,8 @@ class AttackState : State
         if (!_enemy.Attacker.IsAttack)
             _enemy.EnemyFliper.LookAtTarget(_target.position);
 
-        if (_enemy.Attacker.CanAttack)        
-            _enemy.Attacker.StartAttack();        
+        if (_enemy.Attacker.CanAttack)
+            _enemy.Attacker.StartAttack();
     }
 
     public override void TryTransit()
