@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aeb2f40500f1e45bf87a7c308975d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointerDown: {fileID: 8300000, guid: d9eecd8e9cc01294695a75cbd672ce16, type: 3}
-  _pointerEnter: {fileID: 8300000, guid: 32ef845069eb0ad44885c533cb945518, type: 3}
-  _pointerExit: {fileID: 8300000, guid: 32ef845069eb0ad44885c533cb945518, type: 3}
+  _pointerDown: {fileID: 8300000, guid: 4533eeb038755dd4daac71d2dffcc792, type: 3}
+  _pointerEnter: {fileID: 0}
+  _pointerExit: {fileID: 0}
   _pointerUp: {fileID: 0}
 --- !u!1 &727763634934768829
 GameObject:
@@ -2142,9 +2142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aeb2f40500f1e45bf87a7c308975d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointerDown: {fileID: 8300000, guid: d9eecd8e9cc01294695a75cbd672ce16, type: 3}
-  _pointerEnter: {fileID: 8300000, guid: 32ef845069eb0ad44885c533cb945518, type: 3}
-  _pointerExit: {fileID: 8300000, guid: 32ef845069eb0ad44885c533cb945518, type: 3}
+  _pointerDown: {fileID: 8300000, guid: 4533eeb038755dd4daac71d2dffcc792, type: 3}
+  _pointerEnter: {fileID: 0}
+  _pointerExit: {fileID: 0}
   _pointerUp: {fileID: 0}
 --- !u!1 &6822136911072709117
 GameObject:

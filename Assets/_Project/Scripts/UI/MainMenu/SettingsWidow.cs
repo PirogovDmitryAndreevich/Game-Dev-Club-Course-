@@ -8,6 +8,7 @@ public class SettingsWidow : MonoBehaviour
     [SerializeField] private CanvasGroup _panelView;
     [SerializeField] private CanvasGroup _anticlicker;
     [SerializeField] private Button _closeButton;
+    [SerializeField] private ButtonPlaySoundOnInteract _closeButtonSound;
 
     [Header("AudioSettings")]
     [SerializeField] private AudioSettings _audioSettings;
@@ -37,6 +38,7 @@ public class SettingsWidow : MonoBehaviour
     public void Construct(AudioHandler audio)
     {
         AudioHandler = audio;
+        _closeButtonSound.Construct(AudioHandler);
         _panelRectTransform = _panelView.GetComponent<RectTransform>();
     }
 

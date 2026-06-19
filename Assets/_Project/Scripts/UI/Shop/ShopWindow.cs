@@ -11,6 +11,7 @@ public class ShopWindow : MonoBehaviour
 
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button _returnButton;
+    [SerializeField] private ButtonPlaySoundOnInteract _returnButtonSound;
     [SerializeField] private AudioClip _hideShowSound;
     [SerializeField] private float _appearanceDuration = 0.5f;
 
@@ -65,6 +66,8 @@ public class ShopWindow : MonoBehaviour
         _staticData = staticData;
         _progress = progressService;
         _save = save;
+
+        _returnButtonSound.Construct(_audioHandler);
 
         _defenseButton.Initialize(_staticData.DefensePrice, _staticData.DefenseValue);
         _healthButton.Initialize(
