@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_uz
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: uz
+  m_SharedData: {fileID: 11400000, guid: 97748e2b054076f4088ce91911cdb6b3, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 34690031616
+    m_Localized: Hisob
+    m_Metadata:
+      m_Items: []
+  - m_Id: 263933911040
+    m_Localized: Statlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441487187968
+    m_Localized: Sog'liq
+    m_Metadata:
+      m_Items: []
+  - m_Id: 691740336128
+    m_Localized: Himoya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 895629647872
+    m_Localized: Do'kon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1104082362368
+    m_Localized: Ko'nikmalar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1368340291584
+    m_Localized: O'ynash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1659555012608
+    m_Localized: Sozlamalar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1989000814592
+    m_Localized: Tovushlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2197566775296
+    m_Localized: Musiqa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2372473446400
+    m_Localized: Rekord
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2543181619200
+    m_Localized: Arena
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2713130622976
+    m_Localized: Daraja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903694630912
+    m_Localized: Sotib olish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3096250933248
+    m_Localized: Zarar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3281710473216
+    m_Localized: G'alaba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3462564667392
+    m_Localized: Mukofot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3890396258304
+    m_Localized: Qayta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4071657299968
+    m_Localized: Chiqish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4258614206464
+    m_Localized: Mag'lubiyat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4429389488128
+    m_Localized: Pauza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4596494753792
+    m_Localized: Keyingi
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

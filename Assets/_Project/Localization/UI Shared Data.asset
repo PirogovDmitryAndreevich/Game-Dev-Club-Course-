@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: 97748e2b054076f4088ce91911cdb6b3
+  m_Entries:
+  - m_Id: 34690031616
+    m_Key: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 263933911040
+    m_Key: Stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441487187968
+    m_Key: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 691740336128
+    m_Key: Defense
+    m_Metadata:
+      m_Items: []
+  - m_Id: 895629647872
+    m_Key: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1104082362368
+    m_Key: Skills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1368340291584
+    m_Key: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1659555012608
+    m_Key: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1989000814592
+    m_Key: Sounds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2197566775296
+    m_Key: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2372473446400
+    m_Key: Record
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2543181619200
+    m_Key: Arena
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2713130622976
+    m_Key: Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903694630912
+    m_Key: Buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3096250933248
+    m_Key: Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3281710473216
+    m_Key: Victory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3462564667392
+    m_Key: Reward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3890396258304
+    m_Key: Retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4071657299968
+    m_Key: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4258614206464
+    m_Key: Defeat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4429389488128
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4596494753792
+    m_Key: Next
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4199315786841456665
+  references:
+    version: 2
+    RefIds:
+    - rid: 4199315786841456665
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1782113730615

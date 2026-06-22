@@ -21,7 +21,7 @@ public class EnemyDeathParticles : MonoBehaviour
     public void Construct(IPoolService poolService) => 
         _pool = poolService;
 
-    public  void Play(Vector2 point)
+    public void Play(Vector2 point)
     {
         transform.position = point;
         _particles.Play();

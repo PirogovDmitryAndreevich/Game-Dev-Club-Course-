@@ -12,7 +12,6 @@ public class SettingsWidow : MonoBehaviour
 
     [Header("AudioSettings")]
     [SerializeField] private AudioSettings _audioSettings;
-    [SerializeField] private AudioClip _hideShowSound;
 
     [Header("Animation setting")]
     [SerializeField] private float _ACDuration;
@@ -44,8 +43,6 @@ public class SettingsWidow : MonoBehaviour
 
     public void Hide()
     {
-        AudioHandler.PlaySound(_hideShowSound);
-
         KillCurrentAnimationIfActive();
 
         Animation = DOTween.Sequence();
@@ -61,8 +58,6 @@ public class SettingsWidow : MonoBehaviour
 
     public void Show()
     {
-        AudioHandler.PlaySound(_hideShowSound);
-
         gameObject.SetActive(true);
 
         KillCurrentAnimationIfActive();

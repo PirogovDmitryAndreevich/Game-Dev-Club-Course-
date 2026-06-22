@@ -95,7 +95,6 @@ public class WinWindow : PauseBase
             .Play()
             .OnComplete(() => callback?.Invoke());
     }
-
     protected override void Enable()
     {
         base.Enable();

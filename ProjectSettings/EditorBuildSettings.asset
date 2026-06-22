@@ -47,4 +47,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Arena.unity
     guid: 96790a98514e5ce4596bf71b7ca35d8f
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 0b4e1e0ccae4adf41a74fbd3ee5c0d95,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: c585577f387967145ad476bb82e4894c,
+      type: 2}

@@ -51,13 +51,13 @@ public class Enemy : Character
 
         base.ApplyDamage(damage, knockbackForce, damageSource, pushDirection);
 
-        Health.ApplyDamage(damage);
-
         PunchAnimation punch = _pool.Get<PunchAnimation>();
         punch.Play(damageSource);
 
         DamageValueAnimation damageNumber = _pool.Get<DamageValueAnimation>();
         damageNumber.Play(damageSource, damage);
+
+        Health.ApplyDamage(damage);
     }
 
     private void FixedUpdate() => 

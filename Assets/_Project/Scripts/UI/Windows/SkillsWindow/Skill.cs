@@ -206,7 +206,7 @@ public class Skill : MonoBehaviour
 
     private void UpdateNextDataText()
     {
-        _damageNext.text = "+" + _nextDamageData.Damage.ToString();
+        _damageNext.text = _nextDamageData.Damage.ToString();
         _price.text = _nextDamageData.Price.ToString();
 
         _levelNext.text = NextLevelText;

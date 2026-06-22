@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
         _levelSelector.gameObject.SetActive(false);
 
         foreach (Stat stat in _stats)
-            stat.Construct(progress);
+            stat.Construct(progress, ShopWindow);
 
         foreach (ButtonPlaySoundOnInteract button in _buttonPlaySounds)
             button.Construct(handlers.Audio);

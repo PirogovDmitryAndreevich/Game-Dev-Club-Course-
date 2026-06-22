@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Kazakh (Kazakhstan) (kk-KZ)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-Kazakh (Kazakhstan) (kk-KZ)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 10c0a2651e89dbe4bb48b1583a524da7
+  m_SerializeEntries:
+  - m_GUID: 343310deb6339154694d53b6816e407a
+    m_Address: UI_kk-KZ
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-kk-KZ
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 5547a9b9a2426ba4ca04e88c4b693747, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: cda66f5e9bc911b409e21890adfaa170, type: 2}
+    - {fileID: 11400000, guid: f777d09cba632454b9837387a68dee96, type: 2}

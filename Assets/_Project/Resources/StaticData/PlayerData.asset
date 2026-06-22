@@ -32,10 +32,16 @@ MonoBehaviour:
     IsCreat: 1
     Icon: {fileID: 21300000, guid: fb220869ee6c4b04c98d2df8427d8ad6, type: 3}
     Damage:
-    - Damage: 15
-      Price: 10
+    - Damage: 12
+      Price: 450
+    - Damage: 13
+      Price: 550
+    - Damage: 14
+      Price: 1500
+    - Damage: 16
+      Price: 1700
     - Damage: 20
-      Price: 15
+      Price: 2000
   - Type: 2
     AttackOffset: 0.85
     AttackRadius: 0.85
@@ -43,10 +49,16 @@ MonoBehaviour:
     IsCreat: 1
     Icon: {fileID: 21300000, guid: bba9810e90a233c499dec440c355f3fc, type: 3}
     Damage:
+    - Damage: 13
+      Price: 550
+    - Damage: 14
+      Price: 1250
+    - Damage: 16
+      Price: 1800
+    - Damage: 20
+      Price: 2000
     - Damage: 25
-      Price: 10
-    - Damage: 30
-      Price: 15
+      Price: 2300
   - Type: 3
     AttackOffset: 0.85
     AttackRadius: 0.85
@@ -54,10 +66,16 @@ MonoBehaviour:
     IsCreat: 1
     Icon: {fileID: 21300000, guid: 328c4238be84d1444a8ab393d0ba033c, type: 3}
     Damage:
+    - Damage: 7
+      Price: 2000
+    - Damage: 8
+      Price: 2300
     - Damage: 10
-      Price: 10
-    - Damage: 15
-      Price: 15
+      Price: 2500
+    - Damage: 13
+      Price: 2700
+    - Damage: 17
+      Price: 3000
   - Type: 4
     AttackOffset: 0.85
     AttackRadius: 0.85
@@ -65,7 +83,13 @@ MonoBehaviour:
     IsCreat: 1
     Icon: {fileID: 21300000, guid: de86fa6120948174dbfa98ab2bc52a52, type: 3}
     Damage:
+    - Damage: 17
+      Price: 3000
+    - Damage: 20
+      Price: 3200
     - Damage: 25
-      Price: 10
-    - Damage: 30
-      Price: 15
+      Price: 3400
+    - Damage: 34
+      Price: 3600
+    - Damage: 50
+      Price: 3800

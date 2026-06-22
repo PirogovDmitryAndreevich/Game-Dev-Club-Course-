@@ -7,7 +7,7 @@ public class Stat : MonoBehaviour
     [SerializeField] private TMP_Text _valueText;
     [SerializeField] private Button _addButton;
     [SerializeField] private StatsType _type;
-
+    private ShopWindow _shopWindow;
     private PlayerSaveData _playerData;
 
     private void OnDestroy()
@@ -18,8 +18,9 @@ public class Stat : MonoBehaviour
             _addButton.onClick.RemoveListener(OnClickButton);
     }
 
-    public void Construct(IPersistentProgressService progressService)
+    public void Construct(IPersistentProgressService progressService, ShopWindow shopWindow)
     {
+        _shopWindow = shopWindow;
         _playerData = progressService.Progress.PlayerData;
 
         _playerData.StatsChanged += UpdateText;
@@ -38,6 +39,6 @@ public class Stat : MonoBehaviour
 
     private void OnClickButton()
     {
-        Debug.Log($"Pressed add {GetType()} button");
+        _shopWindow.Show();
     }
 }

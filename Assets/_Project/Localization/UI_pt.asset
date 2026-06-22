@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: 97748e2b054076f4088ce91911cdb6b3, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 34690031616
+    m_Localized: Pontos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 263933911040
+    m_Localized: Stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441487187968
+    m_Localized: Vida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 691740336128
+    m_Localized: Defesa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 895629647872
+    m_Localized: Loja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1104082362368
+    m_Localized: Habilidades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1368340291584
+    m_Localized: Oyna
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1659555012608
+    m_Localized: "Configura\xE7\xF5es"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1989000814592
+    m_Localized: Sons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2197566775296
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2372473446400
+    m_Localized: Recorde
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2543181619200
+    m_Localized: Arena
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2713130622976
+    m_Localized: "N\xEDvel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903694630912
+    m_Localized: Comprar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3096250933248
+    m_Localized: Dano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3281710473216
+    m_Localized: "Vit\xF3ria"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3462564667392
+    m_Localized: Recompensas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3890396258304
+    m_Localized: Repetir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4071657299968
+    m_Localized: Sair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4258614206464
+    m_Localized: Derrota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4429389488128
+    m_Localized: Pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4596494753792
+    m_Localized: "Pr\xF3ximo"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
