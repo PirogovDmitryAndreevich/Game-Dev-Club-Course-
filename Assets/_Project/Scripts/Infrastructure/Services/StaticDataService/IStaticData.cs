@@ -11,4 +11,5 @@ public interface IStaticData : IService
     LevelData ForLevel(SceneID id);
     PlayerStaticData ForPlayer();
     AttackData ForPlayerAttack(PlayerAttackType type);
+    DailyRewardStaticData ForDailyReward(DailyRewardType type);
 }

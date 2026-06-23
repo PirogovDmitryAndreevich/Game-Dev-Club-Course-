@@ -23,7 +23,7 @@ MonoBehaviour:
     IsCreat: 0
     Icon: {fileID: 21300000, guid: fb220869ee6c4b04c98d2df8427d8ad6, type: 3}
     Damage:
-    - Damage: 10
+    - Damage: 100
       Price: 0
   - Type: 1
     AttackOffset: 0.85

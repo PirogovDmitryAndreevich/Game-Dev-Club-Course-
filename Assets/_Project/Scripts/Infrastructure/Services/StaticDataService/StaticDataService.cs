@@ -17,6 +17,7 @@ public class StaticDataService : IStaticData
     public PlayerStaticData PlayerData => _playerData;
     public ShopStaticData ShopData => _shopData;
     public Dictionary<SceneID, LevelData> LevelsData { get; private set; }
+    private Dictionary<DailyRewardType, DailyRewardStaticData> _dailyRewards { get; set; }
 
     public void Load()
     {
@@ -29,6 +30,8 @@ public class StaticDataService : IStaticData
         _playerData = Resources.Load<PlayerStaticData>(PlayerDataPath);
 
         _shopData = Resources.Load<ShopStaticData>(ShopDataPath);
+
+        _dailyRewards = _shopData.DailyRewardsData.ToDictionary(x => x.Type, x => x);
         
         _playerAttacks = _playerData.Attacks.ToDictionary(x=>x.Type, x => x);
     }
@@ -48,6 +51,11 @@ public class StaticDataService : IStaticData
 
     public AttackData ForPlayerAttack(PlayerAttackType type) =>
         _playerAttacks.TryGetValue(type, out AttackData data)
+        ? data
+        : null;
+
+    public DailyRewardStaticData ForDailyReward(DailyRewardType type) =>
+        _dailyRewards.TryGetValue(type, out DailyRewardStaticData data)
         ? data
         : null;
 }

@@ -38,6 +38,12 @@ public class BootstrapState : IState
 
         _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>()));
 
+        _services.RegisterSingle<IDailyRewardService>(new DailyRewardService(
+            _services.Single<IStaticData>(),
+            _services.Single<IPersistentProgressService>(),
+            _services.Single<ISaveLoadService>()
+            ));
+
         _services.RegisterSingle<IGameFactory>(new GameFactory(
             _services.Single<IAssets>(),
             _services.Single<IPersistentProgressService>(),
@@ -53,7 +59,8 @@ public class BootstrapState : IState
             _services.Single<IHandlersContainer>(),
             _services.Single<IPersistentProgressService>(),
             _services.Single<ISaveLoadService>(),
-            _services.Single<IStaticData>()));
+            _services.Single<IStaticData>(),
+            _services.Single<IDailyRewardService>()));
     }
 
     private void RegisterStaticData()

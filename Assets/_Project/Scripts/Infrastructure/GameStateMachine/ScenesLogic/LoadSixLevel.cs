@@ -23,9 +23,9 @@ public class LoadSixLevel : IScene
     private FinishWithBusStop _finishWithBusStop;
     private WinWindow _winWindow;
     private Timer _timer;
-    private int _enemyOnScene = 0;
+    private int _enemyOnScene;
     private bool _isPlayerDead;
-    private List<Enemy> _enemies = new List<Enemy>();
+    private List<Enemy> _enemies;
 
     public LoadSixLevel(SceneID id, IStaticData staticData, IGameFactory gameFactory,
         IUIFactory uiFactory, IHandlersContainer handlers, ICoroutineRunner coroutineRunner)
@@ -41,6 +41,7 @@ public class LoadSixLevel : IScene
     public void InitGameObjects()
     {
         LevelData levelData = _staticData.ForLevel(_id);
+        _enemies = new List<Enemy>();
 
         CinemachineVirtualCamera camera = _gameFactory.CreateVirtualCamera();
 
@@ -81,6 +82,8 @@ public class LoadSixLevel : IScene
     {
         _player.Arrow.SetTarget(null);
         float time = LevelTimer;
+        _isPlayerDead = false;
+        _enemyOnScene = 0;
         _timer.UpdateTimer(time);
 
         while (time > 0)

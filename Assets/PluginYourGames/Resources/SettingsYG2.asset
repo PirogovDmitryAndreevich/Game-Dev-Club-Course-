@@ -216,6 +216,14 @@ MonoBehaviour:
   RewardedAdv:
     skipInterAdvAfterReward: 0
     labelAdvSimLabel: 0
+  ServerTime:
+    manualDateSetup: 1
+    year: 2025
+    month: 7
+    day: 2
+    hour: 12
+    minute: 30
+    second: 30
   Storage:
     saveLocal: 0
     saveCloud: 1

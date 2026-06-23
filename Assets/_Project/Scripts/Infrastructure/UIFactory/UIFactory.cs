@@ -8,9 +8,10 @@ public class UIFactory : IUIFactory
     private readonly IPersistentProgressService _progressService;
     private readonly ISaveLoadService _save;
     private readonly IStaticData _staticData;
+    private readonly IDailyRewardService _dailyRewardService;
 
     public UIFactory(GameStateMachine gameStateMachine, IAssets assetProvider, IHandlersContainer handlersContainer,
-        IPersistentProgressService progressService, ISaveLoadService save, IStaticData staticData)
+        IPersistentProgressService progressService, ISaveLoadService save, IStaticData staticData, IDailyRewardService dailyRewardService)
     {
         _gameStateMachine = gameStateMachine;
         _assets = assetProvider;
@@ -18,6 +19,7 @@ public class UIFactory : IUIFactory
         _progressService = progressService;
         _save = save;
         _staticData = staticData;
+        _dailyRewardService = dailyRewardService;
     }
 
     public void CreateMainMenu()
@@ -28,21 +30,11 @@ public class UIFactory : IUIFactory
         menu.Construct(_progressService, _handlersContainer);
         menu.Settings.Construct(_handlersContainer.Audio);
         menu.Settings.AudioSlider.Construct(_progressService, _save);
-        menu.LevelSelector.StartButtonSound.Construct(_handlersContainer.Audio);
-        menu.LevelSelector.ReturnButtonSound.Construct(_handlersContainer.Audio);
-        menu.LevelSelector.Construct(_gameStateMachine, _handlersContainer.Audio, _staticData, this);
-        menu.LevelSelector.ArenaLevelCard.Construct(_progressService);
-        menu.LevelSelector.ArenaLevelCard.Sound.Construct(_handlersContainer.Audio);
+        InitLevelSelector(menu);
         menu.LeaderBoard.Construct(_progressService);
-        menu.ShopWindow.Construct(_handlersContainer.Audio, _staticData.ShopData, _progressService, _save);
-        menu.SkillsWindow.ReturnButtonSound.Construct(_handlersContainer.Audio);
-        menu.SkillsWindow.Skills.Construct(_progressService);
-        menu.SkillsWindow.Skills.FirstSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
-        menu.SkillsWindow.Skills.SecondSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
-        menu.SkillsWindow.StatusBar.Construct(_progressService);
-        menu.Skills.Construct(_progressService);
-        menu.Skills.FirstSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
-        menu.Skills.SecondSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
+        InitShopWindow(menu);
+        InitSkillWindow(menu);
+        InitSkills(menu);
 
         foreach (AttackData attack in _staticData.PlayerData.Attacks)
         {
@@ -125,6 +117,38 @@ public class UIFactory : IUIFactory
 
     public Timer CreateTimer() =>
         _assets.Instantiate(AssetsPath.TimerPath).GetComponent<Timer>();
+
+    private void InitShopWindow(MainMenu menu)
+    {
+        menu.ShopWindow.Construct(_handlersContainer.Audio, _staticData.ShopData, _progressService, _save);
+
+        menu.ShopWindow.DailyReward.Construct(_dailyRewardService, _staticData);
+    }
+
+    private void InitSkills(MainMenu menu)
+    {
+        menu.Skills.Construct(_progressService);
+        menu.Skills.FirstSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
+        menu.Skills.SecondSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
+    }
+
+    private void InitSkillWindow(MainMenu menu)
+    {
+        menu.SkillsWindow.ReturnButtonSound.Construct(_handlersContainer.Audio);
+        menu.SkillsWindow.Skills.Construct(_progressService);
+        menu.SkillsWindow.Skills.FirstSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
+        menu.SkillsWindow.Skills.SecondSkill.Construct(_progressService, _staticData, menu.SkillsWindow);
+        menu.SkillsWindow.StatusBar.Construct(_progressService);
+    }
+
+    private void InitLevelSelector(MainMenu menu)
+    {
+        menu.LevelSelector.StartButtonSound.Construct(_handlersContainer.Audio);
+        menu.LevelSelector.ReturnButtonSound.Construct(_handlersContainer.Audio);
+        menu.LevelSelector.Construct(_gameStateMachine, _handlersContainer.Audio, _staticData, this);
+        menu.LevelSelector.ArenaLevelCard.Construct(_progressService);
+        menu.LevelSelector.ArenaLevelCard.Sound.Construct(_handlersContainer.Audio);
+    }
 
     private void CreateSkillView(AttackData attack, Transform parent)
     {

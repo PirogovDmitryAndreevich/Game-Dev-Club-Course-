@@ -103,6 +103,34 @@ MonoBehaviour:
     m_Key: Next
     m_Metadata:
       m_Items: []
+  - m_Id: 63063070859264
+    m_Key: Space
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63877348843520
+    m_Key: W
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63942847094784
+    m_Key: A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64062145683456
+    m_Key: S
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64099177193472
+    m_Key: D
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64136078680064
+    m_Key: G
+    m_Metadata:
+      m_Items: []
+  - m_Id: 393719961346048
+    m_Key: Day
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

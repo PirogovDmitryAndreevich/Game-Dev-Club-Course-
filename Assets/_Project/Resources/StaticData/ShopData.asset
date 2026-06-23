@@ -24,3 +24,25 @@ MonoBehaviour:
   HitPointsPrice: 10
   HitPointsValue: 10
   HitPointsMultiplier: 2
+  DailyRewardsData:
+  - Type: 1
+    RewardCoins: 300
+    RewardGems: 0
+  - Type: 2
+    RewardCoins: 500
+    RewardGems: 0
+  - Type: 3
+    RewardCoins: 1000
+    RewardGems: 0
+  - Type: 4
+    RewardCoins: 1200
+    RewardGems: 0
+  - Type: 5
+    RewardCoins: 1500
+    RewardGems: 0
+  - Type: 6
+    RewardCoins: 1800
+    RewardGems: 0
+  - Type: 7
+    RewardCoins: 2000
+    RewardGems: 15

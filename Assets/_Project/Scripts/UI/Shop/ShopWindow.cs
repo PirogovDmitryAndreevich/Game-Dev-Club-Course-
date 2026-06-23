@@ -21,7 +21,7 @@ public class ShopWindow : MonoBehaviour
     [SerializeField] private Button _mixInApp;
 
     [Header("Buttons")]
-    [SerializeField] private DayRewardButton[] _rewardDayButtons;
+    [SerializeField] private DailyReward _rewardDayButtons;
     [SerializeField] private ShopUpdateButton _defenseButton;
     [SerializeField] private ShopUpdateButton _healthButton;
 
@@ -33,6 +33,8 @@ public class ShopWindow : MonoBehaviour
     private AudioHandler _audioHandler { get; set; }
 
     private ShopStaticData _staticData;
+
+    public DailyReward DailyReward => _rewardDayButtons;
 
     private bool IsAnimating =>
         Animation != null && Animation.active;

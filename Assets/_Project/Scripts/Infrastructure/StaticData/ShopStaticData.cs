@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ShopData", menuName = "StaticData/Shop")]
@@ -17,13 +16,7 @@ public class ShopStaticData : ScriptableObject
     public int HitPointsPrice;
     public int HitPointsValue;
     public int HitPointsMultiplier;
-}
 
-[Serializable]
-public class MixInAppData
-{
-    public int Gems;
-    public int Coins;
-    public int Defense;
-    public int HitPoints;
+    [Header("DailyReward")]
+    public DailyRewardStaticData[] DailyRewardsData;
 }

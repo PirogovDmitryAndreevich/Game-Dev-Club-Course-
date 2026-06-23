@@ -106,6 +106,34 @@ MonoBehaviour:
     m_Localized: Next
     m_Metadata:
       m_Items: []
+  - m_Id: 63063070859264
+    m_Localized: Space
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63877348843520
+    m_Localized: W
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63942847094784
+    m_Localized: A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64062145683456
+    m_Localized: S
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64099177193472
+    m_Localized: D
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64136078680064
+    m_Localized: G
+    m_Metadata:
+      m_Items: []
+  - m_Id: 393719961346048
+    m_Localized: Day
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

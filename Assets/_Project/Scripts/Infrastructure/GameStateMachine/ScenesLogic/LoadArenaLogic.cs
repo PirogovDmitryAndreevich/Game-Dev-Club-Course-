@@ -72,6 +72,7 @@ public class LoadArenaLogic : IScene
         _player.Arrow.SetTarget(null);
         _time = 0f;
         _enemyOnScene = 0;
+        _isPlayerDead = false;
         _timer.UpdateTimer(_time);
 
         while (!_isPlayerDead)
