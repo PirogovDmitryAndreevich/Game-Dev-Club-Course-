@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 6,
+    "idSave": 8,
     "Saves": {
         "GameData": {
             "SoundValue": 1.0,
@@ -30,6 +30,16 @@
                 "IsThereARecord": false
             },
             "ReachedLevels": [
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
+                {
+                    "ID": 2,
+                    "Trophy": 1,
+                    "ReachedTrophy": 0
+                },
                 {
                     "ID": 2,
                     "Trophy": 1,
